@@ -33,7 +33,7 @@ gantt
 
 | # | User Story                                          | MoSCoW    | Estimate (SP) |
 | - | --------------------------------------------------- | --------- | ------------- |
-| 1 | As a player, I want to move                        | Must Have | 2             |
+| 1 | As a player, I want to move                         | Must Have | 2             |
 | 2 | As a player, I will attack to kill the enemy       | Must Have | 3             |
 | 3 | As a player, I will throw head to stunt the enemy | Must Have | 4             |
 | 4 | As a player, I will take damage                     | Must Have | 1             |
@@ -60,4 +60,4 @@ gantt
 ## Links
 
 - [[docs/agile/01-product-backlog|Product Backlog]]
-- [[docs/agile/sprint-plan-01|Sprint 1 Plan]]
+- [[docs/agile/sprint-plan-01|Sprint 1 Plan]].

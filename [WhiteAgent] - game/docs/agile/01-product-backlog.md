@@ -29,8 +29,8 @@
 
 | # | User Story                                                                                                      | Acceptance Criteria                                                                                                                                      | Estimate (SP) | Sprint |
 | - | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------ |
-| 1 | As a designer, I want enemy spawn rate stored in a data file, so that I can tune difficulty without recompiling | ปรับค่า spawn rate ในไฟล์ data แล้วรันเกมใหม่ ค่าที่เปลี่ยนมีผลทันทีโดยไม่ต้อง build ใหม่ | 5             | -      |
-| 2 | As a designer, I want enemy spawn in random position                                                            | ทุกครั้งที่เล่น ศัตรูจะเกิดไม่ซ้ำที่เดิม                                                                          | 5             | -      |
+| 1 | As a designer, I want enemy spawn rate stored in a data file, so that I can tune difficulty without recompiling | ปรับค่า spawn rate ในไฟล์ data แล้วรันเกมใหม่ ค่าที่เปลี่ยนมีผลทันทีโดยไม่ต้อง build ใหม่ | 5             | 3      |
+| 2 | As a designer, I want enemy spawn in random position                                                            | ทุกครั้งที่เล่น ศัตรูจะเกิดไม่ซ้ำที่เดิม                                                                          | 5             | 3      |
 
 ## MoSCoW Legend
 
@@ -41,4 +41,4 @@
 ## Links
 
 - [[docs/gdd/00-concept|GDD Concept]]
-- [[docs/agile/02-sprint-backlog|Sprint Backlog]]
+- [[docs/agile/02-sprint-backlog|Sprint Backlog]].
