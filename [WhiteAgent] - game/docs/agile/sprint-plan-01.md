@@ -43,21 +43,21 @@
 
 ### Story 2 — [As a player, I will attack to kill the enemy]
 
-- [X] [ระบบรับดาเมจผ่าน Hitbox]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
-- [ ] [ระบบ Combo]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 2]  [status:: todo]
+- [X] [ระบบรับดาเมจผ่าน Hitbox]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3] [actual:: 3] [status:: Done]
+- [X] [ระบบ Combo]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 2]  [actual:: 1] [status:: Done]
 - [X] [Sprite enemy01 take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
 - [X] [Sprite enemy01 die]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
 
 ### Story 3 — [As a player, I will throw head to stunt the enemy]
 
-- [X] [ระบบปาหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
-- [X] [ระบบเก็บหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
+- [X] [ระบบปาหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3] [actual:: 2] [status:: Done]
+- [X] [ระบบเก็บหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3] [actual:: 1] [status:: Done]
 - [ ] [Sprite enemy01 dizzy]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
 
 ### Story 4 — [As a player, I will take damage]
 
 - [X] [ระบบ collision]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: Done]
-- [X] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: Done]
+- [X] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4] [actual:: 3] [status:: Done]
 - [ ] [Sprite enemy01 attack]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
 - [X] [Sprite player take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
 
@@ -71,7 +71,7 @@
 
 - [ ] [Enemy02 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: todo]
 - [ ] [Enemy03 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: todo]
-- [ ] [Enemy04 Ai] [domain::programmer] [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: todo]
+- [ ] [Enemy04 Ai] [domain::programmer] [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3] [status:: todo]
 - [ ] [Sprite enemy02] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: todo]
 - [ ] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: todo]
 - [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
@@ -87,11 +87,11 @@
 
 ### [2026/09/08]
 
-**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** เน้นทำระบบของ player และทำให้ enemy ออกมาให้รับดาเมจได้แล้ว
+**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** ทำระบบ combat หลักของ player ทั้งระยะใกล้และระยะไกล
 
-**สัปดาห์นี้จะทำอะไรต่อไป:** ทำ enemy ตัวที่เหลือเพิ่มเติม, ระบบ Ui, และระบบ Upgrade
+**สัปดาห์นี้จะทำอะไรต่อไป:** ทำ Ai ของ enemy เพิ่ม
 
-**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** Programmer ทำงานไม่ทันตาม Deadline เพราะว่าเจอปัญหาที่ยังไม่รู้วิธีแก้ ต้องไปศึกษาเพิ่มเติม
+**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** ปัญหาบางอย่างเกี่ยวกับระบบของ Visual Studio ต้องศึกษาเพิ่มเติม
 
 ---
 
