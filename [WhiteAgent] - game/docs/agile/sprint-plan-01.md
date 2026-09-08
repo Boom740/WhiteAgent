@@ -64,7 +64,8 @@
 ### Story 5 — [As a player, I will get upgrade]
 
 - [ ] [ระบบ Upgrade] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: todo]
-- [ ] [UI design] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
+- [ ] [UI upgrade design] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 6h] [actual:: 3h] [status:: todo]
+  [note::ระบบอัพเกรด ยังไม่ได้ออกแบบ ยังไม่ได้ทำ แต่หาreferenceแล้ว]
 - [ ] [UI Upgrade] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
 
 ### Story 6 — [As a player, I will fight more enemy]
@@ -78,7 +79,8 @@
 
 ### Story 7 — [As a player, I will rather item]
 
-- [ ] [Ui collectible item] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
+- [ ] [Ui collectible item] [domain::Artist] [owner:: กนต์ระพี เดชะ] [estimate:: 6h] [actual:: 3h] [status:: todo]
+  [note::ระบบเก็บของ ยังไม่ได้ออกแบบ ยังไม่ได้ทำ แต่หาreferenceแล้ว]
 - [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: todo]
 
 ---
@@ -87,11 +89,11 @@
 
 ### [2026/09/08]
 
-**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** เน้นทำระบบของ player และทำให้ enemy ออกมาให้รับดาเมจได้แล้ว
+**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** วางแผนงาน หาreference
 
-**สัปดาห์นี้จะทำอะไรต่อไป:** ทำ enemy ตัวที่เหลือเพิ่มเติม, ระบบ Ui, และระบบ Upgrade
+**สัปดาห์นี้จะทำอะไรต่อไป:** ออกแบบUI
 
-**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** Programmer ทำงานไม่ทันตาม Deadline เพราะว่าเจอปัญหาที่ยังไม่รู้วิธีแก้ ต้องไปศึกษาเพิ่มเติม
+**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** ยังไม่ทราบ
 
 ---
 
