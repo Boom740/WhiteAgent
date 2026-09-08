@@ -74,9 +74,9 @@
 
 ### Story 5 — [As a player, I will get upgrade]
 
-- [ ] [ระบบ Upgrade]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: doing]
-- [ ] [UI design]  [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: doing]
-- [ ] [UI Upgrade]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [ ] [ระบบ Upgrade] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: doing]
+- [ ] [UI design] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: doing]
+- [ ] [UI Upgrade] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
 
 ### Story 6 — [As a player, I will fight more enemy]
 
