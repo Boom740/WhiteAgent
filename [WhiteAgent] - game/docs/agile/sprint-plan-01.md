@@ -38,45 +38,72 @@
 ### Story 1 — [As a player, I want to move]
 
 - [X] [ระบบเคลื่อนที่ตามทิศทางความเร็ว]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: Done]
-- [ ] [Sprite player Idle]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
-- [ ] [Sprite player Walk]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [X] [Sprite player Idle]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
+- [X] [Sprite player Walk]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
 
 ### Story 2 — [As a player, I will attack to kill the enemy]
 
-- [ ] [ระบบรับดาเมจผ่าน Hitbox]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: doing]
-- [ ] [ระบบ Combo]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 2]  [status:: doing]
-- [ ] [Sprite enemy01 take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
-- [ ] [Sprite enemy01 die]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [X] [ระบบรับดาเมจผ่าน Hitbox]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
+- [X] [ระบบ Combo]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 2]  [status:: Done]
+- [X] [Sprite enemy01 take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
+- [X] [Sprite enemy01 die]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
 
 ### Story 3 — [As a player, I will throw head to stunt the enemy]
 
-- [ ] [ระบบปาหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: doing]
-- [ ] [ระบบเก็บหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: doing]
-- [ ] [Sprite enemy01 dizzy]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [X] [ระบบปาหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
+- [X] [ระบบเก็บหัว]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: Done]
+- [X] [Sprite enemy01 dizzy]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
 
 ### Story 4 — [As a player, I will take damage]
 
 - [X] [ระบบ collision]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: Done]
-- [ ] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: doing]
-- [ ] [Sprite enemy01 attack]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
-- [ ] [Sprite player take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [X] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: Done]
+- [X] [Sprite enemy01 attack]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
+- [X] [Sprite player take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
+
+### ~~Story 5 — [As a player, I will get upgrade]~~ ***ยังไม่ได้ทำ ดันไปใส่ sprint ถัดไป*
+
+- ~~ [ระบบแสดง UI]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: Done]~~
+- ~~ [ระบบอัปเดตค่า status]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: Done]~~
+- ~~ [UI design]  [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: Done]~~
+- ~~ [UI Upgrade sprite]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]~~
+
+---
+
+
 
 ### Story 5 — [As a player, I will get upgrade]
 
-- [ ] [ระบบแสดง UI]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: doing]
-- [ ] [ระบบอัปเดตค่า status]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: doing]
+- [ ] [ระบบ Upgrade]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: doing]
 - [ ] [UI design]  [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: doing]
-- [ ] [UI Upgrade sprite]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+- [ ] [UI Upgrade]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+
+### Story 6 — [As a player, I will fight more enemy]
+
+- [ ] [Enemy02 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: doing]
+- [ ] [Enemy03 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: doing]
+- [ ] [Enemy04 Ai] [domain::programmer] [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: doing]
+- [ ] [Sprite enemy02] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: doing]
+- [ ] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: doing]
+- [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: doing]
+
+### Story 7 — [As a player, I will rather item]
+
+- [ ] [Ui collectible item] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: doing]
+- [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: doing]
+
 
 ---
 
 ## Daily Notes
 
-### [2026/09/01]
+### [2026/09/08]
 
-**เมื่อวาน:**
-**วันนี้:** ...
-**Blocked:** ...
+**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** เน้นทำระบบของ player และทำให้ enemy ออกมาให้รับดาเมจได้แล้ว
+
+**สัปดาห์นี้จะทำอะไรต่อไป:** ทำ enemy ตัวที่เหลือเพิ่มเติม, ระบบ Ui, และระบบ Upgrade
+
+**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** Programmer ทำงานไม่ทันตาม Deadline เพราะว่าเจอปัญหาที่ยังไม่รู้วิธีแก้ ต้องไปศึกษาเพิ่มเติม
 
 ---
 
