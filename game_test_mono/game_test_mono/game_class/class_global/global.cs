@@ -10,8 +10,6 @@ namespace old_heart
     {
         public static Vector2 render_size = new Vector2(960,540);
 
-        public static collision_manager collision_manager;
-
         public static class input
         {
             public static KeyboardStateExtended keyboard_state;

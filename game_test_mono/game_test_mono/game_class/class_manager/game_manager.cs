@@ -25,6 +25,9 @@ namespace old_heart
 
         public debug_manager debug_manager;
 
+        Queue<projectile> signal_spawn_projectile_queue = new Queue<projectile>();
+        Queue<entity> signal_spawn_entity_queue = new Queue<entity>();
+
         public player player;
 
         public bool pause = false;
@@ -46,8 +49,8 @@ namespace old_heart
 
             debug_manager = new debug_manager();
 
-            global.signal.signal_spawn_projectile += add_projectile;
-            global.signal.signal_spawn_entity += add_entity;
+            global.signal.signal_spawn_projectile += handle_signal_add_projectile;
+            global.signal.signal_spawn_entity += handle_signal_add_entity;
             global.signal.signal_spawn_particle += add_particle;
         }
         public void add_ui(node node)
@@ -69,6 +72,11 @@ namespace old_heart
         }
         public void add_entity(entity entity)
         {
+            if (entity_manager.entity_list.Count >= entity_manager.limit)
+            {
+                Debug.WriteLine("cant spawn entity at limit count : " + entity_manager.entity_list.Count);
+                return;
+            }
             entity_manager.add(entity);
             if (entity is player player)
             {
@@ -87,6 +95,11 @@ namespace old_heart
         }
         public void add_projectile(projectile projectile)
         {
+            if (projectile_manager.projectile_list.Count >= projectile_manager.limit)
+            {
+                Debug.WriteLine("cant spawn projectile at limit count : " + projectile_manager.projectile_list.Count);
+                return;
+            }
             projectile_manager.add(projectile);
             if (projectile.owner == player)
             {
@@ -119,6 +132,7 @@ namespace old_heart
 
 
             clear_inactive_node();
+            spawn_queue_signal();
         }
         public void clear_inactive_node()
         {
@@ -165,16 +179,38 @@ namespace old_heart
                 }
             }
         }
+        public void spawn_queue_signal()
+        {
+            while (signal_spawn_entity_queue.Count > 0)
+            {
+                entity signal_entity = signal_spawn_entity_queue.Dequeue();
+                add_entity(signal_entity);
+            }
+            while (signal_spawn_projectile_queue.Count > 0)
+            {
+                projectile signal_projectile = signal_spawn_projectile_queue.Dequeue();
+                add_projectile(signal_projectile);
+            }
+        }
+        public void handle_signal_add_projectile(projectile projectile)
+        {
+            signal_spawn_projectile_queue.Enqueue(projectile);
+        }
+        public void handle_signal_add_entity(entity entity)
+        {
+            signal_spawn_entity_queue.Enqueue(entity);
+        }
         public void draw(SpriteBatch sprite_batch)
         {
             Matrix ui_camera_matrix = camera_manager.ui_camera.GetViewMatrix();
             Matrix camera_matrix = camera_manager.camera.GetViewMatrix();
 
-            sprite_batch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: ui_camera_matrix);   // draw blue background
-            sprite_batch.FillRectangle(new RectangleF(0, 0, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight), Color.CornflowerBlue);
-            sprite_batch.End();
 
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , transformMatrix: camera_matrix);    // low layer
+
+            RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
+            sprite_batch.FillRectangle(blue_backgound_rectangle, Color.CornflowerBlue);  // blue_background
+
             map_manager.draw_low(sprite_batch);
             particle_manager.draw_low(sprite_batch);
             sprite_batch.End();
@@ -196,8 +232,8 @@ namespace old_heart
         }
         public void unload()
         {
-            global.signal.signal_spawn_projectile -= add_projectile;
-            global.signal.signal_spawn_entity -= add_entity;
+            global.signal.signal_spawn_projectile -= handle_signal_add_projectile;
+            global.signal.signal_spawn_entity -= handle_signal_add_entity;
             global.signal.signal_spawn_particle -= add_particle;
         }
     }

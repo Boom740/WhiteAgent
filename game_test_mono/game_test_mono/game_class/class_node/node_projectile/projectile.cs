@@ -41,11 +41,6 @@ namespace old_heart
             collision.owner = this;
         }
 
-        protected void register_collision(string layer_name)
-        {
-            global.collision_manager.add(collision, layer_name); // TODO: เช็คว่าชื่อ property ตรงกับของจริงในโปรเจกต์ไหม
-            collision_registered = true;
-        }
         public override void Update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -87,11 +82,6 @@ namespace old_heart
             alive = false;
             // play efx or something
             active = false; // active = false make this get instant delete
-            if (collision_registered)
-            {
-                global.collision_manager.remove(collision);
-                collision_registered = false;
-            }
         }
 
         public virtual void collide_wall(CollisionPair2D pair , float delta_time) // wall collision get call from collision_manager

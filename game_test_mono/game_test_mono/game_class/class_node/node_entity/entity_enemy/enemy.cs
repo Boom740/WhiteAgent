@@ -29,7 +29,7 @@ namespace old_heart
         private float dizzy_timer_current = 0f;
 
         // --- clone ---
-        public float clone_timer = 15f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
+        public float clone_timer = 5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
         private float clone_timer_current;
 
         // --- frightened ---
@@ -205,7 +205,7 @@ namespace old_heart
             if (clone_timer_current <= 0f)
             {
                 clone_timer_current = clone_timer;
-                //global.signal.spawn_entity(new enemy_leukemia(content, position + new Vector2(100,0)));     // dont work need fix 
+                global.signal.spawn_entity(new enemy_leukemia(content, position + new Vector2(100,0)));   
             }
         }
 
@@ -227,7 +227,7 @@ namespace old_heart
         public override void die()
         {
             base.die();
-            global.collision_manager.remove(collision); // กัน collision ค้างในโลกหลัง enemy ตาย
+            //global.collision_manager.remove(collision); // กัน collision ค้างในโลกหลัง enemy ตาย      // มันลบอยู่แล้วตอนหาย ใน game_manager update (clear_inactive_node())
         }
 
         // ---------------- Animation ----------------

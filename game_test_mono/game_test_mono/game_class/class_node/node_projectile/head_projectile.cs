@@ -23,8 +23,6 @@ namespace old_heart
             texture = content.Load<Texture2D>("Placeholder/Weapons/Head");
             sprite_origin = new Vector2(texture.Width / 2, texture.Height); // position คือกึ่งกลาง X, ล่างสุด Y
             sprite_scale = new Vector2(2, 2);
-
-            register_collision("player_hitbox");
         }
 
         public override void Update(GameTime gameTime)

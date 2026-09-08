@@ -18,8 +18,6 @@ namespace old_heart
             this.damage = damage;
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
             velocity = aim_direction * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
-
-            register_collision("player_hitbox");
         }
 
         public override void on_hit_entity(entity target_entity)
@@ -28,7 +26,6 @@ namespace old_heart
             {
                 Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
                 target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-
                 target_enemy.take_damage(damage);
                 time_out(); // โดน enemy แล้วหายทันที ไม่ต้องรอ travel_time หมด
             }
