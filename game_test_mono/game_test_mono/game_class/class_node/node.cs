@@ -1,0 +1,13 @@
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
+public abstract class node
+{
+    public bool active  = true;
+    public bool visible = true;
+    internal Vector2 position;
+
+    // Your universal methods
+    public abstract void Update(GameTime gameTime);
+    public abstract void Draw(SpriteBatch sprite_batch);
+}
