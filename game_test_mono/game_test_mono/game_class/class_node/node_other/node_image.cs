@@ -8,7 +8,7 @@ namespace old_heart
     {
         public Texture2D texture;
         public Vector2 position;
-
+        public Vector2 scale = new Vector2(2,2);
         public image(ContentManager content, Vector2 position, string file_path)
         {
             this.position = position;
@@ -22,7 +22,7 @@ namespace old_heart
 
         public override void Draw(SpriteBatch sprite_batch)
         {
-            sprite_batch.Draw(texture,position,Color.White);
+            sprite_batch.Draw(texture,position,null,Color.White,0,new Vector2(0,0),scale,SpriteEffects.None,0);
         }
 
     }

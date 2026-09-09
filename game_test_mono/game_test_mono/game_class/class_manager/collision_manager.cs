@@ -72,7 +72,9 @@ namespace old_heart
 
             resolve_hitbox_collision("player_hitbox", "enemy");
             resolve_hitbox_collision("enemy_hitbox", "player");
+
             resolve_entity_body_collision("player", "enemy", delta_time);
+            resolve_entity_body_collision("enemy", "enemy", delta_time/4);   // enemy push each other     slowly
         }
 
         public void resolve_wall_collision(string layer_that_collide_with_wall ,float delta_time) // use in update only

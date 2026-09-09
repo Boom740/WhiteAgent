@@ -18,8 +18,8 @@ namespace old_heart
     {
         public string name; // for debug only 
         public Texture2D sprite_sheet;
-        public Point sprite_size = new Point(32,32);
-        public Vector2 sprite_scale = new Vector2(2,2);
+        public Point sprite_size = new Point(64,64);
+        public Vector2 sprite_scale = new Vector2(1,1);
         public bool loop = true;
         public int frame_count = 1;
         public float frame_time = 0.166f;
@@ -32,9 +32,8 @@ namespace old_heart
             if (sprite_size != null)
             {
                 this.sprite_size = sprite_size.Value;
-                this.sprite_origin = new Vector2(this.sprite_size.X/2, this.sprite_size.Y );
             }
-
+            this.sprite_origin = new Vector2(this.sprite_size.X / 2, (this.sprite_size.Y*3) /4);
             frame_count = sprite_sheet.Height / this.sprite_size.Y;
         }
     }
@@ -44,6 +43,7 @@ namespace old_heart
         public animation_data data;
         public animation default_animation;
         public animation current_animation;
+
         public int current_frame_index = 0;
         public int current_direction = 0;
         public float current_time = 0;
@@ -59,16 +59,24 @@ namespace old_heart
             else if (direction == "left") current_direction = 2;
             else if (direction == "right") current_direction = 3;
         }
+        
         public void update(float delta_time , string direction )
         {
             if (pause) { return; }
 
             current_time += delta_time ;
 
-            if(current_time > current_animation.frame_time)  // next frame
+            if (current_time > current_animation.frame_time)  // next frame
             {
-                current_time -= current_animation.frame_time ;
-                current_frame_index++;
+                current_time -= current_animation.frame_time;
+                if (current_frame_index > current_animation.frame_count)    // changed animation but index is still higher 
+                {
+                    current_frame_index = 0;
+                }
+                else { 
+                    current_frame_index++;
+                }
+
 
                 if(current_frame_index >= current_animation.frame_count )  // end animation
                 {
@@ -88,6 +96,11 @@ namespace old_heart
             {
                 current_frame_index = 0;
             }
+            else if (current_frame_index >= animation.frame_count)    // changed animation but index is still higher 
+            {
+                    current_frame_index = 0;
+            }
+
             current_animation = animation;
         }
         public void draw(SpriteBatch sprite_batch, Vector2 position)
@@ -101,9 +114,5 @@ namespace old_heart
             sprite_batch.Draw(texture, position, source_rectangle,Color.White,0,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
         }
 
-        internal void update_animation(float delta_time)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

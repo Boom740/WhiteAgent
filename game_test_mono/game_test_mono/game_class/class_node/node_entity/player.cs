@@ -286,11 +286,25 @@ namespace old_heart
         {
             if (current_state == state.walk)
             {
-                animation_player.play(animation_player.data.data[animation_player_player.animation_name.walk]);
+                if (has_head)
+                {
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.walk]);
+                }
+                else
+                {
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
+                }
             }
-            else
+            else      // idle
             {
-                animation_player.play(animation_player.default_animation);
+                if (has_head)
+                {
+                    animation_player.play(animation_player.default_animation);
+                }
+                else
+                {
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_idle]);
+                }
             }
 
             base.update_animation(delta_time);
@@ -303,7 +317,7 @@ namespace old_heart
 
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
-            public enum animation_name { idle, walk }
+            public enum animation_name { idle, walk, no_head_idle, no_head_walk }
 
             public static readonly animation_data animation_data = new animation_data();
             public animation_player_player(ContentManager content) : base()
@@ -320,15 +334,25 @@ namespace old_heart
             }
             public void load(ContentManager content)
             {
-                Texture2D idle_texture = content.Load<Texture2D>("Placeholder/Player/Idle");
+                Texture2D idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_idle");
                 animation idle_animation = new animation(idle_texture, frame_per_sec: 2);
                 idle_animation.name = "player idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                Texture2D walk_texture = content.Load<Texture2D>("Placeholder/Player/Walk");
+                Texture2D walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_walk");
                 animation walk_animation = new animation(walk_texture, frame_per_sec: 8);
                 walk_animation.name = "player walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
+
+                Texture2D no_head_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_idle");
+                animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 2);
+                no_head_idle_animation.name = "player no_head_walk";
+                animation_data.data.Add(animation_name.no_head_idle, no_head_idle_animation);
+
+                Texture2D no_head_walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_walk");
+                animation no_head_walk_animation = new animation(no_head_walk_texture, frame_per_sec: 8);
+                no_head_walk_animation.name = "player no_head_walk";
+                animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Collisions;
 using System.Collections.Generic;
 
 namespace old_heart
@@ -30,7 +31,10 @@ namespace old_heart
                 time_out(); // โดน enemy แล้วหายทันที ไม่ต้องรอ travel_time หมด
             }
         }
-
+        public override void collide_wall(CollisionPair2D pair, float delta_time)
+        {
+            // not disapear when hit wall
+        }
         public override void Draw(SpriteBatch sprite_batch)
         {
             // ล่องหน ไม่วาดอะไรเลย (ไม่เรียก base.Draw เพราะไม่มี texture โหลดไว้)

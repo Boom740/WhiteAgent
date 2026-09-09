@@ -28,7 +28,7 @@ namespace old_heart
         {
             base.LoadContent();
 
-            font = Content.Load<SpriteFont>("font/test_font");
+            font = Content.Load<SpriteFont>("assets/font/test_font");
 
             game_manager.level_manager.set_level_file("test_1.json");         // exact JSON file name
             game_manager.pause = true;

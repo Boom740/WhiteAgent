@@ -35,15 +35,18 @@ namespace old_heart
                 // TODO: Beast.png เป็น placeholder แทน Leukemia ไปก่อน เปลี่ยน path เมื่อมีภาพจริงของ leukemia
                 Texture2D placeholder_texture = content.Load<Texture2D>("Placeholder/Player/Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
+                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2 ,sprite_size: new Point(32,32)); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
+                idle_animation.sprite_scale = new Vector2(2,2);
                 idle_animation.name = "leukemia idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                animation walk_animation = new animation(placeholder_texture, frame_per_sec: 8);
+                animation walk_animation = new animation(placeholder_texture, frame_per_sec: 8, sprite_size: new Point(32, 32));
+                walk_animation.sprite_scale = new Vector2(2, 2);
                 walk_animation.name = "leukemia walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                animation dizzy_animation = new animation(placeholder_texture, frame_per_sec: 2);
+                animation dizzy_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(32, 32));
+                dizzy_animation.sprite_scale = new Vector2(2, 2);
                 dizzy_animation.name = "leukemia dizzy";
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
             }

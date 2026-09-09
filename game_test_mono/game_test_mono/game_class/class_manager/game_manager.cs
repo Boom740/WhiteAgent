@@ -124,11 +124,12 @@ namespace old_heart
             }
 
             //map_manager.update(gameTime);  map don't update lol
+
+            collision_manager.update(gameTime);
             entity_manager.update(gameTime);
             camera_manager.update(gameTime, player);
             particle_manager.update(gameTime);
             projectile_manager.update(gameTime);
-            collision_manager.update(gameTime);
 
 
             clear_inactive_node();
