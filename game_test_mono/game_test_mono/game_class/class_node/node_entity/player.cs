@@ -32,6 +32,9 @@ namespace old_heart
         public bool is_on_melee_cooldown = false;
         private float melee_cooldown_timer = 0f;
 
+        public float attack_input_delay = 0.15f; // ดีเลย์ขั้นต่ำระหว่างแต่ละ hit กันคลิกรัวเกินจังหวะ
+        private float next_attack_timer = 0f;
+
         // --- combat: head throw ---
         public bool has_head = true;
         public float head_throw_speed = 1200f;
@@ -176,7 +179,7 @@ namespace old_heart
                 {
                     throw_head();
                 }
-                else if (is_attacking == false && is_on_melee_cooldown == false)
+                else if (is_attacking == false && is_on_melee_cooldown == false && next_attack_timer <= 0f)
                 {
                     start_attack();
                 }
@@ -209,7 +212,23 @@ namespace old_heart
                 }
             }
 
-            base.Update(gameTime);
+            // --- attack input delay countdown ---
+            if (next_attack_timer > 0f)
+            {
+                next_attack_timer -= delta_time;
+            }
+
+            // --- attack timer countdown ---
+            if (is_attacking)
+            {
+                attack_timer -= delta_time;
+                if (attack_timer <= 0f)
+                {
+                    is_attacking = false;
+                }
+            }
+
+                base.Update(gameTime);
         }
 
         // ---------------- Melee ----------------
@@ -222,6 +241,7 @@ namespace old_heart
 
             combo_count++;
             combo_reset_timer = combo_reset_window;
+            next_attack_timer = attack_input_delay; // เริ่มนับดีเลย์ทันทีที่ออกหมัด
 
             Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
             Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
