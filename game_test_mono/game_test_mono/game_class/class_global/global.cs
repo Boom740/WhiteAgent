@@ -9,7 +9,7 @@ namespace old_heart
     public static class global           // This class is the important !!!!!!!!!!!!!!!!!!
     {
         public static Vector2 render_size = new Vector2(960,540);
-
+        public static int eee = 0;     // for debug only
         public static class input
         {
             public static KeyboardStateExtended keyboard_state;

@@ -15,7 +15,6 @@ namespace old_heart
 
 
         readonly ScreenManager screen_manager;
-        int eee = 1;
 
         public Game1()
         {

@@ -230,7 +230,33 @@ namespace old_heart
             sprite_batch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: ui_camera_matrix); // ui layer
             ui_manager.draw(sprite_batch);
             sprite_batch.End();
+
+
         }
+        public static readonly BlendState white_flash = new BlendState // from ai     use for entity sprite flash  when hit        // not finish 
+        {
+            // FIX: Use SourceAlpha instead of Blend.One to prevent dark/fading areas from turning transparent
+            ColorSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.InverseSourceAlpha,
+            ColorBlendFunction = BlendFunction.Add,
+
+            // Alpha channel rules remain normal
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.InverseSourceAlpha,
+            AlphaBlendFunction = BlendFunction.Add
+        };
+        public static readonly BlendState WhiteFlash = new BlendState
+        {
+            // --- COLOR EQUATION (RGB) ---
+            ColorSourceBlend = Blend.One,
+            ColorDestinationBlend = Blend.One,
+            ColorBlendFunction = BlendFunction.Add,
+
+            // --- TRANSPARENCY EQUATION (ALPHA) ---
+            AlphaSourceBlend = Blend.SourceAlpha,
+            AlphaDestinationBlend = Blend.InverseSourceAlpha,
+            AlphaBlendFunction = BlendFunction.Add
+        };
         public void unload()
         {
             global.signal.signal_spawn_projectile -= handle_signal_add_projectile;

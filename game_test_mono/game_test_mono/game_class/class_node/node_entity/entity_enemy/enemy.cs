@@ -38,14 +38,14 @@ namespace old_heart
         private const float frightened_exit_delay = 1f;
 
         // --- patrol (square) ---
-        public float patrol_square_size = 100f;
-        private Vector2 patrol_origin;
-        private int patrol_index = 0;
-        private const float patrol_point_threshold = 8f;
+        private float patrol_time_wait = 1f;
+        private float patrol_time_walk = 0.5f;
+        private float current_patrol_time = 0f;
+
+        private Random random = new Random();
 
         public enemy(ContentManager content_set, int max_hp, Vector2 position, float speed) : base(content_set, max_hp, position, speed)
         {
-            patrol_origin = position;
             clone_timer_current = clone_timer;
         }
 
@@ -86,93 +86,105 @@ namespace old_heart
             }
 
             base.Update(gameTime); // ให้ entity จัดการ velocity/position/animation/collision ตามปกติ
-        }
 
-        // ---------------- Normal ----------------
+            // ---------------- Normal ----------------
 
-        private Vector2[] get_patrol_points()
-        {
-            float half = patrol_square_size / 2f;
-            return new Vector2[]
+            void update_patrol()
             {
-                patrol_origin + new Vector2(-half, -half),
-                patrol_origin + new Vector2(half, -half),
-                patrol_origin + new Vector2(half, half),
-                patrol_origin + new Vector2(-half, half),
-            };
-        }
-
-        private void update_patrol()
-        {
-            Vector2[] points = get_patrol_points();
-            Vector2 to_point = points[patrol_index] - position;
-
-            if (to_point.Length() <= patrol_point_threshold)
-            {
-                patrol_index = (patrol_index + 1) % points.Length;
-            }
-            else
-            {
-                acceleration = Vector2.Normalize(to_point) * speed;
-            }
-        }
-
-        private void check_player_distance()
-        {
-            if (target == null) return;
-            float distance = Vector2.Distance(position, target.position);
-            if (distance <= dangerous_rad)
-            {
-                enter_frightened();
-            }
-        }
-
-        // ---------------- Frightened ----------------
-
-        private void enter_frightened()
-        {
-            state = enemy_state.frightened;
-            frightened_exit_timer = 0f;
-        }
-
-        private void update_frightened(float delta_time)
-        {
-            if (target == null) return;
-
-            Vector2 away_direction = position - target.position;
-            float distance = away_direction.Length();
-            away_direction = distance > 0.001f ? Vector2.Normalize(away_direction) : Vector2.UnitY;
-
-            acceleration = away_direction * speed * frightened_speed_multiplier;
-
-            if (distance >= safe_rad)
-            {
-                frightened_exit_timer += delta_time;
-                if (frightened_exit_timer >= frightened_exit_delay)
+                if (current_patrol_time <= 0)
                 {
-                    state = enemy_state.normal;
-                    patrol_origin = position; // จุดเริ่ม patrol ใหม่ตามตำแหน่งปัจจุบัน
-                    patrol_index = 0;
-                    frightened_exit_timer = 0f;
+                    int action_number = random.Next(1, 101);  // random 1 - 100     
+                    if (action_number < 10) //  % to walk
+                    {
+                        current_patrol_time = patrol_time_walk;
+                        acceleration = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * speed;
+                    }
+                    else 
+                    {
+                        current_patrol_time = patrol_time_wait;
+                        acceleration = Vector2.Zero;
+                    }
+                }
+                else
+                {
+                    current_patrol_time -= delta_time;
+                }
+
+            }
+
+            void check_player_distance()
+            {
+                if (target == null) return;
+                float distance = Vector2.Distance(position, target.position);
+                if (distance <= dangerous_rad)
+                {
+                    enter_frightened();
                 }
             }
-            else
+
+            // ---------------- Frightened ----------------
+
+            void enter_frightened()
             {
-                frightened_exit_timer = 0f; // ยังไม่พ้น safe_rad ให้รีเซ็ต delay
+                state = enemy_state.frightened;
+                frightened_exit_timer = 0f;
+            }
+
+            void update_frightened(float delta_time)
+            {
+                if (target == null) return;
+
+                Vector2 away_direction = position - target.position;
+                float distance = away_direction.Length();
+                away_direction = distance > 0.001f ? Vector2.Normalize(away_direction) : Vector2.UnitY;
+
+
+
+                if (distance >= safe_rad)
+                {
+                    frightened_exit_timer += delta_time;
+                    if (frightened_exit_timer >= frightened_exit_delay)
+                    {
+                        state = enemy_state.normal;
+                        frightened_exit_timer = 0f;
+                    }
+                }
+                else
+                {
+                    frightened_exit_timer = 0f; // ยังไม่พ้น safe_rad ให้รีเซ็ต delay
+
+                    acceleration = away_direction * speed * frightened_speed_multiplier;  // เดินหนี แค่ตอนอยู่ในระยะ
+                }
+            }
+
+            // ---------------- Dizzy ----------------
+
+            void update_dizzy(float delta_time)
+            {
+                velocity = Vector2.Zero;
+                acceleration = Vector2.Zero;
+
+                dizzy_timer_current -= delta_time;
+                if (dizzy_timer_current <= 0f)
+                {
+                    state = enemy_state.normal;
+                }
+            }
+
+            // ---------------- Clone ----------------
+
+            void update_clone_timer(float delta_time)
+            {
+                clone_timer_current -= delta_time;
+                if (clone_timer_current <= 0f)
+                {
+                    clone_timer_current = clone_timer;
+                    global.signal.spawn_entity(new enemy_leukemia(content, position + new Vector2(0, 0)));
+                }
             }
         }
 
         // ---------------- Dizzy ----------------
-
-        public void on_hit_by_projectile(projectile proj) // เรียกจาก collision manager ตอน projectile ชน enemy
-        {
-            if (alive == false) return;
-            if (shield && (state == enemy_state.normal || state == enemy_state.frightened))
-            {
-                enter_dizzy();
-            }
-        }
-
         private void enter_dizzy()
         {
             state = enemy_state.dizzy;
@@ -183,34 +195,15 @@ namespace old_heart
             acceleration = Vector2.Zero;
         }
 
-        private void update_dizzy(float delta_time)
+        public void on_hit_by_projectile(projectile proj) // เรียกจาก collision manager ตอน projectile ชน enemy
         {
-            velocity = Vector2.Zero;
-            acceleration = Vector2.Zero;
-
-            dizzy_timer_current -= delta_time;
-            if (dizzy_timer_current <= 0f)
+            if (alive == false) return;
+            if (shield && (state == enemy_state.normal || state == enemy_state.frightened))
             {
-                state = enemy_state.normal;
-                patrol_origin = position;
-                patrol_index = 0;
+                enter_dizzy();
             }
         }
-
-        // ---------------- Clone ----------------
-
-        private void update_clone_timer(float delta_time)
-        {
-            clone_timer_current -= delta_time;
-            if (clone_timer_current <= 0f)
-            {
-                clone_timer_current = clone_timer;
-                global.signal.spawn_entity(new enemy_leukemia(content, position + new Vector2(0,0)));   
-            }
-        }
-
         // ---------------- Damage / Death ----------------
-
         public override void take_damage(int damage_taken)
         {
             if (alive == false) return;

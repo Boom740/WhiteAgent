@@ -6,11 +6,11 @@ namespace old_heart
 {
     public class enemy_leukemia : enemy
     {
-        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, 5, position, 600)
+        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set,max_hp: 5, position,speed: 600)
         {
             animation_player = new animation_player_leukemia(content_set);
         }
-
+        
         public class animation_player_leukemia : animation_player_base
         {
             public static readonly animation_data animation_data = new animation_data();
@@ -33,14 +33,15 @@ namespace old_heart
                 //Point placeholder_sprite_size = new Point(16, 16); // sprite sheet ของ Beast.png คือ 4x4 ช่อง ช่องละ 16x16
 
                 // TODO: Beast.png เป็น placeholder แทน Leukemia ไปก่อน เปลี่ยน path เมื่อมีภาพจริงของ leukemia
-                Texture2D placeholder_texture = content.Load<Texture2D>("Placeholder/Player/Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
+                Texture2D placeholder_texture = content.Load<Texture2D>("Placeholder/Player/Idle"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
+                Texture2D placeholder_texture_2 = content.Load<Texture2D>("Placeholder/Player/Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
 
                 animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2 ,sprite_size: new Point(32,32)); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
                 idle_animation.sprite_scale = new Vector2(2,2);
                 idle_animation.name = "leukemia idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                animation walk_animation = new animation(placeholder_texture, frame_per_sec: 8, sprite_size: new Point(32, 32));
+                animation walk_animation = new animation(placeholder_texture_2, frame_per_sec: 8, sprite_size: new Point(32, 32));
                 walk_animation.sprite_scale = new Vector2(2, 2);
                 walk_animation.name = "leukemia walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);

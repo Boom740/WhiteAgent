@@ -344,12 +344,12 @@ namespace old_heart
                 walk_animation.name = "player walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                Texture2D no_head_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_idle");
+                Texture2D no_head_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_nohead_idle");
                 animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 2);
                 no_head_idle_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_idle, no_head_idle_animation);
 
-                Texture2D no_head_walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_walk");
+                Texture2D no_head_walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_nohead_walk");
                 animation no_head_walk_animation = new animation(no_head_walk_texture, frame_per_sec: 8);
                 no_head_walk_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);

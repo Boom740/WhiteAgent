@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -120,7 +121,7 @@ namespace old_heart
         }
         public void collide_wall(CollisionPair2D pair , float delta_time) // wall collision get call from collision_manager
         {
-            position += pair.FirstResult.MinimumTranslationVector;// / delta_time; // devided by delta_time for wall to push instantly
+            position += pair.FirstResult.MinimumTranslationVector;    
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
