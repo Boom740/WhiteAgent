@@ -15,7 +15,7 @@ namespace old_heart
         public enum state { idle, walk }
         public enum combat_state { none, attack, aim}
         public state current_state = state.idle;
-        public combat_state current_c_state = combat_state.none;
+        public combat_state current_combat_state = combat_state.none;
 
         // --- combat: melee ---
         //public int melee_damage = 1;
@@ -83,12 +83,12 @@ namespace old_heart
             MouseStateExtended mouse_state = global.input.mouse_state; // TODO: เช็คว่าชื่อ property ตรงกับของจริงในโปรเจกต์ไหม
 
             // --- attack timer countdown ---
-            if (current_c_state == combat_state.attack)
+            if (current_combat_state == combat_state.attack)
             {
                 attack_timer -= delta_time;
                 if (attack_timer <= 0f)
                 {
-                    current_c_state = combat_state.none;
+                    current_combat_state = combat_state.none;
                 }
             }
 
@@ -111,24 +111,24 @@ namespace old_heart
             }
 
             // --- aiming ---
-            if (current_c_state != combat_state.attack) // ถ้าไม่ได้โจมตีอยู่
+            if (current_combat_state != combat_state.attack) // ถ้าไม่ได้โจมตีอยู่
             {
                 if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
                 {
-                    current_c_state = combat_state.aim;
+                    current_combat_state = combat_state.aim;
                     Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                     current_direction = get_cardinal_direction(to_cursor); // หมุนตาม cursor แบบ 4 ทิศ ทุกเฟรมที่กำลังเล็งอยู่
                     direction_locked = true; // กันไม่ให้ entity.Update() เขียนทับด้วยทิศทางจาก velocity
                 }
                 else
                 {
-                    current_c_state = combat_state.none;
+                    current_combat_state = combat_state.none;
                     direction_locked = false; // กลับไปใช้ทิศทางตามการเดินปกติ
                 }
             }
             input_direction = Vector2.Zero;
 
-            if (current_c_state != combat_state.attack) // ล็อคการเดินระหว่างโจมตี
+            if (current_combat_state != combat_state.attack) // ล็อคการเดินระหว่างโจมตี
             {
                 if (keyboard_state.IsKeyDown(Keys.D))
                 {
@@ -149,7 +149,7 @@ namespace old_heart
 
                 if (input_direction != Vector2.Zero)
                 {
-                    float effective_speed = current_c_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
+                    float effective_speed = current_combat_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
 
                     if (has_head == false) // เดินเซตอนไม่มีหัว: บิดทิศทาง input แบบสุ่มเล็กน้อย
                     {
@@ -188,11 +188,11 @@ namespace old_heart
             // --- left click: ขว้างหัว (ถ้ากำลังเล็ง) หรือโจมตีธรรมดา ---
             if (mouse_state.WasButtonPressed(MouseButton.Left))
             {
-                if (current_c_state == combat_state.aim && has_head)
+                if (current_combat_state == combat_state.aim && has_head)
                 {
                     throw_head();
                 }
-                else if (current_c_state != combat_state.attack && is_on_melee_cooldown == false && next_attack_timer <= 0f)
+                else if (current_combat_state != combat_state.attack && is_on_melee_cooldown == false && next_attack_timer <= 0f)
                 {
                     start_attack();
                 }
@@ -232,12 +232,12 @@ namespace old_heart
             }
 
             // --- attack timer countdown ---
-            if (current_c_state == combat_state.attack)
+            if (current_combat_state == combat_state.attack)
             {
                 attack_timer -= delta_time;
                 if (attack_timer <= 0f)
                 {
-                    current_c_state = combat_state.none;
+                    current_combat_state = combat_state.none;
                 }
             }
 
@@ -248,7 +248,7 @@ namespace old_heart
 
         private void start_attack()
         {
-            current_c_state = combat_state.attack;
+            current_combat_state = combat_state.attack;
             attack_timer = attack_duration;
             velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนเริ่มโจมตี
 
@@ -357,6 +357,18 @@ namespace old_heart
 
         public override void update_animation(float delta_time)
         {
+            if (current_combat_state == combat_state.attack)
+            {
+                if (has_head)
+                {
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
+                }
+                else
+                {
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
+                }
+            }
+
             if (current_state == state.walk)
             {
                 if (has_head)
@@ -428,7 +440,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
-                animation punch_animation = new animation(punch_texture, frame_per_sec: 3); // ปรับ frame_per_sec ให้เข้ากับความเร็วหมัด (attack_duration)
+                animation punch_animation = new animation(punch_texture, frame_per_sec: 3); 
                 punch_animation.name = "player punch";
                 animation_data.data.Add(animation_name.punch, punch_animation);
 
