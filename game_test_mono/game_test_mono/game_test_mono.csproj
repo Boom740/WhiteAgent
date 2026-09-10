@@ -32,6 +32,9 @@
     <Folder Include="game_class\class_weapon\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\level\test_2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\level\test_1.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

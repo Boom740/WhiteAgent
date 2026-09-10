@@ -1,0 +1,126 @@
+{
+  "name": "test_2.json",
+  "next_level": "test_1.json",
+  "level_object_list": [
+    {
+      "type": "player",
+      "position_x": 40,
+      "position_y": 400,
+      "data": {}
+    },
+    {
+      "type": "enemy_leukemia",
+      "position_x": 467,
+      "position_y": 467,
+      "data": {}
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": -85,
+      "position_y": -90,
+      "data": {
+        "size_x": "100",
+        "size_y": "1000"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": -90,
+      "position_y": -5,
+      "data": {
+        "size_x": "1000",
+        "size_y": "100"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 850,
+      "position_y": -90,
+      "data": {
+        "size_x": "100",
+        "size_y": "1000"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 0,
+      "position_y": 850,
+      "data": {
+        "size_x": "1000",
+        "size_y": "100"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 210,
+      "position_y": 270,
+      "data": {
+        "size_x": "443",
+        "size_y": "20"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 210,
+      "position_y": 270,
+      "data": {
+        "size_x": "15",
+        "size_y": "150"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 640,
+      "position_y": 270,
+      "data": {
+        "size_x": "15",
+        "size_y": "150"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 210,
+      "position_y": 650,
+      "data": {
+        "size_x": "443",
+        "size_y": "20"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 210,
+      "position_y": 560,
+      "data": {
+        "size_x": "15",
+        "size_y": "100"
+      }
+    },
+    {
+      "type": "wall_collision_rectangle",
+      "position_x": 640,
+      "position_y": 560,
+      "data": {
+        "size_x": "15",
+        "size_y": "100"
+      }
+    },
+    {
+      "type": "image",
+      "position_x": 0,
+      "position_y": 0,
+      "data": {
+        "texture": "Placeholder/Levels/map_02/layer01",
+        "high": "False"
+      }
+    },
+    {
+      "type": "image",
+      "position_x": 0,
+      "position_y": 0,
+      "data": {
+        "texture": "Placeholder/Levels/map_02/layer02",
+        "high": "True"
+      }
+    }
+  ]
+}

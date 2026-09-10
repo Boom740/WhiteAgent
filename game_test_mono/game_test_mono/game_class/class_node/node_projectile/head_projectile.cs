@@ -20,9 +20,8 @@ namespace old_heart
         public head_projectile(ContentManager content_set, Vector2 position)
             : base(content_set, time_left: 9999f, position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
-            texture = content.Load<Texture2D>("Placeholder/Weapons/Head");
+            texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
             sprite_origin = new Vector2(texture.Width / 2, texture.Height); // position คือกึ่งกลาง X, ล่างสุด Y
-            sprite_scale = new Vector2(2, 2);
         }
 
         public override void Update(GameTime gameTime)

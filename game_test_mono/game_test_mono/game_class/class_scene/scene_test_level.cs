@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using System.IO;
+using System.Linq;
 
 namespace old_heart
 {
@@ -14,8 +15,11 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text_2;
 
-        public test_level(Game1 game) : base(game)
+        public string level_file;
+
+        public test_level(Game1 game , string level_file) : base(game)
         {
+            this.level_file = level_file;
         }
         public override void LoadContent()
         {
@@ -33,7 +37,7 @@ namespace old_heart
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
 
-            game_manager.level_manager.set_level_file("test_1.json");
+            game_manager.level_manager.set_level_file(level_file);
         }
         public override void Update(GameTime gameTime)
         {
@@ -45,6 +49,8 @@ namespace old_heart
             {
                 ScreenManager.ReplaceScreen(new level_editor(game_ref), fade_transition);
             }
+
+            
 
 
             test_text.text_string = $"test_level scene fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]" +

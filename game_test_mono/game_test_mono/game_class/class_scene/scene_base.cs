@@ -31,6 +31,11 @@ namespace old_heart
         public void update_all(GameTime gameTime)
         {
             game_manager.update(gameTime);
+
+            if (game_manager.level_clear && game_manager.level_manager.next_level_file != null)
+            {
+                ScreenManager.ReplaceScreen(new test_level(game_ref, game_manager.level_manager.next_level_file), fade_transition);
+            }
         }
         public override void Draw(GameTime gameTime)
         {

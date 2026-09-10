@@ -3,6 +3,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using MonoGame.Extended.Screens;
+using MonoGame.Extended.Screens.Transitions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -117,20 +119,32 @@ namespace old_heart
             ui_manager.update(gameTime);
             debug_manager.update(gameTime);
 
-            if (pause)
+            
+
+            if (pause || level_clear)
             {
                 camera_manager.update_global_mouse_position();
                 return;
             }
 
+            if (entity_manager.entity_list.Any(entity => entity is enemy) == false && level_manager.next_level_file != null)   // if no enemy is left in entity_list
+            {
+                Debug.WriteLine("level clear !");
+                level_clear = true;
+            }
+            else
+            {
+                //Debug.WriteLine("level not clea  " + level_manager.next_level_file);
+            }
+
             //map_manager.update(gameTime);  map don't update lol
 
-            collision_manager.update(gameTime);
+
             entity_manager.update(gameTime);
             camera_manager.update(gameTime, player);
             particle_manager.update(gameTime);
             projectile_manager.update(gameTime);
-
+            collision_manager.update(gameTime);
 
             clear_inactive_node();
             spawn_queue_signal();

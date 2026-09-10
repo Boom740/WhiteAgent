@@ -38,7 +38,7 @@ namespace old_heart
             test_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text);
 
-            test_text_2 = new ui_text("[K] save [L] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level", font, new Vector2(10, 510));
+            test_text_2 = new ui_text("[Q] save [E] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level", font, new Vector2(10, 510));
             test_text_2.text_color = Color.DarkRed;
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
@@ -57,13 +57,13 @@ namespace old_heart
                 ScreenManager.ReplaceScreen(new main_menu(game_ref), fade_transition);
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new test_level(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new test_level(game_ref,game_manager.level_manager.current_level_file), fade_transition);
             }
-            else if (keyboard_state.WasKeyPressed(Keys.K))
+            else if (keyboard_state.WasKeyPressed(Keys.Q))
             {
                 game_manager.level_manager.save_level();
             }
-            else if (keyboard_state.WasKeyPressed(Keys.L))
+            else if (keyboard_state.WasKeyPressed(Keys.E))
             {
                 game_manager.level_manager.load_level();
             }else if (keyboard_state.WasKeyPressed(Keys.D1))
