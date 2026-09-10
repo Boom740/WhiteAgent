@@ -113,6 +113,9 @@ namespace old_heart
         public virtual void take_damage(int damage_taken) //เติม virtual ให้ใช้กับ enemy ได้
         {
             hp -= damage_taken;
+
+            animation_player.current_flash_time = animation_player.flash_time;
+
             if(hp  <= 0)
             {
                 hp = 0;

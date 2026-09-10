@@ -48,6 +48,9 @@ namespace old_heart
         public int current_direction = 0;
         public float current_time = 0;
 
+        public readonly float flash_time = 0.1f;
+        public float current_flash_time = 0;
+
         public bool pause = false;
         public animation_player_base()
         {
@@ -88,6 +91,11 @@ namespace old_heart
                 }
             }
 
+            if (current_flash_time > 0)  // update flash time
+            {
+                current_flash_time -= delta_time;
+            }
+
             update_direction(direction);
         }
         public void play(animation animation)
@@ -110,8 +118,12 @@ namespace old_heart
             Vector2 sprite_scale = current_animation.sprite_scale;
             Vector2 sprite_origin = current_animation.sprite_origin;
             float layer_depth = (position.Y + 50000f) / 100000f;
-
-            sprite_batch.Draw(texture, position, source_rectangle,Color.White,0,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
+            Color color = Color.White;
+            if (current_flash_time > 0)
+            {
+                color = new Color(255,0,0,255); // flash red
+            }
+            sprite_batch.Draw(texture, position, source_rectangle, color, 0,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
         }
 
     }

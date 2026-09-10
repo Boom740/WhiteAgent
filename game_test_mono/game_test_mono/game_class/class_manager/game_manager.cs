@@ -220,7 +220,6 @@ namespace old_heart
             Matrix ui_camera_matrix = camera_manager.ui_camera.GetViewMatrix();
             Matrix camera_matrix = camera_manager.camera.GetViewMatrix();
 
-
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , transformMatrix: camera_matrix);    // low layer
 
             RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
@@ -247,30 +246,6 @@ namespace old_heart
 
 
         }
-        public static readonly BlendState white_flash = new BlendState // from ai     use for entity sprite flash  when hit        // not finish 
-        {
-            // FIX: Use SourceAlpha instead of Blend.One to prevent dark/fading areas from turning transparent
-            ColorSourceBlend = Blend.One,
-            ColorDestinationBlend = Blend.InverseSourceAlpha,
-            ColorBlendFunction = BlendFunction.Add,
-
-            // Alpha channel rules remain normal
-            AlphaSourceBlend = Blend.SourceAlpha,
-            AlphaDestinationBlend = Blend.InverseSourceAlpha,
-            AlphaBlendFunction = BlendFunction.Add
-        };
-        public static readonly BlendState WhiteFlash = new BlendState
-        {
-            // --- COLOR EQUATION (RGB) ---
-            ColorSourceBlend = Blend.One,
-            ColorDestinationBlend = Blend.One,
-            ColorBlendFunction = BlendFunction.Add,
-
-            // --- TRANSPARENCY EQUATION (ALPHA) ---
-            AlphaSourceBlend = Blend.SourceAlpha,
-            AlphaDestinationBlend = Blend.InverseSourceAlpha,
-            AlphaBlendFunction = BlendFunction.Add
-        };
         public void unload()
         {
             global.signal.signal_spawn_projectile -= handle_signal_add_projectile;

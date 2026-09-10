@@ -20,10 +20,12 @@ namespace old_heart
 
             font = Content.Load<SpriteFont>("assets/font/test_font");
 
-            test_text = new ui_text("Chess Battle Advanced\nclick or V to play\nEsc to quit\nB level editor", font, new Vector2(10, 5));
+            test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor", font, new Vector2(10, 5));
             game_manager.add_ui(test_text);
-            start_button = new ui_button(Content, new Rectangle(15, 400, 100, 50));
+            start_button = new ui_button(Content, new Rectangle(100, 400, 200, 100));
             game_manager.add_ui(start_button);
+            test_text = new ui_text("PLAY", font, new Vector2(130, 420));
+            game_manager.add_ui(test_text);
 
 
         }
@@ -36,7 +38,7 @@ namespace old_heart
             }
             else if (start_button.clicked)
             {
-                ScreenManager.ReplaceScreen(new gameplay(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new test_level(game_ref,"test_1.json"), fade_transition);
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
