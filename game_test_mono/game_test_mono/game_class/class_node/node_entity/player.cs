@@ -13,14 +13,16 @@ namespace old_heart
     {
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
+        public enum combat_state { none, attack, aim}
         public state current_state = state.idle;
+        public combat_state current_c_state = combat_state.none;
 
         // --- combat: melee ---
         //public int melee_damage = 1;
        // public float melee_range = 40f;   // ระยะยื่นไปด้านหน้า
         //public float melee_hitbox_lifetime = 0.1f; // เวลาที่ hitbox มีตัวตนอยู่ (แยกจาก attack_duration) ยิ่งน้อยยิ่งวิ่งเร็ว+หายเร็ว
         public float attack_duration = 20f / 60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
-        public bool is_attacking = false;
+        public bool is_attackin = false;
         private float attack_timer = 0f;
        // public float melee_lunge_speed = 150f;
 
@@ -50,7 +52,7 @@ namespace old_heart
         private head_projectile thrown_head;
 
         // --- aim  ---
-        public bool is_aiming = false;
+        public bool is_aimin = false;
         public float aim_speed_multiplier = 0.2f;
 
         // --- dash (Space) ---
@@ -81,12 +83,12 @@ namespace old_heart
             MouseStateExtended mouse_state = global.input.mouse_state; // TODO: เช็คว่าชื่อ property ตรงกับของจริงในโปรเจกต์ไหม
 
             // --- attack timer countdown ---
-            if (is_attacking)
+            if (current_c_state == combat_state.attack)
             {
                 attack_timer -= delta_time;
                 if (attack_timer <= 0f)
                 {
-                    is_attacking = false;
+                    current_c_state = combat_state.none;
                 }
             }
 
@@ -109,21 +111,24 @@ namespace old_heart
             }
 
             // --- aiming ---
-            is_aiming = mouse_state.IsButtonDown(MouseButton.Right) && has_head;
-            if (is_aiming)
+            if (current_c_state != combat_state.attack) // ถ้าไม่ได้โจมตีอยู่
             {
-                Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
-                current_direction = get_cardinal_direction(to_cursor); // หมุนตาม cursor แบบ 4 ทิศ ทุกเฟรมที่กำลังเล็งอยู่
-                direction_locked = true; // กันไม่ให้ entity.Update() เขียนทับด้วยทิศทางจาก velocity
+                if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
+                {
+                    current_c_state = combat_state.aim;
+                    Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
+                    current_direction = get_cardinal_direction(to_cursor); // หมุนตาม cursor แบบ 4 ทิศ ทุกเฟรมที่กำลังเล็งอยู่
+                    direction_locked = true; // กันไม่ให้ entity.Update() เขียนทับด้วยทิศทางจาก velocity
+                }
+                else
+                {
+                    current_c_state = combat_state.none;
+                    direction_locked = false; // กลับไปใช้ทิศทางตามการเดินปกติ
+                }
             }
-            else
-            {
-                direction_locked = false; // กลับไปใช้ทิศทางตามการเดินปกติ
-            }
-
             input_direction = Vector2.Zero;
 
-            if (is_attacking == false) // ล็อคการเดินระหว่างโจมตี
+            if (current_c_state != combat_state.attack) // ล็อคการเดินระหว่างโจมตี
             {
                 if (keyboard_state.IsKeyDown(Keys.D))
                 {
@@ -144,7 +149,7 @@ namespace old_heart
 
                 if (input_direction != Vector2.Zero)
                 {
-                    float effective_speed = is_aiming ? speed * aim_speed_multiplier : speed;
+                    float effective_speed = current_c_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
 
                     if (has_head == false) // เดินเซตอนไม่มีหัว: บิดทิศทาง input แบบสุ่มเล็กน้อย
                     {
@@ -183,11 +188,11 @@ namespace old_heart
             // --- left click: ขว้างหัว (ถ้ากำลังเล็ง) หรือโจมตีธรรมดา ---
             if (mouse_state.WasButtonPressed(MouseButton.Left))
             {
-                if (is_aiming && has_head)
+                if (current_c_state == combat_state.aim && has_head)
                 {
                     throw_head();
                 }
-                else if (is_attacking == false && is_on_melee_cooldown == false && next_attack_timer <= 0f)
+                else if (current_c_state != combat_state.attack && is_on_melee_cooldown == false && next_attack_timer <= 0f)
                 {
                     start_attack();
                 }
@@ -227,12 +232,12 @@ namespace old_heart
             }
 
             // --- attack timer countdown ---
-            if (is_attacking)
+            if (current_c_state == combat_state.attack)
             {
                 attack_timer -= delta_time;
                 if (attack_timer <= 0f)
                 {
-                    is_attacking = false;
+                    current_c_state = combat_state.none;
                 }
             }
 
@@ -243,7 +248,7 @@ namespace old_heart
 
         private void start_attack()
         {
-            is_attacking = true;
+            current_c_state = combat_state.attack;
             attack_timer = attack_duration;
             velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนเริ่มโจมตี
 
