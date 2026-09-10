@@ -390,7 +390,7 @@ namespace old_heart
 
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
-            public enum animation_name { idle, walk, no_head_idle, no_head_walk }
+            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch }
 
             public static readonly animation_data animation_data = new animation_data();
             public animation_player_player(ContentManager content) : base()
@@ -426,6 +426,16 @@ namespace old_heart
                 animation no_head_walk_animation = new animation(no_head_walk_texture, frame_per_sec: 8);
                 no_head_walk_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
+
+                Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
+                animation punch_animation = new animation(punch_texture, frame_per_sec: 3); // ปรับ frame_per_sec ให้เข้ากับความเร็วหมัด (attack_duration)
+                punch_animation.name = "player punch";
+                animation_data.data.Add(animation_name.punch, punch_animation);
+
+                Texture2D no_head_punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_punchattack");
+                animation no_head_punch_animation = new animation(no_head_punch_texture, frame_per_sec: 3);
+                no_head_punch_animation.name = "player no_head_punch";
+                animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
             }
         }
     }
