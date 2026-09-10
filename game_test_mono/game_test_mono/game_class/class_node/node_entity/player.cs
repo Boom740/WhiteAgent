@@ -231,15 +231,6 @@ namespace old_heart
                 next_attack_timer -= delta_time;
             }
 
-            // --- attack timer countdown ---
-            if (current_combat_state == combat_state.attack)
-            {
-                attack_timer -= delta_time;
-                if (attack_timer <= 0f)
-                {
-                    current_combat_state = combat_state.none;
-                }
-            }
 
                 base.Update(gameTime);
         }
@@ -368,8 +359,7 @@ namespace old_heart
                     animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
                 }
             }
-
-            if (current_state == state.walk)
+            else if (current_state == state.walk)
             {
                 if (has_head)
                 {
@@ -380,7 +370,7 @@ namespace old_heart
                     animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
                 }
             }
-            else      // idle
+            else // idle
             {
                 if (has_head)
                 {
@@ -440,12 +430,12 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
-                animation punch_animation = new animation(punch_texture, frame_per_sec: 3); 
+                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 1); 
                 punch_animation.name = "player punch";
                 animation_data.data.Add(animation_name.punch, punch_animation);
 
                 Texture2D no_head_punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_punchattack");
-                animation no_head_punch_animation = new animation(no_head_punch_texture, frame_per_sec: 3);
+                animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 1);
                 no_head_punch_animation.name = "player no_head_punch";
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
             }
