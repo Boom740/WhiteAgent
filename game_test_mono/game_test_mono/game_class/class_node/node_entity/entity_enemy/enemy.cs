@@ -210,7 +210,8 @@ namespace old_heart
             if (shield) return; // มี shield อยู่ โจมตีธรรมดาไม่เข้า
 
             base.take_damage(damage_taken);
-
+            dizzy_timer_current += 0.3f;
+            shield_timer_current += 0.3f;
             if (alive == false)
             {
                 state = enemy_state.died;

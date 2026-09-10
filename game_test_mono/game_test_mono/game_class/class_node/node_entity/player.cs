@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics; // Required for Keyboard input
 
 namespace old_heart
@@ -15,14 +16,21 @@ namespace old_heart
         public state current_state = state.idle;
 
         // --- combat: melee ---
-        public int melee_damage = 1;
-        public float melee_range = 40f;   // ระยะยื่นไปด้านหน้า
-        public float melee_hitbox_lifetime = 0.1f; // เวลาที่ hitbox มีตัวตนอยู่ (แยกจาก attack_duration) ยิ่งน้อยยิ่งวิ่งเร็ว+หายเร็ว
+        //public int melee_damage = 1;
+       // public float melee_range = 40f;   // ระยะยื่นไปด้านหน้า
+        //public float melee_hitbox_lifetime = 0.1f; // เวลาที่ hitbox มีตัวตนอยู่ (แยกจาก attack_duration) ยิ่งน้อยยิ่งวิ่งเร็ว+หายเร็ว
         public float attack_duration = 20f / 60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public bool is_attacking = false;
         private float attack_timer = 0f;
-        public float melee_lunge_speed = 150f;
+       // public float melee_lunge_speed = 150f;
 
+        public List<melee_combo_hit_data> combo_hits = new List<melee_combo_hit_data>
+         {
+          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 1
+          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 2
+          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 3
+          new melee_combo_hit_data(damage: 2, lunge_speed: 850f, range: 55f, hitbox_lifetime: 0.08f, knockback_speed: 300f), // hit 4 (finisher)
+         };
         // --- combat: melee combo ---
         public int combo_count = 0;
         public int max_combo = 4;
@@ -243,15 +251,19 @@ namespace old_heart
             combo_reset_timer = combo_reset_window;
             next_attack_timer = attack_input_delay; // เริ่มนับดีเลย์ทันทีที่ออกหมัด
 
+            int hit_index = MathHelper.Clamp(combo_count - 1, 0, combo_hits.Count - 1); // กันเผื่อ max_combo กับ combo_hits.Count ไม่ตรงกัน
+            melee_combo_hit_data hit_data = combo_hits[hit_index];
+
             Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
             Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
 
-            velocity = aim_direction * melee_lunge_speed;
+            velocity = aim_direction * hit_data.lunge_speed;
 
             current_direction = get_cardinal_direction(aim_direction); // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
-            melee_projectile punch = new melee_projectile(content, position, aim_direction, melee_range, melee_hitbox_lifetime, melee_damage);
+             melee_projectile punch = new melee_projectile(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
             punch.owner = this;
+            punch.knockback_speed = hit_data.knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
             global.signal.spawn_projectile(punch);
             if (combo_count >= max_combo)
             {
