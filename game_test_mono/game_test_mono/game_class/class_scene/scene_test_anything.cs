@@ -56,15 +56,17 @@ namespace old_heart
                 ScreenManager.ReplaceScreen(new scene_main_menu(game_ref), fade_transition);
             }
 
-            test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]\nclick or V to go back to title bruh" +
+            test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                                      V to go back to title bruh" +
             $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
 
             if (game_manager.player != null)
             {
-                test_text.text_string += $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
-                    $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
-                    $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
-                    $"\nplayer state : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}";
+                test_text.text_string +=
+                // $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
+                // $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
+                $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
+                $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
+                $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}";
             }
 
 
