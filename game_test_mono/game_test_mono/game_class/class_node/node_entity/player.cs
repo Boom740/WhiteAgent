@@ -236,12 +236,9 @@ namespace old_heart
             }
 
 
-                base.Update(gameTime);
-        }
-
         // ---------------- Melee ----------------
 
-        private void start_attack()
+        void start_attack()
         {
             current_combat_state = combat_state.attack;
             attack_timer = attack_duration;
@@ -261,7 +258,7 @@ namespace old_heart
 
             current_direction = get_cardinal_direction(aim_direction); // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
-             melee_projectile punch = new melee_projectile(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
+            melee_projectile punch = new melee_projectile(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
             punch.owner = this;
             punch.knockback_speed = hit_data.knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
             global.signal.spawn_projectile(punch);
@@ -273,7 +270,7 @@ namespace old_heart
             }
         }
 
-        private direction get_cardinal_direction(Vector2 v)
+        direction get_cardinal_direction(Vector2 v)
         {
             float abs_x = MathF.Abs(v.X);
             float abs_y = MathF.Abs(v.Y);
@@ -287,7 +284,7 @@ namespace old_heart
 
         // ---------------- Head throw / dash / pickup ----------------
 
-        private void throw_head()
+        void throw_head()
         {
             has_head = false;
 
@@ -300,7 +297,7 @@ namespace old_heart
             thrown_head = head;
         }
 
-        private void update_dash(float delta_time)
+        void update_dash(float delta_time)
         {
             if (thrown_head == null)
             {
@@ -332,7 +329,7 @@ namespace old_heart
             acceleration = Vector2.Zero;
         }
 
-        private void cancel_dash()
+        void cancel_dash()
         {
             is_dashing = false;
             max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
@@ -340,7 +337,7 @@ namespace old_heart
             dash_timer = 0f;
         }
 
-        private void reattach_head()
+        void reattach_head()
         {
             has_head = true;
             if (thrown_head != null)
@@ -350,6 +347,8 @@ namespace old_heart
             }
         }
 
+        base.Update(gameTime);
+        }
         public override void update_animation(float delta_time)
         {
             if (current_combat_state == combat_state.attack)
