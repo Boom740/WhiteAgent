@@ -5,12 +5,12 @@ using MonoGame.Extended.Screens;
 
 namespace old_heart
 {
-    public class main_menu : base_screen
+    public class scene_main_menu : base_screen
     {
         private SpriteFont font;
         public ui_button start_button;
         public ui_text test_text;
-        public main_menu(Game1 game) : base(game)
+        public scene_main_menu(Game1 game) : base(game)
         {
             game_ref = game;
         }
@@ -34,7 +34,7 @@ namespace old_heart
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new gameplay(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_test_anything(game_ref), fade_transition);
             }
             else if (start_button.clicked)
             {
@@ -42,7 +42,7 @@ namespace old_heart
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new level_editor(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_level_editor(game_ref), fade_transition);
             }
 
             update_all(gameTime);
