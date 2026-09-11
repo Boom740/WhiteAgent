@@ -52,6 +52,7 @@ namespace old_heart
         public float current_flash_time = 0;
 
         public bool pause = false;
+        public bool is_finished = false;
         public animation_player_base()
         {
         }
@@ -88,6 +89,8 @@ namespace old_heart
                     {
                         play(default_animation);
                     }
+
+                    is_finished = true;
                 }
             }
 
@@ -100,7 +103,9 @@ namespace old_heart
         }
         public void play(animation animation)
         {
-            if(animation.loop == false)  // start from frame 0 only for not loop animation
+            if (current_animation == animation) { return; } //ป้องกันการรีเซ็ตเฟรม ถ้าเป็นแอนนิเมชั่นเดิม
+
+            if (animation.loop == false)  // start from frame 0 only for not loop animation
             {
                 current_frame_index = 0;
             }
@@ -110,6 +115,8 @@ namespace old_heart
             }
 
             current_animation = animation;
+            current_time = 0f;
+            is_finished = false;
         }
         public void draw(SpriteBatch sprite_batch, Vector2 position)
         {

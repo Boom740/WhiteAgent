@@ -21,7 +21,7 @@ namespace old_heart
         //public int melee_damage = 1;
        // public float melee_range = 40f;   // ระยะยื่นไปด้านหน้า
         //public float melee_hitbox_lifetime = 0.1f; // เวลาที่ hitbox มีตัวตนอยู่ (แยกจาก attack_duration) ยิ่งน้อยยิ่งวิ่งเร็ว+หายเร็ว
-        public float attack_duration = 20f / 60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public bool is_attackin = false;
         private float attack_timer = 0f;
        // public float melee_lunge_speed = 150f;
@@ -38,7 +38,7 @@ namespace old_heart
         public int max_combo = 4;
         public float combo_reset_window = 1f;   // เว้นช่วงกดเกินเท่านี้ = คอมโบหลุด
         private float combo_reset_timer = 0f;
-        public float combo_cooldown_duration = 2f; // คูลดาวน์หลังคอมโบครบ 4
+        public float combo_cooldown_duration = 0.5f; // คูลดาวน์หลังคอมโบครบ 4
         public bool is_on_melee_cooldown = false;
         private float melee_cooldown_timer = 0f;
 
@@ -163,14 +163,18 @@ namespace old_heart
 
             acceleration = input_direction;
 
-            if (velocity.Length() > 10f)
+            if (current_combat_state != combat_state.attack)
             {
-                current_state = state.walk;
+                if (velocity.Length() > 10f)
+                {
+                    current_state = state.walk;
+                }
+                else
+                {
+                    current_state = state.idle;
+                }
             }
-            else
-            {
-                current_state = state.idle;
-            }
+            
 
             if (keyboard_state.WasKeyPressed(Keys.F))
             {
@@ -350,13 +354,25 @@ namespace old_heart
         {
             if (current_combat_state == combat_state.attack)
             {
-                if (has_head)
+                // ถ้าแอนิเมชันเล่นจบแล้ว ให้ออกจากสถานะโจมตี
+                if (animation_player.is_finished)
                 {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
+                    // เปลี่ยนกลับเป็นสถานะปกติของคุณ (สมมติว่าเป็น none หรือ idle)
+                    current_combat_state = combat_state.none;
+
+                    animation_player.is_finished = false;
                 }
                 else
                 {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
+                    // ถ้ายังเล่นไม่จบ ก็สั่งเล่นแอนิเมชันต่อยตามปกติ
+                    if (has_head)
+                    {
+                        animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
+                    }
+                    else
+                    {
+                        animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
+                    }
                 }
             }
             else if (current_state == state.walk)
@@ -430,12 +446,12 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
-                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 1); 
+                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 12); 
                 punch_animation.name = "player punch";
                 animation_data.data.Add(animation_name.punch, punch_animation);
 
                 Texture2D no_head_punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_punchattack");
-                animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 1);
+                animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 12);
                 no_head_punch_animation.name = "player no_head_punch";
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
             }
