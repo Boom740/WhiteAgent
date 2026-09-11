@@ -354,25 +354,13 @@ namespace old_heart
         {
             if (current_combat_state == combat_state.attack)
             {
-                // ถ้าแอนิเมชันเล่นจบแล้ว ให้ออกจากสถานะโจมตี
-                if (animation_player.is_finished)
+                if (has_head)
                 {
-                    // เปลี่ยนกลับเป็นสถานะปกติของคุณ (สมมติว่าเป็น none หรือ idle)
-                    current_combat_state = combat_state.none;
-
-                    animation_player.is_finished = false;
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
                 }
                 else
                 {
-                    // ถ้ายังเล่นไม่จบ ก็สั่งเล่นแอนิเมชันต่อยตามปกติ
-                    if (has_head)
-                    {
-                        animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
-                    }
-                    else
-                    {
-                        animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
-                    }
+                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
                 }
             }
             else if (current_state == state.walk)

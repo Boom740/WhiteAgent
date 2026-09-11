@@ -74,7 +74,7 @@ namespace old_heart
         {
             if (entity_manager.entity_list.Count >= entity_manager.limit)
             {
-                Debug.WriteLine("cant spawn entity at limit count : " + entity_manager.entity_list.Count);
+                //Debug.WriteLine("cant spawn entity at limit count : " + entity_manager.entity_list.Count);
                 return;
             }
             entity_manager.add(entity);
