@@ -19,6 +19,8 @@ namespace old_heart
             this.damage = damage;
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
             velocity = aim_direction * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
+
+            hit_box_radius = 30f;
         }
 
         public override void on_hit_entity(entity target_entity)

@@ -69,7 +69,7 @@ namespace old_heart
         {
             animation_player = new animation_player_player(content);
             ground_friction = 10f;
-            max_velocity = 400;
+            max_velocity = 300;
             default_max_velocity = max_velocity;
 
 
@@ -426,22 +426,22 @@ namespace old_heart
             public void load(ContentManager content)
             {
                 Texture2D idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_idle");
-                animation idle_animation = new animation(idle_texture, frame_per_sec: 2);
+                animation idle_animation = new animation(idle_texture, frame_per_sec: 12);
                 idle_animation.name = "player idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
                 Texture2D walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_walk");
-                animation walk_animation = new animation(walk_texture, frame_per_sec: 8);
+                animation walk_animation = new animation(walk_texture, frame_per_sec: 15);
                 walk_animation.name = "player walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
                 Texture2D no_head_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_nohead_idle");
-                animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 2);
+                animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 12);
                 no_head_idle_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_idle, no_head_idle_animation);
 
                 Texture2D no_head_walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_nohead_walk");
-                animation no_head_walk_animation = new animation(no_head_walk_texture, frame_per_sec: 8);
+                animation no_head_walk_animation = new animation(no_head_walk_texture, frame_per_sec: 15);
                 no_head_walk_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
 
