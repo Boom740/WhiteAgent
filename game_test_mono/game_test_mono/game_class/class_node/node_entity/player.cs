@@ -82,16 +82,6 @@ namespace old_heart
 
             MouseStateExtended mouse_state = global.input.mouse_state; // TODO: เช็คว่าชื่อ property ตรงกับของจริงในโปรเจกต์ไหม
 
-            // --- attack timer countdown ---
-            if (current_combat_state == combat_state.attack)
-            {
-                attack_timer -= delta_time;
-                if (attack_timer <= 0f)
-                {
-                    current_combat_state = combat_state.none;
-                }
-            }
-
             // --- dash overrides ทุกอย่าง ---
             if (is_dashing)
             {
@@ -109,72 +99,18 @@ namespace old_heart
                     reattach_head();
                 }
             }
-
-            // --- aiming ---
-            if (current_combat_state != combat_state.attack) // ถ้าไม่ได้โจมตีอยู่
+           
+            switch (current_combat_state)
             {
-                if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
-                {
-                    current_combat_state = combat_state.aim;
-                    Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
-                    current_direction = get_cardinal_direction(to_cursor); // หมุนตาม cursor แบบ 4 ทิศ ทุกเฟรมที่กำลังเล็งอยู่
-                    direction_locked = true; // กันไม่ให้ entity.Update() เขียนทับด้วยทิศทางจาก velocity
-                }
-                else
-                {
-                    current_combat_state = combat_state.none;
-                    direction_locked = false; // กลับไปใช้ทิศทางตามการเดินปกติ
-                }
+                case combat_state.attack:
+                    update_attack_state();
+                    break;
+
+                case combat_state.aim:
+                case combat_state.none:
+                    update_free_state(); // เดินได้ปกติ ทั้งสอง state ต่างกันแค่ความเร็ว/การหมุนตาม cursor
+                    break;
             }
-            input_direction = Vector2.Zero;
-
-            if (current_combat_state != combat_state.attack) // ล็อคการเดินระหว่างโจมตี
-            {
-                if (keyboard_state.IsKeyDown(Keys.D))
-                {
-                    input_direction += new Vector2(1, 0);
-                }
-                if (keyboard_state.IsKeyDown(Keys.A))
-                {
-                    input_direction += new Vector2(-1, 0);
-                }
-                if (keyboard_state.IsKeyDown(Keys.S))
-                {
-                    input_direction += new Vector2(0, 1);
-                }
-                if (keyboard_state.IsKeyDown(Keys.W))
-                {
-                    input_direction += new Vector2(0, -1);
-                }
-
-                if (input_direction != Vector2.Zero)
-                {
-                    float effective_speed = current_combat_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
-
-                    if (has_head == false) // เดินเซตอนไม่มีหัว: บิดทิศทาง input แบบสุ่มเล็กน้อย
-                    {
-                        float wobble_angle = MathHelper.ToRadians((float)(rng.NextDouble() * 2 - 1) * headless_wobble_max_degrees);
-                        input_direction = Vector2.Transform(input_direction, Matrix.CreateRotationZ(wobble_angle));
-                    }
-
-                    input_direction = Vector2.Normalize(input_direction) * effective_speed;
-                }
-            }
-
-            acceleration = input_direction;
-
-            if (current_combat_state != combat_state.attack)
-            {
-                if (velocity.Length() > 10f)
-                {
-                    current_state = state.walk;
-                }
-                else
-                {
-                    current_state = state.idle;
-                }
-            }
-            
 
             if (keyboard_state.WasKeyPressed(Keys.F))
             {
@@ -192,13 +128,21 @@ namespace old_heart
             // --- left click: ขว้างหัว (ถ้ากำลังเล็ง) หรือโจมตีธรรมดา ---
             if (mouse_state.WasButtonPressed(MouseButton.Left))
             {
-                if (current_combat_state == combat_state.aim && has_head)
+                switch (current_combat_state)
                 {
-                    throw_head();
-                }
-                else if (current_combat_state != combat_state.attack && is_on_melee_cooldown == false && next_attack_timer <= 0f)
-                {
-                    start_attack();
+                    case combat_state.aim:
+                        if (has_head)
+                        {
+                            throw_head();
+                        }
+                        break;
+
+                    case combat_state.none:
+                        if (is_on_melee_cooldown == false && next_attack_timer <= 0f)
+                        {
+                            start_attack();
+                        }
+                        break;
                 }
             }
 
@@ -235,10 +179,74 @@ namespace old_heart
                 next_attack_timer -= delta_time;
             }
 
+            base.Update(gameTime);
 
-        // ---------------- Melee ----------------
+            //  local functions: state handlers (เรียกจาก switch ด้านบน) 
+            void update_attack_state()
+            {
+                attack_timer -= delta_time;
+                if (attack_timer <= 0f)
+                {
+                    current_combat_state = combat_state.none;
+                }
+            }
 
-        void start_attack()
+                void update_free_state()
+            {
+                update_aim_toggle();
+                update_movement_input();
+                update_walk_idle_state();
+            }
+
+            void update_aim_toggle()
+            {
+                if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
+                {
+                    current_combat_state = combat_state.aim;
+                    Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
+                    current_direction = get_cardinal_direction(to_cursor);
+                    direction_locked = true;
+                }
+                else
+                {
+                    current_combat_state = combat_state.none;
+                    direction_locked = false;
+                }
+            }
+
+            void update_movement_input()
+            {
+                input_direction = Vector2.Zero;
+
+                if (keyboard_state.IsKeyDown(Keys.D)) input_direction += new Vector2(1, 0);
+                if (keyboard_state.IsKeyDown(Keys.A)) input_direction += new Vector2(-1, 0);
+                if (keyboard_state.IsKeyDown(Keys.S)) input_direction += new Vector2(0, 1);
+                if (keyboard_state.IsKeyDown(Keys.W)) input_direction += new Vector2(0, -1);
+
+                if (input_direction != Vector2.Zero)
+                {
+                    float effective_speed = current_combat_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
+
+                    if (has_head == false)
+                    {
+                        float wobble_angle = MathHelper.ToRadians((float)(rng.NextDouble() * 2 - 1) * headless_wobble_max_degrees);
+                        input_direction = Vector2.Transform(input_direction, Matrix.CreateRotationZ(wobble_angle));
+                    }
+
+                    input_direction = Vector2.Normalize(input_direction) * effective_speed;
+                }
+
+                acceleration = input_direction;
+            }
+
+            void update_walk_idle_state()
+            {
+                current_state = velocity.Length() > 10f ? state.walk : state.idle;
+            }
+
+            // ---------------- Melee ----------------
+
+            void start_attack()
         {
             current_combat_state = combat_state.attack;
             attack_timer = attack_duration;
@@ -345,44 +353,34 @@ namespace old_heart
                 thrown_head.time_out(); // ลบตัวเองออกจาก scene และ collision world
                 thrown_head = null;
             }
-        }
-
-        base.Update(gameTime);
-        }
+        }    
+     }
         public override void update_animation(float delta_time)
         {
-            if (current_combat_state == combat_state.attack)
+            switch (current_combat_state)
             {
-                if (has_head)
-                {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.punch]);
-                }
-                else
-                {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
-                }
-            }
-            else if (current_state == state.walk)
-            {
-                if (has_head)
-                {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.walk]);
-                }
-                else
-                {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
-                }
-            }
-            else // idle
-            {
-                if (has_head)
-                {
-                    animation_player.play(animation_player.default_animation);
-                }
-                else
-                {
-                    animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_idle]);
-                }
+                case combat_state.attack:
+                    animation_player.play(has_head
+                        ? animation_player.data.data[animation_player_player.animation_name.punch]
+                        : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
+                    break;
+
+                default: // none / aim ใช้ตรรกะเดียวกัน: เลือกตาม current_state (walk/idle)
+                    switch (current_state)
+                    {
+                        case state.walk:
+                            animation_player.play(has_head
+                                ? animation_player.data.data[animation_player_player.animation_name.walk]
+                                : animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
+                            break;
+
+                        case state.idle:
+                            animation_player.play(has_head
+                                ? animation_player.default_animation
+                                : animation_player.data.data[animation_player_player.animation_name.no_head_idle]);
+                            break;
+                    }
+                    break;
             }
 
             base.update_animation(delta_time);
@@ -391,8 +389,6 @@ namespace old_heart
         {
             base.Draw(sprite_batch);
         }
-
-
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
             public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch }
