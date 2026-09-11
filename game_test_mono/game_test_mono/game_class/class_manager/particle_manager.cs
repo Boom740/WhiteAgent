@@ -17,7 +17,7 @@ namespace old_heart
     public class particle_manager
     {
         static public Dictionary<Enum, ParticleEmitter> data = new Dictionary<Enum, ParticleEmitter>();
-        enum particle_name { test1 }
+        public enum particle_name { test1 , enemy_die_efx }
 
         public ParticleEffect low_particle_effect;
         public ParticleEffect high_particle_effect;
@@ -91,9 +91,9 @@ namespace old_heart
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
 
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
-            if (keyboard_state.IsKeyDown(Keys.Z))
+            if (keyboard_state.WasKeyReleased(Keys.Z))
             {
-                global.signal.spawn_particle(particle_name.test1, global.input.scaled_mouse_world_position);
+                global.signal.spawn_particle(particle_name.enemy_die_efx, global.input.scaled_mouse_world_position, high_layer: true);
             }
 
             low_particle_effect.Update(delta_time);
@@ -110,7 +110,9 @@ namespace old_heart
 
         public void load()
         {
-            ParticleEmitter emitter = new ParticleEmitter(20)
+            ParticleEmitter emitter;
+
+            emitter = new ParticleEmitter(20)   // test particle
             {
                 Name = "fire_efx",
                 LifeSpan = 2.0f,
@@ -128,14 +130,44 @@ namespace old_heart
             emitter.Modifiers.Add(new LinearGravityModifier
             {
                 Direction = -Vector2.UnitY,
-                Strength = 100f
+                Strength = 200f
             });
             emitter.Modifiers.Add(new AgeModifier
             {
                 Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
             });
 
-            data.Add(particle_name.test1,emitter);
+            data.Add(particle_name.test1, emitter);
+
+            emitter = new ParticleEmitter(20)
+            {
+                Name = "enemy_die_efx",
+                LifeSpan = 1.0f,
+                TextureRegion = new Texture2DRegion(default_particle_texture),
+                Profile = Profile.Spray(-Vector2.UnitY, 4.0f),
+                Parameters = new ParticleReleaseParameters
+                {
+                    Quantity = new ParticleInt32Parameter(10, 20),
+                    Speed = new ParticleFloatParameter(50f, 700f),
+                    Color = new ParticleColorParameter(new Vector3(1.0f, 0.5f, 0.5f)),
+                    Scale = new ParticleVector2Parameter(new Vector2(10f, 10f))
+                }
+            };
+
+            emitter.Modifiers.Add(new LinearGravityModifier
+            {
+                Direction = Vector2.UnitY,
+                Strength = 100f
+            });
+            emitter.Modifiers.Add(new AgeModifier
+            {
+                Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
+            });
+            emitter.Modifiers.Add(new DragModifier
+            {
+                Density = 10f
+            });
+            data.Add(particle_name.enemy_die_efx, emitter);
         }
     }
 }

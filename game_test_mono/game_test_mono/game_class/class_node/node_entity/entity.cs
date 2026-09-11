@@ -107,7 +107,7 @@ namespace old_heart
         public virtual void die()
         {
             alive = false;
-            // play efx or something
+            global.signal.spawn_particle(particle_manager.particle_name.enemy_die_efx, position,high_layer : true);
             active = false; // active = false make this get instant delete
         }
         public virtual void take_damage(int damage_taken) //เติม virtual ให้ใช้กับ enemy ได้
