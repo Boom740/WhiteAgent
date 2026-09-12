@@ -361,7 +361,7 @@ namespace old_heart
                     reattach_head();
                     if (pickup_via_dash)
                     {
-                        global.signal.screen_shake(2f);
+                        global.signal.screen_shake(0.6f);
                     }
                 }
             }
