@@ -14,7 +14,7 @@ namespace old_heart
         public ui_text(string text_string_set, Vector2 position)
         {
             text_string = text_string_set;
-            position = position;
+            this.position = position;
         }
 
         public override void Update(GameTime gameTime)

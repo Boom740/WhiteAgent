@@ -27,13 +27,13 @@ namespace old_heart
             {
                 world_text.Update(gameTime);
             }
-            if (global.input.keyboard_state.WasKeyPressed(Microsoft.Xna.Framework.Input.Keys.G))
-            {
-                world_text test_text = new world_text("E", global.input.scaled_mouse_world_position);
-                test_text.text_scale = new Vector2(0.5f, 0.5f);
-                test_text.text_color = Color.White;
-                global.signal.spawn_world_text(test_text);
-            }
+
+
+            //if (global.input.keyboard_state.WasKeyPressed(Microsoft.Xna.Framework.Input.Keys.G))
+            //{
+            //    world_text test_text = new world_text("1", global.input.scaled_mouse_world_position);
+            //    global.signal.spawn_world_text(test_text);
+            //}
 
         }
         public void draw(SpriteBatch sprite_batch)

@@ -43,18 +43,13 @@ namespace old_heart
 
         public override void Update(GameTime gameTime)
         {
+            if (!alive) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (alive)
+            
+            time_left -= delta_time;
+            if (time_left <= 0)
             {
-                time_left -= delta_time;
-                if (time_left <= 0)
-                {
-                    time_out();
-                }
-            }
-            else
-            {
-                return;
+                time_out();
             }
             
 

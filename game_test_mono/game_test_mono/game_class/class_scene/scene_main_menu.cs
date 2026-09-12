@@ -17,7 +17,6 @@ namespace old_heart
         {
             base.LoadContent();
 
-
             test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor",  new Vector2(10, 5));
             game_manager.add_ui(test_text);
             start_button = new ui_button(Content, new Rectangle(100, 400, 200, 100));
