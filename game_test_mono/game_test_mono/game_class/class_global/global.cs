@@ -40,6 +40,7 @@ namespace old_heart
             public static event Action<world_text> signal_spawn_world_text;
             public static event Action<entity> signal_spawn_entity;
             public static event Action<Enum,Vector2,bool> signal_spawn_particle;
+            public static event Action<float> signal_screen_shake;
             public static void spawn_projectile(projectile projectile)
             {
                 signal_spawn_projectile.Invoke(projectile);
@@ -55,6 +56,10 @@ namespace old_heart
             public static void spawn_particle(Enum particle_name, Vector2 position, bool high_layer = false)
             {
                 signal_spawn_particle.Invoke(particle_name,position,high_layer);
+            }
+            public static void screen_shake(float intensity)
+            {
+                signal_screen_shake.Invoke(intensity);
             }
         }
         public static class theme {

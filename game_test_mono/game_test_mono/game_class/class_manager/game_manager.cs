@@ -56,6 +56,8 @@ namespace old_heart
             global.signal.signal_spawn_world_text += handle_signal_add_world_text;
             global.signal.signal_spawn_entity += handle_signal_add_entity;
             global.signal.signal_spawn_particle += add_particle;
+
+            global.signal.signal_screen_shake += camera_manager.shake_screen;
         }
         public void add_ui(node node)
         {
@@ -283,6 +285,8 @@ namespace old_heart
             global.signal.signal_spawn_world_text -= handle_signal_add_world_text;
             global.signal.signal_spawn_entity -= handle_signal_add_entity;
             global.signal.signal_spawn_particle -= add_particle;
+
+            global.signal.signal_screen_shake -= camera_manager.shake_screen;
         }
     }
 }
