@@ -332,6 +332,36 @@
 /processorParam:TextureFormat=Color
 /build:Placeholder/Player/Walk.png
 
+#begin Placeholder/SFX/Impact.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/SFX/Impact.wav
+
+#begin Placeholder/SFX/Impact2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/SFX/Impact2.wav
+
+#begin Placeholder/SFX/Pick_up_head.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/SFX/Pick_up_head.wav
+
+#begin Placeholder/SFX/Slash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/SFX/Slash.wav
+
+#begin Placeholder/SFX/Throw_Head.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Placeholder/SFX/Throw_Head.wav
+
 #begin Placeholder/Weapons/Head.png
 /importer:TextureImporter
 /processor:TextureProcessor

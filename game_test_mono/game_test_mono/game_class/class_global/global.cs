@@ -1,10 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 { 
@@ -70,6 +74,88 @@ namespace old_heart
                 default_font = content.Load<SpriteFont>("assets/font/test_font");
                 default_font.Spacing = 1f;
             }
+        }
+        public static class sound {
+            public enum sound_name { test1, test2 };  
+            public enum song_name { test1 }; 
+
+            public static Dictionary<sound_name, sound_data> data = new Dictionary<sound_name, sound_data>();
+            public static Dictionary<song_name, song_data> data_song = new Dictionary<song_name, song_data>();
+            public static void play_sound(sound_name sound_name)
+            {
+                sound_data sound_data = data[sound_name];
+                sound_data.sound_effect.Play(sound_data.volume, sound_data.pitch, pan: 0);
+                
+                Debug.WriteLine("global play sound : "+ sound_data.name);
+            }
+            public static void play_song(song_name song_name)  // maybe later  add sound fade out before play if there is already song playing
+            {
+                song_data song_data = data_song[song_name];
+                MediaPlayer.Volume = song_data.volume;
+                MediaPlayer.Play(song_data.song);
+
+                Debug.WriteLine("global play song : " + song_data.name);
+            }
+            public static void pause_song()
+            {
+                MediaPlayer.Pause();
+            }
+            public static void resume_song()
+            {
+                MediaPlayer.Resume();
+            }
+            public static void load(ContentManager content)
+            {
+                load_sound();
+                load_song();
+                MediaPlayer.IsRepeating = true;
+
+                void load_sound()
+                {
+                    sound_data sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"));
+                    data.Add(sound_name.test1, sound_data);
+                }
+                void load_song()
+                {
+                    //song_data song_data = new song_data(content.Load<Song>("Placeholder/"));
+                    //data_song.Add(song_name.test1, song_data);
+                }
+            }
+
+            public class sound_data
+            {
+                public string name;     // for debug 
+                public SoundEffect sound_effect;
+                public float volume;
+                public float pitch;
+
+                public sound_data(SoundEffect sound_effect, float volume = 1, float pitch = 0)
+                {
+                    this.sound_effect = sound_effect;
+                    name = sound_effect.Name;
+                    this.volume = volume;
+                    this.pitch = pitch;
+                }
+            }
+            public class song_data
+            {
+                public string name;     // for debug 
+                public Song song;
+                public float volume;
+
+                public song_data(Song song, float volume = 1)
+                {
+                    this.song = song;
+                    name = song.Name;
+                    this.volume = volume;
+                }
+            }
+        }
+
+        public static void load(ContentManager content)
+        {
+            theme.load(content);
+            sound.load(content);
         }
     }
 }
