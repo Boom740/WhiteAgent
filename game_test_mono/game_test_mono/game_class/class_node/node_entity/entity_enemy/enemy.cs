@@ -212,6 +212,7 @@ namespace old_heart
             if (shield) return; // มี shield อยู่ โจมตีธรรมดาไม่เข้า
 
             base.take_damage(damage_taken);
+            global.signal.screen_shake(0.7f);
             dizzy_timer_current += 0.3f;
             shield_timer_current += 0.3f;
             if (alive == false)
@@ -223,6 +224,7 @@ namespace old_heart
         public override void die()
         {
             base.die();
+            global.signal.screen_shake(3f);
             //global.collision_manager.remove(collision); // กัน collision ค้างในโลกหลัง enemy ตาย      // มันลบอยู่แล้วตอนหาย ใน game_manager update (clear_inactive_node())
         }
 

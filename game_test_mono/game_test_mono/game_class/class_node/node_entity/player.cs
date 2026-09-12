@@ -356,7 +356,13 @@ namespace old_heart
                 Vector2 to_head = thrown_head.position - position;
                 if (to_head.Length() <= pickup_radius  && thrown_head.is_resting)   // head in pickup_radius
                 {
+                    bool pickup_via_dash = current_combat_state == combat_state.dash;
+
                     reattach_head();
+                    if (pickup_via_dash)
+                    {
+                        global.signal.screen_shake(2f);
+                    }
                 }
             }
         }
