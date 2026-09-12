@@ -202,7 +202,7 @@ namespace old_heart
             {
                 enter_dizzy();
 
-                animation_player.current_flash_time = animation_player.flash_time;
+                animation_player.flash();
             }
         }
         // ---------------- Damage / Death ----------------

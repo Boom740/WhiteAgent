@@ -113,7 +113,8 @@ namespace old_heart
         {
             hp -= damage_taken;
 
-            animation_player.current_flash_time = animation_player.flash_time;
+            animation_player.flash();
+
             world_text damage_text = new world_text(damage_taken.ToString(), position);
             global.signal.spawn_world_text(damage_text);
 
