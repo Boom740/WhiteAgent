@@ -393,7 +393,7 @@ namespace old_heart
             public void load(ContentManager content)
             {
                 Texture2D idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_idle");
-                animation idle_animation = new animation(idle_texture, frame_per_sec: 12);
+                animation idle_animation = new animation(idle_texture, frame_per_sec: 8);
                 idle_animation.name = "player idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
@@ -403,7 +403,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
                 Texture2D no_head_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_nohead_idle");
-                animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 12);
+                animation no_head_idle_animation = new animation(no_head_idle_texture, frame_per_sec: 8);
                 no_head_idle_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_idle, no_head_idle_animation);
 
