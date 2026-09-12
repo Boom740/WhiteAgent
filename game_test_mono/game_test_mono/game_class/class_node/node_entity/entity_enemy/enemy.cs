@@ -201,6 +201,8 @@ namespace old_heart
             if (shield && (state == enemy_state.normal || state == enemy_state.frightened))
             {
                 enter_dizzy();
+
+                animation_player.current_flash_time = animation_player.flash_time;
             }
         }
         // ---------------- Damage / Death ----------------
