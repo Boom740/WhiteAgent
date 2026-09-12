@@ -149,7 +149,7 @@ namespace old_heart
                 {
                     Quantity = new ParticleInt32Parameter(10, 20),
                     Speed = new ParticleFloatParameter(50f, 700f),
-                    Color = new ParticleColorParameter(new Vector3(1.0f, 0.5f, 0.5f)),
+                    Color = new ParticleColorParameter(new Vector3(0.0f, 1f, 0.25f)),
                     Scale = new ParticleVector2Parameter(new Vector2(10f, 10f))
                 }
             };

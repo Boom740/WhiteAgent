@@ -43,7 +43,7 @@ namespace old_heart
         protected override void Initialize()
         {
             base.Initialize();
-            screen_manager.ShowScreen(new main_menu(this)); // start in main menu naja
+            screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
         }
 
         protected override void LoadContent()

@@ -1,14 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.Screens;
 using System.IO;
 
 namespace old_heart
 {
-    public class level_editor : base_screen
+    public class scene_level_editor : base_screen
     {
         private SpriteFont font;
 
@@ -21,7 +20,7 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text_2;
         public ui_text test_text_3;
-        public level_editor(Game1 game) : base(game)
+        public scene_level_editor(Game1 game) : base(game)
         {
         }
         public override void LoadContent()
@@ -54,7 +53,7 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new main_menu(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_main_menu(game_ref), fade_transition);
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
                 ScreenManager.ReplaceScreen(new test_level(game_ref,game_manager.level_manager.current_level_file), fade_transition);

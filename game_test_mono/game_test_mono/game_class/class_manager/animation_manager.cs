@@ -69,28 +69,23 @@ namespace old_heart
             if (pause) { return; }
 
             current_time += delta_time ;
-
+            
             if (current_time > current_animation.frame_time)  // next frame
             {
                 current_time -= current_animation.frame_time;
-                if (current_frame_index > current_animation.frame_count)    // changed animation but index is still higher 
-                {
-                    current_frame_index = 0;
-                }
-                else { 
-                    current_frame_index++;
-                }
 
-
-                if(current_frame_index >= current_animation.frame_count )  // end animation
+                if (current_frame_index >= current_animation.frame_count -1)  // end animation
                 {
-                    current_frame_index = 0;
-                    if(current_animation.loop == false)    // if current animation is not loop   play default animation
+                    if (current_animation.loop)  // only reset frame when loop     if not loop stay at last frame
                     {
-                        play(default_animation);
+                        current_frame_index = 0;
                     }
 
                     is_finished = true;
+                }
+                else
+                {
+                    current_frame_index++;
                 }
             }
 
@@ -111,7 +106,7 @@ namespace old_heart
             }
             else if (current_frame_index >= animation.frame_count)    // changed animation but index is still higher 
             {
-                    current_frame_index = 0;
+                current_frame_index = 0;
             }
 
             current_animation = animation;

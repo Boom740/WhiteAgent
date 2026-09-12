@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
-using System.Diagnostics;
 
 namespace old_heart
 {
