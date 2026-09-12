@@ -12,18 +12,19 @@
 | 1 | As a player, I will attack to kill the enemy       | กดปุ่มโจมตีแล้วศัตรูได้รับดาเมจเลือดลดจนตายได้                                                                                       | 3             | 1      |
 | 2 | As a player, I will throw head to stunt the enemy | ทำการปาหัวออกไปแล้วศัตรูเข้าสู่สถานะมึนงง และหัวเด้งออกจากตัวศัตรูทันที                                      | 4             | 1      |
 | 3 | As a player, I will take damage                     | เมื่อศัตรูโจมตีแล้วเลือดของผู้เล่นลดลงตามดาเมจที่ได้รับ                                                                     | 1             | 1      |
-| 4 | As a player, I will get upgrade                     | เมื่อผู้เล่นเคลียร์เลเวลแล้ว จะมีอัปเกรดขึ้นมาให้เลือก                                                                        | 1             | 1      |
-| 5 | As a player, I want to move                         | เมื่อผู้เล่นกด WASD ตัวละครต้องเคลื่อนที่ตามทิศทางที่กดจริงๆ                                                                 | 2             | 1      |
-| 6 | As a player, I want to save game                    | เมื่อผู้เล่นไปยังเลเวลถัดไป จะทำการบันทึกตำแหน่งไว้ ถ้าผู้เล่นตายด่านไหนจะเกิดใหม่ด่านนั้น | 1             | 2      |
-| 7 |                                                     |                                                                                                                                                                                    |               |        |
-| 8 |                                                     |                                                                                                                                                                                    |               |        |
+| 4 | As a player, I want to move                         | เมื่อผู้เล่นกด WASD ตัวละครต้องเคลื่อนที่ตามทิศทางที่กดจริงๆ                                                                 | 2             | 1      |
+| 5 | As a player, I want to save game                    | เมื่อผู้เล่นไปยังเลเวลถัดไป จะทำการบันทึกตำแหน่งไว้ ถ้าผู้เล่นตายด่านไหนจะเกิดใหม่ด่านนั้น | 1             | 2      |
+| 6 | As a player, I will get gameover                    | เมื่อ HP ของผู้เล่นหรือ HP ของร่างกายหมด                                                                                                           | 3             | 2      |
+| 7 | As a player, I want to go next level                | เมื่อผู้เล่นเคลียร์ศัตรูในด่านจนหมด                                                                                                             | 1             | 2      |
 
 ## Should Have
 
-| # | User Story                              | Acceptance Criteria                                                    | Estimate (SP) | Sprint |
-| - | --------------------------------------- | ---------------------------------------------------------------------- | ------------- | ------ |
-| 1 | As a designer, I want to make Main menu | มีปุ่มเริ่มเกม มีปุ่มออกเกม มี How to play | 2             | 3      |
-| 2 | -                                       | -                                                                      | -             | -      |
+| # | User Story                              | Acceptance Criteria                                                     | Estimate (SP) | Sprint |
+| - | --------------------------------------- | ----------------------------------------------------------------------- | ------------- | ------ |
+| 1 | As a designer, I want to make Main menu | มีปุ่มเริ่มเกม มีปุ่มออกเกม มี How to play  | 2             | 3      |
+| 2 | As a enemy, I will drop item when die   | เมื่อศัตรูตายจะดรอปของ                            | 2             | 3      |
+| 3 | As a player, I will get upgrade         | เมื่อจบด่านจะให้เลือกอัปเกรด                | 2             | 3      |
+| 4 | As a player, I will rather item         | เมื่อศัตรูตายแล้ว มีโอกาสจะดรอปไอเทม | 3             | 3      |
 
 ## Nice to Have
 
