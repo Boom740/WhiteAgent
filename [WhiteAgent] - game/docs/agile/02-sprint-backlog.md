@@ -21,7 +21,7 @@ gantt
     title Project Timeline — Sprint 1-4
     dateFormat  YYYY-MM-DD
     section Sprints
-    Sprint 1 :s1, 2026-09-01, 13d
+    Sprint 1 :s1, 2026-08-31, 13d
     Sprint 2 :s2, after s1, 13d
     Sprint 3 :s3, after s2, 10d
     Sprint 4 :s4, after s3, 12d
@@ -37,21 +37,24 @@ gantt
 | 2 | As a player, I will attack to kill the enemy       | Must Have | 3             |
 | 3 | As a player, I will throw head to stunt the enemy | Must Have | 4             |
 | 4 | As a player, I will take damage                     | Must Have | 1             |
-| 5 | As a player, I will get upgrade                     | Must Have | 1             |
 
 ## Sprint 2 (Draft)
 
-| # | User Story                       | MoSCoW    | Estimate (SP) |
-| - | -------------------------------- | --------- | ------------- |
-| 1 | As a player, I want to save game | Must Have | 1             |
+| # | User Story                           | MoSCoW      | Estimate (SP) |
+| - | ------------------------------------ | ----------- | ------------- |
+| 1 | As a player, I want to save game     | Must Have   | 2             |
+| 2 | As a player, I will get upgrade      | Should Have | 4             |
+| 3 | As a player, I will get gameover     | Must Have   | 3             |
+| 4 | As a player, I want to go next level | Must Have   | 1             |
+| 5 | As a player, I will rather item      | Should Have | 3             |
 
 ## Sprint 3 (Draft)
 
-| # | User Story                                                                                                      | MoSCoW       | Estimate (SP) |
-| - | --------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
-| 1 | As a designer, I want to make Main menu                                                                         | Should Have  | 2             |
-| 2 | As a designer, I want enemy spawn rate stored in a data file, so that I can tune difficulty without recompiling | Nice To Have | 5             |
-| 3 | As a designer, I want enemy spawn in random position                                                            | Nice To Have | 5             |
+| # | User Story | MoSCoW | Estimate (SP) |
+| - | ---------- | ------ | ------------- |
+| 1 |            |        |               |
+| 2 |            |        |               |
+| 3 |            |        |               |
 
 > **Sprint 2-4 คือ draft ระดับ release plan** — เป้าหมายคือฝึกกะจำนวน SP ต่อ Sprint ให้ใกล้เคียง capacity ของทีม ไม่ใช่ล็อก scope ตายตัว ปรับได้ทุกครั้งที่ทำ Sprint Planning ของ Sprint ถัดไป
 >
