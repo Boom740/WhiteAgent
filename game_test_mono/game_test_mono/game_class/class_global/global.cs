@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.ViewportAdapters;
@@ -35,11 +37,16 @@ namespace old_heart
         public static class signal
         {
             public static event Action<projectile> signal_spawn_projectile;
+            public static event Action<world_text> signal_spawn_world_text;
             public static event Action<entity> signal_spawn_entity;
             public static event Action<Enum,Vector2,bool> signal_spawn_particle;
             public static void spawn_projectile(projectile projectile)
             {
                 signal_spawn_projectile.Invoke(projectile);
+            }
+            public static void spawn_world_text(world_text world_text)
+            {
+                signal_spawn_world_text.Invoke(world_text);
             }
             public static void spawn_entity(entity entity)
             {
@@ -48,6 +55,15 @@ namespace old_heart
             public static void spawn_particle(Enum particle_name, Vector2 position, bool high_layer = false)
             {
                 signal_spawn_particle.Invoke(particle_name,position,high_layer);
+            }
+        }
+        public static class theme {
+            public static SpriteFont default_font;
+            public static Vector2 default_font_scale = new Vector2(1, 1);
+            public static void load(ContentManager content)
+            {
+                default_font = content.Load<SpriteFont>("assets/font/test_font");
+                default_font.Spacing = 1f;
             }
         }
     }

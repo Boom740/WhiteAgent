@@ -20,12 +20,14 @@ namespace old_heart
         public camera_manager camera_manager;
         public particle_manager particle_manager;
         public projectile_manager projectile_manager;
+        public world_text_manager world_text_manager;
         public collision_manager collision_manager;
         public level_manager level_manager;
 
         public debug_manager debug_manager;
 
         Queue<projectile> signal_spawn_projectile_queue = new Queue<projectile>();
+        Queue<world_text> signal_spawn_world_text_queue = new Queue<world_text>();
         Queue<entity> signal_spawn_entity_queue = new Queue<entity>();
 
         public player player;
@@ -44,12 +46,14 @@ namespace old_heart
             camera_manager = new camera_manager(window,graphics_device);
             particle_manager = new particle_manager(content); 
             projectile_manager = new projectile_manager();
+            world_text_manager = new world_text_manager();
             collision_manager = new collision_manager();
             level_manager = new level_manager(this);
 
             debug_manager = new debug_manager();
 
             global.signal.signal_spawn_projectile += handle_signal_add_projectile;
+            global.signal.signal_spawn_world_text += handle_signal_add_world_text;
             global.signal.signal_spawn_entity += handle_signal_add_entity;
             global.signal.signal_spawn_particle += add_particle;
         }
@@ -112,6 +116,15 @@ namespace old_heart
             }
             debug_manager.add(projectile.collision);
         }
+        public void add_world_text(world_text world_text)
+        {
+            if (world_text_manager.world_text_list.Count >= world_text_manager.limit)
+            {
+                Debug.WriteLine("cant spawn world_text at limit count : " + world_text_manager.world_text_list.Count);
+                return;
+            }
+            world_text_manager.add(world_text);
+        }
         public void update(GameTime gameTime)
         {
             ui_manager.update(gameTime);
@@ -142,6 +155,7 @@ namespace old_heart
             camera_manager.update(gameTime, player);
             particle_manager.update(gameTime);
             projectile_manager.update(gameTime);
+            world_text_manager.update(gameTime);
             collision_manager.update(gameTime);
 
             clear_inactive_node();
@@ -152,6 +166,7 @@ namespace old_heart
 
             clear_inactive_node_in_entity();
             clear_inactive_node_in_projectile();
+            clear_inactive_node_in_world_text();
 
 
             void clear_inactive_node_in_entity() 
@@ -191,6 +206,14 @@ namespace old_heart
                     }
                 }
             }
+            void clear_inactive_node_in_world_text()
+            {
+                List<world_text> inactive_world_text = world_text_manager.world_text_list.Where(node => node.active == false).ToList();
+                foreach (world_text world_text in inactive_world_text)
+                {
+                    world_text_manager.remove(world_text);
+                }
+            }
         }
         public void spawn_queue_signal()
         {
@@ -204,10 +227,19 @@ namespace old_heart
                 projectile signal_projectile = signal_spawn_projectile_queue.Dequeue();
                 add_projectile(signal_projectile);
             }
+            while (signal_spawn_world_text_queue.Count > 0)
+            {
+                world_text signal_world_text = signal_spawn_world_text_queue.Dequeue();
+                add_world_text(signal_world_text);
+            }
         }
         public void handle_signal_add_projectile(projectile projectile)
         {
             signal_spawn_projectile_queue.Enqueue(projectile);
+        }
+        public void handle_signal_add_world_text(world_text world_text)
+        {
+            signal_spawn_world_text_queue.Enqueue(world_text);
         }
         public void handle_signal_add_entity(entity entity)
         {
@@ -235,6 +267,7 @@ namespace old_heart
             sprite_batch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: camera_matrix);  // high layer
             particle_manager.draw_high(sprite_batch);
             map_manager.draw_high(sprite_batch);
+            world_text_manager.draw(sprite_batch);
             debug_manager.draw(sprite_batch); // debug 
             sprite_batch.End();
 
@@ -247,6 +280,7 @@ namespace old_heart
         public void unload()
         {
             global.signal.signal_spawn_projectile -= handle_signal_add_projectile;
+            global.signal.signal_spawn_world_text -= handle_signal_add_world_text;
             global.signal.signal_spawn_entity -= handle_signal_add_entity;
             global.signal.signal_spawn_particle -= add_particle;
         }

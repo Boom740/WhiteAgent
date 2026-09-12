@@ -165,10 +165,17 @@ namespace old_heart
                 }// --- space: dash เข้าหาหัว ---
                 else if (keyboard_state.WasKeyPressed(Keys.Space) && has_head == false && thrown_head != null)
                 {
-                    current_combat_state = combat_state.dash;
-                    max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
+                    if (thrown_head.is_resting == true)
+                    {
+
+                        current_combat_state = combat_state.dash;
+                        max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
+                    }
 
                 }
+
+                check_head_pickup();
+
                 update_movement_input();
                 update_walk_idle_state();
             }
@@ -295,50 +302,63 @@ namespace old_heart
             void update_dash()
             {
                 dash_timer += delta_time;
-
-                if (thrown_head == null ||   dash_timer >= dash_timeout)
+                if (dash_timer >= dash_timeout)  // dash too long
                 {
                     cancel_dash();
                 }
 
-                Vector2 to_head = thrown_head.position - position;
 
-                if (to_head.Length() <= pickup_radius)   // head in pickup_radius
+                if (thrown_head != null)   // have trown head
                 {
-                    reattach_head();
-                }
-                else    // head NOT in pickup_radius
-                {
+                    Vector2 to_head = thrown_head.position - position;
+
                     velocity = Vector2.Normalize(to_head) * dash_speed; // ความเร็วคงที่พุ่งตรงเข้าหาหัว
                     acceleration = Vector2.Zero;
                 }
-
-
-                void cancel_dash()
+                else
                 {
-                    current_combat_state = combat_state.none;
-                    max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
-                    velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนยกเลิก กันพุ่งเลยไปแรงๆ ก่อนกลับสู่ physics ปกติ
-                    dash_timer = 0f;
+                    reattach_head(); // for somereason dont have head projectile in dash state
                 }
 
-                void reattach_head()
-                {
-                    if (thrown_head != null)
-                    {
-                        thrown_head.time_out(); // ลบตัวเองออกจาก scene และ collision world
-                        thrown_head = null;
-                    }
-                    else
-                    {
-                        Debug.WriteLine("player reattach_head function    ERROR    reattach head but there is no thrown head");
-                    }
-
-                    has_head = true;
-                    cancel_dash();
-                }
+                check_head_pickup();
             }
 
+            void cancel_dash()
+            {
+                current_combat_state = combat_state.none;
+                max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
+                velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนยกเลิก กันพุ่งเลยไปแรงๆ ก่อนกลับสู่ physics ปกติ
+                dash_timer = 0f;
+            }
+            void reattach_head()
+            {
+                if (thrown_head != null)
+                {
+                    thrown_head.time_out(); // ลบตัวเองออกจาก scene และ collision world
+                    thrown_head = null;
+                }
+                else
+                {
+                    Debug.WriteLine("player reattach_head function    ERROR    reattach head but there is no thrown head");
+                }
+
+                has_head = true;
+                cancel_dash();
+            }
+
+            void check_head_pickup()
+            {
+                if (thrown_head == null)  // not head projectile yet
+                {
+                    return;
+                }
+
+                Vector2 to_head = thrown_head.position - position;
+                if (to_head.Length() <= pickup_radius  && thrown_head.is_resting)   // head in pickup_radius
+                {
+                    reattach_head();
+                }
+            }
         }
         public override void update_animation(float delta_time)
         {

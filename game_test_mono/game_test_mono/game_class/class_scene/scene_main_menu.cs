@@ -7,7 +7,6 @@ namespace old_heart
 {
     public class scene_main_menu : base_screen
     {
-        private SpriteFont font;
         public ui_button start_button;
         public ui_text test_text;
         public scene_main_menu(Game1 game) : base(game)
@@ -18,13 +17,12 @@ namespace old_heart
         {
             base.LoadContent();
 
-            font = Content.Load<SpriteFont>("assets/font/test_font");
 
-            test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor", font, new Vector2(10, 5));
+            test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor",  new Vector2(10, 5));
             game_manager.add_ui(test_text);
             start_button = new ui_button(Content, new Rectangle(100, 400, 200, 100));
             game_manager.add_ui(start_button);
-            test_text = new ui_text("PLAY", font, new Vector2(130, 420));
+            test_text = new ui_text("PLAY", new Vector2(130, 420));
             game_manager.add_ui(test_text);
 
 

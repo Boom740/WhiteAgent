@@ -9,8 +9,6 @@ namespace old_heart
 {
     public class scene_level_editor : base_screen
     {
-        private SpriteFont font;
-
         public node selecting_node;
 
         public Vector2 camera_position = new Vector2 (0, 0);
@@ -27,22 +25,20 @@ namespace old_heart
         {
             base.LoadContent();
 
-            font = Content.Load<SpriteFont>("assets/font/test_font");
-
             game_manager.level_manager.set_level_file("test_1.json");         // exact JSON file name
             game_manager.pause = true;
 
-            test_text = new ui_text("this text get replace in update function anyway", font, new Vector2(10, 5));
+            test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
             test_text.text_color = Color.DarkRed;
             test_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text);
 
-            test_text_2 = new ui_text("[Q] save [E] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level", font, new Vector2(10, 510));
+            test_text_2 = new ui_text("[Q] save [E] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level",  new Vector2(10, 510));
             test_text_2.text_color = Color.DarkRed;
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
 
-            test_text_3 = new ui_text("current_state = none (not finidsh)", font, new Vector2(10, 490));
+            test_text_3 = new ui_text("current_state = none (not finidsh)", new Vector2(10, 490));
             test_text_3.text_color = Color.DarkRed;
             test_text_3.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_3);

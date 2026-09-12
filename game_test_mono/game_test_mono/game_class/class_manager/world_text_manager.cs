@@ -7,34 +7,42 @@ namespace old_heart
     public class world_text_manager
     {
         public int limit = 300;
-        public List<projectile> world_text_list = new List<projectile> { }; //  all projectile in this scene
+        public List<world_text> world_text_list = new List<world_text> { }; //  all world_text in this scene
         public world_text_manager()
         {
 
         }
-        public void add(projectile projectile)
+        public void add(world_text world_text)
         {
-            world_text_list.Add(projectile);
+            world_text_list.Add(world_text);
         }
-        public void remove(projectile projectile)
+        public void remove(world_text world_text)
         {
-            world_text_list.Remove(projectile);
+            world_text_list.Remove(world_text);
         }
         public void update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            foreach (projectile projectile in world_text_list) // update world projectile
+            foreach (world_text world_text in world_text_list) // update world world_text
             {
-                projectile.Update(gameTime);
+                world_text.Update(gameTime);
             }
+            if (global.input.keyboard_state.WasKeyPressed(Microsoft.Xna.Framework.Input.Keys.G))
+            {
+                world_text test_text = new world_text("E", global.input.scaled_mouse_world_position);
+                test_text.text_scale = new Vector2(0.5f, 0.5f);
+                test_text.text_color = Color.White;
+                global.signal.spawn_world_text(test_text);
+            }
+
         }
         public void draw(SpriteBatch sprite_batch)
         {
-            foreach (projectile projectile in world_text_list)
+            foreach (world_text world_text in world_text_list)
             {
-                if (projectile.visible)
+                if (world_text.visible)
                 {
-                    projectile.Draw(sprite_batch);
+                    world_text.Draw(sprite_batch);
                 }
             }
         }

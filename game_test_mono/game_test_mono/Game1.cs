@@ -43,6 +43,8 @@ namespace old_heart
         protected override void Initialize()
         {
             base.Initialize();
+
+            global.theme.load(Content);
             screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
         }
 

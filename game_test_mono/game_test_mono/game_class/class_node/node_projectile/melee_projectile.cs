@@ -25,12 +25,13 @@ namespace old_heart
 
         public override void on_hit_entity(entity target_entity)
         {
-            if (target_entity is enemy target_enemy && target_enemy.alive)
+            if (target_entity is enemy target_enemy && target_enemy.alive && hit_enemies.Contains(target_enemy) == false)
             {
+                hit_enemies.Add(target_enemy);
+
                 Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
                 target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
                 target_enemy.take_damage(damage);
-                time_out(); // โดน enemy แล้วหายทันที ไม่ต้องรอ travel_time หมด
             }
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)
