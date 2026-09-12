@@ -113,6 +113,10 @@ namespace old_heart
             current_time = 0f;
             is_finished = false;
         }
+        public void flash()
+        {
+           current_flash_time = flash_time;
+        }
         public void draw(SpriteBatch sprite_batch, Vector2 position)
         {
             Texture2D texture = current_animation.sprite_sheet;
