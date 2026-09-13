@@ -47,6 +47,8 @@ namespace old_heart
 
         // --- aim  ---
         public float aim_speed_multiplier = 0.2f;
+       // private bool head_takeoff_playing = false;
+        private animation_player_player animation_player2;
 
         // --- dash (Space) ---
         public float dash_speed = 1600f;
@@ -60,6 +62,7 @@ namespace old_heart
         public player(ContentManager content, Vector2 position) : base(content, max_hp: 4, position, speed: 5000)
         {
             animation_player = new animation_player_player(content);
+            animation_player2 = new animation_player_player(content);
             ground_friction = 10f;
             max_velocity = 300;
             default_max_velocity = max_velocity;
@@ -162,6 +165,7 @@ namespace old_heart
                 else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
                 {
                     current_combat_state = combat_state.aim;
+                    animation_player2.play(animation_player2.data.data[animation_player_player.animation_name.takeoff_head], restart: true);
                 }// --- space: dash เข้าหาหัว ---
                 else if (keyboard_state.WasKeyPressed(Keys.Space) && has_head == false && thrown_head != null)
                 {
@@ -380,19 +384,35 @@ namespace old_heart
                         : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
                     break;
 
+                case combat_state.aim:
+                    // body layer: เล่นท่า headless ตลอดช่วง aim
+                    switch (current_state)
+                    {
+                        case state.walk:
+                            animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
+                            break;
+                        case state.idle:
+                            animation_player.play(animation_player.data.data[animation_player_player.animation_name.no_head_idle]);
+                            break;
+                    }
+
+                    // overlay layer: takeoff_head เล่นซ้อนทับครั้งเดียวจบ
+                    animation_player2.update(delta_time, current_direction.ToString());
+                    break;
+
                 default: // none / aim ใช้ตรรกะเดียวกัน: เลือกตาม current_state (walk/idle)
                     switch (current_state)
                     {
                         case state.walk:
                             animation_player.play(has_head
                                 ? animation_player.data.data[animation_player_player.animation_name.walk]
-                                : animation_player.data.data[animation_player_player.animation_name.no_head_walk]);
+                                : animation_player.data.data[animation_player_player.animation_name.no_head_arm_walk]);
                             break;
 
                         case state.idle:
                             animation_player.play(has_head
                                 ? animation_player.default_animation
-                                : animation_player.data.data[animation_player_player.animation_name.no_head_idle]);
+                                : animation_player.data.data[animation_player_player.animation_name.no_head_arm_idle]);
                             break;
                     }
                     break;
@@ -402,10 +422,14 @@ namespace old_heart
         public override void Draw(SpriteBatch sprite_batch)
         {
             base.Draw(sprite_batch);
+            if (current_combat_state == combat_state.aim)
+            {
+                animation_player2.draw(sprite_batch, position);
+            }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
-            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch }
+            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch, takeoff_head, no_head_arm_idle, no_head_arm_walk}
 
             public static readonly animation_data animation_data = new animation_data();
             public animation_player_player(ContentManager content) : base()
@@ -442,6 +466,16 @@ namespace old_heart
                 no_head_walk_animation.name = "player no_head_walk";
                 animation_data.data.Add(animation_name.no_head_walk, no_head_walk_animation);
 
+                Texture2D no_head_arm_idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_Idle");
+                animation no_head_arm_idle_animation = new animation(no_head_arm_idle_texture, frame_per_sec: 8);
+                no_head_arm_idle_animation.name = "player no_head_arm_walk";
+                animation_data.data.Add(animation_name.no_head_arm_idle, no_head_arm_idle_animation);
+
+                Texture2D no_head_arm_walk_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_walk");
+                animation no_head_arm_walk_animation = new animation(no_head_arm_walk_texture, frame_per_sec: 15);
+                no_head_arm_walk_animation.name = "player no_head_arm_walk";
+                animation_data.data.Add(animation_name.no_head_arm_walk, no_head_arm_walk_animation);
+
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
                 animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 12); 
                 punch_animation.name = "player punch";
@@ -451,6 +485,12 @@ namespace old_heart
                 animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 12);
                 no_head_punch_animation.name = "player no_head_punch";
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
+
+                Texture2D takeoff_head_texture = content.Load<Texture2D>("assets/image/player/sprite_player_takeoffhead"); 
+                animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 7);
+                takeoff_head_animation.name = "player takeoff_head";
+                animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
+
             }
         }
     }

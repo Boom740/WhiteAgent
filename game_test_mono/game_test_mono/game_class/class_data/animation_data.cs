@@ -96,11 +96,11 @@ namespace old_heart
 
             update_direction(direction);
         }
-        public void play(animation animation)
+        public void play(animation animation, bool restart = false)
         {
-            if (current_animation == animation) { return; } //ป้องกันการรีเซ็ตเฟรม ถ้าเป็นแอนนิเมชั่นเดิม
+            if (current_animation == animation && restart == false) { return; } //ป้องกันการรีเซ็ตเฟรม ถ้าเป็นแอนนิเมชั่นเดิม
 
-            if (animation.loop == false)  // start from frame 0 only for not loop animation
+            if (animation.loop == false||restart)  // start from frame 0 only for not loop animation
             {
                 current_frame_index = 0;
             }
