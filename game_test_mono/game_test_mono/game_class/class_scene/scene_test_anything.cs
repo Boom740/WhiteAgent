@@ -53,7 +53,7 @@ namespace old_heart
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.G))
             {
-                global.sound.play_sound(global.sound.sound_name.test1);
+                //global.sound.play_sound(global.sound.sound_name.test1);
             }
 
             test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                                      V to go back to title bruh" +

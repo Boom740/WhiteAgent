@@ -248,6 +248,7 @@ namespace old_heart
                 current_combat_state = combat_state.attack;
                 attack_timer = attack_duration;
                 velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนเริ่มโจมตี
+                global.sound.play_sound(global.sound.sound_name.slash);
 
                 combo_count++;
                 combo_reset_timer = combo_reset_window;
@@ -295,6 +296,7 @@ namespace old_heart
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
 
+                global.sound.play_sound(global.sound.sound_name.throw_head);
                 global.signal.spawn_projectile(head);
                 thrown_head = head;
             }
@@ -359,6 +361,8 @@ namespace old_heart
                     bool pickup_via_dash = current_combat_state == combat_state.dash;
 
                     reattach_head();
+                    global.sound.play_sound(global.sound.sound_name.pick_up_head);
+
                     if (pickup_via_dash)
                     {
                         global.signal.screen_shake(0.6f);

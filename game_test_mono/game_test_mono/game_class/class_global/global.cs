@@ -16,6 +16,7 @@ namespace old_heart
     {
         public static Vector2 render_size = new Vector2(960,540);
         public static int eee = 0;     // for debug only
+        public static Random random = new Random();
         public static class input
         {
             public static KeyboardStateExtended keyboard_state;
@@ -63,7 +64,7 @@ namespace old_heart
             }
             public static void screen_shake(float intensity)
             {
-                signal_screen_shake.Invoke(intensity);
+                signal_screen_shake.Invoke(intensity * global.setting.screen_shake_intensity);
             }
         }
         public static class theme {
@@ -76,7 +77,7 @@ namespace old_heart
             }
         }
         public static class sound {
-            public enum sound_name { test1, test2 };  
+            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head };  
             public enum song_name { test1 }; 
 
             public static Dictionary<sound_name, sound_data> data = new Dictionary<sound_name, sound_data>();
@@ -84,17 +85,19 @@ namespace old_heart
             public static void play_sound(sound_name sound_name)
             {
                 sound_data sound_data = data[sound_name];
-                sound_data.sound_effect.Play(sound_data.volume, sound_data.pitch, pan: 0);
+                float pitch = sound_data.pitch - sound_data.pitch_random + ( (float)random.NextDouble() * 2 * sound_data.pitch_random );
+                float volume = sound_data.volume * global.setting.volume_sound_effect * global.setting.volume_master;
+                sound_data.sound_effect.Play(volume, pitch, pan: 0);
                 
-                Debug.WriteLine("global play sound : "+ sound_data.name);
+                Debug.WriteLine("global play sound : "+ sound_data.name + " volume : " + volume + " pitch : " + pitch);
             }
             public static void play_song(song_name song_name)  // maybe later  add sound fade out before play if there is already song playing
             {
                 song_data song_data = data_song[song_name];
-                MediaPlayer.Volume = song_data.volume;
+                MediaPlayer.Volume = song_data.volume * global.setting.volume_song * global.setting.volume_master;
                 MediaPlayer.Play(song_data.song);
 
-                Debug.WriteLine("global play song : " + song_data.name);
+                Debug.WriteLine("global play song : " + song_data.name + " volume : " + MediaPlayer.Volume);
             }
             public static void pause_song()
             {
@@ -108,16 +111,28 @@ namespace old_heart
             {
                 load_sound();
                 load_song();
-                MediaPlayer.IsRepeating = true;
+
+                MediaPlayer.IsRepeating = true;    // song 
+                MediaPlayer.Volume = global.setting.volume_song * global.setting.volume_master; // set song volume
 
                 void load_sound()
                 {
-                    sound_data sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"));
-                    data.Add(sound_name.test1, sound_data);
+                    sound_data sound_data;
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact"));
+                    data.Add(sound_name.impact_1, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact2"));
+                    data.Add(sound_name.impact_2, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Pick_up_head"));
+                    data.Add(sound_name.pick_up_head, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"),pitch_random: 0.3f);
+                    data.Add(sound_name.slash, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Throw_Head"));
+                    data.Add(sound_name.throw_head, sound_data);
                 }
                 void load_song()
                 {
-                    //song_data song_data = new song_data(content.Load<Song>("Placeholder/"));
+                    song_data song_data;
+                    //song_data = new song_data(content.Load<Song>("Placeholder/"));
                     //data_song.Add(song_name.test1, song_data);
                 }
             }
@@ -128,13 +143,15 @@ namespace old_heart
                 public SoundEffect sound_effect;
                 public float volume;
                 public float pitch;
+                public float pitch_random;
 
-                public sound_data(SoundEffect sound_effect, float volume = 1, float pitch = 0)
+                public sound_data(SoundEffect sound_effect, float volume = 1, float pitch = 0, float pitch_random = 0)
                 {
                     this.sound_effect = sound_effect;
                     name = sound_effect.Name;
                     this.volume = volume;
                     this.pitch = pitch;
+                    this.pitch_random = pitch_random;
                 }
             }
             public class song_data
@@ -151,7 +168,18 @@ namespace old_heart
                 }
             }
         }
+        public static class setting
+        {
+            public static float volume_master = 1f;
+            public static float volume_sound_effect = 0.7f;
+            public static float volume_song = 0.7f;
 
+            public static float screen_shake_intensity = 1f;
+            public static void apply_song_volume_setting()    // use to change currently playing song      dont need when play new song cuz it already set volume when play
+            {
+                MediaPlayer.Volume = volume_song * volume_master;
+            }
+        }
         public static void load(ContentManager content)
         {
             theme.load(content);
