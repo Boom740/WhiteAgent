@@ -8,7 +8,7 @@ namespace old_heart
 {
     public class projectile_test : projectile
     {
-        public projectile_test(ContentManager content_set, float time_left,Vector2 position) : base(content_set,time_left,position)
+        public projectile_test(ContentManager content_set, float time_left,Vector2 position) : base(content_set, position , time_left)
         {
             texture = content.Load<Texture2D>("Placeholder/Weapons/Head");
             sprite_origin = new Vector2((texture.Width / 2), (texture.Height)); // position is center X and bottom Y

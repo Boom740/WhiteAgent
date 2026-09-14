@@ -14,7 +14,7 @@ namespace old_heart
         private HashSet<enemy> hit_enemies = new HashSet<enemy>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
         public melee_projectile(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance, float travel_time, int damage)
-            : base(content_set, time_left: travel_time, position)
+            : base(content_set,  position , time_left: travel_time)
         {
             this.damage = damage;
             visible = false; // ล่องหน ไม่ต้องมี texture เลย

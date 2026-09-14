@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using System;
 
 namespace old_heart
 {
@@ -16,36 +17,44 @@ namespace old_heart
         public float bounce_restitution = 0.05f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
         public float enemy_knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
-
+        public float sprite_height = 25;
+        public float initial_speed = 1000;
         public head_projectile(ContentManager content_set, Vector2 position)
-            : base(content_set, time_left: 9999f, position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
+            : base(content_set,  position : position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
-            sprite_origin = new Vector2(texture.Width / 2, texture.Height); // position คือกึ่งกลาง X, ล่างสุด Y
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + sprite_height); // position คือกึ่งกลาง X, 3/4 Y
         }
 
         public override void Update(GameTime gameTime)
         {
             if (alive == false) return;
             if (is_resting) return;
+            initial_speed = Math.Max(velocity.Length(), initial_speed);
 
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
             velocity -= velocity * drag * delta_time;
             position += velocity * delta_time;
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));
-
+            float speed_till_stop = velocity.Length() - stop_velocity_threshold;
+            float height_ratio = Math.Min(1 , speed_till_stop / (initial_speed - stop_velocity_threshold));
+            height_ratio = 1f - height_ratio;
+            height_ratio = height_ratio * height_ratio;
+            height_ratio = 1f - height_ratio;
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + (height_ratio * sprite_height) );
 
             if (velocity.Length() < stop_velocity_threshold)
             {
-                velocity = Vector2.Zero;
-                is_resting = true;
+                resting();
             }
+
         }
 
         public override void on_hit_entity(entity target_entity)
         {
 
             if (has_bounced) return;
+            if (is_resting) return;
             has_bounced = true;
 
             if (target_entity is enemy target_enemy)
@@ -57,15 +66,19 @@ namespace old_heart
             velocity = -velocity * bounce_restitution; // หัวสะท้อนกลับทิศตรงข้าม แรงลดลงตาม restitution
             if (velocity.Length() < stop_velocity_threshold)
             {
-                velocity = Vector2.Zero;
-                is_resting = true; // หัวหยุดตรงจุดที่โดน enemy ทันที
+                resting();
             }
         }
-
+        public void resting()
+        {
+            velocity = Vector2.Zero;
+            is_resting = true;
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f / 4f)); // position คือกึ่งกลาง X, 3/4 Y
+        }
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {
             velocity = Vector2.Zero;
-            is_resting = true; // ชนกำแพงก็หยุดตรงนั้นเลย ไม่ time_out
+            resting();
         }
     }
 }

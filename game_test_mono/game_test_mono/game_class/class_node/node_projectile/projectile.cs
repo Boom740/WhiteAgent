@@ -32,7 +32,7 @@ namespace old_heart
 
         //public float ground_friction = 5f;
         public float max_velocity = 1000;
-        public projectile(ContentManager content_set, float time_left,Vector2 position)
+        public projectile(ContentManager content_set, Vector2 position , float time_left = 1)
         {
             content = content_set;
             this.time_left = time_left;
