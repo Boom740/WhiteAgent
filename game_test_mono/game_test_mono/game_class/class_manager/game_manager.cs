@@ -33,9 +33,8 @@ namespace old_heart
         public player player;
 
         public bool pause = false;
-        public bool game_over = false;
-        public bool level_clear = false;
-
+        public enum game_state { normal , game_over , level_clear}
+        public game_state current_game_state = game_state.normal;
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
             this.content = content;
@@ -134,7 +133,7 @@ namespace old_heart
 
             
 
-            if (pause || level_clear)
+            if (pause)
             {
                 camera_manager.update_global_mouse_position();
                 return;
@@ -143,7 +142,7 @@ namespace old_heart
             if (entity_manager.entity_list.Any(entity => entity is enemy) == false && level_manager.next_level_file != null)   // if no enemy is left in entity_list
             {
                 Debug.WriteLine("level clear !");
-                level_clear = true;
+                current_game_state = game_state.level_clear;
             }
             else
             {
@@ -188,6 +187,7 @@ namespace old_heart
                     if (entity is player)
                     {
                         player = null;
+                        current_game_state = game_state.game_over;
                     }
                 }
             }

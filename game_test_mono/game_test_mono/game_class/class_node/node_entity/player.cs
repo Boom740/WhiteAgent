@@ -13,7 +13,7 @@ namespace old_heart
     {
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
-        public enum combat_state { none, attack, aim , dash}
+        public enum combat_state { none, attack, aim , dash , die}
         public enum bufferable_input { none , attack , dash }
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
@@ -74,7 +74,6 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
-            if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
@@ -100,6 +99,10 @@ namespace old_heart
 
                 case combat_state.none:
                     update_free_state();
+                    break;
+
+                case combat_state.die:
+                    update_die_state();
                     break;
             }
 
@@ -239,7 +242,14 @@ namespace old_heart
                 update_dash();
                 update_walk_idle_state();
             }
-
+            void update_die_state()
+            {
+                if (animation_player.is_finished)
+                {
+                    active = false;
+                    global.signal.spawn_particle(particle_manager.particle_name.enemy_die_efx,position,high_layer: true);
+                }
+            }
 
             void update_movement_input()
             {
@@ -407,6 +417,9 @@ namespace old_heart
         {
             switch (current_combat_state)
             {
+                case combat_state.die:
+                    //  already play animaiton in die function   dont play any other animation while dying  Chess Battle Advanced
+                    break;
                 case combat_state.attack:
                     //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
@@ -445,7 +458,13 @@ namespace old_heart
             }
             base.update_animation(delta_time);
         }
-
+        public override void die()
+        {
+            if (! alive) { return; }
+            alive = false;
+            current_combat_state = combat_state.die;
+            animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
+        }
         public override void Draw(SpriteBatch sprite_batch)
         {
             base.Draw(sprite_batch);
@@ -456,7 +475,7 @@ namespace old_heart
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
-            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch, takeoff_head, no_head_arm_idle, no_head_arm_walk}
+            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch, takeoff_head, no_head_arm_idle, no_head_arm_walk , die}
 
             public static readonly animation_data animation_data = new animation_data();
             public animation_player_player(ContentManager content) : base()
@@ -518,6 +537,10 @@ namespace old_heart
                 takeoff_head_animation.name = "player takeoff_head";
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 
+                Texture2D die_texture = content.Load<Texture2D>("assets/image/player/sprite_player_die");
+                animation die_animation = new animation(die_texture, frame_per_sec: 12, loop: false , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count: 13);
+                die_animation.name = "player die";
+                animation_data.data.Add(animation_name.die, die_animation);
             }
         }
     }

@@ -22,20 +22,24 @@ namespace old_heart
         public Point sprite_size = new Point(64,64);
         public Vector2 sprite_scale = new Vector2(1,1);
         public bool loop = true;
-        public int frame_count = 1;
+        public int frame_row_count = 0;
         public float frame_time = 0.166f;
         public Vector2 sprite_origin = new Vector2(16,24);
-        public animation(Texture2D sprite_sheet,bool loop = true,float frame_per_sec = 4, Point? sprite_size = null )
+        public bool one_direction_sprite_format = false;
+        public int one_diretion_sprite_format_frame_count = 0;
+        public animation(Texture2D sprite_sheet,bool loop = true, float frame_per_sec = 4, Point? sprite_size = null, bool one_direction_sprite_format = false , int one_diretion_sprite_format_frame_count = 0)
         {
             this.sprite_sheet = sprite_sheet;
             this.loop = loop;
-            this.frame_time = 1f/frame_per_sec;
+            this.frame_time = 1f / frame_per_sec;
             if (sprite_size != null)
             {
                 this.sprite_size = sprite_size.Value;
             }
-            this.sprite_origin = new Vector2(this.sprite_size.X / 2, (this.sprite_size.Y*3) /4);
-            frame_count = sprite_sheet.Height / this.sprite_size.Y;
+            this.sprite_origin = new Vector2(this.sprite_size.X / 2, (this.sprite_size.Y * 3) / 4);
+            frame_row_count = sprite_sheet.Height / this.sprite_size.Y;
+            this.one_direction_sprite_format = one_direction_sprite_format;
+            this.one_diretion_sprite_format_frame_count = one_diretion_sprite_format_frame_count;
         }
     }
 
@@ -70,24 +74,52 @@ namespace old_heart
             if (pause) { return; }
 
             current_time += delta_time ;
-            
-            if (current_time > current_animation.frame_time)  // next frame
+
+            if (current_animation.one_direction_sprite_format == false)  // 4 direction animaiton (4 colume sprite)
             {
-                current_time -= current_animation.frame_time;
-
-                if (current_frame_index >= current_animation.frame_count -1)  // end animation
+                if (current_time > current_animation.frame_time)  // next frame
                 {
-                    if (current_animation.loop)  // only reset frame when loop     if not loop stay at last frame
+                    current_time -= current_animation.frame_time;
+
+                    if (current_frame_index >= current_animation.frame_row_count - 1)  // end animation
                     {
-                        current_frame_index = 0;
-                    }
+                        if (current_animation.loop)  // only reset frame when loop     if not loop stay at last frame
+                        {
+                            current_frame_index = 0;
+                        }
 
-                    is_finished = true;
+                        is_finished = true;
+                    }
+                    else
+                    {
+                        current_frame_index++;
+                    }
                 }
-                else
+
+                update_direction(direction);
+            }
+            else // 1 direction animation format         top -> down    left -> right
+            {
+                if(current_time > current_animation.frame_time)  // next frame
                 {
-                    current_frame_index++;
+                    current_time -= current_animation.frame_time;
+
+                    if (current_frame_index >= current_animation.one_diretion_sprite_format_frame_count - 1)  // end row
+                    {
+                        if (current_animation.loop)  // only reset frame when loop     if not loop stay at last frame
+                        {
+                            current_frame_index = 0;
+                        }
+
+                        is_finished = true;
+                    }
+                    else
+                    {
+                        current_frame_index++;
+                    }
                 }
+
+                update_direction("down");
             }
 
             if (current_flash_time > 0)  // update flash time
@@ -95,7 +127,6 @@ namespace old_heart
                 current_flash_time -= delta_time;
             }
 
-            update_direction(direction);
         }
         public void play(animation animation)
         {
@@ -109,7 +140,7 @@ namespace old_heart
             {
                 current_frame_index = 0;
             }
-            else if (current_frame_index >= animation.frame_count)    // changed animation but index is still higher 
+            else if (current_frame_index >= animation.frame_row_count)    // changed animation but index is still higher 
             {
                 current_frame_index = 0;
             }
@@ -125,7 +156,15 @@ namespace old_heart
         public void draw(SpriteBatch sprite_batch, Vector2 position)
         {
             Texture2D texture = current_animation.sprite_sheet;
-            Rectangle source_rectangle = new Rectangle(current_animation.sprite_size.X * current_direction, current_animation.sprite_size.Y * current_frame_index, current_animation.sprite_size.X, current_animation.sprite_size.Y);
+            Rectangle source_rectangle;
+            if (current_animation.one_direction_sprite_format == false)
+            {
+                source_rectangle = new Rectangle(current_animation.sprite_size.X * current_direction, current_animation.sprite_size.Y * current_frame_index, current_animation.sprite_size.X, current_animation.sprite_size.Y);
+
+            } else {
+                Point current_animation_index_position = new Point(current_frame_index / current_animation.frame_row_count, current_frame_index % current_animation.frame_row_count);
+                source_rectangle = new Rectangle(current_animation.sprite_size.X * current_animation_index_position.X, current_animation.sprite_size.Y * current_animation_index_position.Y, current_animation.sprite_size.X, current_animation.sprite_size.Y);
+            }
             Vector2 sprite_scale = current_animation.sprite_scale;
             Vector2 sprite_origin = current_animation.sprite_origin;
             float layer_depth = (position.Y + 50000f) / 100000f;

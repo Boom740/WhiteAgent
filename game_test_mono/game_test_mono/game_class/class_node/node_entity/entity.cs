@@ -47,7 +47,6 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
-            if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (movement_locked == false)
@@ -111,6 +110,7 @@ namespace old_heart
         }
         public virtual void take_damage(int damage_taken) //เติม virtual ให้ใช้กับ enemy ได้
         {
+            if ( ! alive ) { return; }
             hp -= damage_taken;
 
             animation_player.flash();

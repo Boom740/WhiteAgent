@@ -49,6 +49,7 @@ namespace old_heart
 
             test_text.text_string = $"test_level scene fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]" +
             $"\ncurrent_level_file : {Path.GetFileName(game_manager.level_manager.current_level_file)}" +
+            $"\ngame state : {game_manager.current_game_state}" +
             $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
 
             if (game_manager.player != null)

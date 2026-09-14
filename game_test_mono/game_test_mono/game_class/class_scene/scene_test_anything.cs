@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Screens;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -55,6 +56,18 @@ namespace old_heart
             {
                 //global.sound.play_sound(global.sound.sound_name.test1);
             }
+            if (global.input.keyboard_state.WasKeyPressed(Keys.M))
+            {
+                if (global.setting.volume_sound_effect > 0)
+                {
+                    global.setting.volume_sound_effect = 0;
+                }
+                else
+                {
+                    global.setting.volume_sound_effect = 0.7f;
+                }
+                Debug.WriteLine("change global volume_sound_effect : " + global.setting.volume_sound_effect);
+            }
 
             test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                                      V to go back to title bruh" +
             $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
@@ -68,7 +81,10 @@ namespace old_heart
                 //$"\nplayer animation_2 : {game_manager.player.animation_player_2.current_animation.name} [{game_manager.player.animation_player_2.current_frame_index}]" +
                 $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
                 $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
-                $"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]"  ;
+                //$"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]" +
+                $"\ngame state : {game_manager.current_game_state}" +
+
+                $"";
             }
 
 
