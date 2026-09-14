@@ -14,9 +14,13 @@ namespace old_heart
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
         public enum combat_state { none, attack, aim , dash}
+        public enum bufferable_input { none , attack , dash }
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
+        public bufferable_input current_buffer_input = bufferable_input.none;
 
+        public float input_buffer_time_limit = 0.3f;
+        public float current_input_beffer_time = 0f;
         // --- combat: melee ---
         public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
@@ -78,7 +82,7 @@ namespace old_heart
             input_direction = Vector2.Zero;
 
             update_cooldown();
-
+            update_input_buffer();
 
             switch (current_combat_state)
             {
@@ -114,17 +118,38 @@ namespace old_heart
 
 
 
-
-            
-
             acceleration = input_direction;
             base.Update(gameTime);
 
 
 
+            void update_input_buffer()
+            {
+                if (keyboard_state.WasKeyPressed(Keys.Space))
+                {
+                    buffer_input(bufferable_input.dash);
+                }
+                else if (mouse_state.WasButtonPressed(MouseButton.Left) && current_combat_state != combat_state.aim)
+                {
+                    buffer_input(bufferable_input.attack);
+                }
 
+                if (current_buffer_input == bufferable_input.none) { return; }
+                if (current_input_beffer_time < input_buffer_time_limit)
+                {
+                    current_input_beffer_time += delta_time;
+                }
+                else
+                {
+                    current_buffer_input = bufferable_input.none;
+                }
 
-
+                void buffer_input(bufferable_input buffer_input)
+                {
+                    current_buffer_input = buffer_input;
+                    current_input_beffer_time = 0;
+                }
+            }
 
             void update_cooldown()
             {
@@ -148,13 +173,12 @@ namespace old_heart
                 {
                     next_attack_timer -= delta_time;
                 }
-
             }
 
             //  local functions: state handlers (เรียกจาก switch ด้านบน) 
             void update_free_state()
             {
-                if (mouse_state.WasButtonPressed(MouseButton.Left))     // attack
+                if (current_buffer_input == bufferable_input.attack)     // attack
                 {
                     if (melee_cooldown_timer <= 0 && next_attack_timer <= 0f)
                     {
@@ -166,11 +190,11 @@ namespace old_heart
                     current_combat_state = combat_state.aim;
                     animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
                 }// --- space: dash เข้าหาหัว ---
-                else if (keyboard_state.WasKeyPressed(Keys.Space) && has_head == false && thrown_head != null)
+                else if (current_buffer_input == bufferable_input.dash && has_head == false && thrown_head != null)
                 {
                     if (thrown_head.is_resting == true)
                     {
-
+                        current_buffer_input = bufferable_input.none;
                         current_combat_state = combat_state.dash;
                         max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
                     }
@@ -249,6 +273,7 @@ namespace old_heart
 
             void start_attack()
             {
+                current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.attack;
                 attack_timer = attack_duration;
                 velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนเริ่มโจมตี
