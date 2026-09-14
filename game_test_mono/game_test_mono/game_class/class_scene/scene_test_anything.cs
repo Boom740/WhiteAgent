@@ -65,6 +65,7 @@ namespace old_heart
                 // $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
                 // $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
                 $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
+                $"\nplayer animation_2 : {game_manager.player.animation_player_2.current_animation.name} [{game_manager.player.animation_player_2.current_frame_index}]" +
                 $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
                 $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}";
             }

@@ -47,8 +47,7 @@ namespace old_heart
 
         // --- aim  ---
         public float aim_speed_multiplier = 0.2f;
-       // private bool head_takeoff_playing = false;
-        private animation_player_player animation_player2;
+        public animation_player_player animation_player_2;
 
         // --- dash (Space) ---
         public float dash_speed = 1600f;
@@ -62,7 +61,7 @@ namespace old_heart
         public player(ContentManager content, Vector2 position) : base(content, max_hp: 4, position, speed: 5000)
         {
             animation_player = new animation_player_player(content);
-            animation_player2 = new animation_player_player(content);
+            animation_player_2 = new animation_player_player(content);
             ground_friction = 10f;
             max_velocity = 300;
             default_max_velocity = max_velocity;
@@ -165,7 +164,7 @@ namespace old_heart
                 else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
                 {
                     current_combat_state = combat_state.aim;
-                    animation_player2.play(animation_player2.data.data[animation_player_player.animation_name.takeoff_head], restart: true);
+                    animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
                 }// --- space: dash เข้าหาหัว ---
                 else if (keyboard_state.WasKeyPressed(Keys.Space) && has_head == false && thrown_head != null)
                 {
@@ -214,6 +213,7 @@ namespace old_heart
             void update_dash_state()
             {
                 update_dash();
+                update_walk_idle_state();
             }
 
 
@@ -277,6 +277,10 @@ namespace old_heart
                     melee_cooldown_timer = combo_cooldown_duration;
                     combo_count = 0; // เริ่มคอมโบใหม่ตั้งแต่ตอนนี้ ระหว่างนี้ cooldown จะบล็อกการโจมตีอยู่แล้ว
                 }
+
+                animation_player.play(has_head
+                   ? animation_player.data.data[animation_player_player.animation_name.punch]
+                   : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
             }
 
             direction get_cardinal_direction(Vector2 v)
@@ -379,13 +383,10 @@ namespace old_heart
             switch (current_combat_state)
             {
                 case combat_state.attack:
-                    animation_player.play(has_head
-                        ? animation_player.data.data[animation_player_player.animation_name.punch]
-                        : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
+                    //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
 
-                case combat_state.aim:
-                    // body layer: เล่นท่า headless ตลอดช่วง aim
+                case combat_state.aim:   // body layer: เล่นท่า headless ตลอดช่วง aim
                     switch (current_state)
                     {
                         case state.walk:
@@ -397,7 +398,7 @@ namespace old_heart
                     }
 
                     // overlay layer: takeoff_head เล่นซ้อนทับครั้งเดียวจบ
-                    animation_player2.update(delta_time, current_direction.ToString());
+                    animation_player_2.update(delta_time, current_direction.ToString());
                     break;
 
                 default: // none / aim ใช้ตรรกะเดียวกัน: เลือกตาม current_state (walk/idle)
@@ -419,12 +420,13 @@ namespace old_heart
             }
             base.update_animation(delta_time);
         }
+
         public override void Draw(SpriteBatch sprite_batch)
         {
             base.Draw(sprite_batch);
             if (current_combat_state == combat_state.aim)
             {
-                animation_player2.draw(sprite_batch, position);
+                animation_player_2.draw(sprite_batch, position);
             }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
@@ -487,7 +489,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
 
                 Texture2D takeoff_head_texture = content.Load<Texture2D>("assets/image/player/sprite_player_takeoffhead"); 
-                animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 7);
+                animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 12 , loop: false);
                 takeoff_head_animation.name = "player takeoff_head";
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 

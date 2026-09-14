@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -96,11 +97,15 @@ namespace old_heart
 
             update_direction(direction);
         }
-        public void play(animation animation, bool restart = false)
+        public void play(animation animation)
         {
-            if (current_animation == animation && restart == false) { return; } //ป้องกันการรีเซ็ตเฟรม ถ้าเป็นแอนนิเมชั่นเดิม
+            if (current_animation == animation && animation.loop == true)    //ป้องกันการรีเซ็ตเฟรม ถ้าเป็นแอนนิเมชั่นเดิม
+            {
+                //Debug.WriteLine("same play same animation " + animation.name);
+                return; 
+            } 
 
-            if (animation.loop == false||restart)  // start from frame 0 only for not loop animation
+            if (animation.loop == false)  // start from frame 0 only for not loop animation
             {
                 current_frame_index = 0;
             }

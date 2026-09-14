@@ -28,7 +28,7 @@ namespace old_heart
             {
                 KeyboardExtended.Update(); // update keyboard input 
                 MouseExtended.Update(); // update mouse input 
-
+                
                 keyboard_state = KeyboardExtended.GetState();
                 mouse_state = MouseExtended.GetState();
             }
@@ -89,7 +89,7 @@ namespace old_heart
                 float volume = sound_data.volume * global.setting.volume_sound_effect * global.setting.volume_master;
                 sound_data.sound_effect.Play(volume, pitch, pan: 0);
                 
-                Debug.WriteLine("global play sound : "+ sound_data.name + " volume : " + volume + " pitch : " + pitch);
+                //Debug.WriteLine("global play sound : "+ sound_data.name + " volume : " + volume + " pitch : " + pitch);
             }
             public static void play_song(song_name song_name)  // maybe later  add sound fade out before play if there is already song playing
             {
