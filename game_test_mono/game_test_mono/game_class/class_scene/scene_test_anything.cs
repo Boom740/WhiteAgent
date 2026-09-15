@@ -50,7 +50,7 @@ namespace old_heart
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.G))
             {

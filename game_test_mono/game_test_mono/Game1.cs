@@ -15,6 +15,7 @@ namespace old_heart
 
 
         readonly ScreenManager screen_manager;
+        public run_data_manager run_data_manager;
 
         public Game1()
         {
@@ -47,6 +48,7 @@ namespace old_heart
             global.load(Content);
             
             screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
+            run_data_manager = new run_data_manager(this);
         }
 
         protected override void LoadContent()

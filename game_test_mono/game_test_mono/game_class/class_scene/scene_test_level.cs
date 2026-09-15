@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
+using System;
 using System.IO;
 
 namespace old_heart
@@ -15,6 +16,10 @@ namespace old_heart
 
         public test_level(Game1 game , string level_file) : base(game)
         {
+            if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+            {
+                level_file += ".json";
+            }
             this.level_file = level_file;
         }
         public override void LoadContent()
@@ -37,11 +42,11 @@ namespace old_heart
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new scene_level_editor(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
             }
 
             

@@ -49,10 +49,10 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game_ref), fade_transition);
+                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new test_level(game_ref,game_manager.level_manager.current_level_file), fade_transition);
+                ScreenManager.ReplaceScreen(new test_level(game,game_manager.level_manager.current_level_file), fade_transition);
             }
             else if (keyboard_state.WasKeyPressed(Keys.Q))
             {
