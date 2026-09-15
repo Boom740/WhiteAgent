@@ -411,7 +411,9 @@ FodyWeavers.xsd
 
 # ==========================================
 # MonoGame Build Outputs (Added by Chess Battle Advanced)
+# MonoGame Build Outputs (Added by Dev Lead).
 # ==========================================
+
 bin/
 obj/
 Content/bin/
