@@ -139,7 +139,6 @@ namespace old_heart
 
             if (entity_manager.entity_list.Any(entity => entity is enemy) == false && current_game_state != game_state.level_clear)   // if no enemy is left in entity_list   and   current state is not level_clear
             {
-                Debug.WriteLine("level clear !");
                 current_game_state = game_state.level_clear;
             }
 

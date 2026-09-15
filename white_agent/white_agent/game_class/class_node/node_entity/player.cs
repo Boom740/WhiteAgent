@@ -23,6 +23,8 @@ namespace old_heart
 
         public float input_buffer_time_limit = 0.3f;
         public float current_input_beffer_time = 0f;
+
+        public float i_frame_time = 0f;  // currnetly use when change scene only
         // --- combat: melee ---
         public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
@@ -178,6 +180,11 @@ namespace old_heart
                 if (next_attack_timer > 0f)
                 {
                     next_attack_timer -= delta_time;
+                }
+
+                if (i_frame_time > 0f)  // i frame
+                {
+                    i_frame_time -= delta_time;
                 }
             }
 
@@ -463,6 +470,8 @@ namespace old_heart
         }
         public override void take_damage(int damage_taken)
         {
+            if (i_frame_time > 0) { return; }
+
             base.take_damage(damage_taken);
 
             if (alive) // still alive        still alive...

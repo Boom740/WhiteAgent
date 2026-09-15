@@ -70,7 +70,9 @@ namespace old_heart
             }
 
             test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                                      V to go back to title bruh" +
-            $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
+            $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
+            $"\ngame state : {game_manager.current_game_state}" +
+            $"";
 
             if (game_manager.player != null)
             {
@@ -82,7 +84,6 @@ namespace old_heart
                 $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
                 $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
                 //$"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]" +
-                $"\ngame state : {game_manager.current_game_state}" +
 
                 $"";
             }

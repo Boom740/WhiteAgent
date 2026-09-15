@@ -11,7 +11,7 @@ namespace old_heart
         private Random random = new Random();
 
         public int hp_left = 4;
-        public int respawn_left = 3;
+        public int respawn_left = 2;
         
         public List<string> level_list = new List<string>();
         public int cleared_level = 0;

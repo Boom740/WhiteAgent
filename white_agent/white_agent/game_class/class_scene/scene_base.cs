@@ -23,7 +23,7 @@ namespace old_heart
 
         public override void LoadContent()
         {
-            fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 1f); // setup transition screen for all inheried scene to use
+            fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 0.5f); // setup transition screen for all inheried scene to use
             game_manager = new game_manager(Content, game.Window, GraphicsDevice);
         }
 
@@ -51,6 +51,7 @@ namespace old_heart
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level].ToString();
 
                         ScreenManager.ReplaceScreen(new test_level(game, next_level_name), fade_transition);
+                        game_manager.player.i_frame_time = 100f; // cant take damage when move to next level
                     }
 
                     Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
