@@ -24,6 +24,7 @@ namespace old_heart
 
             public static Point scaled_mouse_position = Point.Zero;
             public static Vector2 scaled_mouse_world_position = Vector2.Zero;
+            public static bool mouse_in_screen = false;       // check if mouse is in screen
             public static void update_input_state()
             {
                 KeyboardExtended.Update(); // update keyboard input 
@@ -37,6 +38,15 @@ namespace old_heart
             {
                 scaled_mouse_position = viewport.PointToScreen(mouse_state.Position);
                 scaled_mouse_world_position = camera.ScreenToWorld(mouse_state.Position.ToVector2());
+
+                if (scaled_mouse_position.X >= 0 && scaled_mouse_position.X <= render_size.X   && scaled_mouse_position.Y >= 0 && scaled_mouse_position.Y <= render_size.Y)
+                {
+                    mouse_in_screen = true;
+                }
+                else
+                {
+                    mouse_in_screen = false;
+                }
             }
         }
         public static class signal

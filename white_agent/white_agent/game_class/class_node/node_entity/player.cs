@@ -137,7 +137,7 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.dash);
                 }
-                else if (mouse_state.WasButtonPressed(MouseButton.Left) && current_combat_state != combat_state.aim)
+                else if (mouse_state.WasButtonPressed(MouseButton.Left) && current_combat_state != combat_state.aim && global.input.mouse_in_screen)
                 {
                     buffer_input(bufferable_input.attack);
                 }
@@ -198,7 +198,7 @@ namespace old_heart
                         start_attack();
                     }
                 }
-                else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head)
+                else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
                 {
                     current_combat_state = combat_state.aim;
                     animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
@@ -239,7 +239,7 @@ namespace old_heart
                     current_combat_state = combat_state.none;
                     direction_locked = false;
                 }
-                else if (mouse_state.WasButtonPressed(MouseButton.Left))
+                else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
                 {
                     throw_head();
                 }
