@@ -410,8 +410,10 @@ FodyWeavers.xsd
 /game_test_mono/game_test_mono/Content/assets/Editable_files
 
 # ==========================================
+# MonoGame Build Outputs (Added by Dev Lead).
 # MonoGame Build Outputs (Added by Programmer)
 # ==========================================
+
 bin/
 obj/
 Content/bin/
