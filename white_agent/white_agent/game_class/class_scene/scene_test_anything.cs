@@ -30,7 +30,7 @@ namespace old_heart
             test_text2.text_color = Color.DarkOrange;
             game_manager.add_map(test_text2);
 
-            player player = new player(Content,new Vector2(200,200));
+            player player = new player(Content,new Vector2(200,200),game.run_data_manager);
             game_manager.add_entity(player);
 
             collision_shape_box wall = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 100f), new Vector2(64f, 500f)));

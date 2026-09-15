@@ -14,7 +14,7 @@ namespace old_heart
         public SpriteBatch sprite_batch;
 
         public game_manager game_manager;
-
+        public bool player_respawned = false;
         public base_screen(Game1 game) : base(game)
         {
             this.game = game;
@@ -23,7 +23,7 @@ namespace old_heart
 
         public override void LoadContent()
         {
-            fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 0.5f); // setup transition screen for all inheried scene to use
+            fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 1f); // setup transition screen for all inheried scene to use
             game_manager = new game_manager(Content, game.Window, GraphicsDevice);
         }
 
@@ -31,7 +31,8 @@ namespace old_heart
         {
             game_manager.update(gameTime);
 
-            
+            if (player_respawned) {return; } 
+
             if (game_manager.current_game_state == game_manager.game_state.level_clear)       // un finish random level system
             {
                 bool play_latest_level = false;
@@ -55,9 +56,17 @@ namespace old_heart
                     Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
                 }
             }
-            else if (game_manager.current_game_state == game_manager.game_state.game_over && game_manager.level_manager.current_level_file != null)
+            else if (game_manager.current_game_state == game_manager.game_state.game_over && game_manager.level_manager.current_level_file != null)  // respawn
             {
-                ScreenManager.ReplaceScreen(new test_level(game, game_manager.level_manager.current_level_file), fade_transition);
+                if (game.run_data_manager.respawn_left > 0)  
+                {
+                    player_respawned = true;
+                    game.run_data_manager.respawn_left--;
+                    ScreenManager.ReplaceScreen(new test_level(game, game_manager.level_manager.current_level_file), fade_transition);
+
+                    Debug.WriteLine("scene base respawn logic respawn_left : " + game.run_data_manager.respawn_left);
+                }
+
             }
         }
         public override void Draw(GameTime gameTime)

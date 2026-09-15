@@ -10,7 +10,8 @@ namespace old_heart
         public Game game;
         private Random random = new Random();
 
-        public int life_left = 3;
+        public int hp_left = 4;
+        public int respawn_left = 3;
         
         public List<string> level_list = new List<string>();
         public int cleared_level = 0;

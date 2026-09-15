@@ -21,7 +21,7 @@ namespace old_heart
 
             font = Content.Load<SpriteFont>("assets/font/test_font");
 
-            game_manager.level_manager.set_level_file("test_1.json");
+            game_manager.level_manager.set_level_file("test_1.json",game.run_data_manager);
         }
         public override void Update(GameTime gameTime)
         {

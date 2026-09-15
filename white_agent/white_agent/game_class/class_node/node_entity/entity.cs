@@ -33,7 +33,7 @@ namespace old_heart
         public int max_hp = 10;
         public int hp = 10;
         public float speed = 100;
-        public entity(ContentManager content_set, int max_hp,Vector2 position, float speed)
+        public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100)
         {
             content = content_set;
             this.max_hp = max_hp;

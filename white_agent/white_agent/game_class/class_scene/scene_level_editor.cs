@@ -25,7 +25,7 @@ namespace old_heart
         {
             base.LoadContent();
 
-            game_manager.level_manager.set_level_file("test_1.json");         // exact JSON file name
+            game_manager.level_manager.set_level_file("test_1.json", game.run_data_manager);         // exact JSON file name
             game_manager.pause = true;
 
             test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
@@ -60,10 +60,10 @@ namespace old_heart
             }
             else if (keyboard_state.WasKeyPressed(Keys.E))
             {
-                game_manager.level_manager.load_level();
+                game_manager.level_manager.load_level(game.run_data_manager);
             }else if (keyboard_state.WasKeyPressed(Keys.D1))
             {
-                game_manager.add_entity(new player(game_manager.content, global.input.scaled_mouse_world_position));
+                //game_manager.add_entity(new player(game_manager.content, global.input.scaled_mouse_world_position));
             }
 
 

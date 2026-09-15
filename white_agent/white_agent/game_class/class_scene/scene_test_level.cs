@@ -36,7 +36,7 @@ namespace old_heart
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
 
-            game_manager.level_manager.set_level_file(level_file);
+            game_manager.level_manager.set_level_file(level_file,game.run_data_manager);
         }
         public override void Update(GameTime gameTime)
         {

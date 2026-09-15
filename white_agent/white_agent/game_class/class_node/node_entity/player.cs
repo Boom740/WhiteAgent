@@ -11,6 +11,8 @@ namespace old_heart
 {
     public class player : entity
     {
+        public run_data_manager run_data;
+
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
         public enum combat_state { none, attack, aim , dash , die}
@@ -62,7 +64,7 @@ namespace old_heart
         // --- headless wobble ---
         public float headless_wobble_max_degrees = 25f;
         private Random rng = new Random();
-        public player(ContentManager content, Vector2 position) : base(content, max_hp: 4, position, speed: 5000)
+        public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 5000)
         {
             animation_player = new animation_player_player(content);
             animation_player_2 = new animation_player_player(content);
@@ -70,7 +72,8 @@ namespace old_heart
             max_velocity = 300;
             default_max_velocity = max_velocity;
 
-
+            this.run_data = run_data;
+            hp = run_data.hp_left;
         }
         public override void Update(GameTime gameTime)
         {
@@ -458,12 +461,23 @@ namespace old_heart
             }
             base.update_animation(delta_time);
         }
+        public override void take_damage(int damage_taken)
+        {
+            base.take_damage(damage_taken);
+
+            if (alive) // still alive        still alive...
+            {
+                run_data.hp_left = hp;
+            }
+        }
         public override void die()
         {
             if (! alive) { return; }
             alive = false;
             current_combat_state = combat_state.die;
             animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
+
+            run_data.hp_left = max_hp; // reset run_data hp to max
         }
         public override void Draw(SpriteBatch sprite_batch)
         {

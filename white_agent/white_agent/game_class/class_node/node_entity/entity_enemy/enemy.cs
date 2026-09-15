@@ -44,7 +44,7 @@ namespace old_heart
 
         private Random random = new Random();
 
-        public enemy(ContentManager content_set, int max_hp, Vector2 position, float speed) : base(content_set, max_hp, position, speed)
+        public enemy(ContentManager content_set, int max_hp, Vector2 position, float speed) : base(content_set, position, max_hp:max_hp, speed:speed)
         {
             clone_timer_current = clone_timer;
         }

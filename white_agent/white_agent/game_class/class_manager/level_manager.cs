@@ -1,9 +1,9 @@
-﻿using MonoGame.Extended;
+﻿using Microsoft.Xna.Framework;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Numerics;
 using System.Text.Json;
 
 namespace old_heart
@@ -28,14 +28,14 @@ namespace old_heart
             high_map_node_list = game_manager.map_manager.high_map_node_list;
 
         }
-        public void set_level_file(string level_file)
+        public void set_level_file(string level_file,run_data_manager run_data)
         {
             string file_directory = AppDomain.CurrentDomain.BaseDirectory;
             string game_root_file = Path.GetFullPath(Path.Combine(file_directory, "..", "..", ".."));  // get true game sorce code file not temporary
             string level_folder = Path.Combine(game_root_file, "Content", "level");
             current_level_file = Path.Combine(level_folder, level_file);
 
-            load_level();
+            load_level(run_data);
         }
         public void clear_level()  //not true clear all  (still have collision in collision world)            use for level editor only
         {
@@ -119,7 +119,7 @@ namespace old_heart
 
             Debug.WriteLine("Saved level : " + current_level_file);
         }
-        public void load_level()
+        public void load_level(run_data_manager run_data)
         {
             clear_level();
             if (current_level_file == null)
@@ -137,7 +137,7 @@ namespace old_heart
                     float position_x = level_object.position_x;
                     float position_y = level_object.position_y;
 
-                    game_manager.add_entity(new player(game_manager.content,new Vector2(position_x,position_y)));
+                    game_manager.add_entity(new player(game_manager.content,new Vector2(position_x,position_y),run_data));
                 }
                 else if(level_object.type == "enemy_leukemia")
                 {
