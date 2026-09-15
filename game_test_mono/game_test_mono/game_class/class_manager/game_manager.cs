@@ -131,26 +131,19 @@ namespace old_heart
             ui_manager.update(gameTime);
             debug_manager.update(gameTime);
 
-            
-
             if (pause)
             {
                 camera_manager.update_global_mouse_position();
                 return;
             }
 
-            if (entity_manager.entity_list.Any(entity => entity is enemy) == false && level_manager.next_level_file != null)   // if no enemy is left in entity_list
+            if (entity_manager.entity_list.Any(entity => entity is enemy) == false && current_game_state != game_state.level_clear)   // if no enemy is left in entity_list   and   current state is not level_clear
             {
                 Debug.WriteLine("level clear !");
                 current_game_state = game_state.level_clear;
             }
-            else
-            {
-                //Debug.WriteLine("level not clea  " + level_manager.next_level_file);
-            }
 
             //map_manager.update(gameTime);  map don't update lol
-
 
             entity_manager.update(gameTime);
             camera_manager.update(gameTime, player);

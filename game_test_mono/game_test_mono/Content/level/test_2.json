@@ -1,6 +1,5 @@
 {
   "name": "test_2.json",
-  "next_level": "test_1.json",
   "level_object_list": [
     {
       "type": "player",

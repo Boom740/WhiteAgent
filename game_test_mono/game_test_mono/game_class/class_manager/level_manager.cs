@@ -13,7 +13,6 @@ namespace old_heart
         public game_manager game_manager;
 
         public string current_level_file;
-        public string next_level_file;
 
         public List<entity> entity_list; //  all entity in this level
         public List<collision_shape> wall_collision_list;
@@ -130,8 +129,6 @@ namespace old_heart
 
             level_data level_data_in_file = JsonSerializer.Deserialize<level_data>(File.ReadAllText(current_level_file));
 
-            next_level_file = level_data_in_file.next_level;
-
             foreach (level_object level_object in level_data_in_file.level_object_list)
             {
                 Debug.WriteLine("Loading : " + level_object.type);
@@ -183,7 +180,6 @@ namespace old_heart
         public class level_data
         {
             public string name { get; set; }
-            public string next_level { get; set; }
             public List<level_object> level_object_list { get; set; } = new List<level_object>();
             public level_data(string name)
             {

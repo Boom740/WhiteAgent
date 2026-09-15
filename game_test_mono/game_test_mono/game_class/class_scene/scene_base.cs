@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
-using MonoGame.Extended.Collisions;
 
 namespace old_heart
 {
@@ -13,8 +12,6 @@ namespace old_heart
         public SpriteBatch sprite_batch;
 
         public game_manager game_manager;
-
-        public CollisionWorld2D collision_world; // for collision detecting
 
         public base_screen(Game1 game) : base(game)
         {
@@ -32,10 +29,11 @@ namespace old_heart
         {
             game_manager.update(gameTime);
 
-            if (game_manager.current_game_state == game_manager.game_state.level_clear && game_manager.level_manager.next_level_file != null)
+            if (game_manager.current_game_state == game_manager.game_state.level_clear )       // un finish random level system
             {
-                ScreenManager.ReplaceScreen(new test_level(game_ref, game_manager.level_manager.next_level_file), fade_transition);
-            }else if (game_manager.current_game_state == game_manager.game_state.game_over && game_manager.level_manager.current_level_file != null)
+                //ScreenManager.ReplaceScreen(new test_level(game_ref, game_manager.level_manager.next_level_file), fade_transition); 
+            }
+            else if (game_manager.current_game_state == game_manager.game_state.game_over && game_manager.level_manager.current_level_file != null)
             {
                 ScreenManager.ReplaceScreen(new test_level(game_ref, game_manager.level_manager.current_level_file), fade_transition);
             }
