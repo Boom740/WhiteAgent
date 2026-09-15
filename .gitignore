@@ -408,3 +408,12 @@ FodyWeavers.xsd
 .mgbld/
 
 /game_test_mono/game_test_mono/Content/assets/Editable_files
+
+# ==========================================
+# MonoGame Build Outputs (Added by Dev Lead)
+# ==========================================
+bin/
+obj/
+Content/bin/
+Content/obj/
+*.mgcontent
