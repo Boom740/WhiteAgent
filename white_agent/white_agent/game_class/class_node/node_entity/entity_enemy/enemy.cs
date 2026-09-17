@@ -44,7 +44,7 @@ namespace old_heart
             }
         }
         // ---------------- Dizzy ----------------
-        private void enter_dizzy()
+        public virtual void enter_dizzy()
         {
             state = enemy_state.dizzy;
             shield = false;
@@ -52,17 +52,10 @@ namespace old_heart
             shield_timer_current = shield_timer;
             velocity = Vector2.Zero;
             acceleration = Vector2.Zero;
-        }
-        public virtual void on_hit_by_projectile(projectile projectile) // เรียกจาก collision manager ตอน projectile ชน enemy
-        {
-            if (alive == false) return;
-            if (projectile is projectile_head && (shield && (state == enemy_state.normal || state == enemy_state.frightened)) ) 
-            {
-                enter_dizzy();
 
-                animation_player.flash();
-            }
+            animation_player.flash();
         }
+        
         public override void die()
         {
             base.die();

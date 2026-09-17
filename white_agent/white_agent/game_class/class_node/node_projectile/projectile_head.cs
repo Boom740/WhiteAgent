@@ -10,20 +10,27 @@ namespace old_heart
     // หัวที่ผู้เล่นขว้างออกไป: บินไปตาม velocity แล้วค่อยๆ ช้าลงด้วย drag จนหยุด (ไม่ time_out หายไปเอง รอผู้เล่นมาเก็บ)
     public class projectile_head : projectile
     {
+        public run_data_manager run_data;
+
         public bool is_resting = false;
         public float drag = 3f;                    // ยิ่งมากยิ่งหยุดเร็ว
         private const float stop_velocity_threshold = 15f;
 
         public float bounce_restitution = 0.05f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
-        public float enemy_knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
         public float sprite_height = 25;
         public float initial_speed = 1000;
-        public projectile_head(ContentManager content_set, Vector2 position)
+
+        public float shock_wave_size;
+        public bool shock_wave_enable = true;
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data)
             : base(content_set,  position : position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
+            this.run_data = run_data;
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + sprite_height); // position คือกึ่งกลาง X, 3/4 Y
+
+            hit_box_radius = 14;
         }
 
         public override void Update(GameTime gameTime)
@@ -33,6 +40,7 @@ namespace old_heart
             initial_speed = Math.Max(velocity.Length(), initial_speed);
 
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             velocity -= velocity * drag * delta_time;
             position += velocity * delta_time;
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));
@@ -49,7 +57,21 @@ namespace old_heart
             }
 
         }
+        public void resting()
+        {
+            velocity = Vector2.Zero;
+            is_resting = true;
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f / 4f)); // position คือกึ่งกลาง X, 3/4 Y
+        }
+        public void spawn_shock_wave()
+        {
+            if (shock_wave_enable == false) { return;}
+            shock_wave_enable = false;
 
+            projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, run_data);
+            shock_wave.owner = this.owner;
+            global.signal.spawn_projectile(shock_wave);
+        }
         public override void on_hit_entity(entity target_entity)
         {
 
@@ -60,25 +82,19 @@ namespace old_heart
             if (target_entity is enemy target_enemy)
             {
                 Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
-                target_enemy.apply_knockback(hit_direction, enemy_knockback_speed); // enemy กระเด็นไปตามทิศที่หัวพุ่งเข้าใส่
-                target_enemy.on_hit_by_projectile(this);
+
+                spawn_shock_wave();
             }
             velocity = -velocity * bounce_restitution; // หัวสะท้อนกลับทิศตรงข้าม แรงลดลงตาม restitution
-            if (velocity.Length() < stop_velocity_threshold)
-            {
-                resting();
-            }
         }
-        public void resting()
-        {
-            velocity = Vector2.Zero;
-            is_resting = true;
-            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f / 4f)); // position คือกึ่งกลาง X, 3/4 Y
-        }
+        
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {
+            if (is_resting) return;
             velocity = Vector2.Zero;
             resting();
+
+            spawn_shock_wave();
         }
     }
 }

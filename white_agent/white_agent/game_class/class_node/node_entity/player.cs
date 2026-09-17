@@ -344,7 +344,7 @@ namespace old_heart
             {
                 has_head = false;
 
-                projectile_head head = new projectile_head(content, position);
+                projectile_head head = new projectile_head(content, position,run_data);
                 head.owner = this;
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;

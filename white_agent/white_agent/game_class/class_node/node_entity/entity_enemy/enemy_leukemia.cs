@@ -148,7 +148,6 @@ namespace old_heart
 
             void update_dizzy(float delta_time)
             {
-                velocity = Vector2.Zero;
                 acceleration = Vector2.Zero;
 
                 dizzy_timer_current -= delta_time;
@@ -189,11 +188,11 @@ namespace old_heart
             base.update_animation(delta_time);
         }
 
-        public override void on_hit_by_projectile(projectile projectile) // เรียกจาก collision manager ตอน projectile ชน enemy
+        public override void enter_dizzy()
         {
             if (state == enemy_state.normal || state == enemy_state.frightened)
             {
-                base.on_hit_by_projectile(projectile);
+                base.enter_dizzy();
             }
         }
 
