@@ -15,6 +15,7 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text2;
 
+        public enemy_bacteria enemy_2;
         public scene_test_anything(Game1 game) : base(game)
         {
         }
@@ -40,10 +41,12 @@ namespace old_heart
             collision_shape_circle wall3 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
             game_manager.add_map_collision(wall3);
 
-            enemy test_enemy = new enemy_leukemia(Content, position: new Vector2(400, 300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
-            
+            enemy test_enemy = new enemy_leukemia(Content, position: new Vector2(400, 1300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
             game_manager.add_entity(test_enemy);
-           
+
+
+            enemy_2 = new enemy_bacteria(Content, position: new Vector2(400, 300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
+            game_manager.add_entity(enemy_2);
 
         }
         public override void Update(GameTime gameTime)
@@ -88,6 +91,12 @@ namespace old_heart
                 $"";
             }
 
+            if (enemy_2 != null)
+            {
+                test_text.text_string +=
+                $"\nbacc state : {enemy_2.state}" +
+                $"";
+            }
 
             update_all(gameTime);
         }

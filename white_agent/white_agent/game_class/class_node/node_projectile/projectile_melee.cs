@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Collisions;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -11,27 +12,45 @@ namespace old_heart
     {
         public int damage;
         public float knockback_speed = 150f;
-        private HashSet<enemy> hit_enemies = new HashSet<enemy>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
+        private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
-        public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance, float travel_time, int damage)
+        public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance = 50, float travel_time = 0.3f, int damage = 1)
             : base(content_set,  position , time_left: travel_time)
         {
             this.damage = damage;
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
-            velocity = aim_direction * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
+            velocity = Vector2.Normalize(aim_direction) * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
 
             hit_box_radius = 30f;
         }
 
         public override void on_hit_entity(entity target_entity)
         {
-            if (target_entity is enemy target_enemy && target_enemy.alive && hit_enemies.Contains(target_enemy) == false)
+            if (owner is player)
             {
-                hit_enemies.Add(target_enemy);
+                if (target_entity is enemy target_enemy && target_enemy.alive && hit_entity.Contains(target_enemy) == false)
+                {
+                    hit_entity.Add(target_enemy);
 
-                Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
-                target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                target_enemy.take_damage(damage);
+                    Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
+                    target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                    target_enemy.take_damage(damage);
+                }
+            }
+            else if (owner is enemy)
+            {
+                if (target_entity is player target_player && target_player.alive && hit_entity.Contains(target_player) == false)
+                {
+                    hit_entity.Add(target_player);
+
+                    Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
+                    target_player.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                    target_player.take_damage(damage);
+                }
+            }
+            else
+            {
+                Debug.WriteLine("projectile_melee owner is not player or enemy");
             }
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)
