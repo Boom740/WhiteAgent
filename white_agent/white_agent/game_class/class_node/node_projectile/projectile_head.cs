@@ -8,7 +8,7 @@ using System;
 namespace old_heart
 {
     // หัวที่ผู้เล่นขว้างออกไป: บินไปตาม velocity แล้วค่อยๆ ช้าลงด้วย drag จนหยุด (ไม่ time_out หายไปเอง รอผู้เล่นมาเก็บ)
-    public class head_projectile : projectile
+    public class projectile_head : projectile
     {
         public bool is_resting = false;
         public float drag = 3f;                    // ยิ่งมากยิ่งหยุดเร็ว
@@ -19,7 +19,7 @@ namespace old_heart
         private bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
         public float sprite_height = 25;
         public float initial_speed = 1000;
-        public head_projectile(ContentManager content_set, Vector2 position)
+        public projectile_head(ContentManager content_set, Vector2 position)
             : base(content_set,  position : position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");

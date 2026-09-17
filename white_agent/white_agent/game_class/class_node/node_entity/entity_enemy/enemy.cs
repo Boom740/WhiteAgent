@@ -56,7 +56,7 @@ namespace old_heart
         public virtual void on_hit_by_projectile(projectile projectile) // เรียกจาก collision manager ตอน projectile ชน enemy
         {
             if (alive == false) return;
-            if (projectile is head_projectile && (shield && (state == enemy_state.normal || state == enemy_state.frightened)) ) 
+            if (projectile is projectile_head && (shield && (state == enemy_state.normal || state == enemy_state.frightened)) ) 
             {
                 enter_dizzy();
 

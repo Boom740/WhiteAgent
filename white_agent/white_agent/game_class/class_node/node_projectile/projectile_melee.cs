@@ -7,13 +7,13 @@ using System.Collections.Generic;
 namespace old_heart
 {
     // hitbox ของท่าโจมตีปกติ: ล่องหน วิ่งออกไปตามทิศ cursor ระยะสั้นๆ แล้วหายไป
-    public class melee_projectile : projectile
+    public class projectile_melee : projectile
     {
         public int damage;
         public float knockback_speed = 150f;
         private HashSet<enemy> hit_enemies = new HashSet<enemy>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
-        public melee_projectile(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance, float travel_time, int damage)
+        public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance, float travel_time, int damage)
             : base(content_set,  position , time_left: travel_time)
         {
             this.damage = damage;

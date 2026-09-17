@@ -51,7 +51,7 @@ namespace old_heart
         public bool has_head = true;
         public float head_throw_speed = 1200f;
         public float pickup_radius = 24f;
-        private head_projectile thrown_head;
+        private projectile_head thrown_head;
 
         // --- aim  ---
         public float aim_speed_multiplier = 0.2f;
@@ -313,7 +313,7 @@ namespace old_heart
 
                 current_direction = get_cardinal_direction(aim_direction); // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
-                melee_projectile punch = new melee_projectile(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
+                projectile_melee punch = new projectile_melee(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
                 punch.owner = this;
                 punch.knockback_speed = hit_data.knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
                 global.signal.spawn_projectile(punch);
@@ -344,7 +344,7 @@ namespace old_heart
             {
                 has_head = false;
 
-                head_projectile head = new head_projectile(content, position);
+                projectile_head head = new projectile_head(content, position);
                 head.owner = this;
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
