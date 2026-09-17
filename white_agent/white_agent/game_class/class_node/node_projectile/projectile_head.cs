@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -16,7 +17,7 @@ namespace old_heart
         public float drag = 3f;                    // ยิ่งมากยิ่งหยุดเร็ว
         private const float stop_velocity_threshold = 15f;
 
-        public float bounce_restitution = 0.05f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
+        public float bounce_power = 50f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
         private bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
         public float sprite_height = 25;
         public float initial_speed = 1000;
@@ -44,6 +45,7 @@ namespace old_heart
             velocity -= velocity * drag * delta_time;
             position += velocity * delta_time;
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));
+
             float speed_till_stop = velocity.Length() - stop_velocity_threshold;
             float height_ratio = Math.Min(1 , speed_till_stop / (initial_speed - stop_velocity_threshold));
             height_ratio = 1f - height_ratio;
@@ -72,29 +74,36 @@ namespace old_heart
             shock_wave.owner = this.owner;
             global.signal.spawn_projectile(shock_wave);
         }
+        public void bounce_back(Vector2 bounce_vector)
+        {
+            has_bounced = true;
+            velocity = bounce_vector * bounce_power; 
+            initial_speed = velocity.Length();
+            Debug.WriteLine("ee " + bounce_vector);
+        }
         public override void on_hit_entity(entity target_entity)
         {
 
             if (has_bounced) return;
             if (is_resting) return;
-            has_bounced = true;
 
             if (target_entity is enemy target_enemy)
             {
-                Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
-
                 spawn_shock_wave();
+
+                Vector2 target_direction = position - target_enemy.position;
+                Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
+                bounce_back(hit_direction);
             }
-            velocity = -velocity * bounce_restitution; // หัวสะท้อนกลับทิศตรงข้าม แรงลดลงตาม restitution
         }
         
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {
+            if (has_bounced) return;
             if (is_resting) return;
-            velocity = Vector2.Zero;
-            resting();
 
             spawn_shock_wave();
+            bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector));
         }
     }
 }
