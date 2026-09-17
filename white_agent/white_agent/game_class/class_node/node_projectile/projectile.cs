@@ -12,6 +12,7 @@ namespace old_heart
 
         public ContentManager content;
         public Texture2D texture;
+        public Texture2D shadow_texture;
 
         public collision_shape collision;
 
@@ -39,6 +40,8 @@ namespace old_heart
             this.position = position;
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
             collision.owner = this;
+
+            shadow_texture = content.Load<Texture2D>("assets/image/other/white_pixel");
         }
 
         public override void Update(GameTime gameTime)
@@ -88,6 +91,9 @@ namespace old_heart
         {
             float layer_depth = (position.Y + 50000f) / 100000f;
             sprite_batch.Draw(texture, position,null,Color.White,rotation, sprite_origin, sprite_scale,SpriteEffects.None, layer_depth);
+
+            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius) / shadow_texture.Height);
+            sprite_batch.Draw(shadow_texture, position - (shadow_scale / 2), null, Color.White, 0, Vector2.Zero, shadow_scale, SpriteEffects.None, 0);
         }
     }
 }
