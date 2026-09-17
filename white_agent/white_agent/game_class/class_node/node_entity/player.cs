@@ -296,7 +296,7 @@ namespace old_heart
                 current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.attack;
                 attack_timer = attack_duration;
-                velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนเริ่มโจมตี
+
                 global.sound.play_sound(global.sound.sound_name.slash);
 
                 combo_count++;
@@ -317,6 +317,7 @@ namespace old_heart
                 punch.owner = this;
                 punch.knockback_speed = hit_data.knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
                 global.signal.spawn_projectile(punch);
+
                 if (combo_count >= max_combo)
                 {
                     melee_cooldown_timer = combo_cooldown_duration;

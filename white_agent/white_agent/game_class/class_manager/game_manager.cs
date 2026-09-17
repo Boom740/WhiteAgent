@@ -91,9 +91,9 @@ namespace old_heart
             else
             {
                 collision_manager.add(entity.collision, "enemy");
-                if (entity is enemy_leukemia enemy_leukemia)
+                if (entity is enemy enemy)
                 {
-                    enemy_leukemia.target = this.player; // ให้ enemy รู้จัก player เพื่อเช็คระยะ dangerous_rad/safe_rad
+                    enemy.target = this.player; // ให้ enemy รู้จัก player เพื่อเช็คระยะ dangerous_rad/safe_rad
                 }
             }
             debug_manager.add(entity.collision);
