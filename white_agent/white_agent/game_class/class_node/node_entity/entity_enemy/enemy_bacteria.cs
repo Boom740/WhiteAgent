@@ -29,7 +29,7 @@ namespace old_heart
         public float attack_lunge_speed = 100f;
         public float attack_hitbox_radius = 30;
         public float attack_hitbox_distance = 30;
-
+        public int attack_damage = 1;
         public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5, speed: 100)
         {
             animation_player = new animation_player_bacteria(content_set);
@@ -179,7 +179,7 @@ namespace old_heart
 
                 animation_player.play(animation_player.data.data[animation_name.attack]);
 
-                projectile_melee punch = new projectile_melee(content, position, aim_direction :aim_direction ,travel_distance: attack_hitbox_distance,travel_time : attack_duration, damage: 1);
+                projectile_melee punch = new projectile_melee(content, position, aim_direction :aim_direction ,travel_distance: attack_hitbox_distance,travel_time : attack_duration, damage: attack_damage);
                 punch.owner = this;
                 punch.knockback_speed = 100; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
                 punch.hit_box_radius = attack_radius;

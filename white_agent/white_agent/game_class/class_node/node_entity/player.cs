@@ -469,9 +469,9 @@ namespace old_heart
             }
             base.update_animation(delta_time);
         }
-        public override void take_damage(int damage_taken)
+        public override bool take_damage(int damage_taken)
         {
-            if (i_frame_time > 0) { return; }
+            if (i_frame_time > 0) { return false; }
 
             base.take_damage(damage_taken);
 
@@ -479,6 +479,8 @@ namespace old_heart
             {
                 run_data.hp_left = hp;
             }
+
+            return true;
         }
         public override void die()
         {
