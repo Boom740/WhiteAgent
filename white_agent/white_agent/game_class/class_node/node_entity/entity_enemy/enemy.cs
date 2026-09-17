@@ -8,7 +8,7 @@ namespace old_heart
 {
     public abstract class enemy : entity
     {
-        public enum enemy_state { normal, frightened, dizzy, died }
+        public enum enemy_state { normal , frightened , dizzy, died , chase , attack}
         public enemy_state state = enemy_state.normal;
 
         // --- target (player) ---

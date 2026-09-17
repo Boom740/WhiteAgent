@@ -69,8 +69,7 @@ namespace old_heart
             resolve_hitbox_collision("enemy_hitbox", "player");
 
             resolve_entity_body_collision("player", "enemy", delta_time);
-            resolve_entity_body_collision("enemy", "enemy", delta_time/4);   // enemy push each other     slowly
-
+            resolve_entity_body_collision("enemy", "enemy", delta_time); 
 
             resolve_wall_collision("player", delta_time);
             resolve_wall_collision("player_hitbox", delta_time);
