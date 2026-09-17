@@ -64,17 +64,19 @@ namespace old_heart
 
             collision_world.RebuildDynamicLayers();
 
-            resolve_wall_collision("player", delta_time);
-            resolve_wall_collision("player_hitbox", delta_time);
-
-            resolve_wall_collision("enemy", delta_time);
-            resolve_wall_collision("enemy_hitbox", delta_time);
 
             resolve_hitbox_collision("player_hitbox", "enemy");
             resolve_hitbox_collision("enemy_hitbox", "player");
 
             resolve_entity_body_collision("player", "enemy", delta_time);
             resolve_entity_body_collision("enemy", "enemy", delta_time/4);   // enemy push each other     slowly
+
+
+            resolve_wall_collision("player", delta_time);
+            resolve_wall_collision("player_hitbox", delta_time);
+
+            resolve_wall_collision("enemy", delta_time);
+            resolve_wall_collision("enemy_hitbox", delta_time);
         }
 
         public void resolve_wall_collision(string layer_that_collide_with_wall ,float delta_time) // use in update only
@@ -86,6 +88,7 @@ namespace old_heart
                 {
                     if (collision_shape.owner is entity entity)
                     {
+                        entity.position += pair.FirstResult.MinimumTranslationVector;
                         entity.collide_wall(pair, delta_time);
                     }
                     else if (collision_shape.owner is projectile projectile)
@@ -96,7 +99,6 @@ namespace old_heart
                         Debug.WriteLine("collision_shape.owner is not entity nor projectile : " + collision_shape);
                     }
                 }
-                //Debug.WriteLine(pair.First.GetType().Name);
             }
         }
         public void resolve_hitbox_collision(string hitbox_layer, string target_layer)
@@ -117,15 +119,34 @@ namespace old_heart
                 }
             }
         }
-
         public void resolve_entity_body_collision(string layer_a, string layer_b, float delta_time)
         {
+            float push_multiplier = 1.5f;   // scale push power
+            float minimul_distance = 0.01f;  // prevent too close distance push too much 
+
+
             var collisionPairs = collision_world.QueryCollisionPairs(layer_a, layer_b);
             foreach (var pair in collisionPairs)
             {
-                if (pair.First is collision_shape shape_a && shape_a.owner is entity entity_a)
+                if (pair.First is collision_shape shape_a && shape_a.owner is entity entity_a     &&     pair.Second is collision_shape shape_b && shape_b.owner is entity entity_b)
                 {
-                    entity_a.collide_wall(pair, delta_time); // reuse: แค่ผลัก entity_a ออกด้วย MinimumTranslationVector
+                    Vector2 push_direction = entity_b.position - entity_a.position;  // vector from a to b
+                    float push_distance = push_direction.Length();
+
+                    if (push_distance < minimul_distance)
+                    {
+                        push_distance = minimul_distance;
+                        push_direction = new Vector2(1, 0);
+                    }
+                    float overlapse_distance = ((entity_a.hit_box_radius + entity_b.hit_box_radius) - push_distance);
+
+                    push_direction = Vector2.Normalize(push_direction) * overlapse_distance * push_multiplier;
+
+                    entity_a.velocity -= (push_direction);
+                    entity_b.velocity += (push_direction);
+
+                    entity_a.collide_entity(entity_b);
+                    entity_b.collide_entity(entity_a);
                 }
             }
         }

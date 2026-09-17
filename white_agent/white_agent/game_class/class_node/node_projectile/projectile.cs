@@ -81,8 +81,6 @@ namespace old_heart
 
         public virtual void collide_wall(CollisionPair2D pair , float delta_time) // wall collision get call from collision_manager
         {
-            //velocity += pair.FirstResult.MinimumTranslationVector / delta_time; // devided by delta_time for wall to push instantly   // bounce off wall
-
             velocity = Vector2.Zero;  // stop move and time_out when hit wall
             time_left = 0;
         }

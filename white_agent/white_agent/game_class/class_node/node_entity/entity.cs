@@ -126,7 +126,11 @@ namespace old_heart
         }
         public void collide_wall(CollisionPair2D pair , float delta_time) // wall collision get call from collision_manager
         {
-            position += pair.FirstResult.MinimumTranslationVector;    
+            //position += pair.FirstResult.MinimumTranslationVector;    
+        }
+        public virtual void collide_entity(entity entity)
+        {
+            // for collecting item
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
