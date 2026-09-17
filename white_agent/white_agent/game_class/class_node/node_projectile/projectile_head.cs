@@ -79,7 +79,6 @@ namespace old_heart
             has_bounced = true;
             velocity = bounce_vector * bounce_power; 
             initial_speed = velocity.Length();
-            Debug.WriteLine("ee " + bounce_vector);
         }
         public override void on_hit_entity(entity target_entity)
         {
