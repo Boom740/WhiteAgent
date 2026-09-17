@@ -46,14 +46,18 @@ namespace old_heart
         // ---------------- Dizzy ----------------
         public virtual void enter_dizzy()
         {
-            state = enemy_state.dizzy;
-            shield = false;
-            dizzy_timer_current = dizzy_timer;
-            shield_timer_current = shield_timer;
-            velocity = Vector2.Zero;
-            acceleration = Vector2.Zero;
+            if (state != enemy_state.dizzy && state != enemy_state.died)
+            {
 
-            animation_player.flash();
+                state = enemy_state.dizzy;
+                shield = false;
+                dizzy_timer_current = dizzy_timer;
+                shield_timer_current = shield_timer;
+                velocity = Vector2.Zero;
+                acceleration = Vector2.Zero;
+
+                animation_player.flash();
+            }
         }
         
         public override void die()

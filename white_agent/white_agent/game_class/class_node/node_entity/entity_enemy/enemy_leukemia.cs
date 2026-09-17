@@ -188,13 +188,6 @@ namespace old_heart
             base.update_animation(delta_time);
         }
 
-        public override void enter_dizzy()
-        {
-            if (state == enemy_state.normal || state == enemy_state.frightened)
-            {
-                base.enter_dizzy();
-            }
-        }
 
 
         public class animation_player_leukemia : animation_player_base
