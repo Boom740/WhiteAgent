@@ -10,7 +10,8 @@ namespace old_heart
         public Game game;
         private Random random = new Random();
 
-        public int hp_left = 4;
+        public int max_hp = 1;
+        public int hp_left = 1;
         public int respawn_left = 2;
 
         public float shock_wave_radius = 18;

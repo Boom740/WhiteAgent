@@ -31,13 +31,14 @@ namespace old_heart
 
         //public float ground_friction = 5f;
         public float max_velocity = 1000;
-        public projectile(ContentManager content_set, Vector2 position , float time_left = 1)
+        public projectile(ContentManager content_set, Vector2 position , float time_left = 1 , entity owner = null)
         {
             content = content_set;
             this.time_left = time_left;
             this.position = position;
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
             collision.owner = this;
+            this.owner = owner;
 
             shadow_texture = content.Load<Texture2D>("assets/image/other/white_pixel");
         }

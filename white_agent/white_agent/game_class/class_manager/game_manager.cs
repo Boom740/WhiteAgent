@@ -129,6 +129,8 @@ namespace old_heart
         }
         public void update(GameTime gameTime)
         {
+            spawn_queue_signal();
+
             ui_manager.update(gameTime);
             debug_manager.update(gameTime);
 
@@ -154,7 +156,6 @@ namespace old_heart
             camera_manager.update(gameTime, player);
 
             clear_inactive_node();
-            spawn_queue_signal();
         }
         public void clear_inactive_node()
         {

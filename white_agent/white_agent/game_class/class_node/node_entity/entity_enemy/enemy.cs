@@ -29,7 +29,7 @@ namespace old_heart
         {
         }
         // ---------------- Damage / Death ----------------
-        public override bool take_damage(int damage_taken)
+        public virtual bool take_damage(int damage_taken, node damage_dealer = null)
         {
             if (alive == false) { return false; }
             if (shield) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า

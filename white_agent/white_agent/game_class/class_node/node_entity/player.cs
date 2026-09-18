@@ -5,7 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics; // Required for Keyboard input
+using System.Diagnostics;
+using System.Reflection.Metadata.Ecma335; // Required for Keyboard input
 
 namespace old_heart
 {
@@ -48,11 +49,12 @@ namespace old_heart
         private float next_attack_timer = 0f;
 
         // --- combat: head throw ---
+        private projectile_head head_projectile;
         public bool has_head = true;
         public float head_throw_speed = 1200f;
         public float pickup_radius = 24f;
-        private projectile_head thrown_head;
 
+        public float head_drop_speed = 300;
         // --- aim  ---
         public float aim_speed_multiplier = 0.2f;
         public animation_player_player animation_player_2;
@@ -76,6 +78,7 @@ namespace old_heart
 
             this.run_data = run_data;
             hp = run_data.hp_left;
+            max_hp = run_data.max_hp;
         }
         public override void Update(GameTime gameTime)
         {
@@ -344,16 +347,15 @@ namespace old_heart
             {
                 has_head = false;
 
-                projectile_head head = new projectile_head(content, position,run_data);
-                head.owner = this;
+                projectile_head head = new projectile_head(content, position,run_data ,owner: this);
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
 
                 global.sound.play_sound(global.sound.sound_name.throw_head);
                 global.signal.spawn_projectile(head);
-                thrown_head = head;
+                head_projectile = head;
             }
-
+            
             void update_dash()
             {
                 dash_timer -= delta_time;
@@ -392,10 +394,10 @@ namespace old_heart
 
             void reattach_head()
             {
-                if (thrown_head != null)
+                if (head_projectile != null)
                 {
-                    thrown_head.time_out(); // ลบตัวเองออกจาก scene และ collision world
-                    thrown_head = null;
+                    head_projectile.time_out(); // ลบตัวเองออกจาก scene และ collision world
+                    head_projectile = null;
                 }
                 else
                 {
@@ -407,13 +409,13 @@ namespace old_heart
 
             void check_head_pickup()
             {
-                if (thrown_head == null)  // not head projectile yet
+                if (head_projectile == null)  // not head projectile yet
                 {
                     return;
                 }
 
-                Vector2 to_head = thrown_head.position - position;
-                if (to_head.Length() <= pickup_radius  && thrown_head.is_resting)   // head in pickup_radius
+                Vector2 to_head = head_projectile.position - position;
+                if (to_head.Length() <= pickup_radius  && head_projectile.is_resting)   // head in pickup_radius
                 {
                     bool pickup_via_dash = current_combat_state == combat_state.dash;
 
@@ -474,20 +476,58 @@ namespace old_heart
             }
             base.update_animation(delta_time);
         }
-        public override bool take_damage(int damage_taken)
+        public override bool take_damage(int damage_taken, node damage_dealer = null)
         {
             if (i_frame_time > 0) { return false; }
 
-            if (base.take_damage(damage_taken) == false) { return false; }
-
-            global.signal.screen_shake(0.4f);
-
-            if (alive) // still alive        still alive...
+            if (has_head)
             {
-                run_data.hp_left = hp;
+                Vector2 head_drop_direction = Vector2.Zero;
+                if (damage_dealer is projectile projectile)
+                {
+                    head_drop_direction = position - projectile.position;
+                }
+                else if (damage_dealer is entity entity)
+                {
+                    head_drop_direction = position - entity.position;
+                }
+
+                if (head_drop_direction == Vector2.Zero)
+                {
+                    head_drop_direction = new Vector2(0, -200);
+                }
+
+                drop_head(head_drop_direction);
+
+                return false;
             }
 
+            if (base.take_damage(damage_taken) == false) { return false; }
+
+            if (alive == false) { return false; }
+
+            global.signal.screen_shake(0.4f);
+            run_data.hp_left = hp;
+
+           
+            
+
+
             return true;
+
+            void drop_head(Vector2 head_drop_direction)  // when take damage
+            {
+                if (head_projectile != null) { return; }
+                has_head = false;
+
+                projectile_head head = new projectile_head(content, position, run_data, owner: this);
+                head.velocity = Vector2.Normalize(head_drop_direction) * head_drop_speed ;
+                head.has_bounced = true;
+                head.shock_wave_enable = false;
+
+                global.signal.spawn_projectile(head);
+                head_projectile = head;
+            }
         }
         public override void die()
         {

@@ -34,7 +34,7 @@ namespace old_heart
 
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
 
-                    bool deal_damage = target_enemy.take_damage(damage);
+                    bool deal_damage = target_enemy.take_damage(damage,damage_dealer: this);
                     if (deal_damage)
                     {
                         target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
@@ -49,7 +49,7 @@ namespace old_heart
 
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
 
-                    bool deal_damage = target_player.take_damage(damage);
+                    bool deal_damage = target_player.take_damage(damage, damage_dealer: this);
                     if (deal_damage)
                     {
                         target_player.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่

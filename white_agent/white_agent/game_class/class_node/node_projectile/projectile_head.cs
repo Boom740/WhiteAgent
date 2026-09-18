@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
+using System.Buffers;
 using System.Diagnostics;
 
 namespace old_heart
@@ -18,14 +19,14 @@ namespace old_heart
         private const float stop_velocity_threshold = 15f;
 
         public float bounce_power = 50f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
-        private bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
+        public bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
         public float sprite_height = 25;
         public float initial_speed = 1000;
 
         public float shock_wave_size;
         public bool shock_wave_enable = true;
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data)
-            : base(content_set,  position : position) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null)
+            : base(content_set,  position : position , owner : owner) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
             this.run_data = run_data;
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
@@ -70,15 +71,18 @@ namespace old_heart
             if (shock_wave_enable == false) { return;}
             shock_wave_enable = false;
 
-            projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, run_data);
-            shock_wave.owner = this.owner;
+            projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, run_data , owner: this.owner);
             global.signal.spawn_projectile(shock_wave);
         }
         public void bounce_back(Vector2 bounce_vector)
         {
-            has_bounced = true;
-            velocity = bounce_vector * bounce_power; 
-            initial_speed = velocity.Length();
+            velocity = bounce_vector * bounce_power;
+
+            if (has_bounced == false)
+            {
+                has_bounced = true;
+                initial_speed = velocity.Length();
+            }
         }
         public override void on_hit_entity(entity target_entity)
         {
@@ -98,11 +102,10 @@ namespace old_heart
         
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {
-            if (has_bounced) return;
             if (is_resting) return;
 
-            spawn_shock_wave();
             bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector));
+            spawn_shock_wave();
         }
     }
 }

@@ -80,7 +80,7 @@ namespace old_heart
 
             if (other is player)
             {
-                other.take_damage(contact_damage);
+                other.take_damage(contact_damage, damage_dealer: this);
                 die();
             }
         }
