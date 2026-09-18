@@ -33,8 +33,12 @@ namespace old_heart
                     hit_entity.Add(target_enemy);
 
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
-                    target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                    target_enemy.take_damage(damage);
+
+                    bool deal_damage = target_enemy.take_damage(damage);
+                    if (deal_damage)
+                    {
+                        target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                    }
                 }
             }
             else if (owner is enemy)
@@ -44,8 +48,12 @@ namespace old_heart
                     hit_entity.Add(target_player);
 
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
-                    target_player.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                    target_player.take_damage(damage);
+
+                    bool deal_damage = target_player.take_damage(damage);
+                    if (deal_damage)
+                    {
+                        target_player.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                    }
                 }
             }
             else

@@ -111,9 +111,9 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.enemy_die_efx, position,high_layer : true);
             active = false; // active = false make this get instant delete
         }
-        public virtual void take_damage(int damage_taken) //เติม virtual ให้ใช้กับ enemy ได้
+        public virtual bool take_damage(int damage_taken) //เติม virtual ให้ใช้กับ enemy ได้
         {
-            if ( ! alive ) { return; }
+            if ( ! alive ) { return false; }
             hp -= damage_taken;
 
             animation_player.flash();
@@ -126,6 +126,7 @@ namespace old_heart
                 hp = 0;
                 die();
             }
+            return true;
         }
         public void collide_wall(CollisionPair2D pair , float delta_time) // wall collision get call from collision_manager
         {

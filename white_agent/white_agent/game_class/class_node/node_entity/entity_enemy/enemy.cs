@@ -29,10 +29,10 @@ namespace old_heart
         {
         }
         // ---------------- Damage / Death ----------------
-        public override void take_damage(int damage_taken)
+        public override bool take_damage(int damage_taken)
         {
-            if (alive == false) return;
-            if (shield) return; // มี shield อยู่ โจมตีธรรมดาไม่เข้า
+            if (alive == false) { return false; }
+            if (shield) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า
 
             base.take_damage(damage_taken);
             global.signal.screen_shake(0.4f);
@@ -42,6 +42,7 @@ namespace old_heart
             {
                 state = enemy_state.died;
             }
+            return true;
         }
         // ---------------- Dizzy ----------------
         public virtual void enter_dizzy()

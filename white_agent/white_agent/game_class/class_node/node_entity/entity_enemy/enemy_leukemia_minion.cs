@@ -15,7 +15,8 @@ namespace old_heart
         {
             animation_player = new animation_player_minion(content_set);
             state = enemy_state.chase; // minion ไล่ล่าทันทีที่เกิด ไม่มี patrol เหมือน leukemia
-            
+
+            hit_box_radius = 8; 
         }
 
         public override void Update(GameTime gameTime)
