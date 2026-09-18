@@ -35,6 +35,7 @@ namespace old_heart
         public bool pause = false;
         public enum game_state { normal , game_over , level_clear}
         public game_state current_game_state = game_state.normal;
+
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
             this.content = content;
@@ -142,6 +143,7 @@ namespace old_heart
                 current_game_state = game_state.level_clear;
             }
 
+            
             //map_manager.update(gameTime);  map don't update lol
 
             entity_manager.update(gameTime);

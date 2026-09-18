@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.Screens;
 using System;
+using System.Diagnostics;
+using System.Net;
 
 namespace old_heart
 {
@@ -49,6 +51,8 @@ namespace old_heart
             
             screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
             run_data_manager = new run_data_manager(this);
+
+            global.signal.signal_change_mouse_state += change_mouse_state;
         }
 
         protected override void LoadContent()
@@ -67,6 +71,26 @@ namespace old_heart
 
             base.Update(gameTime);
         }
+        protected override void UnloadContent()
+        {
+
+            base.UnloadContent();
+        }
+        public void change_mouse_state(global.mouse_state mouse_state)
+        {
+            if (mouse_state == global.mouse_state.normal)
+            {
+                Debug.WriteLine("mouse normal");
+            }else if (mouse_state == global.mouse_state.combat)
+            {
+                Debug.WriteLine("mouse combat");
+            }
+            else if (mouse_state == global.mouse_state.combat_aim)
+            {
+                Debug.WriteLine("mouse combat_aim");
+            }
+        }
+
 
         //protected override void Draw(GameTime gameTime)
         //{
