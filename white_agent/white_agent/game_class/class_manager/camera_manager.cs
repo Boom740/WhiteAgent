@@ -5,6 +5,7 @@ using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.ViewportAdapters;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -19,6 +20,11 @@ namespace old_heart
         private float trauma_decay = 2f;
         private float max_Offset = 10f;
         private Random rng_shake = new Random();
+
+        public bool following_player = false;
+        public float follow_mouse_ratio = 0.05f; // 0-1  
+        public float tween_smooting = 0.5f;  // 0-1    
+
         public camera_manager(GameWindow window, GraphicsDevice graphics_device)
         {
             viewport_adapter = new BoxingViewportAdapter(window,graphics_device,(int)global.render_size.X, (int)global.render_size.Y);
@@ -36,8 +42,17 @@ namespace old_heart
 
             if (player != null)
             {
-                Vector2 target_position = player.position;
-                camera.LookAt(target_position); // maybe use gametime to tween camera to target position in future
+                if (following_player == false)
+                {
+                    following_player = true;
+                    camera.LookAt(player.position);
+                }
+
+                Vector2 target_position = (player.position*(1-follow_mouse_ratio) + global.input.scaled_mouse_world_position * (follow_mouse_ratio));
+                Vector2 currentCenter = camera.Position + camera.Origin;
+
+                camera.LookAt(Vector2.Lerp(currentCenter, target_position, tween_smooting));
+
             }
 
             if(truama > 0f)
