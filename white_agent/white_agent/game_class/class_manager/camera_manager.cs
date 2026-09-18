@@ -49,9 +49,9 @@ namespace old_heart
                 }
 
                 Vector2 target_position = (player.position*(1-follow_mouse_ratio) + global.input.scaled_mouse_world_position * (follow_mouse_ratio));
-                Vector2 currentCenter = camera.Position + camera.Origin;
+                Vector2 current_center = camera.Position + camera.Origin;
 
-                camera.LookAt(Vector2.Lerp(currentCenter, target_position, tween_smooting));
+                camera.LookAt(Vector2.Lerp(current_center, target_position, tween_smooting));
 
             }
 
