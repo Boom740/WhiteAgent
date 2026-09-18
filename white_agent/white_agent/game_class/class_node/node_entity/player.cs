@@ -29,12 +29,12 @@ namespace old_heart
         public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
 
-        public List<melee_combo_hit_data> combo_hits = new List<melee_combo_hit_data>
+        public List<melee_data> combo_hits = new List<melee_data>
          {
-          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 1
-          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 2
-          new melee_combo_hit_data(damage: 1, lunge_speed: 150f, range: 40f, hitbox_lifetime: 0.07f, knockback_speed: 150f), // hit 3
-          new melee_combo_hit_data(damage: 2, lunge_speed: 850f, range: 55f, hitbox_lifetime: 0.08f, knockback_speed: 300f), // hit 4 (finisher)
+          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f , hitbox_radius: 30), // hit 1
+          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f, hitbox_radius: 30), // hit 2
+          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f, hitbox_radius: 30), // hit 3
+          new melee_data(damage: 2, lunge_speed: 850f, range: 85f, hitbox_lifetime: 0.08f, knockback_speed: 300f, hitbox_radius: 30), // hit 4 (finisher)
          };
         // --- combat: melee combo ---
         public int combo_count = 0;
@@ -63,9 +63,7 @@ namespace old_heart
         private float dash_timer = 0f;
 
         private float default_max_velocity;
-        // --- headless wobble ---
-        public float headless_wobble_max_degrees = 25f;
-        private Random rng = new Random();
+
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 5000)
         {
             animation_player = new animation_player_player(content);
@@ -263,25 +261,33 @@ namespace old_heart
 
             void update_movement_input()
             {
+                current_direction_vector = Vector2.Zero;
 
-                if (keyboard_state.IsKeyDown(Keys.D)) input_direction += new Vector2(1, 0);
-                if (keyboard_state.IsKeyDown(Keys.A)) input_direction += new Vector2(-1, 0);
-                if (keyboard_state.IsKeyDown(Keys.S)) input_direction += new Vector2(0, 1);
-                if (keyboard_state.IsKeyDown(Keys.W)) input_direction += new Vector2(0, -1);
+                if (keyboard_state.IsKeyDown(Keys.D))
+                {
+                    input_direction += new Vector2(1, 0);
+                }
+                if (keyboard_state.IsKeyDown(Keys.A)) 
+                {
+                    input_direction += new Vector2(-1, 0);
+                }
+                if (keyboard_state.IsKeyDown(Keys.S)) 
+                { 
+                    input_direction += new Vector2(0, 1); 
+                }
+                if (keyboard_state.IsKeyDown(Keys.W)) 
+                { 
+                    input_direction += new Vector2(0, -1);
+                }
 
                 if (input_direction != Vector2.Zero)
                 {
                     float effective_speed = current_combat_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
 
-                    if (has_head == false)
-                    {
-                        float wobble_angle = MathHelper.ToRadians((float)(rng.NextDouble() * 2 - 1) * headless_wobble_max_degrees);
-                        input_direction = Vector2.Transform(input_direction, Matrix.CreateRotationZ(wobble_angle));
-                    }
-
                     input_direction = Vector2.Normalize(input_direction) * effective_speed;
                 }
 
+                current_direction_vector += input_direction;
             }
 
             void update_walk_idle_state()
@@ -304,7 +310,7 @@ namespace old_heart
                 next_attack_timer = attack_input_delay; // เริ่มนับดีเลย์ทันทีที่ออกหมัด
 
                 int hit_index = MathHelper.Clamp(combo_count - 1, 0, combo_hits.Count - 1); // กันเผื่อ max_combo กับ combo_hits.Count ไม่ตรงกัน
-                melee_combo_hit_data hit_data = combo_hits[hit_index];
+                melee_data hit_data = combo_hits[hit_index];
 
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
@@ -313,10 +319,7 @@ namespace old_heart
 
                 current_direction = get_cardinal_direction(aim_direction); // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
-                projectile_melee punch = new projectile_melee(content, position, aim_direction, hit_data.range, hit_data.hitbox_lifetime, hit_data.damage);
-                punch.owner = this;
-                punch.knockback_speed = hit_data.knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
-                global.signal.spawn_projectile(punch);
+                hit_data.spawn_melee_projectile(content, this, position, aim_direction);
 
                 if (combo_count >= max_combo)
                 {
@@ -473,7 +476,7 @@ namespace old_heart
         {
             if (i_frame_time > 0) { return false; }
 
-            base.take_damage(damage_taken);
+            if (base.take_damage(damage_taken) == false) { return false; }
 
             if (alive) // still alive        still alive...
             {

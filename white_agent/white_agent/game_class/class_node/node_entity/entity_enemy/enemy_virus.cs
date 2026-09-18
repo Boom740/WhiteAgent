@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
     public class enemy_virus : enemy
     {
-        public enum animation_name { idle, walk, dizzy, died , attack}
-        // shared animation key ใช้ร่วมกันทุก enemy type เพื่อให้ base class เลือก animation ถูก
+        public enum animation_name { idle, walk, dizzy, died, attack }
 
 
         // --- radii ---
@@ -28,14 +28,9 @@ namespace old_heart
         public float attack_cooldown = 2f;
         public float attack_cooldown_timer = 0f;
 
-        public float attack_lunge_speed = 100f;
-        public float attack_hitbox_radius = 20;
-        public float attack_hitbox_distance = 30;
-        public float attack_hitbox_duration = 0.3f;
-        public float attack_knockback_speed = 100;
+        public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 100f, range: 40f, hitbox_lifetime: 0.3f, knockback_speed: 100f);
 
-        public int attack_damage = 1;
-        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5, speed: 100)
+        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5)
         {
             animation_player = new animation_player_virus(content_set);
         }
@@ -46,7 +41,7 @@ namespace old_heart
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             update_cooldown();
-            // shield regen ทำงานอิสระจาก state ตามที่ต้องการ
+
             if (shield == false && state != enemy_state.died)
             {
                 shield_timer_current -= delta_time;
@@ -71,7 +66,7 @@ namespace old_heart
                     break;
 
                 case enemy_state.dizzy:
-                    update_dizzy(delta_time);
+                    update_dizzy();
                     break;
 
                 case enemy_state.died:
@@ -99,6 +94,7 @@ namespace old_heart
                     {
                         current_patrol_time = patrol_time_walk;
                         acceleration = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * speed;
+                        current_direction_vector = acceleration;
                     }
                     else
                     {
@@ -120,15 +116,16 @@ namespace old_heart
                 }
             }
 
-
             // ----------------- chase -------------------
             void update_chase()
             {
                 if (target == null) return;
                 float distance = Vector2.Distance(position, target.position);
+
                 if (distance > dangerous_radius)
                 {
                     state = enemy_state.normal;
+                    return;
                 }
                 else if (distance <= attack_radius)
                 {
@@ -136,13 +133,14 @@ namespace old_heart
                     {
                         start_attack();
                     }
-
-                    // ถ้าติด cooldown ก็ยืนปลดๆ 
+                    acceleration = Vector2.Zero;
                 }
                 else
                 {
-                    velocity = Vector2.Normalize(target.position - position) * speed;
+                    acceleration = Vector2.Normalize(target.position - position) * speed;
                 }
+
+                current_direction_vector = target.position - position;  // loot at target
             }
 
             // ----------------- attack -------------------
@@ -155,10 +153,10 @@ namespace old_heart
                 {
                     // do nothing
                 }
-                else if (hitbox_spawn_timer <= 0)  
+                else if (hitbox_spawn_timer <= 0)
                 {
                     hitbox_spawn_timer = -1;
-                    make_attack_projectile();
+                    melee_data.spawn_melee_projectile(content, this, position, current_direction_vector);
                 }
                 else
                 {
@@ -174,7 +172,7 @@ namespace old_heart
 
             // ---------------- Dizzy ----------------
 
-            void update_dizzy(float delta_time)
+            void update_dizzy()
             {
                 acceleration = Vector2.Zero;
 
@@ -186,42 +184,24 @@ namespace old_heart
             }
 
 
-
             void start_attack()
             {
                 state = enemy_state.attack;
 
-                Vector2 aim_direction = Vector2.Normalize(target.position - position) * attack_lunge_speed;
-                velocity = aim_direction ;
+                Vector2 aim_direction = Vector2.Normalize(target.position - position) * melee_data.lunge_speed;
+
+                acceleration = Vector2.Zero;
+                velocity = aim_direction;
+
+                current_direction_vector = aim_direction;  // update direction to aim
 
                 attack_timer = attack_duration;
                 hitbox_spawn_timer = hitbox_spawn_time;
 
-                current_direction = get_cardinal_direction(target.position - position);
 
                 animation_player.play(animation_player.data.data[animation_name.attack]);
-                
-
-                direction get_cardinal_direction(Vector2 v)
-                {
-                    float abs_x = MathF.Abs(v.X);
-                    float abs_y = MathF.Abs(v.Y);
-                    if (abs_x > abs_y)
-                        return v.X > 0 ? direction.right : direction.left;
-                    else
-                        return v.Y > 0 ? direction.down : direction.up;
-                }
             }
 
-            void make_attack_projectile()
-            {
-                projectile_melee punch = new projectile_melee(content, position, aim_direction: velocity, travel_distance: attack_hitbox_distance, travel_time: attack_hitbox_duration, damage: attack_damage);
-                punch.owner = this;
-                punch.knockback_speed = attack_knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
-                punch.hit_box_radius = attack_hitbox_radius;
-
-                global.signal.spawn_projectile(punch);
-            }
         }
 
         public override void update_animation(float delta_time)
@@ -271,8 +251,8 @@ namespace old_heart
                 Texture2D placeholder_texture = content.Load<Texture2D>("Placeholder/Player/Idle"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
                 Texture2D placeholder_texture_2 = content.Load<Texture2D>("Placeholder/Player/Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2 ,sprite_size: new Point(32,32)); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
-                idle_animation.sprite_scale = new Vector2(2,2);
+                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(32, 32)); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
+                idle_animation.sprite_scale = new Vector2(2, 2);
                 idle_animation.name = "bacteria idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 

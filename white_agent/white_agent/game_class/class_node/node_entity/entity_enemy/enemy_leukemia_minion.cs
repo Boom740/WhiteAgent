@@ -57,6 +57,7 @@ namespace old_heart
                 if (to_target != Vector2.Zero)
                 {
                     acceleration = Vector2.Normalize(to_target) * speed;
+                    current_direction_vector = acceleration;
                 }
             }
 

@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace old_heart
 {
     public class enemy_leukemia : enemy
     {
         public enum animation_name { idle, walk, dizzy, died }
-        // shared animation key ใช้ร่วมกันทุก enemy type เพื่อให้ base class เลือก animation ถูก
 
 
         // --- radii ---
@@ -16,30 +16,33 @@ namespace old_heart
         public float safe_rad = 250f;
 
 
-
         // --- clone ---
+        public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
+
         public float clone_timer = 5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
-        private float clone_timer_current;
+        private float current_clone_timer;
+        public int minion_limit = 2;
 
         // --- frightened ---
-        public float frightened_speed_multiplier = 2f;
-        private float frightened_exit_timer = 0f;
-        private const float frightened_exit_delay = 1f;
+        public float frightened_exit_timer = 0f;
+        private const float frightened_exit_delay = 0.5f;
 
         // --- patrol (square) ---
         private float patrol_time_wait = 1f;
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5, speed: 600)
+        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , speed: 1200)
         {
             animation_player = new animation_player_leukemia(content_set);
-            clone_timer_current = clone_timer;
+            current_clone_timer = clone_timer;
         }
         public override void Update(GameTime gameTime)
         {
             if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            minion_list.RemoveAll(enemy => enemy.alive == false);     // clear dead minion 
 
             // shield regen ทำงานอิสระจาก state ตามที่ต้องการ
             if (shield == false && state != enemy_state.died)
@@ -85,6 +88,7 @@ namespace old_heart
                     {
                         current_patrol_time = patrol_time_walk;
                         acceleration = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * speed;
+                        current_direction_vector = acceleration;
                     }
                     else
                     {
@@ -134,13 +138,15 @@ namespace old_heart
                     {
                         state = enemy_state.normal;
                         frightened_exit_timer = 0f;
+                        acceleration = Vector2.Zero;   // stop when return to normal state
                     }
                 }
                 else
                 {
                     frightened_exit_timer = 0f; // ยังไม่พ้น safe_rad ให้รีเซ็ต delay
 
-                    acceleration = away_direction * speed * frightened_speed_multiplier;  // เดินหนี แค่ตอนอยู่ในระยะ
+                    acceleration = away_direction * speed ;  // เดินหนี แค่ตอนอยู่ในระยะ
+                    current_direction_vector = acceleration;
                 }
             }
 
@@ -161,12 +167,30 @@ namespace old_heart
 
             void update_clone_timer(float delta_time)
             {
-                clone_timer_current -= delta_time;
-                if (clone_timer_current <= 0f)
+                if (minion_list.Count >= minion_limit)
                 {
-                    clone_timer_current = clone_timer;
-                    global.signal.spawn_entity(new enemy_leukemia_minion(content, position + new Vector2(1, 0)));
-                    global.signal.spawn_entity(new enemy_leukemia_minion(content, position + new Vector2(-1, 0)));
+                    current_clone_timer = clone_timer;  // timer dont move
+                    return;
+                }
+
+                current_clone_timer -= delta_time;
+                if (current_clone_timer <= 0f)
+                {
+                    current_clone_timer = clone_timer;
+
+                    spawn_minion(new Vector2(-1, 0));
+
+                    if (minion_list.Count < minion_limit)
+                    {
+                        spawn_minion(new Vector2(1, 0));
+                    }
+                }
+
+                void spawn_minion(Vector2 offset)
+                {
+                    enemy_leukemia_minion new_minion = new enemy_leukemia_minion(content, position + offset);
+                    global.signal.spawn_entity(new_minion);
+                    minion_list.Add(new_minion);
                 }
             }
         }

@@ -25,7 +25,7 @@ namespace old_heart
 
         public Random random = new Random();
 
-        public enemy(ContentManager content_set, Vector2 position , int max_hp, float speed) : base(content_set, position, max_hp:max_hp, speed:speed)
+        public enemy(ContentManager content_set, Vector2 position , int max_hp, float speed = 600) : base(content_set, position, max_hp:max_hp, speed:speed)
         {
         }
         // ---------------- Damage / Death ----------------
@@ -34,7 +34,8 @@ namespace old_heart
             if (alive == false) { return false; }
             if (shield) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า
 
-            base.take_damage(damage_taken);
+            if (base.take_damage(damage_taken) == false) { return false; }
+
             global.signal.screen_shake(0.4f);
             dizzy_timer_current += 0.3f;
             shield_timer_current += 0.3f;

@@ -1,12 +1,9 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.Input;
 using MonoGame.Extended.Screens;
 using System;
 using System.Diagnostics;
-using System.Net;
 
 namespace old_heart
 {

@@ -29,8 +29,6 @@ namespace old_heart
         public bool alive = true;
         public float time_left = 0;
 
-        //protected bool collision_registered = false; // กันเรียก remove ซ้ำ/เรียกกับ actor ที่ไม่เคย add
-
         //public float ground_friction = 5f;
         public float max_velocity = 1000;
         public projectile(ContentManager content_set, Vector2 position , float time_left = 1)

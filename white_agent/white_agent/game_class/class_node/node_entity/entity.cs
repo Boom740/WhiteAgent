@@ -9,11 +9,13 @@ namespace old_heart
 {
     public abstract class entity : node
     {
-        public enum direction {down,up,left,right}
-
         public ContentManager content;
+
+        public enum direction {down,up,left,right}
         
         public direction current_direction = direction.down;
+        public Vector2 current_direction_vector = new Vector2(0, 1);   // use for set direction
+
         public bool movement_locked = false;
         public bool direction_locked = false;
         public Vector2 knockback_velocity = Vector2.Zero;
@@ -34,7 +36,7 @@ namespace old_heart
         public bool alive = true;
         public int max_hp = 10;
         public int hp = 10;
-        public float speed = 100;
+        public float speed = 100;     // for acceralation
         public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100)
         {
             content = content_set;
@@ -74,28 +76,48 @@ namespace old_heart
                     knockback_velocity = Vector2.Zero;
                 }
             }
+
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));  // update collision position
+
             if (direction_locked == false)
             {
-                update_direction(velocity);
+                update_direction(current_direction_vector);
             }
             update_animation(delta_time);
 
-            void update_direction(Vector2 velocity)
+            void update_direction(Vector2 direction_vector)
             {
-                float abs_x = MathF.Abs(velocity.X); // for calculate direction
-                float abs_y = MathF.Abs(velocity.Y); // for calculate direction
+                float abs_x = MathF.Abs(direction_vector.X); // for calculate direction
+                float abs_y = MathF.Abs(direction_vector.Y); // for calculate direction
 
-                if (abs_x < 0.01f && abs_y < 0.01f)
+                if (abs_x < 0.01f && abs_y < 0.01f) // 0 direction
                 {
-                    //current_direction = direction.down;         // stand still will stay the same direction
-                }else if(abs_x > abs_y)
+                    return;
+                }
+
+                direction new_direction_x = direction_vector.X > 0 ? direction.right : direction.left;
+                direction new_direction_y = direction_vector.Y > 0 ? direction.down : direction.up;
+
+                if (abs_x == abs_y)   // diagonal 
                 {
-                    current_direction = velocity.X > 0 ? direction.right : direction.left;
+                    if (current_direction == new_direction_x || current_direction == new_direction_y)  // same direction as curently
+                    {
+                        return;
+                    }
+                    else       // last direction is not same diagonal
+                    {
+                        current_direction = new_direction_x;
+                    }
+                    return;
+                }
+
+                if(abs_x > abs_y)
+                {
+                    current_direction = new_direction_x;
                 }
                 else
                 {
-                    current_direction = velocity.Y > 0 ? direction.down : direction.up;
+                    current_direction = new_direction_y;
                 }
             }
         }
@@ -103,7 +125,6 @@ namespace old_heart
         {
             animation_player.update(delta_time, current_direction.ToString());
         }
-
 
         public virtual void die()
         {
