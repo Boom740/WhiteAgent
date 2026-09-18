@@ -19,6 +19,7 @@ namespace old_heart
         public enemy_bacteria enemy_2;
         public scene_test_anything(Game1 game) : base(game)
         {
+            global.change_mouse_state(global.mouse_state.combat);
         }
         public override void LoadContent()
         {

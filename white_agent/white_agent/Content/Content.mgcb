@@ -362,6 +362,30 @@
 /processorParam:Quality=Best
 /build:Placeholder/SFX/Throw_Head.wav
 
+#begin Placeholder/Ui/crosshair-000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Placeholder/Ui/crosshair-000.png
+
+#begin Placeholder/Ui/crosshair-002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Placeholder/Ui/crosshair-002.png
+
 #begin Placeholder/Weapons/Head.png
 /importer:TextureImporter
 /processor:TextureProcessor

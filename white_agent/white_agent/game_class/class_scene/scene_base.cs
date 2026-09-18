@@ -19,6 +19,8 @@ namespace old_heart
         {
             this.game = game;
             sprite_batch = game.sprite_batch;
+
+            global.change_mouse_state(global.mouse_state.normal);
         }
 
         public override void LoadContent()

@@ -21,6 +21,7 @@ namespace old_heart
                 level_file += ".json";
             }
             this.level_file = level_file;
+            global.change_mouse_state(global.mouse_state.combat);
         }
         public override void LoadContent()
         {

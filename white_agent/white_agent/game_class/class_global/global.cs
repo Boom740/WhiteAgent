@@ -18,6 +18,12 @@ namespace old_heart
 
         public enum mouse_state { normal, combat, combat_aim }
         public static mouse_state current_mouse_state = mouse_state.normal;
+        public static void change_mouse_state(mouse_state mouse_state_set)
+        {
+            if (mouse_state_set == current_mouse_state) { return; }
+
+            current_mouse_state = mouse_state_set;
+        }
 
         public static int eee = 0;     // for debug only
         private static Random random = new Random();   // use in global only
@@ -57,19 +63,12 @@ namespace old_heart
         {   
             public static mouse_state current_mouse_state = mouse_state.normal;
 
-            public static event Action<mouse_state> signal_change_mouse_state;
             public static event Action<projectile> signal_spawn_projectile;
             public static event Action<world_text> signal_spawn_world_text;
             public static event Action<entity> signal_spawn_entity;
             public static event Action<Enum,Vector2,bool> signal_spawn_particle;
             public static event Action<float> signal_screen_shake;
-            public static void change_mouse_state(mouse_state mouse_state_set)
-            {
-                if (mouse_state_set == current_mouse_state) { return; }
-
-                current_mouse_state = mouse_state_set;
-                signal_change_mouse_state.Invoke(current_mouse_state);
-            }
+            
             public static void spawn_projectile(projectile projectile)
             {
                 signal_spawn_projectile.Invoke(projectile);

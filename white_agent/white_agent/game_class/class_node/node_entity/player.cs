@@ -196,6 +196,9 @@ namespace old_heart
             //  local functions: state handlers (เรียกจาก switch ด้านบน) 
             void update_free_state()
             {
+                check_head_pickup();
+                update_movement_input();
+
                 if (current_buffer_input == bufferable_input.attack)     // attack
                 {
                     if (melee_cooldown_timer <= 0 && next_attack_timer <= 0f)
@@ -217,9 +220,6 @@ namespace old_heart
                     return;
                 }
 
-                check_head_pickup();
-
-                update_movement_input();
                 update_walk_idle_state();
             }
             void update_attack_state()

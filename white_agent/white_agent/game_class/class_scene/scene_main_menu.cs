@@ -13,7 +13,6 @@ namespace old_heart
         public ui_button reset_button;
         public scene_main_menu(Game1 game) : base(game)
         {
-            game = game;
         }
         public override void LoadContent()
         {

@@ -1,33 +1,68 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
 using MonoGame.Extended.Screens;
+using System;
+using System.IO;
 
 namespace old_heart
 {
-    public class scene_gameplay : base_screen       // will be uselater                not use now
+    public class scene_gameplay : base_screen  // copy of test level for now
     {
-        private SpriteFont font;
+        public ui_text test_text;
+        public ui_text test_text_2;
 
-        public string current_map_file;
+        public string level_file;
 
-        public scene_gameplay(Game1 game) : base(game)
+        public scene_gameplay(Game1 game, string level_file) : base(game)
         {
+            if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+            {
+                level_file += ".json";
+            }
+            this.level_file = level_file;
+
+            global.change_mouse_state(global.mouse_state.combat);
         }
         public override void LoadContent()
         {
             base.LoadContent();
 
-            font = Content.Load<SpriteFont>("assets/font/test_font");
+            test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
+            test_text.text_color = Color.DarkRed;
+            test_text.text_scale = new Vector2(0.5f, 0.5f);
+            game_manager.add_ui(test_text);
 
-            game_manager.level_manager.set_level_file("test_1.json",game.run_data_manager);
+            test_text_2 = new ui_text("[V] to main_menu [B] to level_editor \nChess Battle Advanced", new Vector2(10, 490));
+            test_text_2.text_color = Color.DarkRed;
+            test_text_2.text_scale = new Vector2(0.5f, 0.5f);
+            game_manager.add_ui(test_text_2);
+
+            game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
         }
         public override void Update(GameTime gameTime)
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
                 ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
+            }
+            if (global.input.keyboard_state.WasKeyPressed(Keys.B))
+            {
+                ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
+            }
+
+
+            test_text.text_string = $"scene_gameplay scene fps [{(1 / gameTime.ElapsedGameTime.TotalSeconds):F2}]" +
+            $"\ncurrent_level_file : {Path.GetFileName(game_manager.level_manager.current_level_file)}" +
+            $"\ngame state : {game_manager.current_game_state}" +
+            $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
+
+            if (game_manager.player != null)
+            {
+                test_text.text_string += $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
+                $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
+                $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
+                $"\nplayer state : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state}]";
             }
 
 

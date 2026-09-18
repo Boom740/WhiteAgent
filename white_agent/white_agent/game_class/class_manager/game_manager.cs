@@ -40,7 +40,7 @@ namespace old_heart
         {
             this.content = content;
 
-            ui_manager = new ui_manager();
+            ui_manager = new ui_manager(content);
             map_manager = new map_manager();
             entity_manager = new entity_manager();
             camera_manager = new camera_manager(window,graphics_device);
@@ -147,11 +147,11 @@ namespace old_heart
             //map_manager.update(gameTime);  map don't update lol
 
             entity_manager.update(gameTime);
-            camera_manager.update(gameTime, player);
             particle_manager.update(gameTime);
             projectile_manager.update(gameTime);
             world_text_manager.update(gameTime);
             collision_manager.update(gameTime);
+            camera_manager.update(gameTime, player);
 
             clear_inactive_node();
             spawn_queue_signal();
