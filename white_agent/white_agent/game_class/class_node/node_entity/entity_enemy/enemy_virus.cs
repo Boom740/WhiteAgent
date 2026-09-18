@@ -2,13 +2,12 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics;
 
 namespace old_heart
 {
-    public class enemy_bacteria : enemy
+    public class enemy_virus : enemy
     {
-        public enum animation_name { idle, walk, dizzy, died, attack }
+        public enum animation_name { idle, walk, dizzy, died , attack}
         // shared animation key ใช้ร่วมกันทุก enemy type เพื่อให้ base class เลือก animation ถูก
 
 
@@ -36,9 +35,9 @@ namespace old_heart
         public float attack_knockback_speed = 100;
 
         public int attack_damage = 1;
-        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5, speed: 100)
+        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5, speed: 100)
         {
-            animation_player = new animation_player_bacteria(content_set);
+            animation_player = new animation_player_virus(content_set);
         }
 
         public override void Update(GameTime gameTime)
@@ -156,7 +155,7 @@ namespace old_heart
                 {
                     // do nothing
                 }
-                else if (hitbox_spawn_timer <= 0)
+                else if (hitbox_spawn_timer <= 0)  
                 {
                     hitbox_spawn_timer = -1;
                     make_attack_projectile();
@@ -193,7 +192,7 @@ namespace old_heart
                 state = enemy_state.attack;
 
                 Vector2 aim_direction = Vector2.Normalize(target.position - position) * attack_lunge_speed;
-                velocity = aim_direction;
+                velocity = aim_direction ;
 
                 attack_timer = attack_duration;
                 hitbox_spawn_timer = hitbox_spawn_time;
@@ -201,7 +200,7 @@ namespace old_heart
                 current_direction = get_cardinal_direction(target.position - position);
 
                 animation_player.play(animation_player.data.data[animation_name.attack]);
-
+                
 
                 direction get_cardinal_direction(Vector2 v)
                 {
@@ -247,11 +246,11 @@ namespace old_heart
             base.update_animation(delta_time);
         }
 
-        public class animation_player_bacteria : animation_player_base
+        public class animation_player_virus : animation_player_base
         {
             public static readonly animation_data animation_data = new animation_data();
 
-            public animation_player_bacteria(ContentManager content) : base()
+            public animation_player_virus(ContentManager content) : base()
             {
                 if (animation_data.data.Count == 0)
                 {
