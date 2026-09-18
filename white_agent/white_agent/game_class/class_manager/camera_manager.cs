@@ -15,7 +15,7 @@ namespace old_heart
 
         public BoxingViewportAdapter viewport_adapter;
 
-        private float truama;
+        private float truama = 0;
         private float trauma_decay = 2f;
         private float max_Offset = 10f;
         private Random rng_shake = new Random();
@@ -28,7 +28,7 @@ namespace old_heart
         }
         public void shake_screen(float amount = 0.4f) // chess battle advanced
         {
-            truama = MathHelper.Clamp(truama + amount, 0f, 1f);
+            truama = MathHelper.Max(truama, amount);
         }
         public void update(GameTime gameTime ,player player)
         {

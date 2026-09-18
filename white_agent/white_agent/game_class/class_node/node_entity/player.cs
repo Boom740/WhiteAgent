@@ -58,9 +58,11 @@ namespace old_heart
         public animation_player_player animation_player_2;
 
         // --- dash (Space) ---
-        public float dash_speed = 1600f;
-        public float dash_timeout = 2f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
-        private float dash_timer = 0f;
+        public float dash_speed = 1000f;
+        public float dash_duration = 0.2f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
+        public float dash_timer = 0f;
+        public float dash_cooldown = 2f;
+        public float dash_cooldown_timer = 0f;
 
         private float default_max_velocity;
 
@@ -180,6 +182,11 @@ namespace old_heart
                     next_attack_timer -= delta_time;
                 }
 
+                if (dash_cooldown_timer > 0)
+                {
+                    dash_cooldown_timer -= delta_time;
+                }
+
                 if (i_frame_time > 0f)  // i frame
                 {
                     i_frame_time -= delta_time;
@@ -201,16 +208,13 @@ namespace old_heart
                 {
                     current_combat_state = combat_state.aim;
                     animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
-                }// --- space: dash เข้าหาหัว ---
-                else if (current_buffer_input == bufferable_input.dash && has_head == false && thrown_head != null)
+                    return;
+                }
+                else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
                 {
-                    if (thrown_head.is_resting == true)
-                    {
-                        current_buffer_input = bufferable_input.none;
-                        current_combat_state = combat_state.dash;
-                        max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
-                    }
-
+                    current_buffer_input = bufferable_input.none;
+                    start_dash();
+                    return;
                 }
 
                 check_head_pickup();
@@ -285,7 +289,7 @@ namespace old_heart
                     input_direction = Vector2.Normalize(input_direction) * effective_speed;
                 }
 
-                if (current_combat_state != combat_state.aim)
+                if (current_combat_state != combat_state.aim  &&  input_direction != Vector2.Zero)
                 {
                     current_direction_vector = input_direction;
                 }
@@ -352,35 +356,40 @@ namespace old_heart
 
             void update_dash()
             {
-                dash_timer += delta_time;
-                if (dash_timer >= dash_timeout)  // dash too long
+                dash_timer -= delta_time;
+                if (dash_timer <= 0)  // dash end
                 {
-                    cancel_dash();
+                    end_dash();
                 }
 
-
-                if (thrown_head != null)   // have trown head
+                Vector2 dash_direction = current_direction_vector;
+                if (dash_direction == Vector2.Zero)
                 {
-                    Vector2 to_head = thrown_head.position - position;
+                    dash_direction = new  Vector2(0, 1);
+                    Debug.WriteLine("error player update dash function dash_direction = vector 0,0  ");
+                }
+                velocity = Vector2.Normalize(dash_direction) * dash_speed; // ความเร็วคงที่พุ่งตรงเข้าหาหัว
+                acceleration = Vector2.Zero;
 
-                    velocity = Vector2.Normalize(to_head) * dash_speed; // ความเร็วคงที่พุ่งตรงเข้าหาหัว
-                    acceleration = Vector2.Zero;
-                }
-                else
-                {
-                    reattach_head(); // for somereason dont have head projectile in dash state
-                }
 
                 check_head_pickup();
             }
+            void start_dash()
+            {
+                current_combat_state = combat_state.dash;
+                dash_timer = dash_duration;
+                max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
-            void cancel_dash()
+                i_frame_time += dash_duration;
+            }
+            void end_dash()
             {
                 current_combat_state = combat_state.none;
                 max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
                 velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนยกเลิก กันพุ่งเลยไปแรงๆ ก่อนกลับสู่ physics ปกติ
-                dash_timer = 0f;
+                dash_cooldown_timer = dash_cooldown;
             }
+
             void reattach_head()
             {
                 if (thrown_head != null)
@@ -394,7 +403,6 @@ namespace old_heart
                 }
 
                 has_head = true;
-                cancel_dash();
             }
 
             void check_head_pickup()
@@ -429,7 +437,9 @@ namespace old_heart
                 case combat_state.attack:
                     //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
-
+                case combat_state.dash:
+                    //  already play animaiton in punch function   dont play any other animation while attacking
+                    break;
                 case combat_state.aim:   // body layer: เล่นท่า headless ตลอดช่วง aim
                     switch (current_state)
                     {
@@ -469,6 +479,8 @@ namespace old_heart
             if (i_frame_time > 0) { return false; }
 
             if (base.take_damage(damage_taken) == false) { return false; }
+
+            global.signal.screen_shake(0.4f);
 
             if (alive) // still alive        still alive...
             {
