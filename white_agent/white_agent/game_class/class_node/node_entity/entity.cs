@@ -17,7 +17,6 @@ namespace old_heart
         public Vector2 current_direction_vector = new Vector2(0, 1);   // use for set direction
 
         public bool movement_locked = false;
-        public bool direction_locked = false;
         public Vector2 knockback_velocity = Vector2.Zero;
         public float knockback_friction = 8f;
 
@@ -79,10 +78,8 @@ namespace old_heart
 
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));  // update collision position
 
-            if (direction_locked == false)
-            {
-                update_direction(current_direction_vector);
-            }
+            
+            update_direction(current_direction_vector);
             update_animation(delta_time);
 
             void update_direction(Vector2 direction_vector)

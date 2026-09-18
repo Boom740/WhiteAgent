@@ -194,6 +194,7 @@ namespace old_heart
                     if (melee_cooldown_timer <= 0 && next_attack_timer <= 0f)
                     {
                         start_attack();
+                        return;
                     }
                 }
                 else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
@@ -229,13 +230,12 @@ namespace old_heart
             {
 
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
-                current_direction = get_cardinal_direction(to_cursor);
-                direction_locked = true;
+
+                current_direction_vector = to_cursor;
 
                 if ((mouse_state.IsButtonDown(MouseButton.Right) && has_head) == false)
                 {
                     current_combat_state = combat_state.none;
-                    direction_locked = false;
                 }
                 else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
                 {
@@ -261,8 +261,6 @@ namespace old_heart
 
             void update_movement_input()
             {
-                current_direction_vector = Vector2.Zero;
-
                 if (keyboard_state.IsKeyDown(Keys.D))
                 {
                     input_direction += new Vector2(1, 0);
@@ -287,7 +285,10 @@ namespace old_heart
                     input_direction = Vector2.Normalize(input_direction) * effective_speed;
                 }
 
-                current_direction_vector += input_direction;
+                if (current_combat_state != combat_state.aim)
+                {
+                    current_direction_vector = input_direction;
+                }
             }
 
             void update_walk_idle_state()
@@ -316,8 +317,7 @@ namespace old_heart
                 Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
 
                 velocity = aim_direction * hit_data.lunge_speed;
-
-                current_direction = get_cardinal_direction(aim_direction); // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
+                current_direction_vector = aim_direction; // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
                 hit_data.spawn_melee_projectile(content, this, position, aim_direction);
 
@@ -332,15 +332,7 @@ namespace old_heart
                    : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
             }
 
-            direction get_cardinal_direction(Vector2 v)
-            {
-                float abs_x = MathF.Abs(v.X);
-                float abs_y = MathF.Abs(v.Y);
-                if (abs_x > abs_y)
-                    return v.X > 0 ? direction.right : direction.left;
-                else
-                    return v.Y > 0 ? direction.down : direction.up;
-            }
+            
 
             // ---------------- Head throw / dash / pickup ----------------
 
