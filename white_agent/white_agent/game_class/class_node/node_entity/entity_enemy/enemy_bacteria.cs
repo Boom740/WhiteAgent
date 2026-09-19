@@ -253,26 +253,26 @@ namespace old_heart
 
                 animation idle_animation = new animation(placeholder_texture, frame_per_sec: 4 ,sprite_size: new Point(80,80)); // (ใส่ , sprite_size: placeholder_sprite_size ไว้หลัง frame per sec  ถ้าใส่ beast ได้แล้ว)
                 idle_animation.sprite_scale = new Vector2(1,1);
-                idle_animation.sprite_origin = new Vector2(40, 67);
+                idle_animation.sprite_origin = new Vector2(40, 64);
                 idle_animation.name = "bacteria idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
                 animation walk_animation = new animation(placeholder_texture_2, frame_per_sec: 8, sprite_size: new Point(80, 80));
                 walk_animation.sprite_scale = new Vector2(1, 1);
-                walk_animation.sprite_origin = new Vector2(40, 67);
+                walk_animation.sprite_origin = new Vector2(40, 64);
                 walk_animation.name = "bacteria walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
                 animation dizzy_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(80, 80));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
-                dizzy_animation.sprite_origin = new Vector2(40, 67);
+                dizzy_animation.sprite_origin = new Vector2(40, 64);
                 dizzy_animation.name = "bacteria dizzy";
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/enemy/sprite_bacteria_attack");
                 animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 12, sprite_size: new Point(80, 80));
 
-                punch_animation.sprite_origin = new Vector2(40, 67);
+                punch_animation.sprite_origin = new Vector2(40, 64);
                 punch_animation.name = "bacteria attack";
                 animation_data.data.Add(animation_name.attack, punch_animation);
             }
