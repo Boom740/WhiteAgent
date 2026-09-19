@@ -5,7 +5,6 @@ using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.ViewportAdapters;
 using System;
-using System.Diagnostics;
 
 namespace old_heart
 {
@@ -51,7 +50,9 @@ namespace old_heart
                 Vector2 target_position = (player.position*(1-follow_mouse_ratio) + global.input.scaled_mouse_world_position * (follow_mouse_ratio));
                 Vector2 current_center = camera.Position + camera.Origin;
 
-                camera.LookAt(Vector2.Lerp(current_center, target_position, tween_smooting));
+                target_position = Vector2.Lerp(current_center, target_position, tween_smooting);
+                //target_position = new Vector2((int)(target_position.X + (target_position.X >= 0 ? 0.5f : -0.5f)), (int)(target_position.Y + (target_position.Y >= 0 ? 0.5f : -0.5f)));   // round camara position
+                camera.LookAt(target_position);
 
             }
 

@@ -127,11 +127,13 @@ namespace old_heart
 
                 animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
                 idle_animation.sprite_scale = new Vector2(0.6f, 0.6f);
+                idle_animation.sprite_origin = new Vector2(32, 57);
                 idle_animation.name = "minion idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
                 animation walk_animation = new animation(placeholder_texture_walk, frame_per_sec: 10, sprite_size: new Point(64, 64));
                 walk_animation.sprite_scale = new Vector2(0.6f, 0.6f);
+                walk_animation.sprite_origin = new Vector2(32, 57);
                 walk_animation.name = "minion walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 

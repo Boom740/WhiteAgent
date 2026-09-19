@@ -48,7 +48,7 @@ namespace old_heart
 
             enemy test_enemy;
 
-            test_enemy = new enemy_bacteria(Content, position: new Vector2(400, -300)); 
+            test_enemy = new enemy_virus(Content, position: new Vector2(400, -300)); 
             game_manager.add_entity(test_enemy);
 
             enemy_2 = new enemy_bacteria(Content, position: new Vector2(400, 300)); 
