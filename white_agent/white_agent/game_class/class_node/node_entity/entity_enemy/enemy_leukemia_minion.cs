@@ -122,16 +122,16 @@ namespace old_heart
 
             public void load(ContentManager content)
             {
-                Texture2D placeholder_texture = content.Load<Texture2D>("Placeholder/Player/Idle");
-                Texture2D placeholder_texture_walk = content.Load<Texture2D>("Placeholder/Player/Walk");
+                Texture2D placeholder_texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
+                Texture2D placeholder_texture_walk = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_walk");
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(32, 32));
-                idle_animation.sprite_scale = new Vector2(1.6f, 1.6f);
+                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
+                idle_animation.sprite_scale = new Vector2(0.6f, 0.6f);
                 idle_animation.name = "minion idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                animation walk_animation = new animation(placeholder_texture_walk, frame_per_sec: 10, sprite_size: new Point(32, 32));
-                walk_animation.sprite_scale = new Vector2(1.6f, 1.6f);
+                animation walk_animation = new animation(placeholder_texture_walk, frame_per_sec: 10, sprite_size: new Point(64, 64));
+                walk_animation.sprite_scale = new Vector2(0.6f, 0.6f);
                 walk_animation.name = "minion walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 

@@ -176,6 +176,66 @@
 /processorParam:TextureFormat=Color
 /build:assets/image/player/sprite_player_walk.png;assets/image/player/sprite_player_walk
 
+#begin assets/image/enemy/sprite_leukemia_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/enemy/sprite_leukemia_idle.png;assets/image/enemy/sprite_leukemia_idle
+
+#begin assets/image/enemy/sprite_leukemia_walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/enemy/sprite_leukemia_walk.png;assets/image/enemy/sprite_leukemia_walk
+
+#begin assets/image/enemy/sprite_bacteria_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/enemy/sprite_bacteria_idle.png;assets/image/enemy/sprite_bacteria_idle
+
+#begin assets/image/enemy/sprite_bacteria_walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/enemy/sprite_bacteria_walk.png;assets/image/enemy/sprite_bacteria_walk
+
+#begin assets/image/enemy/sprite_bacteria_attack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/enemy/sprite_bacteria_attack.png;assets/image/enemy/sprite_bacteria_attack
+
 #begin assets/image/ui/crosshair_000.png
 /importer:TextureImporter
 /processor:TextureProcessor
