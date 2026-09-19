@@ -11,7 +11,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\assets\font\File.spritefont" />
+    <None Remove="Content\assets\font\whiteagent.spritefont" />
     <None Remove="Content\level\test_1.json" />
+    <None Remove="Content\whiteagent.spritefont" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

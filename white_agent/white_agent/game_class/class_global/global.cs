@@ -96,7 +96,7 @@ namespace old_heart
             public static Vector2 default_font_scale = new Vector2(1, 1);
             public static void load(ContentManager content)
             {
-                default_font = content.Load<SpriteFont>("assets/font/test_font");
+                default_font = content.Load<SpriteFont>("assets/font/font_game_02");
                 default_font.Spacing = 1f;
             }
         }
