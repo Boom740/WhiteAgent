@@ -52,7 +52,7 @@ namespace old_heart
                     {
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level].ToString();
 
-                        ScreenManager.ReplaceScreen(new test_level(game, next_level_name), fade_transition);
+                        ScreenManager.ReplaceScreen(new scene_gameplay(game, next_level_name), fade_transition);
                         game_manager.player.i_frame_time = 100f; // cant take damage when move to next level
                     }
 
@@ -65,7 +65,7 @@ namespace old_heart
                 {
                     player_respawned = true;
                     game.run_data_manager.respawn_left--;
-                    ScreenManager.ReplaceScreen(new test_level(game, game_manager.level_manager.current_level_file), fade_transition);
+                    ScreenManager.ReplaceScreen(new scene_gameplay(game, game_manager.level_manager.current_level_file), fade_transition);
 
                     Debug.WriteLine("scene base respawn logic respawn_left : " + game.run_data_manager.respawn_left);
                 }

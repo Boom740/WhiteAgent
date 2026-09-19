@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -80,7 +81,8 @@ namespace old_heart
 
             if (other is player)
             {
-                other.take_damage(contact_damage, damage_dealer: this);
+                bool deal_damage = other.take_damage(contact_damage, damage_dealer: this);
+                if (deal_damage == false) { return; }
                 die();
             }
         }

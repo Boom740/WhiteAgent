@@ -52,7 +52,7 @@ namespace old_heart
             {
                 if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // still has next level
                 {
-                    ScreenManager.ReplaceScreen(new test_level(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
+                    ScreenManager.ReplaceScreen(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
                 }
             }
             else if (reset_button.clicked)

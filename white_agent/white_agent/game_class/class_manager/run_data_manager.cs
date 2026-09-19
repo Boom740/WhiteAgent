@@ -12,7 +12,7 @@ namespace old_heart
 
         public int max_hp = 1;
         public int hp_left = 1;
-        public int respawn_left = 2;
+        public int respawn_left = 3;
 
         public float shock_wave_radius = 18;
 

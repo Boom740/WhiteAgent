@@ -499,12 +499,11 @@ namespace old_heart
 
                 drop_head(head_drop_direction);
 
-                return false;
+                return true;
             }
 
             if (base.take_damage(damage_taken) == false) { return false; }
 
-            if (alive == false) { return false; }
 
             global.signal.screen_shake(0.4f);
             run_data.hp_left = hp;

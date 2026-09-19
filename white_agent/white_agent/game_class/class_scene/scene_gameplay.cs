@@ -11,6 +11,7 @@ namespace old_heart
     {
         public ui_text test_text;
         public ui_text test_text_2;
+        public image live_image;
 
         public string level_file;
 
@@ -28,15 +29,18 @@ namespace old_heart
         {
             base.LoadContent();
 
-            test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
-            test_text.text_color = Color.DarkRed;
-            test_text.text_scale = new Vector2(0.5f, 0.5f);
+            test_text = new ui_text("0", new Vector2(80, 10));
+            test_text.text_color = Color.Black;
+            test_text.text_scale = new Vector2(1f, 1f);
             game_manager.add_ui(test_text);
 
-            test_text_2 = new ui_text("[V] to main_menu [B] to level_editor \nChess Battle Advanced", new Vector2(10, 490));
-            test_text_2.text_color = Color.DarkRed;
+            test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
+            test_text_2.text_color = Color.Black;
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
+
+            live_image = new image(game.Content, new Vector2(20, 10),"Placeholder/Weapons/Head");
+            game_manager.add_ui(live_image);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
         }
@@ -52,17 +56,16 @@ namespace old_heart
             }
 
 
-            test_text.text_string = $"scene_gameplay scene fps [{(1 / gameTime.ElapsedGameTime.TotalSeconds):F2}]" +
-            $"\ncurrent_level_file : {Path.GetFileName(game_manager.level_manager.current_level_file)}" +
-            $"\ngame state : {game_manager.current_game_state}" +
-            $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}";
 
             if (game_manager.player != null)
             {
-                test_text.text_string += $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
-                $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
-                $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
-                $"\nplayer state : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state}]";
+                test_text.text_string = $""+
+                $"{game_manager.player.run_data.respawn_left}" +
+                $"";
+                test_text_2.text_string = $"" +
+                $"Dash cooldown : {Math.Max(0, game_manager.player.dash_cooldown_timer )  :F2}" +
+                $"                                                                      V to return to title" +
+                $"";
             }
 
 
