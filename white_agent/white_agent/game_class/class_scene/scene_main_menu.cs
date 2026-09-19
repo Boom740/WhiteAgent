@@ -18,7 +18,7 @@ namespace old_heart
         {
             base.LoadContent();
 
-            test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor",  new Vector2(10, 5));
+            test_text = new ui_text("Chess Battle Advanced\nclick play to play\nEsc to quit\nV test thing scene\nB level editor\nF full screen",  new Vector2(10, 5));
             game_manager.add_ui(test_text);
 
             test_text_2 = new ui_text("replace in update ", new Vector2(10, 500));
@@ -63,8 +63,15 @@ namespace old_heart
             {
                 ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
             }
+            else if (global.input.keyboard_state.WasKeyPressed(Keys.F))
+            {
+                game._graphics.ToggleFullScreen();
+            }
 
-            test_text_2.text_string = $"level_cleared : {game.run_data_manager.cleared_level} / {game.run_data_manager.level_list.Count}";
+            test_text_2.text_string = $"level_cleared : {game.run_data_manager.cleared_level} / {game.run_data_manager.level_list.Count}" +
+            $"\nlife left : {game.run_data_manager.respawn_left}" +
+            $"";
+                
 
             update_all(gameTime);
         }
