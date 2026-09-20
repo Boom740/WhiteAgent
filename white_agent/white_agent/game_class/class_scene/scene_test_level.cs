@@ -29,12 +29,12 @@ namespace old_heart
 
             test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
             test_text.text_color = Color.DarkRed;
-            test_text.text_scale = new Vector2(0.5f, 0.5f);
+            test_text.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text); 
 
             test_text_2 = new ui_text("[V] to main_menu [B] to level_editor \nChess Battle Advanced",  new Vector2(10, 490));
             test_text_2.text_color = Color.DarkRed;
-            test_text_2.text_scale = new Vector2(0.5f, 0.5f);
+            test_text_2.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text_2);
 
             game_manager.level_manager.set_level_file(level_file,game.run_data_manager);

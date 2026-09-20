@@ -44,7 +44,7 @@ namespace old_heart
         {
             base.Initialize();
 
-            global.load(Content);
+            global.load(Content,GraphicsDevice);
             
             screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
             run_data_manager = new run_data_manager(this);

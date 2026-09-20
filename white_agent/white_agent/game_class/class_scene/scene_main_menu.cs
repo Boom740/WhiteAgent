@@ -22,7 +22,7 @@ namespace old_heart
             game_manager.add_ui(test_text);
 
             test_text_2 = new ui_text("replace in update ", new Vector2(10, 500));
-            test_text_2.text_scale = new Vector2(0.5f, 0.5f);
+            test_text_2.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text_2);
 
             start_button = new ui_button(Content, new Rectangle(100, 300, 200, 100));
@@ -30,14 +30,14 @@ namespace old_heart
 
             ui_text test_text_local;
 
-            test_text_local = new ui_text("PLAY", new Vector2(130, 320));
+            test_text_local = new ui_text("PLAY", new Vector2(130, 330));
             game_manager.add_ui(test_text_local);
 
             reset_button = new ui_button(Content, new Rectangle(700, 400, 150, 50));
             game_manager.add_ui(reset_button);
 
             test_text_local = new ui_text("reset data", new Vector2(730, 420));
-            test_text_local.text_scale = new Vector2(0.5f, 0.5f);
+            test_text_local.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text_local);
 
         }

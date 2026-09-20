@@ -1,18 +1,19 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Graphics.PackedVector;
+using MonoGame.Extended.BitmapFonts;
 using System.Diagnostics;
 
 namespace old_heart
 {
     public class world_text : node
     {
-        public SpriteFont text_font = global.theme.default_font;
+        public BitmapFont text_font = global.theme.default_font_2;
         public Color text_start_color = Color.White;
         public Color text_color = Color.White;
         public string text_string;
         public Vector2 text_size;
-        public Vector2 text_scale = new Vector2(0.5f, 0.5f);
+        public Vector2 text_scale = global.theme.default_font_scale_2;
         public float rotation = 0;
         public Vector2 origin = new Vector2(0, 0);
 

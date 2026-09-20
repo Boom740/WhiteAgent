@@ -27,7 +27,7 @@ namespace old_heart
 
             test_text = new ui_text("this text get replace in update function anyway",  new Vector2(10, 5));
             test_text.text_color = Color.DarkRed;
-            test_text.text_scale = new Vector2(0.5f, 0.5f);
+            test_text.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text);
             test_text2 = new ui_text("press P to view hitbox testttttttt  Chess Battle Advanced\nE shake\nF player take 1 damage\nT spawn test projectile\nZ spawn test particle",  new Vector2(25f, 0f));
             test_text2.text_color = Color.DarkOrange;

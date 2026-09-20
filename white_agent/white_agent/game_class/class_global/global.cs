@@ -4,11 +4,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended;
+using MonoGame.Extended.BitmapFonts;
 using MonoGame.Extended.Input;
 using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 
 namespace old_heart
 { 
@@ -92,12 +94,14 @@ namespace old_heart
             
         }
         public static class theme {
-            public static SpriteFont default_font;
-            public static Vector2 default_font_scale = new Vector2(1, 1);
-            public static void load(ContentManager content)
+            public static BitmapFont default_font_1;
+            public static BitmapFont default_font_2;
+            public static Vector2 default_font_scale_1 = new Vector2(0.5f , 0.5f);
+            public static Vector2 default_font_scale_2 = new Vector2(0.5f , 0.5f);
+            public static void load(ContentManager content , GraphicsDevice graphics_device)
             {
-                default_font = content.Load<SpriteFont>("assets/font/font_game_02");
-                default_font.Spacing = 1f;
+                default_font_1 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/font_agent_01.fnt"), "font_1");
+                default_font_2 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/font_agent_02.fnt"),"font_2");
             }
         }
         public static class sound {
@@ -204,9 +208,9 @@ namespace old_heart
                 MediaPlayer.Volume = volume_song * volume_master;
             }
         }
-        public static void load(ContentManager content)
+        public static void load(ContentManager content,GraphicsDevice graphics_device)
         {
-            theme.load(content);
+            theme.load(content, graphics_device);
             sound.load(content);
         }
     }
