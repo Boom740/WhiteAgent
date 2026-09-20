@@ -25,7 +25,7 @@ namespace old_heart
         {
             base.LoadContent();
 
-            game_manager.level_manager.set_level_file("test_1.json", game.run_data_manager);         // exact JSON file name
+            game_manager.level_manager.set_level_file("level_0_tutorial.json", game.run_data_manager);         // exact JSON file name
             game_manager.pause = true;
 
             test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));

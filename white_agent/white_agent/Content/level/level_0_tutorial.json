@@ -1,0 +1,143 @@
+{
+    "name": "level_0_tutorial.json",
+    "level_object_list": [
+        {
+            "type": "player",
+            "position_x": 480,
+            "position_y": 550,
+            "data": {}
+        },
+        {
+            "type": "enemy_leukemia",
+            "position_x": 480,
+            "position_y": 240,
+            "data": {}
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 75,
+            "position_y": 0,
+            "data": {
+                "size_x": "100",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 45,
+            "data": {
+                "size_x": "1000",
+                "size_y": "100"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 785,
+            "position_y": 0,
+            "data": {
+                "size_x": "100",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 630,
+            "data": {
+                "size_x": "1000",
+                "size_y": "100"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 0,
+            "data": {
+                "size_x": "64",
+                "size_y": "380"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 0,
+            "data": {
+                "size_x": "128",
+                "size_y": "320"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 445,
+            "data": {
+                "size_x": "64",
+                "size_y": "320"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 500,
+            "data": {
+                "size_x": "128",
+                "size_y": "320"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 575,
+            "data": {
+                "size_x": "245",
+                "size_y": "320"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 660,
+            "position_y": 0,
+            "data": {
+                "size_x": "200",
+                "size_y": "395"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 600,
+            "position_y": 575,
+            "data": {
+                "size_x": "200",
+                "size_y": "300"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 660,
+            "position_y": 500,
+            "data": {
+                "size_x": "200",
+                "size_y": "300"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 725,
+            "position_y": 446,
+            "data": {
+                "size_x": "200",
+                "size_y": "300"
+            }
+        },
+        {
+            "type": "image",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "texture": "assets/image/levels/texture_level_tutorial",
+                "high": "False"
+            }
+        }
+    ]
+}

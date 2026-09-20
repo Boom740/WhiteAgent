@@ -8,7 +8,7 @@ namespace old_heart
     {
         public Texture2D texture;
         public Vector2 position;
-        public Vector2 scale = new Vector2(2,2);
+        public Vector2 scale = new Vector2(1,1);
         public image(ContentManager content, Vector2 position, string file_path)
         {
             this.position = position;

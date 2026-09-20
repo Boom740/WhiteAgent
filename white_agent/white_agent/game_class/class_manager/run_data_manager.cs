@@ -37,8 +37,7 @@ namespace old_heart
             //level_list.AddRange(level_set_1);
             //level_list.Add(level_boss_1);
 
-            level_list.Add("test_1");
-            level_list.Add("test_2");
+            level_list.Add("level_0_tutorial");
 
             foreach (string level in level_list)
             {
