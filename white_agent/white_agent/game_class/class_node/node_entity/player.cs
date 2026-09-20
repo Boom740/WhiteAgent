@@ -66,6 +66,7 @@ namespace old_heart
         // --- dash (Space) ---
         public float dash_speed = 1000f;
         public float dash_duration = 0.2f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
+        public float dash_i_frame_duration = 0.3f;
         public float dash_timer = 0f;
         public float dash_cooldown = 2f;
         public float dash_cooldown_timer = 0f;
@@ -386,7 +387,7 @@ namespace old_heart
                 dash_timer = dash_duration;
                 max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
-                i_frame_time += dash_duration;
+                i_frame_time += dash_i_frame_duration;
             }
             void end_dash()
             {
@@ -548,15 +549,16 @@ namespace old_heart
 
             run_data.hp_left = max_hp; // reset run_data hp to max
         }
-        private float get_blink_alpha()
-        {
-            if (i_frame_time <= 0f) return 1f;
-            bool visible_phase = ((int)(i_frame_time / blink_interval)) % 2 == 0;
-            return visible_phase ? 1f : blink_min_alpha;
-        }
+
         public override void Draw(SpriteBatch sprite_batch)
         {
-            float alpha = get_blink_alpha();
+            float alpha = 1f;
+            if (i_frame_time > 0f)
+            {
+                bool visible_phase = ((int)(i_frame_time / blink_interval)) % 2 == 0;
+                alpha = visible_phase ? 1f : blink_min_alpha;
+            }
+
             animation_player.draw(sprite_batch, position, alpha);
 
             //base.Draw(sprite_batch);
@@ -565,6 +567,10 @@ namespace old_heart
             {
                 animation_player_2.draw(sprite_batch, position, alpha);
             }
+
+            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
+            Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;
+            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f * alpha), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
