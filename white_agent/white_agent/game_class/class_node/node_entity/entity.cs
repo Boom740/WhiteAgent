@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -156,11 +157,16 @@ namespace old_heart
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
-            animation_player.draw(sprite_batch, position);
-            
-            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width ,( hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
-            Vector2 shadow_origin = new Vector2(shadow_texture.Width,shadow_texture.Height)    /2;   // center
-            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1,1,1,0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
+            this.Draw(sprite_batch, 1f);
+        }
+
+        public virtual void Draw(SpriteBatch sprite_batch, float alpha)
+        {
+            animation_player.draw(sprite_batch, position, alpha);
+
+            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
+            Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
+            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
         public void apply_knockback(Vector2 direction, float speed)
         {

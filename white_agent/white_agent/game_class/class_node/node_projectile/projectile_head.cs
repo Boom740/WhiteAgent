@@ -123,13 +123,8 @@ namespace old_heart
                 alpha = visible_phase ? 1f : blink_min_alpha;
             }
 
-            float layer_depth = (position.Y + 50000f) / 100000f;
-            Color color = Color.White * alpha;
-            sprite_batch.Draw(texture, position, null, color, rotation, sprite_origin, sprite_scale, SpriteEffects.None, layer_depth);
+            base.Draw(sprite_batch,alpha);
 
-            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
-            Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;
-            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f * alpha), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
     }
 }
