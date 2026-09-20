@@ -30,12 +30,12 @@ namespace old_heart
             base.LoadContent();
 
             test_text = new ui_text("0", new Vector2(80, 10));
-            test_text.text_color = Color.Black;
+            //test_text.text_color = Color.Black;
             test_text.text_scale = new Vector2(1f, 1f);
             game_manager.add_ui(test_text);
 
             test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
-            test_text_2.text_color = Color.Black;
+            //test_text_2.text_color = Color.Black;
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
 
