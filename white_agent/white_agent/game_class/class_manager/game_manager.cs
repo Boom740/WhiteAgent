@@ -250,7 +250,7 @@ namespace old_heart
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , transformMatrix: camera_matrix);    // low layer
 
             RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
-            sprite_batch.FillRectangle(blue_backgound_rectangle, Color.CornflowerBlue);  // blue_background
+            sprite_batch.FillRectangle(blue_backgound_rectangle, Color.Black);  // blue_background
 
             map_manager.draw_low(sprite_batch);
             particle_manager.draw_low(sprite_batch);

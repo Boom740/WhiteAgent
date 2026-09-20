@@ -7,7 +7,7 @@ namespace old_heart
     public class ui_text : node
     {
         public BitmapFont text_font = global.theme.default_font_2;
-        public Color text_color = Color.Black;
+        public Color text_color = Color.White;
         public Vector2 position;
         public string text_string;
         public Vector2 text_scale = global.theme.default_font_scale_2;
