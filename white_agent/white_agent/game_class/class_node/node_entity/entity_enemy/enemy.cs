@@ -26,10 +26,11 @@ namespace old_heart
 
         public Random random = new Random();
 
-        public enemy(ContentManager content_set, Vector2 position , int max_hp, float speed = 600) : base(content_set, position, max_hp:max_hp, speed:speed)
+        public enemy(ContentManager content_set, Vector2 position, int max_hp, float speed = 600 , float hit_box_radius = 15) : base(content_set, position, max_hp: max_hp, speed: speed,hit_box_radius:hit_box_radius)
         {
             animation_player_shield = new animation_player_shield(content);
         }
+
         // ---------------- Damage / Death ----------------
         public virtual bool take_damage(int damage_taken, node damage_dealer = null)
         {
@@ -76,7 +77,7 @@ namespace old_heart
 
             if(shield == true)
             {
-                animation_player_shield.draw(sprite_batch, position + new Vector2(0,0.01f) , alpha : 0.5f); // draw on top of enemy sprite
+                animation_player_shield.draw(sprite_batch, position + new Vector2(0,0.01f) , alpha : 0.5f ,   new Vector2(hit_box_radius/15f)  * 1.3f ); // draw on top of enemy sprite
             }
         }
         
@@ -92,7 +93,6 @@ namespace old_heart
             {
                 load(content);
             }
-
             base.data = animation_data;
 
             default_animation = animation_data.data[animation_name.normal];
@@ -100,10 +100,10 @@ namespace old_heart
         }
         public void load(ContentManager content)
         {
-            Texture2D normal_texture = content.Load<Texture2D>("assets/image/other/white_pixel");
+            Texture2D normal_texture = content.Load<Texture2D>("assets/image/other/sprite_shield");
             animation normal_animation = new animation(normal_texture, frame_per_sec: 8);
             normal_animation.name = "enemy shield normal";
-            normal_animation.sprite_scale = new Vector2(1, 1);
+            normal_animation.sprite_origin = new Vector2(normal_animation.sprite_size.X / 2f, (normal_animation.sprite_size.Y * 4f) / 5f);
             animation_data.data.Add(animation_name.normal, normal_animation);
 
         }

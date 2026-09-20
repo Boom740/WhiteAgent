@@ -25,7 +25,7 @@ namespace old_heart
         public Texture2D shadow_texture;
 
         public collision_shape collision;
-        public float hit_box_radius = 10; // for collision // hit_box is circle (BoundingCircle2D)
+        public float hit_box_radius; // for collision // hit_box is circle (BoundingCircle2D)
 
         public float ground_friction = 10f;
         public float max_velocity = 400;
@@ -37,13 +37,14 @@ namespace old_heart
         public int max_hp = 10;
         public int hp = 10;
         public float speed = 100;     // for acceralation
-        public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100)
+        public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100,float hit_box_radius = 15)
         {
             content = content_set;
             this.max_hp = max_hp;
             this.hp = max_hp;
             this.position = position;
             this.speed = speed;
+            this.hit_box_radius = hit_box_radius;
 
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
             collision.owner = this;

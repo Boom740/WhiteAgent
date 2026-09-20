@@ -30,11 +30,9 @@ namespace old_heart
 
         public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 100f, range: 40f, hitbox_lifetime: 0.3f, knockback_speed: 100f);
 
-        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 )
+        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , hit_box_radius: 15)
         {
             animation_player = new animation_player_bacteria(content_set);
-
-            hit_box_radius = 15;
         }
 
         public override void Update(GameTime gameTime)

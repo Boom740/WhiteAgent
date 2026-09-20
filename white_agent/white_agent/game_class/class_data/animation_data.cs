@@ -154,7 +154,7 @@ namespace old_heart
         {
            current_flash_time = flash_time;
         }
-        public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f)
+        public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f , Vector2? draw_scale = null)
         {
             Texture2D texture = current_animation.sprite_sheet;
             Rectangle source_rectangle;
@@ -167,6 +167,10 @@ namespace old_heart
                 source_rectangle = new Rectangle(current_animation.sprite_size.X * current_animation_index_position.X, current_animation.sprite_size.Y * current_animation_index_position.Y, current_animation.sprite_size.X, current_animation.sprite_size.Y);
             }
             Vector2 sprite_scale = current_animation.sprite_scale;
+            if (draw_scale.HasValue )
+            {
+                sprite_scale *= draw_scale.Value;
+            }
             Vector2 sprite_origin = current_animation.sprite_origin;
             float layer_depth = (position.Y + 50000f) / 100000f;
             Color color = Color.White;

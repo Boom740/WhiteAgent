@@ -67,6 +67,7 @@ namespace old_heart
         public float dash_speed = 1000f;
         public float dash_duration = 0.2f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
         public float dash_i_frame_duration = 0.3f;
+        public float dash_i_frame_visual_timer = 0f; // player has i_frame but not blink
         public float dash_timer = 0f;
         public float dash_cooldown = 2f;
         public float dash_cooldown_timer = 0f;
@@ -198,6 +199,10 @@ namespace old_heart
                 if (i_frame_time > 0f)  // i frame
                 {
                     i_frame_time -= delta_time;
+                }
+                if (dash_i_frame_visual_timer > 0f)  //  // player has i_frame but not blink
+                {
+                    dash_i_frame_visual_timer -= delta_time;
                 }
             }
 
@@ -388,6 +393,7 @@ namespace old_heart
                 max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
                 i_frame_time += dash_i_frame_duration;
+                dash_i_frame_visual_timer += dash_i_frame_duration;
             }
             void end_dash()
             {
@@ -552,25 +558,29 @@ namespace old_heart
 
         public override void Draw(SpriteBatch sprite_batch)
         {
-            float alpha = 1f;
+            float blink_alpha = 1f;
             if (i_frame_time > 0f)
             {
                 bool visible_phase = ((int)(i_frame_time / blink_interval)) % 2 == 0;
-                alpha = visible_phase ? 1f : blink_min_alpha;
+                blink_alpha = visible_phase ? 1f : blink_min_alpha;
             }
 
             if (current_combat_state == combat_state.die)
             {
                 base.Draw(sprite_batch, 1);   // not blinking when die
             }
+            else if (dash_i_frame_visual_timer > 0)  // still has i_frame from dash
+            {
+                base.Draw(sprite_batch, blink_min_alpha);
+            }
             else
             {
-                base.Draw(sprite_batch, alpha);
+                base.Draw(sprite_batch, blink_alpha);
             }
             
             if (current_combat_state == combat_state.aim)
             {
-                animation_player_2.draw(sprite_batch, position, alpha);
+                animation_player_2.draw(sprite_batch, position, blink_alpha);
                 
             }
         }

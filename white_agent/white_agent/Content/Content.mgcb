@@ -105,6 +105,18 @@
 /processorParam:TextureFormat=Color
 /build:assets/image/other/sprite_shadow.png;assets/image/other/sprite_shadow
 
+#begin assets/image/other/sprite_shield.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/other/sprite_shield.png;assets/image/other/sprite_shield
+
 #begin assets/image/other/white_pixel.png
 /importer:TextureImporter
 /processor:TextureProcessor
