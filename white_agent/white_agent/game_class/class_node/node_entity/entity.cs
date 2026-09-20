@@ -47,7 +47,7 @@ namespace old_heart
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
             collision.owner = this;
 
-            shadow_texture = content.Load<Texture2D>("assets/image/other/white_pixel");
+            shadow_texture = content.Load<Texture2D>("assets/image/other/sprite_shadow");
         }
         public override void Update(GameTime gameTime)
         {
@@ -158,8 +158,9 @@ namespace old_heart
         {
             animation_player.draw(sprite_batch, position);
             
-            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width ,( hit_box_radius ) / shadow_texture.Height);
-            sprite_batch.Draw(shadow_texture, position - (shadow_scale /2), null, Color.White, 0,Vector2.Zero, shadow_scale, SpriteEffects.None, 0);
+            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width ,( hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
+            Vector2 shadow_origin = new Vector2(shadow_texture.Width,shadow_texture.Height)    /2;   // center
+            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1,1,1,0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
         public void apply_knockback(Vector2 direction, float speed)
         {

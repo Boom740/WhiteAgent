@@ -14,7 +14,7 @@ namespace old_heart
         public int hp_left = 1;
         public int respawn_left = 3;
 
-        public float shock_wave_radius = 18;
+        public float shock_wave_radius = 20;
 
         public List<string> level_list = new List<string>();
         public int cleared_level = 0;

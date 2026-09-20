@@ -23,7 +23,6 @@ namespace old_heart
         public float sprite_height = 25;
         public float initial_speed = 1000;
 
-        public float shock_wave_size;
         public bool shock_wave_enable = true;
         public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null)
             : base(content_set,  position : position , owner : owner) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
@@ -52,7 +51,7 @@ namespace old_heart
             height_ratio = 1f - height_ratio;
             height_ratio = height_ratio * height_ratio;
             height_ratio = 1f - height_ratio;
-            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + (height_ratio * sprite_height) );
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (4f/5f) + (height_ratio * sprite_height) );
 
             if (velocity.Length() < stop_velocity_threshold)
             {
@@ -64,7 +63,7 @@ namespace old_heart
         {
             velocity = Vector2.Zero;
             is_resting = true;
-            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f / 4f)); // position คือกึ่งกลาง X, 3/4 Y
+            sprite_origin = new Vector2(texture.Width / 2, texture.Height * (4f / 5f)); // position คือกึ่งกลาง X, 3/4 Y
         }
         public void spawn_shock_wave()
         {

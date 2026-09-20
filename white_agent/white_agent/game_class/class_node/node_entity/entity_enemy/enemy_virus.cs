@@ -33,6 +33,8 @@ namespace old_heart
         public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5)
         {
             animation_player = new animation_player_virus(content_set);
+
+            hit_box_radius = 15;
         }
 
         public override void Update(GameTime gameTime)

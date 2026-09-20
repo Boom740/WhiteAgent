@@ -78,7 +78,7 @@ namespace old_heart
                 Debug.WriteLine("change global volume_sound_effect : " + global.setting.volume_sound_effect);
             }
 
-            test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                                      V to go back to title bruh" +
+            test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                               V to go back to title bruh" +
             $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
             $"\ngame state : {game_manager.current_game_state}" +
             $"";
