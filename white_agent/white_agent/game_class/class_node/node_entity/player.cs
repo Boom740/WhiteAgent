@@ -29,6 +29,10 @@ namespace old_heart
         // --- combat: melee ---
         public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
+        // --- I-frame---
+        public float i_frame_duration = 3f; // ระยะเวลา i-frame ทั้งหมด ใช้ทั้งคุม i_frame_time และ pickup_lock_timer ของหัว ให้ sync กัน
+        public float blink_interval = 0.1f;
+        public float blink_min_alpha = 0.2f;
 
         public List<melee_data> combo_hits = new List<melee_data>
          {
@@ -413,6 +417,10 @@ namespace old_heart
                 {
                     return;
                 }
+                if (head_projectile.pickup_lock_timer > 0f)  // ยังอยู่ในช่วงล็อก เก็บไม่ได้
+                {
+                    return;
+                }
 
                 Vector2 to_head = head_projectile.position - position;
                 if (to_head.Length() <= pickup_radius  && head_projectile.is_resting)   // head in pickup_radius
@@ -499,13 +507,14 @@ namespace old_heart
 
                 drop_head(head_drop_direction);
 
+                i_frame_time = i_frame_duration; // เริ่ม i-frame ทันทีที่หัวหลุด
                 global.signal.screen_shake(0.6f);
                 return true;
             }
 
             if (base.take_damage(damage_taken) == false) { return false; }
 
-
+            i_frame_time = i_frame_duration; // เริ่ม i-frame ตอนโดนดาเมจจริง
             global.signal.screen_shake(0.6f);
             run_data.hp_left = hp;
 
@@ -524,6 +533,7 @@ namespace old_heart
                 head.velocity = Vector2.Normalize(head_drop_direction) * head_drop_speed ;
                 head.has_bounced = true;
                 head.shock_wave_enable = false;
+                head.pickup_lock_timer = i_frame_duration; // ห้ามเก็บตลอดช่วง i-frame
 
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
@@ -538,12 +548,22 @@ namespace old_heart
 
             run_data.hp_left = max_hp; // reset run_data hp to max
         }
+        private float get_blink_alpha()
+        {
+            if (i_frame_time <= 0f) return 1f;
+            bool visible_phase = ((int)(i_frame_time / blink_interval)) % 2 == 0;
+            return visible_phase ? 1f : blink_min_alpha;
+        }
         public override void Draw(SpriteBatch sprite_batch)
         {
-            base.Draw(sprite_batch);
+            float alpha = get_blink_alpha();
+            animation_player.draw(sprite_batch, position, alpha);
+
+            //base.Draw(sprite_batch);
+
             if (current_combat_state == combat_state.aim)
             {
-                animation_player_2.draw(sprite_batch, position);
+                animation_player_2.draw(sprite_batch, position, alpha);
             }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only

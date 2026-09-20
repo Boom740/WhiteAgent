@@ -24,6 +24,10 @@ namespace old_heart
         public float initial_speed = 1000;
 
         public bool shock_wave_enable = true;
+
+        public float pickup_lock_timer = 0f; // ห้ามเก็บหัว
+        public float blink_interval = 0.1f;
+        public float blink_min_alpha = 0.2f;
         public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null)
             : base(content_set,  position : position , owner : owner) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
         {
@@ -37,10 +41,13 @@ namespace old_heart
         public override void Update(GameTime gameTime)
         {
             if (alive == false) return;
+            float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (pickup_lock_timer > 0f)
+            {
+                pickup_lock_timer -= delta_time; // ต้องอยู่ก่อน is_resting check ไม่งั้นค้างไม่นับตอนหัวหยุดนิ่งแล้ว
+            }
             if (is_resting) return;
             initial_speed = Math.Max(velocity.Length(), initial_speed);
-
-            float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             velocity -= velocity * drag * delta_time;
             position += velocity * delta_time;
@@ -105,6 +112,20 @@ namespace old_heart
 
             bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector));
             spawn_shock_wave();
+        }
+
+        public override void Draw(SpriteBatch sprite_batch)
+        {
+            float alpha = 1f;
+            if (pickup_lock_timer > 0f)
+            {
+                bool visible_phase = ((int)(pickup_lock_timer / blink_interval)) % 2 == 0;
+                alpha = visible_phase ? 1f : blink_min_alpha;
+            }
+
+            float layer_depth = (position.Y + 50000f) / 100000f;
+            Color color = Color.White * alpha;
+            sprite_batch.Draw(texture, position, null, color, rotation, sprite_origin, sprite_scale, SpriteEffects.None, layer_depth);
         }
     }
 }

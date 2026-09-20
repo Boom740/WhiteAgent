@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Graphics.PackedVector;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -153,7 +154,7 @@ namespace old_heart
         {
            current_flash_time = flash_time;
         }
-        public void draw(SpriteBatch sprite_batch, Vector2 position)
+        public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f)
         {
             Texture2D texture = current_animation.sprite_sheet;
             Rectangle source_rectangle;
@@ -173,6 +174,7 @@ namespace old_heart
             {
                 color = new Color(255,0,0,255); // flash red
             }
+            color *= alpha;
             sprite_batch.Draw(texture, position, source_rectangle, color, 0,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
         }
 
