@@ -34,11 +34,14 @@ namespace old_heart
 
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
 
-                    bool deal_damage = target_enemy.take_damage(damage,damage_dealer: this);
-                    if (deal_damage)
-                    {
-                        target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                    }
+                    target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักเสมอ ไม่ว่าจะมี shield กันดาเมจอยู่หรือไม่
+                    target_enemy.take_damage(damage, damage_dealer: this); // ดาเมจยังถูก shield บล็อกตามปกติถ้ามี shield อยู่
+
+                    /* bool deal_damage = target_enemy.take_damage(damage,damage_dealer: this);
+                     if (deal_damage)
+                     {
+                         target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                     }*/
                 }
             }
             else if (owner is enemy)

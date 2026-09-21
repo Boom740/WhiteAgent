@@ -169,7 +169,7 @@ namespace old_heart
             Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
             sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
-        public void apply_knockback(Vector2 direction, float speed)
+        public virtual void apply_knockback(Vector2 direction, float speed)
         {
             knockback_velocity = direction * speed;
         }

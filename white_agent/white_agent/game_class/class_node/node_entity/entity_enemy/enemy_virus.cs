@@ -33,6 +33,7 @@ namespace old_heart
         public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 ,hit_box_radius: 15)
         {
             animation_player = new animation_player_virus(content_set);
+            can_be_dizzied = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -203,7 +204,11 @@ namespace old_heart
             }
 
         }
-
+        
+        public override void apply_knockback(Vector2 direction, float speed)
+        {
+            // ทำให้ virus ไม่โดน knockback 
+        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)

@@ -23,6 +23,7 @@ namespace old_heart
         // --- dizzy ---
         public float dizzy_timer = 3f;
         public float dizzy_timer_current = 0f;
+        public bool can_be_dizzied = true;
 
         public Random random = new Random();
 
@@ -51,17 +52,28 @@ namespace old_heart
         // ---------------- Dizzy ----------------
         public virtual void enter_dizzy()
         {
-            if (state != enemy_state.dizzy && state != enemy_state.died)
+
+            if (state == enemy_state.died) return;
+
+            if (shield)
+            {
+                shield = false;
+                shield_timer_current = shield_timer;
+                animation_player.flash();
+            }
+
+            if (can_be_dizzied == false) return;
+
+            if (state != enemy_state.dizzy )
             {
 
                 state = enemy_state.dizzy;
-                shield = false;
+               
                 dizzy_timer_current = dizzy_timer;
-                shield_timer_current = shield_timer;
+                
                 velocity = Vector2.Zero;
                 acceleration = Vector2.Zero;
 
-                animation_player.flash();
             }
         }
         
