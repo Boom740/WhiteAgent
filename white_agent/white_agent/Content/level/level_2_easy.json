@@ -1,0 +1,197 @@
+{
+    "name": "level_2_easy.json",
+    "level_object_list": [
+        {
+            "type": "player",
+            "position_x": 250,
+            "position_y": 230,
+            "data": {}
+        },
+        {
+            "type": "enemy_leukemia",
+            "position_x": 270,
+            "position_y": 440,
+            "data": {}
+        },
+        {
+            "type": "enemy_bacteria",
+            "position_x": 650,
+            "position_y": 520,
+            "data": {}
+        },
+        {
+            "type": "enemy_leukemia",
+            "position_x": 850,
+            "position_y": 730,
+            "data": {}
+        },
+        {
+            "type": "enemy_bacteria",
+            "position_x": 390,
+            "position_y": 850,
+            "data": {}
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "size_x": "175",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "size_x": "1000",
+                "size_y": "155"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 785,
+            "position_y": 330,
+            "data": {
+                "size_x": "1000",
+                "size_y": "340"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 900,
+            "data": {
+                "size_x": "1000",
+                "size_y": "135"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 915,
+            "position_y": 0,
+            "data": {
+                "size_x": "160",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 850,
+            "position_y": 270,
+            "data": {
+                "size_x": "60",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 485,
+            "position_y": 472,
+            "data": {
+                "size_x": "60",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 850,
+            "position_y": 780,
+            "data": {
+                "size_x": "60",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 623,
+            "position_y": 160,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 360,
+            "position_y": 393,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 623,
+            "position_y": 615,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 175,
+            "position_y": 845,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 160,
+            "position_y": 270,
+            "data": {
+                "size_x": "520",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 160,
+            "position_y": 270,
+            "data": {
+                "size_x": "140",
+                "size_y": "110"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 370,
+            "position_y": 270,
+            "data": {
+                "size_x": "310",
+                "size_y": "110"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 295,
+            "position_y": 675,
+            "data": {
+                "size_x": "505",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 360,
+            "position_y": 675,
+            "data": {
+                "size_x": "320",
+                "size_y": "110"
+            }
+        },
+        {
+            "type": "image",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "texture": "assets/image/levels/texture_level_easy_02",
+                "high": "False"
+            }
+        }
+    ]
+}

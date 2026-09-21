@@ -38,6 +38,10 @@ namespace old_heart
             //level_list.Add(level_boss_1);
 
             level_list.Add("level_0_tutorial");
+            level_list.Add("level_1_easy");
+            level_list.Add("level_2_easy");
+            level_list.Add("level_3_easy");
+            level_list.Add("level_4_easy");
 
             foreach (string level in level_list)
             {

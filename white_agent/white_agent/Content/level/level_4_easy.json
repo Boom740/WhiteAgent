@@ -1,0 +1,182 @@
+{
+    "name": "level_4_easy.json",
+    "level_object_list": [
+        {
+            "type": "player",
+            "position_x": 265,
+            "position_y": 230,
+            "data": {}
+        },
+        {
+            "type": "enemy_leukemia",
+            "position_x": 840,
+            "position_y": 700,
+            "data": {}
+        },
+        {
+            "type": "enemy_bacteria",
+            "position_x": 265,
+            "position_y": 460,
+            "data": {}
+        },
+        {
+            "type": "enemy_bacteria",
+            "position_x": 510,
+            "position_y": 767,
+            "data": {}
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "size_x": "150",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "size_x": "1000",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 0,
+            "position_y": 855,
+            "data": {
+                "size_x": "1000",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 380,
+            "position_y": 0,
+            "data": {
+                "size_x": "1000",
+                "size_y": "625"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 890,
+            "position_y": 0,
+            "data": {
+                "size_x": "100",
+                "size_y": "1000"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 312,
+            "position_y": 505,
+            "data": {
+                "size_x": "60",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 583,
+            "position_y": 630,
+            "data": {
+                "size_x": "60",
+                "size_y": "115"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 155,
+            "position_y": 120,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 315,
+            "position_y": 120,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 235,
+            "position_y": 295,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 150,
+            "position_y": 505,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 235,
+            "position_y": 713,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 380,
+            "position_y": 630,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 380,
+            "position_y": 800,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 585,
+            "position_y": 800,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 735,
+            "position_y": 715,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "image",
+            "position_x": 0,
+            "position_y": 0,
+            "data": {
+                "texture": "assets/image/levels/texture_level_easy_04",
+                "high": "False"
+            }
+        }
+    ]
+}

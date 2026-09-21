@@ -33,6 +33,12 @@ namespace old_heart
             string file_directory = AppDomain.CurrentDomain.BaseDirectory;
             string game_root_file = Path.GetFullPath(Path.Combine(file_directory, "..", "..", ".."));  // get true game sorce code file not temporary
             string level_folder = Path.Combine(game_root_file, "Content", "level");
+
+            if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+            {
+                level_file += ".json";
+            }
+
             current_level_file = Path.Combine(level_folder, level_file);
 
             load_level(run_data);
@@ -64,6 +70,10 @@ namespace old_heart
                 else if(entity is enemy_leukemia)
                 {
                     entity_type = "enemy_leukemia";
+                }
+                else if (entity is enemy_bacteria)
+                {
+                    entity_type = "enemy_bacteria";
                 }
                 else
                 {
@@ -146,6 +156,13 @@ namespace old_heart
 
                     game_manager.add_entity(new enemy_leukemia(game_manager.content, new Vector2(position_x, position_y)));
                 }
+                else if (level_object.type == "enemy_bacteria")
+                {
+                    float position_x = level_object.position_x;
+                    float position_y = level_object.position_y;
+
+                    game_manager.add_entity(new enemy_bacteria(game_manager.content, new Vector2(position_x, position_y)));
+                }
                 else if (level_object.type == "wall_collision_rectangle")
                 {
                     float position_x = level_object.position_x;
@@ -179,7 +196,7 @@ namespace old_heart
 
         public class level_data
         {
-            public string name { get; set; }
+            public string name { get; set; }   // not actually use
             public List<level_object> level_object_list { get; set; } = new List<level_object>();
             public level_data(string name)
             {

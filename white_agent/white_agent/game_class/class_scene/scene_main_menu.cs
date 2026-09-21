@@ -44,7 +44,10 @@ namespace old_heart
 
         public override void Update(GameTime gameTime)
         {
-            if (global.input.keyboard_state.WasKeyPressed(Keys.V))
+            if (global.input.keyboard_state.WasKeyPressed(Keys.Escape)){
+                game.Exit();
+            }
+            else if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
                 ScreenManager.ReplaceScreen(new scene_test_anything(game), fade_transition);
             }

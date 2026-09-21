@@ -49,16 +49,28 @@ namespace old_heart
             public static void update_scaled_mouse(BoxingViewportAdapter viewport , OrthographicCamera camera) // call from camera manager
             {
                 scaled_mouse_position = viewport.PointToScreen(mouse_state.Position);
-                scaled_mouse_world_position = camera.ScreenToWorld(mouse_state.Position.ToVector2());
 
-                if (scaled_mouse_position.X >= 0 && scaled_mouse_position.X <= render_size.X   && scaled_mouse_position.Y >= 0 && scaled_mouse_position.Y <= render_size.Y)
+                bool mouse_in_screen_x = scaled_mouse_position.X >= 0 && scaled_mouse_position.X <= render_size.X;
+                bool mouse_in_screen_y = scaled_mouse_position.Y >= 0 && scaled_mouse_position.Y <= render_size.Y;
+
+                if (mouse_in_screen_x && mouse_in_screen_y)
                 {
                     mouse_in_screen = true;
+                    scaled_mouse_world_position = camera.ScreenToWorld(mouse_state.Position.ToVector2());
                 }
                 else
                 {
                     mouse_in_screen = false;
+                    //if (mouse_in_screen_x)
+                    //{
+                    //    scaled_mouse_world_position.X = camera.ScreenToWorld(mouse_state.Position.ToVector2()).X;
+                    //}
+                    //else if(mouse_in_screen_y)
+                    //{
+                    //    scaled_mouse_world_position.Y = camera.ScreenToWorld(mouse_state.Position.ToVector2()).Y;
+                    //}
                 }
+
             }
         }
         public static class signal

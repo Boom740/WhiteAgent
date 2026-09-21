@@ -11,6 +11,7 @@ namespace old_heart
     {
         public ui_text test_text;
         public ui_text test_text_2;
+        public ui_text test_text_3;
         public image live_image;
 
         public string level_file;
@@ -39,6 +40,12 @@ namespace old_heart
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text_2);
 
+            test_text_3 = new ui_text(" [Esc]\nPause", new Vector2(550, 250));
+            test_text_3.text_scale = new Vector2(2f, 2f);
+            test_text_3.text_color *= 0.5f; // transparent
+            test_text_3.visible = false;
+            game_manager.add_ui(test_text_3);
+
             live_image = new image(game.Content, new Vector2(20, 10),"Placeholder/Weapons/Head");
             game_manager.add_ui(live_image);
 
@@ -46,7 +53,19 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
-            if (global.input.keyboard_state.WasKeyPressed(Keys.V))
+            if (global.input.keyboard_state.WasKeyPressed(Keys.Escape)){
+                if (game_manager.pause == true)
+                {
+                    game_manager.pause = false;
+                    test_text_3.visible = false;
+                }
+                else
+                {
+                    game_manager.pause = true;
+                    test_text_3.visible = true;
+                }
+            }
+            else if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
                 ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
             }

@@ -60,10 +60,6 @@ namespace old_heart
         {
             global.input.update_input_state();
 
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || global.input.keyboard_state.IsKeyDown(Keys.Escape))
-                Exit();
-
-
             base.Update(gameTime);
         }
         protected override void UnloadContent()

@@ -4,8 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
-using System.Buffers;
-using System.Diagnostics;
 
 namespace old_heart
 {
@@ -28,8 +26,11 @@ namespace old_heart
         public float pickup_lock_timer = 0f; // ห้ามเก็บหัว
         public float blink_interval = 0.1f;
         public float blink_min_alpha = 0.2f;
+
+
+        public Random random = new Random();
         public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null)
-            : base(content_set,  position : position , owner : owner) // time_left ไม่ได้ใช้จริงเพราะ override Update ทั้งหมด
+            : base(content_set,  position : position , owner : owner , time_left:0) 
         {
             this.run_data = run_data;
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
@@ -42,11 +43,23 @@ namespace old_heart
         {
             if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             if (pickup_lock_timer > 0f)
             {
                 pickup_lock_timer -= delta_time; // ต้องอยู่ก่อน is_resting check ไม่งั้นค้างไม่นับตอนหัวหยุดนิ่งแล้ว
             }
-            if (is_resting) return;
+
+            if (is_resting)
+            {
+                collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));
+                return;
+            }
+            time_left += delta_time;
+            if (time_left >= 10)
+            {
+                resting();
+            }
+
             initial_speed = Math.Max(velocity.Length(), initial_speed);
 
             velocity -= velocity * drag * delta_time;
@@ -64,7 +77,6 @@ namespace old_heart
             {
                 resting();
             }
-
         }
         public void resting()
         {
@@ -110,7 +122,8 @@ namespace old_heart
         {
             if (is_resting) return;
 
-            bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector));
+            Vector2 random_vector = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * 0.1f * time_left;
+            bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector + random_vector));
             spawn_shock_wave();
         }
 

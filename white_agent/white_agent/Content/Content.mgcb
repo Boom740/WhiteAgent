@@ -81,6 +81,54 @@
 /processorParam:TextureFormat=Color
 /build:assets/image/enemy/sprite_leukemia_walk.png;assets/image/enemy/sprite_leukemia_walk
 
+#begin assets/image/levels/texture_level_easy_01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/levels/texture_level_easy_01.png;assets/image/levels/texture_level_easy_01
+
+#begin assets/image/levels/texture_level_easy_02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/levels/texture_level_easy_02.png;assets/image/levels/texture_level_easy_02
+
+#begin assets/image/levels/texture_level_easy_03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/levels/texture_level_easy_03.png;assets/image/levels/texture_level_easy_03
+
+#begin assets/image/levels/texture_level_easy_04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/levels/texture_level_easy_04.png;assets/image/levels/texture_level_easy_04
+
 #begin assets/image/levels/texture_level_tutorial.png
 /importer:TextureImporter
 /processor:TextureProcessor
