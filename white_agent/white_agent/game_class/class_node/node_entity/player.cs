@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using System;
 using System.Collections.Generic;
@@ -582,6 +583,19 @@ namespace old_heart
             {
                 animation_player_2.draw(sprite_batch, position, blink_alpha);
                 
+            }
+            if (dash_cooldown_timer > 0)
+            {
+                int dash_cooldown_offset_height = -50;
+                Point dash_cooldown_rectangle_size = new Point(60,5);
+                float rectangle_ratio = (dash_cooldown_timer / dash_cooldown);
+
+                rectangle_ratio = rectangle_ratio * rectangle_ratio * rectangle_ratio * rectangle_ratio;     // ease out quad  
+
+                Point rectagle_top_left = new Point((int)(position.X - (dash_cooldown_rectangle_size.X / 2 * rectangle_ratio)), (int)(position.Y + dash_cooldown_offset_height));
+                Rectangle dash_cooldown_rectangle = new Rectangle(rectagle_top_left,new Point((int)(dash_cooldown_rectangle_size.X * rectangle_ratio), dash_cooldown_rectangle_size.Y));
+
+                sprite_batch.FillRectangle(dash_cooldown_rectangle, Color.White, 1);
             }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
