@@ -38,7 +38,7 @@ namespace old_heart
             test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
             //test_text_2.text_color = Color.Black;
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
-            game_manager.add_ui(test_text_2);
+            //game_manager.add_ui(test_text_2);
 
             test_text_3 = new ui_text(" [Esc]\nPause", new Vector2(550, 250));
             test_text_3.text_scale = new Vector2(2f, 2f);
@@ -80,10 +80,6 @@ namespace old_heart
             {
                 test_text.text_string = $""+
                 $"{game_manager.player.run_data.respawn_left}" +
-                $"";
-                test_text_2.text_string = $"" +
-                $"Dash cooldown : {Math.Max(0, game_manager.player.dash_cooldown_timer )  :F2}" +
-                $"                                                                      V to return to title" +
                 $"";
             }
 

@@ -157,6 +157,9 @@ namespace old_heart
                 {
                     hitbox_spawn_timer = -1;
                     melee_data.spawn_melee_projectile(content,this,position,current_direction_vector);
+
+                    acceleration = Vector2.Zero;
+                    velocity = current_direction_vector;
                 }
                 else
                 {
@@ -189,9 +192,6 @@ namespace old_heart
                 state = enemy_state.attack;
 
                 Vector2 aim_direction = Vector2.Normalize(target.position - position) * melee_data.lunge_speed;
-
-                acceleration = Vector2.Zero;
-                velocity = aim_direction;
 
                 current_direction_vector = aim_direction;  // update direction to aim
 
