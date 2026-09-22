@@ -7,7 +7,6 @@ using MonoGame.Extended.Input;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection.Metadata.Ecma335; // Required for Keyboard input
 
 namespace old_heart
 {

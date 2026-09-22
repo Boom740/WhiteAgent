@@ -55,16 +55,22 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\assets\font\font_agent_01.fnt">
+    <None Update="Content\assets\font\lukee_bold.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\assets\font\font_agent_01.png">
+    <None Update="Content\assets\font\lukee_bold.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\assets\font\font_agent_02.fnt">
+    <None Update="Content\assets\font\lukee_light.fnt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Content\assets\font\font_agent_02.png">
+    <None Update="Content\assets\font\lukee_light.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\assets\font\lukee_small.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Content\assets\font\lukee_small.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

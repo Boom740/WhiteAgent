@@ -106,14 +106,19 @@ namespace old_heart
             
         }
         public static class theme {
+
             public static BitmapFont default_font_1;
             public static BitmapFont default_font_2;
+            public static BitmapFont default_font_3;
+
             public static Vector2 default_font_scale_1 = new Vector2(0.5f , 0.5f);
             public static Vector2 default_font_scale_2 = new Vector2(0.5f , 0.5f);
+            public static Vector2 default_font_scale_3 = new Vector2(0.5f, 0.5f);
             public static void load(ContentManager content , GraphicsDevice graphics_device)
             {
-                default_font_1 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/font_agent_01.fnt"), "font_1");
-                default_font_2 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/font_agent_02.fnt"),"font_2");
+                default_font_1 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_bold.fnt"), "font_1");
+                default_font_2 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_light.fnt"),"font_2");
+                default_font_3 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_small.fnt"), "font_3");
             }
         }
         public static class sound {
