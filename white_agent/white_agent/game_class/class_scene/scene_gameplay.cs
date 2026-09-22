@@ -30,9 +30,9 @@ namespace old_heart
         {
             base.LoadContent();
 
-            test_text = new ui_text("0", new Vector2(80, 10));
+            test_text = new ui_text("x 0", new Vector2(80, 20));
             //test_text.text_color = Color.Black;
-            test_text.text_scale = new Vector2(1f, 1f);
+            test_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text);
 
             test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
@@ -46,7 +46,7 @@ namespace old_heart
             test_text_3.visible = false;
             game_manager.add_ui(test_text_3);
 
-            live_image = new image(game.Content, new Vector2(20, 10),"Placeholder/Weapons/Head");
+            live_image = new image(game.Content, new Vector2(20, 20),"assets/image/ui/ui_life");
             game_manager.add_ui(live_image);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
@@ -78,7 +78,7 @@ namespace old_heart
 
             if (game_manager.player != null)
             {
-                test_text.text_string = $""+
+                test_text.text_string = $"x " +
                 $"{game_manager.player.run_data.respawn_left}" +
                 $"";
             }

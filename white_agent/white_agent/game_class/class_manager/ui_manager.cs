@@ -17,8 +17,8 @@ namespace old_heart
 
         public ui_manager(ContentManager content)
         {
-            cursor_normal = content.Load<Texture2D>("Placeholder/Ui/crosshair-000");
-            cursor_combat = content.Load<Texture2D>("Placeholder/Ui/crosshair-002");
+            cursor_normal = content.Load<Texture2D>("assets/image/ui/ui_cursor");
+            cursor_combat = content.Load<Texture2D>("assets/image/ui/ui_crosshair");
         }
         public void add(node node)
         {

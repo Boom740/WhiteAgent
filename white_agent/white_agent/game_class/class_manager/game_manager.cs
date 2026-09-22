@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
@@ -144,7 +145,10 @@ namespace old_heart
             {
                 current_game_state = game_state.level_clear;
             }
-
+            if (global.input.keyboard_state.WasKeyPressed(Keys.O))   // debug
+            {
+                current_game_state = game_state.level_clear;
+            }
             
             //map_manager.update(gameTime);  map don't update lol
 

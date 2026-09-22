@@ -333,6 +333,18 @@
 /processorParam:TextureFormat=Color
 /build:assets/image/ui/crosshair_000.png;assets/image/ui/crosshair_000
 
+#begin assets/image/ui/crosshair_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/crosshair_000.png;assets/image/ui/crosshair_000
+
 #begin assets/image/ui/crosshair_002.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -344,6 +356,66 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
+
+#begin assets/image/ui/crosshair_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
+
+#begin assets/image/ui/ui_crosshair.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/ui_crosshair.PNG;assets/image/ui/ui_crosshair
+
+#begin assets/image/ui/ui_cursor.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/ui_cursor.PNG;assets/image/ui/ui_cursor
+
+#begin assets/image/ui/ui_dna.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/ui_dna.PNG;assets/image/ui/ui_dna
+
+#begin assets/image/ui/ui_life.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:assets/image/ui/ui_life.PNG;assets/image/ui/ui_life
 
 #begin assets/image/weapons/sprite_weapon_head.png
 /importer:TextureImporter

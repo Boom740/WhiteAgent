@@ -53,7 +53,7 @@ namespace old_heart
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level].ToString();
 
                         ScreenManager.ReplaceScreen(new scene_gameplay(game, next_level_name), fade_transition);
-                        game_manager.player.i_frame_time = 100f; // cant take damage when move to next level
+                        game_manager.player.current_combat_state = player.combat_state.change_scene; // cant take damage when move to next level
                     }
 
                     Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);

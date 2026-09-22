@@ -17,7 +17,7 @@ namespace old_heart
 
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
-        public enum combat_state { none, attack, aim , dash , die}
+        public enum combat_state { none, attack, aim , dash , die , change_scene}
         public enum bufferable_input { none , attack , dash }
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
@@ -118,6 +118,10 @@ namespace old_heart
 
                 case combat_state.die:
                     update_die_state();
+                    break;
+
+                case combat_state.change_scene:
+                    update_change_scene_state();
                     break;
             }
 
@@ -275,6 +279,10 @@ namespace old_heart
                     active = false;
                     global.signal.spawn_particle(particle_manager.particle_name.enemy_die_efx,position,high_layer: true);
                 }
+            }
+            void update_change_scene_state()
+            {
+                i_frame_time = 1; // set i frame to 1 every time when change scene
             }
 
             void update_movement_input()
@@ -566,9 +574,9 @@ namespace old_heart
                 blink_alpha = visible_phase ? 1f : blink_min_alpha;
             }
 
-            if (current_combat_state == combat_state.die)
+            if (current_combat_state == combat_state.die || current_combat_state == combat_state.change_scene)
             {
-                base.Draw(sprite_batch, 1);   // not blinking when die
+                base.Draw(sprite_batch, 1);   // not blinking when die or change scene
             }
             else if (dash_i_frame_visual_timer > 0)  // still has i_frame from dash
             {
