@@ -1,6 +1,6 @@
 # Product Backlog
 
-**Version:** 1.0 | **Last Updated:** 2026-09-01
+**Version:** 1.0 | **Last Updated:** 2026-09-22
 
 > รวม User Story ทั้งหมดของโปรเจกต์ — ยังไม่ได้แปลว่าต้องทำใน Sprint นี้ทั้งหมด
 > โปรเจกต์นี้แบ่งงานตลอดเทอมเป็น **4 Sprint** (Sprint 1-4) — Sprint ไหนหยิบ Story ไปทำ ให้ใส่เลข Sprint นั้น (1-4) ลงคอลัมน์ `Sprint`
@@ -16,15 +16,17 @@
 | 5 | As a player, I want to save game                    | เมื่อผู้เล่นไปยังเลเวลถัดไป จะทำการบันทึกตำแหน่งไว้ ถ้าผู้เล่นตายด่านไหนจะเกิดใหม่ด่านนั้น | 1             | 2      |
 | 6 | As a player, I will get gameover                    | เมื่อ HP ของผู้เล่นหรือ HP ของร่างกายหมด                                                                                                           | 3             | 2      |
 | 7 | As a player, I want to go next level                | เมื่อผู้เล่นเคลียร์ศัตรูในด่านจนหมด                                                                                                             | 1             | 2      |
+| 8 | As a player, I will fight more enemy                | มีศัตรูเพิ่มขึ้น                                                                                                                                                   | 3             | 2      |
 
 ## Should Have
 
-| # | User Story                              | Acceptance Criteria                                                     | Estimate (SP) | Sprint |
-| - | --------------------------------------- | ----------------------------------------------------------------------- | ------------- | ------ |
-| 1 | As a designer, I want to make Main menu | มีปุ่มเริ่มเกม มีปุ่มออกเกม มี How to play  | 2             | 3      |
-| 2 | As a enemy, I will drop item when die   | เมื่อศัตรูตายจะดรอปของ                            | 2             | 3      |
-| 3 | As a player, I will get upgrade         | เมื่อจบด่านจะให้เลือกอัปเกรด                | 2             | 3      |
-| 4 | As a player, I will rather item         | เมื่อศัตรูตายแล้ว มีโอกาสจะดรอปไอเทม | 3             | 3      |
+| # | User Story                                   | Acceptance Criteria                                                     | Estimate (SP) | Sprint |
+| - | -------------------------------------------- | ----------------------------------------------------------------------- | ------------- | ------ |
+| 1 | As a designer, I want to make Main menu      | มีปุ่มเริ่มเกม มีปุ่มออกเกม มี How to play  | 2             | 3      |
+| 2 | As a enemy, I will drop item when die        | เมื่อศัตรูตายจะดรอปของ                            | 2             | 3      |
+| 3 | As a player, I will get upgrade              | เมื่อจบด่านจะให้เลือกอัปเกรด                | 2             | 3      |
+| 4 | As a player, I will gather money            | เมื่อศัตรูตายแล้ว มีโอกาสจะดรอปไอเทม | 3             | 3      |
+| 5 | As a designer, I want player to hear SFX/BGM | ผู้เล่นได้ยินเสียงในเกม                          | 2             | 2      |
 
 ## Nice to Have
 

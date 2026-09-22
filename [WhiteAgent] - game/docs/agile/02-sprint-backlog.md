@@ -12,9 +12,10 @@
 
 | Sprint   | เริ่ม | สิ้นสุด |
 | -------- | ---------- | -------------- |
-| Sprint 1 | 2026-09-01 | 2026-09-12     |
-| Sprint 2 | 2026-09-13 | 2026-09-25     |
+| Sprint 1 | 2026-08-31 | 2026-09-12     |
+| Sprint 2 | 2026-09-14 | 2026-09-26     |
 | Sprint 3 | 2026-09-26 | 2026-10-5      |
+| Sprint x |            |                |
 
 ```mermaid
 gantt
@@ -40,21 +41,20 @@ gantt
 
 ## Sprint 2 (Draft)
 
-| # | User Story                           | MoSCoW      | Estimate (SP) |
-| - | ------------------------------------ | ----------- | ------------- |
-| 1 | As a player, I want to save game     | Must Have   | 2             |
-| 2 | As a player, I will get upgrade      | Should Have | 4             |
-| 3 | As a player, I will get gameover     | Must Have   | 3             |
-| 4 | As a player, I want to go next level | Must Have   | 1             |
-| 5 | As a player, I will rather item      | Should Have | 3             |
+| # | User Story                                   | MoSCoW      | Estimate (SP) |
+| - | -------------------------------------------- | ----------- | ------------- |
+| 1 | As a player, I want to save game             | Must Have   | 2             |
+| 2 | As a player, I want to go next level         | Must Have   | 1             |
+| 3 | As a designer, I want player to hear SFX/BGM | Should Have | 2             |
+| 4 | As a player, I will fight more enemy         | Must Have   | 3             |
 
 ## Sprint 3 (Draft)
 
-| # | User Story | MoSCoW | Estimate (SP) |
-| - | ---------- | ------ | ------------- |
-| 1 |            |        |               |
-| 2 |            |        |               |
-| 3 |            |        |               |
+| # | User Story                        | MoSCoW      | Estimate (SP) |
+| - | --------------------------------- | ----------- | ------------- |
+| 1 | As a player, I will get upgrade   | Should Have | 3             |
+| 2 | As a player, I will get gameover  | Must Have   | 1             |
+| 3 | As a player, I will gather money | Should Have | 2             |
 
 > **Sprint 2-4 คือ draft ระดับ release plan** — เป้าหมายคือฝึกกะจำนวน SP ต่อ Sprint ให้ใกล้เคียง capacity ของทีม ไม่ใช่ล็อก scope ตายตัว ปรับได้ทุกครั้งที่ทำ Sprint Planning ของ Sprint ถัดไป
 >

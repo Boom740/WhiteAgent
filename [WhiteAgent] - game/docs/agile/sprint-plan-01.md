@@ -6,28 +6,22 @@
 
 <!-- Sprint 2-4 ในแลปถัดไป: คัดลอกไฟล์นี้ทั้งไฟล์ไปสร้าง sprint-plan-02.md, sprint-plan-03.md, sprint-plan-04.md ตามลำดับ -->
 
-# Sprint [N] Plan
+# Sprint [1] Plan
 
 **Sprint Goal:** [เป้าหมายหลักของ Sprint นี้ในหนึ่งประโยค]
-**ระยะเวลา:** [2026/09/01] — [2026/10/17]
+**ระยะเวลา:** [2026/08/31] — [2026/09/12]
 **Team:** [ธีรภัทร ศิริณัฐกุลสมบัติ, วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ, ณัฏฐกิตติ์ นามอภิรมย์]
 
 ---
 
 ## Sprint Backlog
 
-| #  | User Story                                          | รับผิดชอบ                                                                           | MoSCoW      | Estimate (SP) | Status  |
-| -- | --------------------------------------------------- | -------------------------------------------------------------------------------------------- | ----------- | ------------- | ------- |
-| 1  | As a player, I want to move                         | [วงศ์วรรธน์ พงค์จินะ, ธีรภัทร ศิริณัฐกุลสมบัติ]     | Must Have   | [2]           | ✅ Done |
-| 2  | As a player, I will attack to kill the enemy       | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have   | [3]           | ✅ Done |
-| 3  | As a player, I will throw head to stunt the enemy | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have   | [4]           | ✅ Done |
-| 4  | As a player, I will take damage                     | [วงศ์วรรธน์ พงค์จินะ]                                                      | Must Have   | [1]           | ✅ Done |
-| 5  | As a player, I will get upgrade                     | [วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ]                           | Should Have | [1]           | 🔲 Todo |
-| 6  | As a player, I will fight more enemy                |                                                                                              | Should Have | [1]           | 🔲 Todo |
-| 7  | As a player, I will rather item                     |                                                                                              | Should Have | [3]           | 🔲 Todo |
-| 8  | As a player, I will get gameover                    |                                                                                              | Must Have   | [3]           | 🔲 Todo |
-| 9  | As a player, I want to go next level                |                                                                                              | Must Have   | [2]           | 🔲 Todo |
-| 10 | As a player, I want to save game                    |                                                                                              | Should Have | [1]           | 🔲 Todo |
+| # | User Story                                          | รับผิดชอบ                                                                           | MoSCoW    | Estimate (SP) | Status  |
+| - | --------------------------------------------------- | -------------------------------------------------------------------------------------------- | --------- | ------------- | ------- |
+| 1 | As a player, I want to move                         | [วงศ์วรรธน์ พงค์จินะ, ธีรภัทร ศิริณัฐกุลสมบัติ]     | Must Have | [2]           | ✅ Done |
+| 2 | As a player, I will attack to kill the enemy       | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | [3]           | ✅ Done |
+| 3 | As a player, I will throw head to stunt the enemy | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | [4]           | ✅ Done |
+| 4 | As a player, I will take damage                     | [วงศ์วรรธน์ พงค์จินะ]                                                      | Must Have | [1]           | ✅ Done |
 
 ## Status Legend
 
@@ -62,28 +56,6 @@
 - [X] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: Done]
 - [X] [Sprite player take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
 
-### Story 5 — [As a player, I will get upgrade]
-
-- [ ] [ระบบ Upgrade] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: todo]
-- [ ] [UI design] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
-- [ ] [UI Upgrade] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
-
-### Story 6 — [As a player, I will fight more enemy]
-
-- [ ] [Enemy02 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: todo]
-- [ ] [Enemy03 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 4]  [status:: todo]
-- [ ] [Enemy04 Ai] [domain::programmer] [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 3]  [status:: todo]
-- [ ] [Sprite enemy01] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
-- [ ] [Sprite enemy02] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: todo]
-- [ ] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: todo]
-- [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
-
-### Story 7 — [As a player, I will rather item]
-
-- [ ] [Ui collectible item] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
-- [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: todo]
-
----
 
 ## Daily Notes
 
