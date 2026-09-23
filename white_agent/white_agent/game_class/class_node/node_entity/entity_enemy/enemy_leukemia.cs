@@ -326,23 +326,24 @@ namespace old_heart
             {
                 //Point placeholder_sprite_size = new Point(16, 16); // sprite sheet ของ Beast.png คือ 4x4 ช่อง ช่องละ 16x16
 
-                // TODO: Beast.png เป็น placeholder แทน Leukemia ไปก่อน เปลี่ยน path เมื่อมีภาพจริงของ leukemia
-                Texture2D placeholder_texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
-                Texture2D placeholder_texture_2 = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
+                Texture2D texture;
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 8 ,sprite_size: new Point(64,64));
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
+                animation idle_animation = new animation(texture, frame_per_sec: 8 ,sprite_size: new Point(64,64));
                 idle_animation.sprite_scale = new Vector2(1,1);
                 idle_animation.sprite_origin = new Vector2(32,57);
                 idle_animation.name = "leukemia idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                animation walk_animation = new animation(placeholder_texture_2, frame_per_sec: 8, sprite_size: new Point(64, 64));
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_Walk");
+                animation walk_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(64, 64));
                 walk_animation.sprite_scale = new Vector2(1, 1);
                 walk_animation.sprite_origin = new Vector2(32, 57);
                 walk_animation.name = "leukemia walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                animation dizzy_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
+                animation dizzy_animation = new animation(texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
                 dizzy_animation.sprite_origin = new Vector2(32, 57);
                 dizzy_animation.name = "leukemia dizzy";

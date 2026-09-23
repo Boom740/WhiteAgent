@@ -71,7 +71,6 @@ namespace old_heart
                     Rotation = saved_particle.Parameters.Rotation
                 }
             };
-            Debug.WriteLine("ee  " + new_particle.Parameters.Color.Value);
             foreach (Modifier modifier in saved_particle.Modifiers)
             {
                 new_particle.Modifiers.Add(modifier);

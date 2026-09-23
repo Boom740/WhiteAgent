@@ -69,10 +69,10 @@ namespace old_heart
             {
                 ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
             }
-            if (global.input.keyboard_state.WasKeyPressed(Keys.B))
-            {
-                ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
-            }
+            //if (global.input.keyboard_state.WasKeyPressed(Keys.B))
+            //{
+            //    ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
+            //}
 
 
 

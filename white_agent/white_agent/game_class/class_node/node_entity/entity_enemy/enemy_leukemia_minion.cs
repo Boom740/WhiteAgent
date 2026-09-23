@@ -7,7 +7,7 @@ namespace old_heart
 {
     public class enemy_leukemia_minion : enemy
     {
-        public enum animation_name { idle, walk, died }
+        public enum animation_name { idle, walk, died , dizzy }
 
         public int contact_damage = 1;
 
@@ -94,7 +94,7 @@ namespace old_heart
         {
             if (state == enemy_state.dizzy)
             {
-                animation_player.play(animation_player.data.data[animation_name.idle]); // TODO: ใส่ dizzy animation แยกทีหลังถ้ามี sprite
+                animation_player.play(animation_player.data.data[animation_name.dizzy]);
             }
             else if (velocity.Length() > 10f)
             {
@@ -127,25 +127,29 @@ namespace old_heart
 
             public void load(ContentManager content)
             {
-                Texture2D placeholder_texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
-                Texture2D placeholder_texture_walk = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_walk");
+                Texture2D texture;
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
-                idle_animation.sprite_scale = new Vector2(0.6f, 0.6f);
-                idle_animation.sprite_origin = new Vector2(32, 57);
+
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_minion_idle");
+                animation idle_animation = new animation(texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
+                idle_animation.sprite_scale = new Vector2(1f, 1f);
+                idle_animation.sprite_origin = new Vector2(32, 48);
                 idle_animation.name = "minion idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                animation walk_animation = new animation(placeholder_texture_walk, frame_per_sec: 10, sprite_size: new Point(64, 64));
-                walk_animation.sprite_scale = new Vector2(0.6f, 0.6f);
-                walk_animation.sprite_origin = new Vector2(32, 57);
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_minion_walk");
+                animation walk_animation = new animation(texture, frame_per_sec: 10, sprite_size: new Point(64, 64));
+                walk_animation.sprite_scale = new Vector2(1f, 1f);
+                walk_animation.sprite_origin = new Vector2(32, 48);
                 walk_animation.name = "minion walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                //animation died_animation = new animation(placeholder_texture, loop: false, frame_per_sec: 2, sprite_size: new Point(32, 32));
-                //died_animation.sprite_scale = new Vector2(1.2f, 1.2f);
-               // died_animation.name = "minion died";
-               // animation_data.data.Add(animation_name.died, died_animation);
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_minion_dizzy");
+                animation dizzy_animation = new animation(texture, frame_per_sec: 10, sprite_size: new Point(64, 64));
+                dizzy_animation.sprite_scale = new Vector2(1, 1);
+                dizzy_animation.sprite_origin = new Vector2(32, 48);
+                dizzy_animation.name = "leukemia dizzy";
+                animation_data.data.Add(animation_name.dizzy, dizzy_animation);
             }
         }
     }
