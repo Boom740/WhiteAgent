@@ -33,7 +33,7 @@ namespace old_heart
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
         public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 1500f, range: 150f, hitbox_lifetime: 0.5f, knockback_speed: 500f);
 
-        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , hit_box_radius: 15)
+        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 8 , hit_box_radius: 15)
         {
             animation_player = new animation_player_bacteria(content_set);
         }

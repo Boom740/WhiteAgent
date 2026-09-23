@@ -45,7 +45,7 @@ namespace old_heart
         public int projectile_damage = 1;
         public float projectile_knockback_speed = 150f;
 
-        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , speed: 1200, hit_box_radius: 15)
+        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 4 , speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_leukemia(content_set);
             current_clone_timer = clone_timer;

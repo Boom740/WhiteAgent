@@ -36,14 +36,13 @@ namespace old_heart
 
         public List<melee_data> combo_hits = new List<melee_data>
          {
-          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f , hitbox_radius: 30), // hit 1
-          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f, hitbox_radius: 30), // hit 2
-          new melee_data(damage: 1, lunge_speed: 150f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 150f, hitbox_radius: 30), // hit 3
-          new melee_data(damage: 2, lunge_speed: 850f, range: 85f, hitbox_lifetime: 0.08f, knockback_speed: 300f, hitbox_radius: 30), // hit 4 (finisher)
+          new melee_data(damage: 1, lunge_speed: 200f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 200f , hitbox_radius: 35), // hit 1
+          new melee_data(damage: 1, lunge_speed: 200f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 200f, hitbox_radius: 35), // hit 2
+          new melee_data(damage: 2, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 400f, hitbox_radius: 35), // hit 3 (finisher)
          };
         // --- combat: melee combo ---
         public int combo_count = 0;
-        public int max_combo = 4;
+        public int max_combo = 3;
         public float combo_reset_window = 1f;   // เว้นช่วงกดเกินเท่านี้ = คอมโบหลุด
         public float combo_reset_timer = 0f;
         public float combo_cooldown_duration = 0.5f; // คูลดาวน์หลังคอมโบครบ 4
