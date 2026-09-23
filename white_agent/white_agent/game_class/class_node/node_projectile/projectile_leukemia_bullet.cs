@@ -31,6 +31,9 @@ namespace old_heart
         {
             if (target_entity is player target_player && target_player.alive)
             {
+                bool deal_damage = target_player.take_damage(damage, damage_dealer: this); // ทำงานเหมือนโดนโจมตีทุกอย่าง (หัวหลุด, i-frame ฯลฯ)
+                if (!deal_damage) { return; }
+
                 Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
 
                 target_player.apply_knockback(hit_direction, knockback_speed); // knockback เสมอ เหมือนกับ melee
