@@ -40,8 +40,8 @@ namespace old_heart
             test_text_2.text_scale = new Vector2(0.5f, 0.5f);
             //game_manager.add_ui(test_text_2);
 
-            test_text_3 = new ui_text(" [Esc]\nPause", new Vector2(550, 250));
-            test_text_3.text_scale = new Vector2(2f, 2f);
+            test_text_3 = new ui_text(" [Esc]\nPause", new Vector2(550, 300));
+            test_text_3.text_scale = new Vector2(1.5f, 1.5f);
             test_text_3.text_color *= 0.5f; // transparent
             test_text_3.visible = false;
             game_manager.add_ui(test_text_3);

@@ -284,7 +284,8 @@ namespace old_heart
                 if (animation_player.is_finished)
                 {
                     active = false;
-                    global.signal.spawn_particle(particle_manager.particle_name.enemy_die_efx,position,high_layer: true);
+                    global.signal.spawn_particle(particle_manager.particle_name.die_efx_white, position, high_layer: true);
+                    global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_white, position, high_layer: false);
                 }
             }
             void update_change_scene_state()

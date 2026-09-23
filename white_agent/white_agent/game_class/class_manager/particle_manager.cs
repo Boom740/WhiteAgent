@@ -11,13 +11,14 @@ using MonoGame.Extended.Particles.Modifiers.Interpolators;
 using MonoGame.Extended.Particles.Profiles;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 {
     public class particle_manager
     {
         static public Dictionary<Enum, ParticleEmitter> data = new Dictionary<Enum, ParticleEmitter>();
-        public enum particle_name { test1 , enemy_die_efx }
+        public enum particle_name { die_efx_red , die_efx_green, die_efx_purple , die_efx_white , blood_on_ground_efx_red , blood_on_ground_efx_green , blood_on_ground_efx_purple , blood_on_ground_efx_white }
 
         public ParticleEffect low_particle_effect;
         public ParticleEffect high_particle_effect;
@@ -70,6 +71,7 @@ namespace old_heart
                     Rotation = saved_particle.Parameters.Rotation
                 }
             };
+            Debug.WriteLine("ee  " + new_particle.Parameters.Color.Value);
             foreach (Modifier modifier in saved_particle.Modifiers)
             {
                 new_particle.Modifiers.Add(modifier);
@@ -93,7 +95,7 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyReleased(Keys.Z))
             {
-                global.signal.spawn_particle(particle_name.enemy_die_efx, global.input.scaled_mouse_world_position, high_layer: true);
+                global.signal.spawn_particle(particle_name.blood_on_ground_efx_red, global.input.scaled_mouse_world_position, high_layer: false);
             }
 
             low_particle_effect.Update(delta_time);
@@ -110,64 +112,147 @@ namespace old_heart
 
         public void load()
         {
-            ParticleEmitter emitter;
+            load_die_efx_color(Color.Red);
+            load_die_efx_color(Color.Green);
+            load_die_efx_color(Color.Purple);
+            load_die_efx_color(Color.White);
 
-            emitter = new ParticleEmitter(20)   // test particle
+            load_blood_on_ground_efx_color(Color.Red);
+            load_blood_on_ground_efx_color(Color.Green);
+            load_blood_on_ground_efx_color(Color.Purple);
+            load_blood_on_ground_efx_color(Color.White);
+
+
+            void load_die_efx_color(Color color)
             {
-                Name = "fire_efx",
-                LifeSpan = 2.0f,
-                TextureRegion = new Texture2DRegion(content.Load<Texture2D>("Placeholder/Weapons/Head")),
-                Profile = Profile.Spray(-Vector2.UnitY, 2.0f),
-                Parameters = new ParticleReleaseParameters
+                ParticleEmitter emitter;
+                string this_particle_name = "die_efx_";
+                string color_name = "";
+
+                float color_hue;
+                float color_saturation;
+                float color_lightness;
+                color.ToHSL(out color_hue,out color_saturation,out color_lightness);
+
+                if (color == Color.Red)
                 {
-                    Quantity = new ParticleInt32Parameter(10, 20),
-                    Speed = new ParticleFloatParameter(10.0f, 40.0f),
-                    Color = new ParticleColorParameter(new Vector3(0.0f, 1.0f, 0.6f)),
-                    Scale = new ParticleVector2Parameter(new Vector2(1f, 1f))
+                    color_name = "red";
                 }
-            };
-
-            emitter.Modifiers.Add(new LinearGravityModifier
-            {
-                Direction = -Vector2.UnitY,
-                Strength = 200f
-            });
-            emitter.Modifiers.Add(new AgeModifier
-            {
-                Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
-            });
-
-            data.Add(particle_name.test1, emitter);
-
-            emitter = new ParticleEmitter(20)
-            {
-                Name = "enemy_die_efx",
-                LifeSpan = 1.0f,
-                TextureRegion = new Texture2DRegion(default_particle_texture),
-                Profile = Profile.Spray(-Vector2.UnitY, 4.0f),
-                Parameters = new ParticleReleaseParameters
+                else if (color == Color.Green)
                 {
-                    Quantity = new ParticleInt32Parameter(10, 20),
-                    Speed = new ParticleFloatParameter(50f, 700f),
-                    Color = new ParticleColorParameter(new Vector3(0.0f, 1f, 0.25f)),
-                    Scale = new ParticleVector2Parameter(new Vector2(10f, 10f))
+                    color_name = "green";
                 }
-            };
+                else if (color == Color.Purple)
+                {
+                    color_name = "purple";
+                }
+                else if (color == Color.White)
+                {
+                    color_name = "white";
+                }
 
-            emitter.Modifiers.Add(new LinearGravityModifier
+                emitter = new ParticleEmitter(20)
+                {
+                    Name = this_particle_name + color_name ,
+                    LifeSpan = 1.0f,
+                    TextureRegion = new Texture2DRegion(default_particle_texture),
+                    Profile = Profile.Spray(-Vector2.UnitY, 4.0f),
+                    Parameters = new ParticleReleaseParameters
+                    {
+                        Quantity = new ParticleInt32Parameter(10, 20),
+                        Speed = new ParticleFloatParameter(50f, 700f),
+                        Color = new ParticleColorParameter(new Vector3(color_hue , color_saturation / 100f, color_lightness / 100f )),
+                        Scale = new ParticleVector2Parameter(new Vector2(10f, 10f))
+                    }
+                };
+
+                emitter.Modifiers.Add(new LinearGravityModifier
+                {
+                    Direction = Vector2.UnitY,
+                    Strength = 100f
+                });
+                emitter.Modifiers.Add(new AgeModifier
+                {
+                    Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
+                });
+                emitter.Modifiers.Add(new DragModifier
+                {
+                    Density = 10f
+                });
+
+                add_into_data(this_particle_name + color_name , emitter);
+            }
+            void load_blood_on_ground_efx_color(Color color)
             {
-                Direction = Vector2.UnitY,
-                Strength = 100f
-            });
-            emitter.Modifiers.Add(new AgeModifier
+                ParticleEmitter emitter;
+                string this_particle_name = "blood_on_ground_efx_";
+                string color_name = "";
+                float color_hue;
+                float color_saturation;
+                float color_lightness;
+                color.ToHSL(out color_hue, out color_saturation, out color_lightness);
+
+                if (color == Color.Red)
+                {
+                    color_name = "red";
+                }
+                else if (color == Color.Green)
+                {
+                    color_name = "green";
+                }
+                else if (color == Color.Purple)
+                {
+                    color_name = "purple";
+                }
+                else if (color == Color.White)
+                {
+                    color_name = "white";
+                }
+
+                emitter = new ParticleEmitter(20)
+                {
+                    Name = this_particle_name + color_name,
+                    LifeSpan = 5.0f,
+                    TextureRegion = new Texture2DRegion(default_particle_texture),
+                    Profile = Profile.Circle(0,CircleRadiation.Out),
+                    Parameters = new ParticleReleaseParameters
+                    {
+                        Quantity = new ParticleInt32Parameter(10, 20),
+                        Speed = new ParticleFloatParameter(300f, 0f),
+                        Color = new ParticleColorParameter(new Vector3(color_hue, color_saturation/100f, color_lightness / 100f )),
+                        Scale = new ParticleVector2Parameter(new Vector2(3f, 3f))
+                    }
+                };
+
+                emitter.Modifiers.Add(new AgeModifier
+                {
+                    Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
+                });
+                emitter.Modifiers.Add(new AgeModifier
+                {
+                    Interpolators = { new ScaleInterpolator { StartValue = new Vector2(10,10), EndValue = new Vector2(20, 20) } }
+                });
+                emitter.Modifiers.Add(new DragModifier
+                {
+                    Density = 30f
+                });
+                add_into_data(this_particle_name + color_name, emitter);
+            }
+
+
+            void add_into_data(string this_particle_name , ParticleEmitter emitter)
             {
-                Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
-            });
-            emitter.Modifiers.Add(new DragModifier
-            {
-                Density = 10f
-            });
-            data.Add(particle_name.enemy_die_efx, emitter);
+                if (Enum.TryParse<particle_name>(this_particle_name, out particle_name particle_enum))
+                {
+
+                    data.Add(particle_enum, emitter);
+                    Debug.WriteLine("  prase efx name : " + this_particle_name);
+                }
+                else
+                {
+                    Debug.WriteLine("cant prase efx name : " + this_particle_name);
+                }
+            }
         }
     }
 }

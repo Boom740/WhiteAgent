@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 
 namespace old_heart
 {
@@ -240,6 +241,12 @@ namespace old_heart
         {
             if (state == enemy_state.dash) { return; }
             base.enter_dizzy();
+        }
+        public override void die()
+        {
+            global.signal.spawn_particle(particle_manager.particle_name.die_efx_green, position, high_layer: true);
+            global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_green, position, high_layer: false);
+            base.die();
         }
         public override void update_animation(float delta_time)
         {

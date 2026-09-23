@@ -230,7 +230,12 @@ namespace old_heart
 
             base.update_animation(delta_time);
         }
-
+        public override void die()
+        {
+            global.signal.spawn_particle(particle_manager.particle_name.die_efx_red, position, high_layer: true);
+            global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_red, position, high_layer: false);
+            base.die();
+        }
         public class animation_player_virus : animation_player_base
         {
             public static readonly animation_data animation_data = new animation_data();

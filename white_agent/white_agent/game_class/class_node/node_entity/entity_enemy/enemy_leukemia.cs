@@ -279,7 +279,12 @@ namespace old_heart
                 }
             }
         }
-
+        public override void die()
+        {
+            global.signal.spawn_particle(particle_manager.particle_name.die_efx_purple, position, high_layer: true);
+            global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_purple, position, high_layer: false);
+            base.die();
+        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)
