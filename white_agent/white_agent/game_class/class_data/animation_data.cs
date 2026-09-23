@@ -149,6 +149,7 @@ namespace old_heart
             current_animation = animation;
             current_time = 0f;
             is_finished = false;
+            pause = false;
         }
         public void flash()
         {

@@ -236,10 +236,10 @@ namespace old_heart
             }
         }
 
-        public override bool take_damage(int damage_taken, node damage_dealer = null)
+        public override void enter_dizzy()
         {
-            if (state == enemy_state.dash) { return false; }
-            return base.take_damage(damage_taken, damage_dealer);
+            if (state == enemy_state.dash) { return; }
+            base.enter_dizzy();
         }
         public override void update_animation(float delta_time)
         {
