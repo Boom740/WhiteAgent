@@ -157,10 +157,10 @@ namespace old_heart
                 else if (hitbox_spawn_timer <= 0)
                 {
                     hitbox_spawn_timer = -1;
-                    melee_data.spawn_melee_projectile(content, this, position, current_direction_vector);
 
                     acceleration = Vector2.Zero;
-                    velocity = current_direction_vector;
+                    melee_data.spawn_melee_projectile(content, this, position, current_direction_vector);
+
                 }
                 else
                 {

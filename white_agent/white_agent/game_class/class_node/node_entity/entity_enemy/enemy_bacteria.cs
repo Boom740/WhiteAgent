@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace old_heart
@@ -12,23 +13,24 @@ namespace old_heart
 
 
         // --- radii ---
-        public float dangerous_radius = 200f;
-        public float attack_radius = 40f;
+        public float dangerous_radius = 300f;
+        public float attack_radius = 80f;
 
         // --- patrol (square) ---
         private float patrol_time_wait = 1f;
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public float attack_duration = 1f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 1f;
         public float attack_timer = 0f;
-        public float hitbox_spawn_time = 0.5f;
-        public float hitbox_spawn_timer = -1f;
 
-        public float attack_cooldown = 2f;
+        public float attack_cooldown = 3f;
         public float attack_cooldown_timer = 0f;
 
-        public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 100f, range: 40f, hitbox_lifetime: 0.3f, knockback_speed: 100f);
+        public float dash_timer = 0f;
+        public int dash_animation_frame_index = 5;
+        private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
+        public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 1500f, range: 150f, hitbox_lifetime: 0.5f, knockback_speed: 200f);
 
         public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , hit_box_radius: 15)
         {
@@ -63,6 +65,10 @@ namespace old_heart
 
                 case enemy_state.attack:
                     update_attack();
+                    break;
+
+                case enemy_state.dash:
+                    update_dash();
                     break;
 
                 case enemy_state.dizzy:
@@ -149,30 +155,43 @@ namespace old_heart
             {
                 attack_timer -= delta_time;
 
-                if (hitbox_spawn_timer == -1)
+                if (animation_player.current_animation == animation_player_bacteria.animation_data.data[animation_name.attack] && animation_player.current_frame_index == dash_animation_frame_index)
                 {
-                    // do nothing
+                    start_dash();
                 }
-                else if (hitbox_spawn_timer <= 0)
-                {
-                    hitbox_spawn_timer = -1;
-                    melee_data.spawn_melee_projectile(content,this,position,current_direction_vector);
-
-                    acceleration = Vector2.Zero;
-                    velocity = current_direction_vector;
-                }
-                else
-                {
-                    hitbox_spawn_timer -= delta_time;
-                }
-
+                
                 if (attack_timer <= 0f)
                 {
                     state = enemy_state.normal;
                     attack_cooldown_timer = attack_cooldown;
                 }
             }
+            
+            void update_dash()
+            {
+                dash_timer -= delta_time;
 
+                velocity = melee_data.lunge_speed * current_direction_vector;
+
+                if (dash_timer <= 0f)
+                {
+                    state = enemy_state.attack;
+                    velocity = Vector2.Zero;
+                    animation_player.pause = false;
+                    animation_player.current_frame_index = dash_animation_frame_index + 1;
+                }
+            }
+
+            void start_dash()
+            {
+                state = enemy_state.dash;
+                animation_player.pause = true;
+                animation_player.current_frame_index = dash_animation_frame_index;
+                dash_timer = melee_data.hitbox_lifetime;
+                hit_entity.Clear();
+
+                acceleration = Vector2.Zero;
+            }
             // ---------------- Dizzy ----------------
 
             void update_dizzy()
@@ -196,14 +215,32 @@ namespace old_heart
                 current_direction_vector = aim_direction;  // update direction to aim
 
                 attack_timer = attack_duration;
-                hitbox_spawn_timer = hitbox_spawn_time;
 
 
                 animation_player.play(animation_player.data.data[animation_name.attack]);
             }
 
         }
+        public override void collide_entity(entity entity)
+        {
+            if (alive == false) return;
+            if (state != enemy_state.dash) return; // ตอนติด dizzyไม่ระเบิดใส่ผู้เล่นตอนโดนชน
 
+            if (entity is player && entity.alive && hit_entity.Contains(entity) == false)
+            {
+                hit_entity.Add(entity);
+
+                bool deal_damage = entity.take_damage(melee_data.damage, damage_dealer: this);
+                if (deal_damage == false) { return; }
+                entity.apply_knockback(velocity,melee_data.knockback_speed);
+            }
+        }
+
+        public override bool take_damage(int damage_taken, node damage_dealer = null)
+        {
+            if (state == enemy_state.dash) { return false; }
+            return base.take_damage(damage_taken, damage_dealer);
+        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)
@@ -211,6 +248,10 @@ namespace old_heart
                 animation_player.play(animation_player.data.data[animation_name.dizzy]);
             }
             else if (state == enemy_state.attack)
+            {
+
+            }
+            else if (state == enemy_state.dash)
             {
 
             }

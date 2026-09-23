@@ -341,7 +341,6 @@ namespace old_heart
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
 
-                velocity = aim_direction * hit_data.lunge_speed;
                 current_direction_vector = aim_direction; // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
                 hit_data.spawn_melee_projectile(content, this, position, aim_direction);

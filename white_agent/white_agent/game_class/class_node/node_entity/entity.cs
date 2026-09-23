@@ -171,6 +171,7 @@ namespace old_heart
         }
         public virtual void apply_knockback(Vector2 direction, float speed)
         {
+            direction = Vector2.Normalize(direction);
             knockback_velocity = direction * speed;
         }
     }

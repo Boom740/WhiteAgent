@@ -34,6 +34,8 @@ namespace old_heart
             melee_projectile.owner = owner;
             melee_projectile.knockback_speed = knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
             global.signal.spawn_projectile(melee_projectile);
+
+            owner.velocity = Vector2.Normalize(aim_direction) * lunge_speed;
         }
     }
 }

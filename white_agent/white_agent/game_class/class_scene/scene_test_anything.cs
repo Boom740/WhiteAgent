@@ -43,7 +43,7 @@ namespace old_heart
             collision_shape_circle wall3 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
             game_manager.add_map_collision(wall3);
 
-            enemy_1 = new enemy_leukemia(Content, position: new Vector2(-600, 300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
+            enemy_1 = new enemy_leukemia(Content, position: new Vector2(1600, 300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
             game_manager.add_entity(enemy_1);
 
             enemy test_enemy;

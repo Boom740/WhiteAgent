@@ -72,14 +72,14 @@ namespace old_heart
         }
 
         // ชนกับ entity อื่น 
-        public override void collide_entity(entity other)
+        public override void collide_entity(entity entity)
         {
             if (alive == false) return;
             if (state != enemy_state.chase) return; // ตอนติด dizzyไม่ระเบิดใส่ผู้เล่นตอนโดนชน
 
-            if (other is player)
+            if (entity is player)
             {
-                bool deal_damage = other.take_damage(contact_damage, damage_dealer: this);
+                bool deal_damage = entity.take_damage(contact_damage, damage_dealer: this);
                 if (deal_damage == false) { return; }
                 die();
             }
