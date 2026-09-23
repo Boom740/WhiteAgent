@@ -14,7 +14,7 @@ namespace old_heart
         // --- radii ---
         public float dangerous_rad = 150f;
         public float safe_rad = 250f;
-
+        public float sight_radius = 350f;
 
         // --- clone ---
         public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
@@ -32,6 +32,19 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
+        // --- projectile attack ---
+        public float attack_cooldown = 1.5f;
+        private float attack_cooldown_timer = 0f;
+
+        public int shots_per_burst = 3;
+        public float shot_interval = 0.15f;
+        private int shots_fired_in_burst = 0;
+        private float shot_timer = 0f;
+
+        public float projectile_speed = 400f;
+        public int projectile_damage = 1;
+        public float projectile_knockback_speed = 150f;
+
         public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 5 , speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_leukemia(content_set);
@@ -43,6 +56,12 @@ namespace old_heart
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             minion_list.RemoveAll(enemy => enemy.alive == false);     // clear dead minion 
+
+            // projectile cooldown
+            if (attack_cooldown_timer > 0f)
+            {
+                attack_cooldown_timer -= delta_time;
+            }
 
             // shield regen ทำงานอิสระจาก state ตามที่ต้องการ
             if (shield == false && state != enemy_state.died)
@@ -65,6 +84,11 @@ namespace old_heart
                 case enemy_state.frightened:
                     update_clone_timer(delta_time);
                     update_frightened(delta_time);
+                    break;
+
+                case enemy_state.attack:
+                    update_clone_timer(delta_time);
+                    update_attack(delta_time);
                     break;
 
                 case enemy_state.dizzy:
@@ -111,6 +135,10 @@ namespace old_heart
                 {
                     enter_frightened();
                 }
+                else if (distance <= sight_radius && attack_cooldown_timer <= 0f)
+                {
+                    enter_attack();
+                }
             }
 
             // ---------------- Frightened ----------------
@@ -148,6 +176,63 @@ namespace old_heart
                     acceleration = away_direction * speed ;  // เดินหนี แค่ตอนอยู่ในระยะ
                     current_direction_vector = acceleration;
                 }
+            }
+
+            // ---------------- Projectile Attack ----------------
+
+            void enter_attack()
+            {
+                state = enemy_state.attack;
+                shots_fired_in_burst = 0;
+                shot_timer = 0f; // ยิงนัดแรกทันทีที่เข้า state
+                acceleration = Vector2.Zero;
+            }
+
+            void update_attack(float dt)
+            {
+                if (target == null) { state = enemy_state.normal; return; }
+
+                float distance = Vector2.Distance(position, target.position);
+
+                if (distance <= dangerous_rad) // player เข้าใกล้เกินไประหว่างยิง ยกเลิกแล้วหนีแทนทันที
+                {
+                    enter_frightened();
+                    return;
+                }
+                if (distance > sight_radius) // player หนีออกนอกระยะยิงไปแล้ว ยกเลิก burst ที่เหลือ
+                {
+                    state = enemy_state.normal;
+                    attack_cooldown_timer = attack_cooldown;
+                    return;
+                }
+
+                current_direction_vector = target.position - position; // หันหน้าเข้าหา player ตลอดช่วงยิง
+                acceleration = Vector2.Zero; // ยืนนิ่งยิง ไม่เดิน
+
+                if (shots_fired_in_burst >= shots_per_burst)
+                {
+                    attack_cooldown_timer = attack_cooldown;
+                    state = enemy_state.normal;
+                    return;
+                }
+
+                shot_timer -= dt;
+                if (shot_timer <= 0f)
+                {
+                    fire_projectile();
+                    shots_fired_in_burst++;
+                    shot_timer = shot_interval;
+                }
+            }
+
+            void fire_projectile()
+            {
+                Vector2 aim_direction = target.position - position;
+                if (aim_direction == Vector2.Zero) aim_direction = current_direction_vector;
+
+                projectile_leukemia_bullet shot = new projectile_leukemia_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed);
+                shot.owner = this;
+                global.signal.spawn_projectile(shot);
             }
 
             // ---------------- Dizzy ----------------
