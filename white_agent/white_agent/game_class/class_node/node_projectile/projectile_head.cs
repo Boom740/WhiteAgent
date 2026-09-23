@@ -13,7 +13,7 @@ namespace old_heart
         public run_data_manager run_data;
 
         public bool is_resting = false;
-        public float drag = 3f;                    // ยิ่งมากยิ่งหยุดเร็ว
+        public float drag = 4f;                    // ยิ่งมากยิ่งหยุดเร็ว
         private const float stop_velocity_threshold = 15f;
 
         public float bounce_power = 50f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง

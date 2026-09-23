@@ -12,7 +12,7 @@ namespace old_heart
 
 
         // --- radii ---
-        public float dangerous_rad = 150f;
+        public float dangerous_rad = 200f;
         public float safe_rad = 250f;
         public float sight_radius = 350f;
 
@@ -37,11 +37,11 @@ namespace old_heart
         private float attack_cooldown_timer = 0f;
 
         public int shots_per_burst = 3;
-        public float shot_interval = 0.15f;
+        public float shot_interval = 0.3f;
         private int shots_fired_in_burst = 0;
         private float shot_timer = 0f;
 
-        public float projectile_speed = 400f;
+        public float projectile_speed = 300f;
         public int projectile_damage = 1;
         public float projectile_knockback_speed = 150f;
 
@@ -325,7 +325,7 @@ namespace old_heart
                 Texture2D placeholder_texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
                 Texture2D placeholder_texture_2 = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_Walk"); //ใช้รูป player ไปก่อนเพราะ Beast ยังใส่ไม่ได้
 
-                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 2 ,sprite_size: new Point(64,64));
+                animation idle_animation = new animation(placeholder_texture, frame_per_sec: 8 ,sprite_size: new Point(64,64));
                 idle_animation.sprite_scale = new Vector2(1,1);
                 idle_animation.sprite_origin = new Vector2(32,57);
                 idle_animation.name = "leukemia idle";

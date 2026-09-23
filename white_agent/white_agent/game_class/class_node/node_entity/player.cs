@@ -65,11 +65,11 @@ namespace old_heart
 
         // --- dash (Space) ---
         public float dash_speed = 1000f;
-        public float dash_duration = 0.2f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
-        public float dash_i_frame_duration = 0.3f;
+        public float dash_duration = 0.1f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
+        public float dash_i_frame_duration = 0.6f;
         public float dash_i_frame_visual_timer = 0f; // player has i_frame but not blink
         public float dash_timer = 0f;
-        public float dash_cooldown = 2f;
+        public float dash_cooldown = 1.5f;
         public float dash_cooldown_timer = 0f;
 
         private float default_max_velocity;

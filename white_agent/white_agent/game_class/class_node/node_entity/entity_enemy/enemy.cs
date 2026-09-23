@@ -17,11 +17,11 @@ namespace old_heart
         public animation_player_shield animation_player_shield;
 
         public bool shield = true;
-        public float shield_timer = 3f; // ตั้งเท่ากับ dizzy_timer ไว้ก่อน ปรับแยกได้ทีหลัง
+        public float shield_timer = 1.5f; // ตั้งเท่ากับ dizzy_timer ไว้ก่อน ปรับแยกได้ทีหลัง
         public float shield_timer_current = 0f;
 
         // --- dizzy ---
-        public float dizzy_timer = 3f;
+        public float dizzy_timer = 2.5f;
         public float dizzy_timer_current = 0f;
         public bool can_be_dizzied = true;
 
