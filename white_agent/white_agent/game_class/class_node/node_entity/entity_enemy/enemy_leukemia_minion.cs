@@ -12,7 +12,7 @@ namespace old_heart
         public int contact_damage = 1;
 
         public enemy_leukemia_minion(ContentManager content_set, Vector2 position)
-            : base(content_set, position, max_hp: 1, speed: 300, hit_box_radius: 8)
+            : base(content_set, position, max_hp: 1, speed: 1000, hit_box_radius: 8)
         {
             animation_player = new animation_player_minion(content_set);
             state = enemy_state.chase; // minion ไล่ล่าทันทีที่เกิด ไม่มี patrol เหมือน leukemia

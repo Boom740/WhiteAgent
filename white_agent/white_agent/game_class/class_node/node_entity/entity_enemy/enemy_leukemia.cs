@@ -12,9 +12,9 @@ namespace old_heart
 
 
         // --- radii ---
-        public float dangerous_rad = 200f;
+        public float dangerous_rad = 180f;
         public float safe_rad = 250f;
-        public float sight_radius = 350f;
+        public float sight_radius = 270f;
 
         // --- clone ---
         public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
@@ -41,7 +41,7 @@ namespace old_heart
         private int shots_fired_in_burst = 0;
         private float shot_timer = 0f;
 
-        public float projectile_speed = 300f;
+        public float projectile_speed = 250f;
         public int projectile_damage = 1;
         public float projectile_knockback_speed = 150f;
 

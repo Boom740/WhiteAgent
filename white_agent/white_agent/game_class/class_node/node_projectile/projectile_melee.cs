@@ -14,7 +14,7 @@ namespace old_heart
         public float knockback_speed = 150f;
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
-        public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance = 50, float travel_time = 0.3f, int damage = 1 , int hit_box_dadius = 15)
+        public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance = 50, float travel_time = 0.3f, int damage = 1 , int hit_box_dadius = 20)
             : base(content_set,  position , time_left: travel_time)
         {
             this.damage = damage;
