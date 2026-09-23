@@ -21,7 +21,7 @@ namespace old_heart
 
             // TODO: ใช้ placeholder ไปก่อน เปลี่ยน path เมื่อมี sprite projectile จริงของ leukemia
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
-            sprite_origin = new Vector2(texture.Width / 2f, texture.Height / 2f);
+            sprite_origin = new Vector2(texture.Width / 2f, texture.Height *3 / 2f);
             sprite_scale = new Vector2(0.6f, 0.6f); // ย่อขนาดกว่าตัวหัวจริง เพราะยืม sprite มาใช้ชั่วคราว
 
             hit_box_radius = 10f;
