@@ -246,6 +246,14 @@ namespace old_heart
                 {
                     current_combat_state = combat_state.none;
                 }
+
+                if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
+                {
+                    update_movement_input();
+                    current_buffer_input = bufferable_input.none;
+                    start_dash();
+                    return;
+                }
             }
             void update_aim_state()
             {
