@@ -675,7 +675,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
 
                 Texture2D takeoff_head_texture = content.Load<Texture2D>("assets/image/player/sprite_player_takeoffhead"); 
-                animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 12 , loop: false);
+                animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 15 , loop: false);
                 takeoff_head_animation.name = "player takeoff_head";
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 

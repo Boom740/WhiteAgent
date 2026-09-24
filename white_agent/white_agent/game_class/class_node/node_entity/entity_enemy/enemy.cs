@@ -40,7 +40,7 @@ namespace old_heart
 
             if (base.take_damage(damage_taken) == false) { return false; }
 
-            global.signal.screen_shake(0.4f);
+            global.signal.screen_shake(0.6f);
             dizzy_timer_current += 0.3f;
             shield_timer_current += 0.3f;
             if (alive == false)
