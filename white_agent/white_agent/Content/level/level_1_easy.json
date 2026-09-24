@@ -3,32 +3,20 @@
     "level_object_list": [
         {
             "type": "player",
-            "position_x": 830,
-            "position_y": 270,
-            "data": {}
-        },
-        {
-            "type": "enemy_leukemia",
-            "position_x": 240,
-            "position_y": 400,
-            "data": {}
-        },
-        {
-            "type": "enemy_leukemia",
-            "position_x": 840,
-            "position_y": 840,
-            "data": {}
-        },
-        {
-            "type": "enemy_bacteria",
-            "position_x": 420,
+            "position_x": 265,
             "position_y": 230,
             "data": {}
         },
         {
-            "type": "enemy_bacteria",
-            "position_x": 340,
-            "position_y": 840,
+            "type": "enemy_leukemia",
+            "position_x": 260,
+            "position_y": 690,
+            "data": {}
+        },
+        {
+            "type": "enemy_leukemia",
+            "position_x": 830,
+            "position_y": 690,
             "data": {}
         },
         {
@@ -36,7 +24,7 @@
             "position_x": 0,
             "position_y": 0,
             "data": {
-                "size_x": "160",
+                "size_x": "150",
                 "size_y": "1000"
             }
         },
@@ -46,58 +34,40 @@
             "position_y": 0,
             "data": {
                 "size_x": "1000",
-                "size_y": "135"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 390,
-            "position_y": 360,
-            "data": {
-                "size_x": "1000",
-                "size_y": "285"
+                "size_y": "115"
             }
         },
         {
             "type": "wall_collision_rectangle",
             "position_x": 0,
-            "position_y": 875,
+            "position_y": 855,
             "data": {
                 "size_x": "1000",
-                "size_y": "135"
+                "size_y": "115"
             }
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 900,
+            "position_x": 380,
             "position_y": 0,
             "data": {
-                "size_x": "160",
+                "size_x": "1000",
+                "size_y": "625"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 890,
+            "position_y": 0,
+            "data": {
+                "size_x": "100",
                 "size_y": "1000"
             }
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 0,
-            "position_y": 0,
-            "data": {
-                "size_x": "290",
-                "size_y": "250"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 0,
-            "position_y": 0,
-            "data": {
-                "size_x": "225",
-                "size_y": "310"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 390,
-            "position_y": 245,
+            "position_x": 312,
+            "position_y": 505,
             "data": {
                 "size_x": "60",
                 "size_y": "115"
@@ -105,8 +75,8 @@
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 553,
-            "position_y": 135,
+            "position_x": 583,
+            "position_y": 630,
             "data": {
                 "size_x": "60",
                 "size_y": "115"
@@ -114,44 +84,17 @@
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 716,
-            "position_y": 245,
+            "position_x": 155,
+            "position_y": 120,
             "data": {
-                "size_x": "60",
-                "size_y": "115"
+                "size_x": "57",
+                "size_y": "50"
             }
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 390,
-            "position_y": 705,
-            "data": {
-                "size_x": "60",
-                "size_y": "115"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 160,
-            "position_y": 495,
-            "data": {
-                "size_x": "65",
-                "size_y": "175"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 775,
-            "position_y": 650,
-            "data": {
-                "size_x": "120",
-                "size_y": "115"
-            }
-        },
-        {
-            "type": "wall_collision_rectangle",
-            "position_x": 233,
-            "position_y": 560,
+            "position_x": 315,
+            "position_y": 120,
             "data": {
                 "size_x": "57",
                 "size_y": "50"
@@ -160,7 +103,7 @@
         {
             "type": "wall_collision_rectangle",
             "position_x": 235,
-            "position_y": 820,
+            "position_y": 295,
             "data": {
                 "size_x": "57",
                 "size_y": "50"
@@ -168,10 +111,55 @@
         },
         {
             "type": "wall_collision_rectangle",
-            "position_x": 390,
-            "position_y": 705,
+            "position_x": 150,
+            "position_y": 505,
             "data": {
-                "size_x": "125",
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 235,
+            "position_y": 713,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 380,
+            "position_y": 630,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 380,
+            "position_y": 800,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 585,
+            "position_y": 800,
+            "data": {
+                "size_x": "57",
+                "size_y": "50"
+            }
+        },
+        {
+            "type": "wall_collision_rectangle",
+            "position_x": 735,
+            "position_y": 715,
+            "data": {
+                "size_x": "57",
                 "size_y": "50"
             }
         },
@@ -180,7 +168,7 @@
             "position_x": 0,
             "position_y": 0,
             "data": {
-                "texture": "assets/image/levels/texture_level_easy_01",
+                "texture": "assets/image/levels/texture_level_easy_04",
                 "high": "False"
             }
         }

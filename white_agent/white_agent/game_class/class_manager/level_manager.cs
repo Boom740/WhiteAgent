@@ -75,6 +75,10 @@ namespace old_heart
                 {
                     entity_type = "enemy_bacteria";
                 }
+                else if (entity is enemy_virus)
+                {
+                    entity_type = "enemy_virus";
+                }
                 else
                 {
                     Debug.WriteLine("ERROR cant save entity : " + entity);
@@ -162,6 +166,13 @@ namespace old_heart
                     float position_y = level_object.position_y;
 
                     game_manager.add_entity(new enemy_bacteria(game_manager.content, new Vector2(position_x, position_y)));
+                }
+                else if (level_object.type == "enemy_virus")
+                {
+                    float position_x = level_object.position_x;
+                    float position_y = level_object.position_y;
+
+                    game_manager.add_entity(new enemy_virus(game_manager.content, new Vector2(position_x, position_y)));
                 }
                 else if (level_object.type == "wall_collision_rectangle")
                 {

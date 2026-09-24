@@ -73,7 +73,7 @@ namespace old_heart
                 game._graphics.ToggleFullScreen();
             }
 
-            test_text_2.text_string = $"level_cleared : {game.run_data_manager.cleared_level} / {game.run_data_manager.level_list.Count}" +
+            test_text_2.text_string = $"level cleared : {game.run_data_manager.cleared_level} / {game.run_data_manager.level_list.Count}" +
             $"\nlife left : {game.run_data_manager.respawn_left}" +
             $"";
                 

@@ -26,28 +26,27 @@ namespace old_heart
         }
         public void load()
         {
-            List<string> level_set_1 = new List<string>() { "level_1", "level_2", "level_3", "level_4", "level_5" };
-            string level_boss_1 = "level_boss_1";
+            List<string> level_set_1 = new List<string>() { "level_1_easy", "level_2_easy", "level_3_easy", "level_4_easy"};
             List<string> level_set_2 = new List<string>();
-
             List<string> level_set_3 = new List<string>();
 
-            random_level_order(level_set_1);
-
-            //level_list.AddRange(level_set_1);
-            //level_list.Add(level_boss_1);
+            //random_level_order(level_set_1);
 
             level_list.Add("level_0_tutorial");
-            level_list.Add("level_1_easy");
-            level_list.Add("level_2_easy");
-            level_list.Add("level_3_easy");
-            level_list.Add("level_4_easy");
+            level_list_add_from_list(level_set_1);
 
             foreach (string level in level_list)
             {
                 Debug.WriteLine("level_list " +  level);
             }  // debug
 
+            void level_list_add_from_list(List<string> level_add_list)
+            {
+                foreach (string level in level_add_list)
+                {
+                    level_list.Add(level);
+                }
+            }
             void random_level_order(List<string> level_set) 
             {
                 int i = level_set.Count;
