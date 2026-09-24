@@ -27,6 +27,8 @@ namespace old_heart
 
         public float attack_cooldown = 2f;
         public float attack_cooldown_timer = 0f;
+        public int attack_hit_frame = 8; // frame 9 แบบ 1-indexed = index 8 แบบ 0-indexed
+        private bool hitbox_spawned_this_attack = false;
 
         public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 100f, range: 40f, hitbox_lifetime: 0.3f, knockback_speed: 100f);
 
@@ -150,22 +152,13 @@ namespace old_heart
             {
                 attack_timer -= delta_time;
 
-                if (hitbox_spawn_timer == -1)
+                if (hitbox_spawned_this_attack == false && animation_player.current_frame_index >= attack_hit_frame)
                 {
-                    // do nothing
-                }
-                else if (hitbox_spawn_timer <= 0)
-                {
-                    hitbox_spawn_timer = -1;
-
+                    hitbox_spawned_this_attack = true;
                     acceleration = Vector2.Zero;
                     melee_data.spawn_melee_projectile(content, this, position, current_direction_vector);
-
                 }
-                else
-                {
-                    hitbox_spawn_timer -= delta_time;
-                }
+               
 
                 if (attack_timer <= 0f)
                 {
@@ -191,13 +184,14 @@ namespace old_heart
             void start_attack()
             {
                 state = enemy_state.attack;
+                hitbox_spawned_this_attack = false;
 
                 Vector2 aim_direction = Vector2.Normalize(target.position - position) * melee_data.lunge_speed;
 
                 current_direction_vector = aim_direction;  // update direction to aim
 
                 attack_timer = attack_duration;
-                hitbox_spawn_timer = hitbox_spawn_time;
+                //hitbox_spawn_timer = hitbox_spawn_time;
 
 
                 animation_player.play(animation_player.data.data[animation_name.attack]);

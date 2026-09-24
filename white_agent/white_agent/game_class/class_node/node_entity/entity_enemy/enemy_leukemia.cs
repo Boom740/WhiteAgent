@@ -342,7 +342,7 @@ namespace old_heart
                 walk_animation.name = "leukemia walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_dizzy");
                 animation dizzy_animation = new animation(texture, frame_per_sec: 2, sprite_size: new Point(64, 64));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
                 dizzy_animation.sprite_origin = new Vector2(32, 57);
