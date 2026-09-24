@@ -56,6 +56,7 @@ namespace old_heart
         public bool has_head = true;
         public float head_throw_speed = 1200f;
         public float pickup_radius = 24f;
+        public float throw_head_i_frame_duration = 1f;
 
         public float head_drop_speed = 300;
         // --- aim  ---
@@ -66,7 +67,7 @@ namespace old_heart
         public float dash_speed = 1000f;
         public float dash_duration = 0.1f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
         public float dash_i_frame_duration = 0.6f;
-        public float dash_i_frame_visual_timer = 0f; // player has i_frame but not blink
+        public float fade_i_frame_visual_timer = 0f; // player has i_frame but not blink
         public float dash_timer = 0f;
         public float dash_cooldown = 1.5f;
         public float dash_cooldown_timer = 0f;
@@ -203,9 +204,9 @@ namespace old_heart
                 {
                     i_frame_time -= delta_time;
                 }
-                if (dash_i_frame_visual_timer > 0f)  //  // player has i_frame but not blink
+                if (fade_i_frame_visual_timer > 0f)  //  // player has i_frame but not blink
                 {
-                    dash_i_frame_visual_timer -= delta_time;
+                    fade_i_frame_visual_timer -= delta_time;
                 }
             }
 
@@ -379,6 +380,8 @@ namespace old_heart
                 global.sound.play_sound(global.sound.sound_name.throw_head);
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
+
+                i_frame_time = throw_head_i_frame_duration;
             }
             
             void update_dash()
@@ -408,7 +411,7 @@ namespace old_heart
                 max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
                 i_frame_time += dash_i_frame_duration;
-                dash_i_frame_visual_timer += dash_i_frame_duration;
+                fade_i_frame_visual_timer += dash_i_frame_duration;
             }
             void end_dash()
             {
@@ -584,7 +587,7 @@ namespace old_heart
             {
                 base.Draw(sprite_batch, 1);   // not blinking when die or change scene
             }
-            else if (dash_i_frame_visual_timer > 0)  // still has i_frame from dash
+            else if (fade_i_frame_visual_timer > 0 )  // still has i_frame from dash
             {
                 base.Draw(sprite_batch, blink_min_alpha);
             }
