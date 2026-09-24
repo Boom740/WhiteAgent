@@ -665,12 +665,12 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_arm_walk, no_head_arm_walk_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
-                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 12); 
+                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 15, sprite_size: new Point(128, 128)); 
                 punch_animation.name = "player punch";
                 animation_data.data.Add(animation_name.punch, punch_animation);
 
                 Texture2D no_head_punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_punchattack");
-                animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 12);
+                animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 15, sprite_size: new Point(128, 128));
                 no_head_punch_animation.name = "player no_head_punch";
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
 
@@ -680,7 +680,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 
                 Texture2D die_texture = content.Load<Texture2D>("assets/image/player/sprite_player_die");
-                animation die_animation = new animation(die_texture, frame_per_sec: 12, loop: false , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count: 13);
+                animation die_animation = new animation(die_texture, frame_per_sec: 16, loop: false , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count: 13);
                 die_animation.name = "player die";
                 animation_data.data.Add(animation_name.die, die_animation);
             }
