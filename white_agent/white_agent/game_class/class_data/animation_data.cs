@@ -28,6 +28,7 @@ namespace old_heart
         public Vector2 sprite_origin = new Vector2(16,24);
         public bool one_direction_sprite_format = false;
         public int one_diretion_sprite_format_frame_count = 0;
+        public float layer_depth_offset = 0f; 
         public animation(Texture2D sprite_sheet,bool loop = true, float frame_per_sec = 4, Point? sprite_size = null, bool one_direction_sprite_format = false , int one_diretion_sprite_format_frame_count = 0)
         {
             this.sprite_sheet = sprite_sheet;
@@ -173,7 +174,7 @@ namespace old_heart
                 sprite_scale *= draw_scale.Value;
             }
             Vector2 sprite_origin = current_animation.sprite_origin;
-            float layer_depth = (position.Y + 50000f) / 100000f;
+            float layer_depth = ((position.Y + 50000f) / 100000f ) + current_animation.layer_depth_offset;
             Color color = Color.White;
             if (current_flash_time > 0)
             {

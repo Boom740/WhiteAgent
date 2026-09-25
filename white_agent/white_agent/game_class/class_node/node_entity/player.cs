@@ -257,6 +257,7 @@ namespace old_heart
                     start_dash();
                     return;
                 }
+                
             }
             void update_aim_state()
             {
@@ -273,8 +274,17 @@ namespace old_heart
                 {
                     throw_head();
                 }
-                
-                update_movement_input();
+                else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
+                {
+                    current_buffer_input = bufferable_input.dash;
+
+                    update_movement_input();
+
+                    start_dash();
+                    return;
+                }
+
+                update_movement_input(false);
                 update_walk_idle_state();
             }
             void update_dash_state()
@@ -296,7 +306,7 @@ namespace old_heart
                 i_frame_time = 1; // set i frame to 1 every time when change scene
             }
 
-            void update_movement_input()
+            void update_movement_input(bool look_at_mouse = true)
             {
                 if (keyboard_state.IsKeyDown(Keys.D))
                 {
@@ -322,7 +332,7 @@ namespace old_heart
                     input_direction = Vector2.Normalize(input_direction) * effective_speed;
                 }
 
-                if (current_combat_state != combat_state.aim  &&  input_direction != Vector2.Zero)
+                if (look_at_mouse  &&  input_direction != Vector2.Zero)
                 {
                     current_direction_vector = input_direction;
                 }
@@ -476,8 +486,9 @@ namespace old_heart
                     //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
                 case combat_state.dash:
-                    //  already play animaiton in punch function   dont play any other animation while attacking
+                    //  already play animaiton
                     break;
+
                 case combat_state.aim:   // body layer: เล่นท่า headless ตลอดช่วง aim
                     switch (current_state)
                     {
@@ -601,9 +612,17 @@ namespace old_heart
             
             if (current_combat_state == combat_state.aim)
             {
-                animation_player_2.draw(sprite_batch, position, blink_alpha);
+                if (fade_i_frame_visual_timer > 0)  // still has i_frame from dash
+                {
+                    animation_player_2.draw(sprite_batch, position, blink_min_alpha);
+                }
+                else
+                {
+                    animation_player_2.draw(sprite_batch, position, blink_alpha);
+                }
                 
             }
+
             if (dash_cooldown_timer > 0)
             {
                 int dash_cooldown_offset_height = -50;
@@ -681,6 +700,7 @@ namespace old_heart
 
                 Texture2D takeoff_head_texture = content.Load<Texture2D>("assets/image/player/sprite_player_takeoffhead"); 
                 animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 15 , loop: false);
+                takeoff_head_animation.layer_depth_offset = 0.001f;
                 takeoff_head_animation.name = "player takeoff_head";
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 
