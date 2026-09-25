@@ -700,7 +700,7 @@ namespace old_heart
 
                 Texture2D takeoff_head_texture = content.Load<Texture2D>("assets/image/player/sprite_player_takeoffhead"); 
                 animation takeoff_head_animation = new animation(takeoff_head_texture, frame_per_sec: 15 , loop: false);
-                takeoff_head_animation.layer_depth_offset = 0.001f;
+                takeoff_head_animation.layer_depth_offset = 0.000001f;
                 takeoff_head_animation.name = "player takeoff_head";
                 animation_data.data.Add(animation_name.takeoff_head, takeoff_head_animation);
 
