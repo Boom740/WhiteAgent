@@ -27,7 +27,7 @@ namespace old_heart
 
         public float i_frame_time = 0f;  // currnetly use when change scene only
         // --- combat: melee ---
-        public float attack_duration = 20f /60f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 0.3f ;  // time that not able to move
         public float attack_timer = 0f;
         // --- I-frame---
         public float i_frame_duration = 3f; // ระยะเวลา i-frame ทั้งหมด ใช้ทั้งคุม i_frame_time และ pickup_lock_timer ของหัว ให้ sync กัน
@@ -242,7 +242,10 @@ namespace old_heart
             void update_attack_state()
             {
                 attack_timer -= delta_time;
-                if (attack_timer <= 0f)
+                if (attack_timer <= 0f ||  (animation_player.is_finished == true && (
+                    animation_player.current_animation == animation_player_player.animation_data.data[animation_player_player.animation_name.punch] ||
+                    animation_player.current_animation == animation_player_player.animation_data.data[animation_player_player.animation_name.no_head_punch]
+                    ) ) )
                 {
                     current_combat_state = combat_state.none;
                 }
@@ -665,12 +668,14 @@ namespace old_heart
                 animation_data.data.Add(animation_name.no_head_arm_walk, no_head_arm_walk_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_punchattack");
-                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 15, sprite_size: new Point(128, 128)); 
+                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 15, sprite_size: new Point(128, 128));
+                punch_animation.sprite_origin = new Vector2(64, 80);
                 punch_animation.name = "player punch";
                 animation_data.data.Add(animation_name.punch, punch_animation);
 
                 Texture2D no_head_punch_texture = content.Load<Texture2D>("assets/image/player/sprite_player_noheadbutarm_punchattack");
                 animation no_head_punch_animation = new animation(no_head_punch_texture, loop: false, frame_per_sec: 15, sprite_size: new Point(128, 128));
+                no_head_punch_animation.sprite_origin = new Vector2(64, 80);
                 no_head_punch_animation.name = "player no_head_punch";
                 animation_data.data.Add(animation_name.no_head_punch, no_head_punch_animation);
 
