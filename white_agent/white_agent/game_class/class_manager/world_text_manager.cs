@@ -16,10 +16,6 @@ namespace old_heart
         {
             world_text_list.Add(world_text);
         }
-        public void remove(world_text world_text)
-        {
-            world_text_list.Remove(world_text);
-        }
         public void update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;

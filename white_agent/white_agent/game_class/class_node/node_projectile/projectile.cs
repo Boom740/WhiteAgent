@@ -100,5 +100,17 @@ namespace old_heart
             Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
             sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f) * alpha, 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
+
+        public virtual void delete_clean_up(collision_manager collision_manager, debug_manager debug_manager)
+        {
+            if (collision is ICollisionActor actor)
+            {
+                collision_manager.remove(actor); // remove it from collision manager
+            }
+            if (collision is node node)
+            {
+                debug_manager.remove(node);
+            }
+        }
     }
 }

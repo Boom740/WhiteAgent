@@ -156,11 +156,15 @@ namespace old_heart
         {
             // for collecting item
         }
+        public virtual void apply_knockback(Vector2 direction, float speed)
+        {
+            direction = Vector2.Normalize(direction);
+            knockback_velocity = direction * speed;
+        }
         public override void Draw(SpriteBatch sprite_batch)
         {
             this.Draw(sprite_batch, 1f);
         }
-
         public virtual void Draw(SpriteBatch sprite_batch, float alpha)
         {
             animation_player.draw(sprite_batch, position, alpha);
@@ -169,10 +173,17 @@ namespace old_heart
             Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
             sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
-        public virtual void apply_knockback(Vector2 direction, float speed)
+
+        public virtual void delete_clean_up(collision_manager collision_manager , debug_manager debug_manager)
         {
-            direction = Vector2.Normalize(direction);
-            knockback_velocity = direction * speed;
+            if (collision is ICollisionActor actor)
+            {
+                collision_manager.remove(actor); // remove it from collision manager
+            }
+            if (collision is node node)
+            {
+                debug_manager.remove(node);
+            }
         }
     }
 }

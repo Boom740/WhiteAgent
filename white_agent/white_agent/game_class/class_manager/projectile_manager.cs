@@ -16,10 +16,6 @@ namespace old_heart
         {
             projectile_list.Add(projectile);
         }
-        public void remove(projectile projectile)
-        {
-            projectile_list.Remove(projectile);
-        }
         public void update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;

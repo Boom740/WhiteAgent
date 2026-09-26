@@ -16,10 +16,6 @@ namespace old_heart
         {
             entity_list.Add(entity);
         }
-        public void remove(entity entity)
-        {
-            entity_list.Remove(entity);
-        }
         public void update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;

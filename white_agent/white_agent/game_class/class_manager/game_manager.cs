@@ -27,10 +27,13 @@ namespace old_heart
 
         public debug_manager debug_manager;
 
-        Queue<projectile> signal_spawn_projectile_queue = new Queue<projectile>();
-        Queue<world_text> signal_spawn_world_text_queue = new Queue<world_text>();
-        Queue<entity> signal_spawn_entity_queue = new Queue<entity>();
+        public List<projectile> signal_spawn_projectile_list = new List<projectile>();
+        public List<world_text> signal_spawn_world_text_list = new List<world_text>();
+        public List<entity> signal_spawn_entity_list = new List<entity>();
 
+        public List<entity> entity_list; // use in clear inactive
+        public List<projectile> projectile_list;
+        public List<world_text> world_text_list;
         public player player;
 
         public bool pause = false;
@@ -59,6 +62,10 @@ namespace old_heart
             global.signal.signal_spawn_particle += add_particle;
 
             global.signal.signal_screen_shake += camera_manager.shake_screen;
+
+            entity_list = entity_manager.entity_list;
+            projectile_list = projectile_manager.projectile_list;
+            world_text_list = world_text_manager.world_text_list;
         }
         public void add_ui(node node)
         {
@@ -130,7 +137,7 @@ namespace old_heart
         }
         public void update(GameTime gameTime)
         {
-            spawn_queue_signal();
+            spawn_signal_list();
 
             ui_manager.update(gameTime);
             debug_manager.update(gameTime);
@@ -161,90 +168,105 @@ namespace old_heart
 
             clear_inactive_node();
         }
-        public void clear_inactive_node()
+        public void clear_inactive_node()      // use evil swap back technique >:D
         {
-
             clear_inactive_node_in_entity();
             clear_inactive_node_in_projectile();
             clear_inactive_node_in_world_text();
 
-
             void clear_inactive_node_in_entity() 
             {
-                List<entity> inactive_entity = entity_manager.entity_list.Where(node => node.active == false).ToList();
-                foreach (entity entity in inactive_entity)
+                for (int i = entity_list.Count - 1; i >= 0; i--)
                 {
-                    entity_manager.remove(entity);
-                    if (entity.collision is ICollisionActor actor) {
-                        collision_manager.remove(actor); // remove it from collision manager
-                        //Debug.WriteLine("game_manager test collision entity removed " + entity);
-                    }
-                    if (entity.collision is node node)
+                    entity entity = entity_list[i];
+                    
+                    if (entity.active != true)
                     {
-                        debug_manager.remove(node);
-                    }
-                    if (entity is player)
-                    {
-                        player = null;
-                        current_game_state = game_state.game_over;
+                        int list_index = entity_list.Count - 1;
+                        if (i < list_index)
+                        {
+                            entity_list[i] = entity_list[list_index];
+                        }
+
+                        entity.delete_clean_up(collision_manager,debug_manager);
+                        
+                        if (entity is player)
+                        {
+                            player = null;
+                            current_game_state = game_state.game_over;
+                        }
+
+                        entity_list.RemoveAt(list_index);
                     }
                 }
             }
             void clear_inactive_node_in_projectile()
             {
-                List<projectile> inactive_projectile = projectile_manager.projectile_list.Where(node => node.active == false).ToList();
-                foreach (projectile projectile in inactive_projectile)
+                for (int i = projectile_list.Count - 1; i >= 0; i--)
                 {
-                    projectile_manager.remove(projectile);
-                    if (projectile.collision is ICollisionActor actor)
+                    projectile projectile = projectile_list[i];
+
+                    if (projectile.active != true)
                     {
-                        collision_manager.remove(actor); // remove it from collision manager 
-                        //Debug.WriteLine("game_manager test collision projectile removed " + projectile);
-                    }
-                    if (projectile.collision is node node)
-                    {
-                        debug_manager.remove(node);
+                        int list_index = projectile_list.Count - 1;
+                        if (i < list_index)
+                        {
+                            projectile_list[i] = projectile_list[list_index];
+                        }
+
+                       projectile.delete_clean_up(collision_manager, debug_manager);
+
+                        projectile_list.RemoveAt(list_index);
                     }
                 }
             }
             void clear_inactive_node_in_world_text()
             {
-                List<world_text> inactive_world_text = world_text_manager.world_text_list.Where(node => node.active == false).ToList();
-                foreach (world_text world_text in inactive_world_text)
+                for (int i = world_text_list.Count - 1; i >= 0; i--)
                 {
-                    world_text_manager.remove(world_text);
+                    world_text world_text = world_text_list[i];
+
+                    if (world_text.active != true)
+                    {
+                        int list_index = world_text_list.Count - 1;
+                        if (i < list_index)
+                        {
+                            world_text_list[i] = world_text_list[list_index];
+                        }
+
+                        world_text_list.RemoveAt(list_index);
+                    }
                 }
             }
         }
-        public void spawn_queue_signal()
+        public void spawn_signal_list()
         {
-            while (signal_spawn_entity_queue.Count > 0)
-            {
-                entity signal_entity = signal_spawn_entity_queue.Dequeue();
+            foreach (entity signal_entity in signal_spawn_entity_list) {
                 add_entity(signal_entity);
             }
-            while (signal_spawn_projectile_queue.Count > 0)
-            {
-                projectile signal_projectile = signal_spawn_projectile_queue.Dequeue();
+            foreach (projectile signal_projectile in signal_spawn_projectile_list) {
                 add_projectile(signal_projectile);
             }
-            while (signal_spawn_world_text_queue.Count > 0)
+            foreach (world_text signal_world_text in signal_spawn_world_text_list)
             {
-                world_text signal_world_text = signal_spawn_world_text_queue.Dequeue();
                 add_world_text(signal_world_text);
             }
+
+            signal_spawn_entity_list.Clear();
+            signal_spawn_projectile_list.Clear();
+            signal_spawn_world_text_list.Clear();
         }
         public void handle_signal_add_projectile(projectile projectile)
         {
-            signal_spawn_projectile_queue.Enqueue(projectile);
+            signal_spawn_projectile_list.Add(projectile);
         }
         public void handle_signal_add_world_text(world_text world_text)
         {
-            signal_spawn_world_text_queue.Enqueue(world_text);
+            signal_spawn_world_text_list.Add(world_text);
         }
         public void handle_signal_add_entity(entity entity)
         {
-            signal_spawn_entity_queue.Enqueue(entity);
+            signal_spawn_entity_list.Add(entity);
         }
         public void draw(SpriteBatch sprite_batch)
         {
@@ -253,8 +275,8 @@ namespace old_heart
 
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , transformMatrix: camera_matrix);    // low layer
 
-            RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
-            sprite_batch.FillRectangle(blue_backgound_rectangle, Color.Black);  // blue_background
+            //RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
+            //sprite_batch.FillRectangle(blue_backgound_rectangle, Color.Black);  // background
 
             map_manager.draw_low(sprite_batch);
             particle_manager.draw_low(sprite_batch);
