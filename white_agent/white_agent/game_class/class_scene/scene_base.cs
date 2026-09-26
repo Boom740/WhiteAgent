@@ -35,7 +35,7 @@ namespace old_heart
 
             if (player_respawned) {return; } 
 
-            if (game_manager.current_game_state == game_manager.game_state.level_clear)       // un finish random level system
+            if (game_manager.current_game_state == game_manager.game_state.level_clear)       // finished level
             {
                 bool play_latest_level = false;
                 if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
