@@ -30,15 +30,15 @@ namespace old_heart
         public float attack_duration = 0.3f ;  // time that not able to move
         public float attack_timer = 0f;
         // --- I-frame---
-        public float i_frame_duration = 3f; // ระยะเวลา i-frame ทั้งหมด ใช้ทั้งคุม i_frame_time และ pickup_lock_timer ของหัว ให้ sync กัน
+        public float i_frame_duration = 2f; // ระยะเวลา i-frame ทั้งหมด ใช้ทั้งคุม i_frame_time และ pickup_lock_timer ของหัว ให้ sync กัน
         public float blink_interval = 0.1f;
         public float blink_min_alpha = 0.2f;
 
         public List<melee_data> combo_hits = new List<melee_data>
          {
-          new melee_data(damage: 1, lunge_speed: 200f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 200f , hitbox_radius: 35), // hit 1
-          new melee_data(damage: 1, lunge_speed: 200f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 200f, hitbox_radius: 35), // hit 2
-          new melee_data(damage: 2, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 400f, hitbox_radius: 35), // hit 3 (finisher)
+          new melee_data(damage: 1, lunge_speed: 600f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
+          new melee_data(damage: 1, lunge_speed: 600f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
+          new melee_data(damage: 2, lunge_speed: 1000f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
          };
         // --- combat: melee combo ---
         public int combo_count = 0;
@@ -48,14 +48,14 @@ namespace old_heart
         public float combo_cooldown_duration = 0.5f; // คูลดาวน์หลังคอมโบครบ 4
         public float melee_cooldown_timer = 0f;
 
-        public float attack_input_delay = 0.15f; // ดีเลย์ขั้นต่ำระหว่างแต่ละ hit กันคลิกรัวเกินจังหวะ
+        public float attack_input_delay = 0.4f; // ดีเลย์ขั้นต่ำระหว่างแต่ละ hit กันคลิกรัวเกินจังหวะ
         private float next_attack_timer = 0f;
 
         // --- combat: head throw ---
         private projectile_head head_projectile;
         public bool has_head = true;
         public float head_throw_speed = 1200f;
-        public float pickup_radius = 24f;
+        public float pickup_radius = 40f;
         public float throw_head_i_frame_duration = 1f;
 
         public float head_drop_speed = 300;
@@ -65,11 +65,11 @@ namespace old_heart
 
         // --- dash (Space) ---
         public float dash_speed = 1000f;
-        public float dash_duration = 0.1f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
+        public float dash_duration = 0.15f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
         public float dash_i_frame_duration = 0.6f;
         public float fade_i_frame_visual_timer = 0f; // player has i_frame but not blink
         public float dash_timer = 0f;
-        public float dash_cooldown = 1.5f;
+        public float dash_cooldown = 1f;
         public float dash_cooldown_timer = 0f;
 
         private float default_max_velocity;
@@ -572,7 +572,7 @@ namespace old_heart
                 head.velocity = Vector2.Normalize(head_drop_direction) * head_drop_speed ;
                 head.has_bounced = true;
                 head.shock_wave_enable = false;
-                head.pickup_lock_timer = i_frame_duration; // ห้ามเก็บตลอดช่วง i-frame
+                head.pickup_lock_timer = 1; // ห้ามเก็บตลอดช่วง i-frame
 
                 global.signal.spawn_projectile(head);
                 head_projectile = head;

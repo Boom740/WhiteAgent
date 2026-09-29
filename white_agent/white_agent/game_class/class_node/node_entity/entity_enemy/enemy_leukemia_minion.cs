@@ -12,7 +12,7 @@ namespace old_heart
         public int contact_damage = 1;
 
         public enemy_leukemia_minion(ContentManager content_set, Vector2 position)
-            : base(content_set, position, max_hp: 1, speed: 1000, hit_box_radius: 8)
+            : base(content_set, position, max_hp: 1, speed: 900, hit_box_radius: 8)
         {
             animation_player = new animation_player_minion(content_set);
             state = enemy_state.chase; // minion ไล่ล่าทันทีที่เกิด ไม่มี patrol เหมือน leukemia
@@ -145,7 +145,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_minion_dizzy");
-                animation dizzy_animation = new animation(texture, frame_per_sec: 10, sprite_size: new Point(64, 64));
+                animation dizzy_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(64, 64));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
                 dizzy_animation.sprite_origin = new Vector2(32, 48);
                 dizzy_animation.name = "leukemia dizzy";

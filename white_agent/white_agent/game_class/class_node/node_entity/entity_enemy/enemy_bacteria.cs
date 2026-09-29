@@ -309,7 +309,7 @@ namespace old_heart
                 walk_animation.name = "bacteria walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                animation dizzy_animation = new animation(dizzy_texture, frame_per_sec: 2, sprite_size: new Point(80, 80));
+                animation dizzy_animation = new animation(dizzy_texture, frame_per_sec: 12, sprite_size: new Point(80, 80));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
                 dizzy_animation.sprite_origin = new Vector2(40, 64);
                 dizzy_animation.name = "bacteria dizzy";
