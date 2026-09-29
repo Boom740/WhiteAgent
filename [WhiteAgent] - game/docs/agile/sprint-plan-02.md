@@ -14,12 +14,12 @@
 
 ## Sprint Backlog
 
-| # | User Story                                   | รับผิดชอบ                                                                                                                   | MoSCoW      | Estimate (SP) | Status         |
-| - | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- | ------------- | -------------- |
-| 1 | As a player, I will fight more enemy         | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Should Have | [1]           | 🔄 In Progress |
-| 2 | As a player, I want to go next level         | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | [2]           | ✅ Done        |
-| 3 | As a player, I want to save game             | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | [1]           | ✅ Done        |
-| 4 | As a designer, I want player to hear SFX/BGM | [วงศ์วรรธน์ พงค์จินะ, ธีรภัทร ศิริณัฐกุลสมบัติม กนต์ระพี เดชะ]                | Should Have | [2]           | 🔲 Todo        |
+| # | User Story                           | รับผิดชอบ                                                                                                                   | MoSCoW      | Estimate (SP) | Status         |
+| - | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- | ------------- | -------------- |
+| 1 | As a player, I will fight more enemy | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Should Have | [1]           | 🔄 In Progress |
+| 2 | As a player, I want to go next level | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | [2]           | ✅ Done        |
+| 3 | As a player, I want to save game     | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | [1]           | ✅ Done        |
+| 4 | As a player, I will gather money     | [วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ]                                                                  | Should Have | [2]           | 🔄 In Progress |
 
 ## Status Legend
 
@@ -38,22 +38,20 @@
 - [X] [Enemy03 Ai] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: ✅ Done]
 - [X] [Sprite enemy01] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: ✅ Done]
 - [X] [Sprite enemy02] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: ✅ Done]
-- [ ] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: 🔄 In Progress]
+- [X] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: ✅ Done]
 - [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: todo]
-
-
 
 ### Story 2 — [As a player, I want to go next level]
 
-- [ ] [ระบบผ่านด่าน] [domain::Programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ✅ Done]
+- [X] [ระบบผ่านด่าน] [domain::Programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ✅ Done]
 
 ### Story 3 — [As a player, I want to save game]
 
-- [ ] [ระบบ Simple Save] [domain::Programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ✅ Done]
+- [X] [ระบบ Simple Save] [domain::Programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ✅ Done]
 
 ### Story 4 — [As a player, I will gather money]
 
-- [ ] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
+- [X] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: todo]
 - [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: todo]
 
 ---
@@ -62,13 +60,11 @@
 
 ### [2026/09/08]
 
-**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:** 
+**สัปดาห์ที่ผ่านมาได้ทำอะไรไปบ้าง:**
 
-**สัปดาห์นี้จะทำอะไรต่อไป:** 
+**สัปดาห์นี้จะทำอะไรต่อไป:**
 
-**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:** 
-
-
+**พบปัญหาหรืออุปสรรคอะไรในการทำงาน:**
 
 ---
 
