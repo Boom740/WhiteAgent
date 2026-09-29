@@ -7,7 +7,6 @@ using System.Diagnostics;
 
 namespace old_heart
 {
-    // hitbox ของท่าโจมตีปกติ: ล่องหน วิ่งออกไปตามทิศ cursor ระยะสั้นๆ แล้วหายไป
     public class projectile_melee : projectile
     {
         public int damage;
@@ -21,7 +20,7 @@ namespace old_heart
             this.velocity = Vector2.Normalize(aim_direction) * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
             this.hit_box_radius = hit_box_radius;
 
-            visible = false; // ล่องหน ไม่ต้องมี texture เลย
+            visible = false; // ล่องหน 
         }
 
         public override void on_hit_entity(entity target_entity)
