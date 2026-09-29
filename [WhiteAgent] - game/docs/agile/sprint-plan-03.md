@@ -21,7 +21,7 @@
 | 5 | As a designer, I want to make Main menu      | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ, กนต์ระพี เดชะ] | Should Have | 7hr           | 🔄 In Progress |
 | 6 | As a enemy, It will drop item when die       | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ, กนต์ระพี เดชะ] | Should Have | 6hr           | 🔄 In Progress |
 | 7 | As a player, I will gather money            | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ, กนต์ระพี เดชะ] | Should Have | 1 days        | 🔄 In Progress |
-| 8 | As a player, I will fight more enemy         | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ]                            | Should Have | 12hr          | 🔄 In Progress |
+| 8 | As a player, I will fight more enemy         | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ]                            | Must Have   | 12hr          | 🔄 In Progress |
 
 ## Status Legend
 

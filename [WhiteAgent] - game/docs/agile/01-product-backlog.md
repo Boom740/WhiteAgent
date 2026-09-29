@@ -16,7 +16,7 @@
 | 5 | As a player, I want to save game                    | เมื่อผู้เล่นไปยังเลเวลถัดไป จะทำการบันทึกตำแหน่งไว้ ถ้าผู้เล่นตายด่านไหนจะเกิดใหม่ด่านนั้น | 6hr           | 2      |
 | 6 | As a player, I will get gameover                    | เมื่อ HP ของผู้เล่นหรือ HP ของร่างกายหมด                                                                                                           | 1hr           | 2      |
 | 7 | As a player, I want to go next level                | เมื่อผู้เล่นเคลียร์ศัตรูในด่านจนหมด                                                                                                             | 3hr           | 2      |
-| 8 | As a player, I will fight more enemy                | มีศัตรูเพิ่มขึ้น                                                                                                                                                   | 5 days        | 2 - 3  |
+| 8 | As a player, I will fight more enemy                | ผู้เล่นจะได้สู้กับศัตรูหลายประเภทมากขึ้น                                                                                                   | 5 days        | 2 - 3  |
 
 ## Should Have
 
@@ -29,6 +29,7 @@
 | 5 | As a designer, I want player to hear SFX/BGM | ผู้เล่นได้ยินเสียงในเกม                                                                                | 2 days        | 2 - 3  |
 | 6 | As a player, I need some rest after fight    | เมื่อเคลียร์ด่านสำเร็จ ผู้เล่นจะไม่ไปด่านต่อไปจนกว่าจะเดินไปเอง | 1 days        | 3      |
 | 7 | As a player, I will fight the boss           | เมื่อถึงท้ายด่านผู้เล่น                                                                                | 3 days        | 3      |
+| 8 | As a player, I will fight more enemy         | ผู้เล่นจะได้สู้กับศัตรูหลายประเภทมากขึ้น                                              |               |        |
 
 ## Nice to Have
 

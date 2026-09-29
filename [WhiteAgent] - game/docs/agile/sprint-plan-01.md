@@ -18,10 +18,10 @@
 
 | # | User Story                                          | รับผิดชอบ                                                                           | MoSCoW    | Estimate (SP) | Status  |
 | - | --------------------------------------------------- | -------------------------------------------------------------------------------------------- | --------- | ------------- | ------- |
-| 1 | As a player, I want to move                         | [วงศ์วรรธน์ พงค์จินะ, ธีรภัทร ศิริณัฐกุลสมบัติ]     | Must Have | [2]           | ✅ Done |
-| 2 | As a player, I will attack to kill the enemy       | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | [3]           | ✅ Done |
-| 3 | As a player, I will throw head to stunt the enemy | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | [4]           | ✅ Done |
-| 4 | As a player, I will take damage                     | [วงศ์วรรธน์ พงค์จินะ]                                                      | Must Have | [1]           | ✅ Done |
+| 1 | As a player, I want to move                         | [วงศ์วรรธน์ พงค์จินะ, ธีรภัทร ศิริณัฐกุลสมบัติ]     | Must Have | 3hr           | ✅ Done |
+| 2 | As a player, I will attack to kill the enemy       | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | 12hr          | ✅ Done |
+| 3 | As a player, I will throw head to stunt the enemy | [ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have | 6hr           | ✅ Done |
+| 4 | As a player, I will take damage                     | [วงศ์วรรธน์ พงค์จินะ]                                                      | Must Have | 3hr           | ✅ Done |
 
 ## Status Legend
 
@@ -55,7 +55,6 @@
 - [X] [ระบบ collision]  [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 3]  [status:: Done]
 - [X] [Enemy01 Ai]  [owner:: ณัฏฐกิตติ์ นามอภิรมย์]  [estimate:: 4]  [status:: Done]
 - [X] [Sprite player take damage]  [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: Done]
-
 
 ## Daily Notes
 
