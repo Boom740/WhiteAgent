@@ -30,7 +30,7 @@ gantt
 
 > ปรับวันที่ให้ตรงกับวันที่ทีมเริ่มลงมือทำจริง (ถ้าไม่ใช่วันแลปนี้)
 
-## Sprint 1 (กำลังทำ)
+## Sprint 1 (Done)
 
 | # | User Story                                          | MoSCoW    | Estimate (SP) |
 | - | --------------------------------------------------- | --------- | ------------- |
@@ -39,7 +39,7 @@ gantt
 | 3 | As a player, I will throw head to stunt the enemy | Must Have | 6hr           |
 | 4 | As a player, I will take damage                     | Must Have | 3hr           |
 
-## Sprint 2 (Draft)
+## Sprint 2 (Done)
 
 | # | User Story                           | MoSCoW      | Estimate (SP) |
 | - | ------------------------------------ | ----------- | ------------- |
@@ -48,7 +48,7 @@ gantt
 | 3 | As a player, I will gather money    | Should Have | 1 days        |
 | 4 | As a player, I will fight more enemy | Must Have   | 5 days        |
 
-## Sprint 3 (Draft)
+## Sprint 3 (In Progress)
 
 | # | User Story                                   | MoSCoW      | Estimate (SP) |
 | - | -------------------------------------------- | ----------- | ------------- |

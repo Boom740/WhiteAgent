@@ -14,12 +14,12 @@
 
 ## Sprint Backlog
 
-| # | User Story                           | รับผิดชอบ                                                                                                                   | MoSCoW      | Estimate (SP) | Status  |
-| - | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- | ------------- | ------- |
-| 1 | As a player, I will fight more enemy | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have   | 5 days        | ✅ Done |
-| 2 | As a player, I want to go next level | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | 3hr           | ✅ Done |
-| 3 | As a player, I want to save game     | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | 6hr           | ✅ Done |
-| 4 | As a player, I will gather money     | [วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ]                                                                  | Should Have | 1 days        | ✅ Done |
+| # | User Story                           | รับผิดชอบ                                                                                                                   | MoSCoW      | Estimate (SP) | Status                           |
+| - | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ----------- | ------------- | -------------------------------- |
+| 1 | As a player, I will fight more enemy | [วงศ์วรรธน์ พงค์จินะ, ณัฏฐกิตติ์ นามอภิรมย์, ธีรภัทร ศิริณัฐกุลสมบัติ] | Must Have   | 5 days        | เอาไปทำ Sprint ถัดไป |
+| 2 | As a player, I want to go next level | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | 3hr           | ✅ Done                          |
+| 3 | As a player, I want to save game     | [วงศ์วรรธน์ พงค์จินะ]                                                                                              | Must Have   | 6hr           | ✅ Done                          |
+| 4 | As a player, I will gather money     | [วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ]                                                                  | Should Have | 1 days        | เอาไปทำ Sprint ถัดไป |
 
 ## Status Legend
 
@@ -39,7 +39,7 @@
 - [X] [Sprite enemy01] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: ✅ Done]
 - [X] [Sprite enemy02] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: ✅ Done]
 - [X] [Sprite enemy03] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 3]  [status:: ✅ Done]
-- [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: ❌ Blocked]
+- [ ] [Sprite enemy04] [domain::Artist] [owner:: ธีรภัทร ศิริณัฐกุลสมบัติ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
 
 ### Story 2 — [As a player, I want to go next level]
 
@@ -51,8 +51,8 @@
 
 ### Story 4 — [As a player, I will gather money]
 
-- [X] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: ❌ Blocked]
-- [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ❌ Blocked]
+- [X] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
+- [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
 
 ---
 
