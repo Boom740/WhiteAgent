@@ -29,7 +29,7 @@ namespace old_heart
             _graphics.ApplyChanges();
             //_graphics.ToggleFullScreen();
 
-            Window.Title = "Chess Battle Advanced" ;
+            Window.Title = "White Agent";
             Window.AllowUserResizing = true;
 
             Content.RootDirectory = "Content";

@@ -480,7 +480,7 @@ namespace old_heart
             switch (current_combat_state)
             {
                 case combat_state.die:
-                    //  already play animaiton in die function   dont play any other animation while dying  Chess Battle Advanced
+                    //  already play animaiton in die function   dont play any other animation while dying  
                     break;
                 case combat_state.attack:
                     //  already play animaiton in punch function   dont play any other animation while attacking

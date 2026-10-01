@@ -31,7 +31,7 @@ namespace old_heart
             ui_camera = new OrthographicCamera(viewport_adapter);
             camera = new OrthographicCamera(viewport_adapter);
         }
-        public void shake_screen(float amount = 0.4f) // chess battle advanced
+        public void shake_screen(float amount = 0.4f) 
         {
             truama = MathHelper.Max(truama, amount);
         }
