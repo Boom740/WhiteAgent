@@ -31,8 +31,8 @@ namespace old_heart
         public void set_level_file(string level_file,run_data_manager run_data)
         {
             string file_directory = AppDomain.CurrentDomain.BaseDirectory;
-            //string game_root_file = Path.GetFullPath(Path.Combine(file_directory, "..", "..", ".."));  // get true game sorce code file not temporary
-            string level_folder = Path.Combine(file_directory, "Content", "level");
+            string game_root_file = Path.GetFullPath(Path.Combine(file_directory, "..", "..", ".."));  // get true game sorce code file not temporary
+            string level_folder = Path.Combine(game_root_file, "Content", "level");
 
             if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
             {
@@ -134,42 +134,6 @@ namespace old_heart
             Debug.WriteLine("Saved level : " + current_level_file);
         }
 
-        public void save_game_data() // ฟังก์ชันใหม่สำหรับเซฟ High Score หรือข้อมูลการเล่น
-        {
-            string file_directory = AppDomain.CurrentDomain.BaseDirectory;
-            string save_folder = Path.Combine(file_directory, "Saves");
-
-            if (!Directory.Exists(save_folder))
-            {
-                Directory.CreateDirectory(save_folder);
-            }
-
-            string save_file = Path.Combine(save_folder, "high_score.json");
-
-            // ตัวอย่างการสร้างข้อมูลและเซฟเป็น JSON (คุณสามารถเปลี่ยนไปใช้ run_data แทนได้)
-            var saveData = new { HighScore = 9999, LastPlayed = DateTime.Now };
-            string json_string = JsonSerializer.Serialize(saveData, new JsonSerializerOptions { WriteIndented = true });
-
-            File.WriteAllText(save_file, json_string);
-            Debug.WriteLine("Saved game data to : " + save_file);
-        }
-
-        public void load_game_data() // ฟังก์ชันสำหรับโหลดข้อมูลกลับมา
-        {
-            string file_directory = AppDomain.CurrentDomain.BaseDirectory;
-            string save_file = Path.Combine(file_directory, "Saves", "high_score.json");
-
-            if (File.Exists(save_file))
-            {
-                string json_string = File.ReadAllText(save_file);
-                // นำ json_string ไปแปลงกลับเป็นข้อมูลเกมของคุณ
-                Debug.WriteLine("Loaded game data from : " + save_file);
-            }
-            else
-            {
-                Debug.WriteLine("No save file found.");
-            }
-        }
         public void load_level(run_data_manager run_data)
         {
             clear_level();
@@ -267,3 +231,45 @@ namespace old_heart
         }
     }
 }
+
+
+
+
+
+
+//public void save_game_data() // ฟังก์ชันใหม่สำหรับเซฟ High Score หรือข้อมูลการเล่น
+//{
+//    string file_directory = AppDomain.CurrentDomain.BaseDirectory;
+//    string save_folder = Path.Combine(file_directory, "Saves");
+
+//    if (!Directory.Exists(save_folder))
+//    {
+//        Directory.CreateDirectory(save_folder);
+//    }
+
+//    string save_file = Path.Combine(save_folder, "high_score.json");
+
+//    // ตัวอย่างการสร้างข้อมูลและเซฟเป็น JSON (คุณสามารถเปลี่ยนไปใช้ run_data แทนได้)
+//    var saveData = new { HighScore = 9999, LastPlayed = DateTime.Now };
+//    string json_string = JsonSerializer.Serialize(saveData, new JsonSerializerOptions { WriteIndented = true });
+
+//    File.WriteAllText(save_file, json_string);
+//    Debug.WriteLine("Saved game data to : " + save_file);
+//}
+
+//public void load_game_data() // ฟังก์ชันสำหรับโหลดข้อมูลกลับมา
+//{
+//    string file_directory = AppDomain.CurrentDomain.BaseDirectory;
+//    string save_file = Path.Combine(file_directory, "Saves", "high_score.json");
+
+//    if (File.Exists(save_file))
+//    {
+//        string json_string = File.ReadAllText(save_file);
+//        // นำ json_string ไปแปลงกลับเป็นข้อมูลเกมของคุณ
+//        Debug.WriteLine("Loaded game data from : " + save_file);
+//    }
+//    else
+//    {
+//        Debug.WriteLine("No save file found.");
+//    }
+//}
