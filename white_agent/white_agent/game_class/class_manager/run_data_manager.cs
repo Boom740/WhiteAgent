@@ -18,6 +18,12 @@ namespace old_heart
 
         public List<string> level_list = new List<string>();
         public int cleared_level = 0;
+
+        public List<upgrade_base> upgrade_list = new List<upgrade_base> {
+            new upgrade_double_dash(),
+            new upgrade_lethal_dash()
+        };
+
         public run_data_manager(Game game)
         {
             this.game = game;
@@ -59,6 +65,14 @@ namespace old_heart
                     level_set[i] = level_set[random_index];
                     level_set[random_index] = temp_level;
                 }
+            }
+        }
+
+        public void apply_upgrade(player player)
+        {
+            foreach (upgrade_base upgrade in upgrade_list)
+            {
+                upgrade.apply_upgrade(player);
             }
         }
     }

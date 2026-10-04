@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -33,7 +34,7 @@ namespace old_heart
         }
 
         // ---------------- Damage / Death ----------------
-        public virtual bool take_damage(int damage_taken, node damage_dealer = null)
+        public override bool take_damage(int damage_taken, node damage_dealer = null)
         {
             if (alive == false) { return false; }
             if (shield) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า

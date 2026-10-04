@@ -71,6 +71,16 @@ namespace old_heart
         public float dash_timer = 0f;
         public float dash_cooldown = 1f;
         public float dash_cooldown_timer = 0f;
+        
+        public int dash_count = 0; // current dash count
+        public int max_dash = 1;
+        public float dash_combo_wait = 0.3f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
+        public float dash_combo_wait_timer = 0f;
+
+        public bool lethal_dash_enable = false;
+        public int lethal_dash_damage = 2;
+        public float lethal_dash_knockback = 300f;
+        private HashSet<entity> dash_hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
         private float default_max_velocity;
 
@@ -85,13 +95,15 @@ namespace old_heart
             this.run_data = run_data;
             hp = run_data.hp_left;
             max_hp = run_data.max_hp;
+
+            run_data.apply_upgrade(this);
         }
         public override void Update(GameTime gameTime)
         {
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
-            MouseStateExtended mouse_state = global.input.mouse_state; // TODO: เช็คว่าชื่อ property ตรงกับของจริงในโปรเจกต์ไหม
+            MouseStateExtended mouse_state = global.input.mouse_state;
             input_direction = Vector2.Zero;
 
             update_cooldown();
@@ -150,7 +162,7 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.dash);
                 }
-                else if (mouse_state.WasButtonPressed(MouseButton.Left) && current_combat_state != combat_state.aim && global.input.mouse_in_screen)
+                else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
                 {
                     buffer_input(bufferable_input.attack);
                 }
@@ -195,9 +207,19 @@ namespace old_heart
                     next_attack_timer -= delta_time;
                 }
 
-                if (dash_cooldown_timer > 0)
+                if (dash_cooldown_timer > 0f)
                 {
                     dash_cooldown_timer -= delta_time;
+                }
+
+                if (dash_combo_wait_timer > 0f)  // wait if player still can dash again (double dash)
+                {
+                    dash_combo_wait_timer -= delta_time;
+                }
+                else if (dash_count > 0 && current_combat_state != combat_state.dash) // combo wait is time up   and alrady in combo
+                {
+                    dash_cooldown_timer = dash_cooldown;
+                    dash_count = 0;
                 }
 
                 if (i_frame_time > 0f)  // i frame
@@ -216,7 +238,13 @@ namespace old_heart
                 check_head_pickup();
                 update_movement_input();
 
-                if (current_buffer_input == bufferable_input.attack)     // attack
+                if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
+                {
+                    current_combat_state = combat_state.aim;
+                    animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
+                    return;
+                }
+                else if (current_buffer_input == bufferable_input.attack)     // attack
                 {
                     if (melee_cooldown_timer <= 0 && next_attack_timer <= 0f)
                     {
@@ -224,15 +252,8 @@ namespace old_heart
                         return;
                     }
                 }
-                else if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
-                {
-                    current_combat_state = combat_state.aim;
-                    animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
-                    return;
-                }
                 else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
                 {
-                    current_buffer_input = bufferable_input.none;
                     start_dash();
                     return;
                 }
@@ -253,7 +274,6 @@ namespace old_heart
                 if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
                 {
                     update_movement_input();
-                    current_buffer_input = bufferable_input.none;
                     start_dash();
                     return;
                 }
@@ -270,14 +290,12 @@ namespace old_heart
                 {
                     current_combat_state = combat_state.none;
                 }
-                else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
+                else if (current_buffer_input == bufferable_input.attack && global.input.mouse_in_screen)
                 {
                     throw_head();
                 }
                 else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
                 {
-                    current_buffer_input = bufferable_input.dash;
-
                     update_movement_input();
 
                     start_dash();
@@ -384,6 +402,8 @@ namespace old_heart
 
             void throw_head()
             {
+                current_buffer_input = bufferable_input.none;
+
                 has_head = false;
 
                 projectile_head head = new projectile_head(content, position,run_data ,owner: this);
@@ -414,24 +434,38 @@ namespace old_heart
                 velocity = Vector2.Normalize(dash_direction) * dash_speed; // ความเร็วคงที่พุ่งตรงเข้าหาหัว
                 acceleration = Vector2.Zero;
 
-
                 check_head_pickup();
             }
             void start_dash()
             {
+                current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.dash;
                 dash_timer = dash_duration;
                 max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
                 i_frame_time += dash_i_frame_duration;
                 fade_i_frame_visual_timer += dash_i_frame_duration;
+
+                dash_count++;
+
+                dash_hit_entity.Clear();
             }
             void end_dash()
             {
                 current_combat_state = combat_state.none;
                 max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
                 velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนยกเลิก กันพุ่งเลยไปแรงๆ ก่อนกลับสู่ physics ปกติ
-                dash_cooldown_timer = dash_cooldown;
+
+                if (dash_count >= max_dash)
+                {
+                    dash_cooldown_timer = dash_cooldown;
+                    dash_combo_wait_timer = 0;
+                    dash_count = 0;
+                }
+                else
+                {
+                    dash_combo_wait_timer = dash_combo_wait;
+                }
             }
 
             void reattach_head()
@@ -578,6 +612,17 @@ namespace old_heart
                 head_projectile = head;
             }
         }
+        public override void collide_entity(entity entity)
+        {
+            base.collide_entity(entity);
+
+            if (current_combat_state != combat_state.dash || lethal_dash_enable == false) { return; }
+            if (dash_hit_entity.Contains(entity)) { return; }
+
+            dash_hit_entity.Add(entity);
+            entity.take_damage(lethal_dash_damage, damage_dealer: this);
+            entity.apply_knockback(current_direction_vector, lethal_dash_knockback);
+        }
         public override void die()
         {
             if (! alive) { return; }
@@ -623,7 +668,7 @@ namespace old_heart
                 
             }
 
-            if (dash_cooldown_timer > 0)
+            if (dash_cooldown_timer > 0)  // dash cooldown bar
             {
                 int dash_cooldown_offset_height = -50;
                 Point dash_cooldown_rectangle_size = new Point(60,5);

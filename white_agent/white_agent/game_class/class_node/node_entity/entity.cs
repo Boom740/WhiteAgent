@@ -154,7 +154,7 @@ namespace old_heart
         }
         public virtual void collide_entity(entity entity)
         {
-            // for collecting item
+            // for anything i guess
         }
         public virtual void apply_knockback(Vector2 direction, float speed)
         {
