@@ -25,7 +25,7 @@ namespace old_heart
         public float hitbox_spawn_time = 0.5f;
         public float hitbox_spawn_timer = -1f;
 
-        public float attack_cooldown = 2f;
+        public float attack_cooldown = 1.5f;
         public float attack_cooldown_timer = 0f;
         public int attack_hit_frame = 8; // frame 9 แบบ 1-indexed = index 8 แบบ 0-indexed
         private bool hitbox_spawned_this_attack = false;

@@ -32,7 +32,7 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 4 , speed: 1200, hit_box_radius: 15)
+        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 6 , speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_leukemia(content_set);
             current_clone_timer = clone_timer;

@@ -21,10 +21,10 @@ namespace old_heart
 
         public float bounce_power = 50f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
         public bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
-        public float sprite_height = 25;
-        public float initial_speed = 1000;
+        public float sprite_height = 15;
+        public float initial_speed = 300;
 
-        public float shock_wave_radius = 40;  // set when initilize
+        public float shock_wave_radius = 15;  // set when initilize
         public bool shock_wave_enable = true;
 
         public float pickup_lock_timer = 0f; // ห้ามเก็บหัว
@@ -41,7 +41,7 @@ namespace old_heart
 
         private HashSet<entity> hit_entity = new HashSet<entity>();
         Vector2 bounce_direction; // for bounce
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 40 , bool explosive_impact = false)
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 15 , bool explosive_impact = false)
             : base(content_set,  position : position , owner : owner , time_left:0) 
         {
             this.run_data = run_data;
