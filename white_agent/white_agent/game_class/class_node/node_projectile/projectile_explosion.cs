@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 namespace old_heart
 {
-    public class projectile_shock_wave : projectile
+    public class projectile_explosion : projectile
     {
-        //public int damage = 0;
-        public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
+        public int damage = 1;
+        //public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
-        public projectile_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 40)
+        public projectile_explosion(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 45)
             : base(content_set, position, time_left: 0.1f, owner: owner)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
@@ -25,11 +25,15 @@ namespace old_heart
             if (target_entity is enemy target_enemy && target_enemy.alive && hit_entity.Contains(target_enemy) == false)
             {
                 hit_entity.Add(target_enemy);
-                Vector2 target_direction = target_enemy.position - position;
-                Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
-                target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                // target_enemy.take_damage(damage);   // no damage
-                target_enemy.enter_dizzy();
+
+
+                target_enemy.take_damage(damage);
+
+
+                //Vector2 target_direction = target_enemy.position - position;
+                //Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
+                //target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                //target_enemy.enter_dizzy();
             }
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)

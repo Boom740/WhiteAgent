@@ -24,6 +24,7 @@ namespace old_heart
         public float sprite_height = 25;
         public float initial_speed = 1000;
 
+        public float shock_wave_radius = 40;  // set when initilize
         public bool shock_wave_enable = true;
 
         public float pickup_lock_timer = 0f; // ห้ามเก็บหัว
@@ -34,11 +35,13 @@ namespace old_heart
         public int ricochet = 0;
         public float ricochet_range = 200;
 
+        public bool explosive_impact = false;
+
         public Random random = new Random();
 
         private HashSet<entity> hit_entity = new HashSet<entity>();
         Vector2 bounce_direction; // for bounce
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0)
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 40 , bool explosive_impact = false)
             : base(content_set,  position : position , owner : owner , time_left:0) 
         {
             this.run_data = run_data;
@@ -46,8 +49,10 @@ namespace old_heart
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + sprite_height); // position คือกึ่งกลาง X, 3/4 Y
 
             hit_box_radius = 14;
+            this.shock_wave_radius = shock_wave_radius;
 
             ricochet_max = head_ricochet;
+            this.explosive_impact = explosive_impact;
         }
 
         public override void Update(GameTime gameTime)
@@ -99,7 +104,7 @@ namespace old_heart
         {
             if (shock_wave_enable == false) { return;}
 
-            projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, run_data , owner: this.owner);
+            projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, owner:owner , hit_box_radius:shock_wave_radius);
             global.signal.spawn_projectile(shock_wave);
         }
         public void bounce_back(Vector2 bounce_vector)
@@ -121,12 +126,18 @@ namespace old_heart
             if (target_entity is player) { return; }
             if (ricochet >= 1 && target_entity is enemy enemy && enemy.state == enemy.enemy_state.dizzy) { return; }
 
-            spawn_shock_wave();
-
             hit_entity.Add(target_entity);
+
+            spawn_shock_wave();
 
             Vector2 target_direction = position - target_entity.position;
             bounce_direction = target_direction != Vector2.Zero ? target_direction : Vector2.UnitY;
+
+            if (explosive_impact == true)
+            {
+                global.signal.spawn_projectile(new projectile_explosion(content, position, owner));
+            }
+
 
             if (ricochet < ricochet_max)
             {
@@ -137,6 +148,8 @@ namespace old_heart
             {
                 bounce_back(bounce_direction);
             }
+
+            
         }
 
         public virtual void ricoche_to_enemy(HashSet<entity> detected_entity)

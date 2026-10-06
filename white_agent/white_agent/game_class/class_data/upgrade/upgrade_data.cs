@@ -49,4 +49,15 @@ namespace old_heart
             player.head_ricochet = 1;
         }
     }
+    public class upgrade_explosive_impact : upgrade_base
+    {
+        public upgrade_explosive_impact()
+        {
+            this.type = upgrade_type.head;
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.head_explosive_impact = true;
+        }
+    }
 }

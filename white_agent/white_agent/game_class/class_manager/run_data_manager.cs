@@ -14,15 +14,14 @@ namespace old_heart
         public int hp_left = 1;
         public int respawn_left = 3;
 
-        public float shock_wave_radius = 40;
-
         public List<string> level_list = new List<string>();
         public int cleared_level = 0;
 
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {
             new upgrade_double_dash(),
             new upgrade_lethal_dash(),
-            new upgrade_ricochet_head()
+            new upgrade_ricochet_head(),
+            new upgrade_explosive_impact()
         };
 
         public run_data_manager(Game game)

@@ -61,6 +61,7 @@ namespace old_heart
         public float head_drop_speed = 300;
 
         public int head_ricochet = 0;
+        public bool head_explosive_impact = false;
         // --- aim  ---
         public float aim_speed_multiplier = 0.2f;
         public animation_player_player animation_player_2;
@@ -408,7 +409,7 @@ namespace old_heart
 
                 has_head = false;
 
-                projectile_head head = new projectile_head(content, position,run_data ,owner: this , head_ricochet);
+                projectile_head head = new projectile_head(content, position,run_data ,owner: this , head_ricochet , explosive_impact: head_explosive_impact);
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
 
