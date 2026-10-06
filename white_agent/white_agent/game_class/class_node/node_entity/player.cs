@@ -54,11 +54,11 @@ namespace old_heart
         // --- combat: head throw ---
         private projectile_head head_projectile;
         public bool has_head = true;
-        public float head_throw_speed = 1200f;
+        public float head_throw_speed = 1500f;
         public float pickup_radius = 40f;
-        public float throw_head_i_frame_duration = 1f;
+        public float throw_head_i_frame_duration = 0.2f;
 
-        public float head_drop_speed = 300;
+        public float head_drop_speed = 1000;
 
         public int head_ricochet = 0;
         public bool head_explosive_impact = false;
@@ -67,7 +67,7 @@ namespace old_heart
         public animation_player_player animation_player_2;
 
         // --- dash (Space) ---
-        public float dash_speed = 1000f;
+        public float dash_speed = 900f;
         public float dash_duration = 0.15f; // ยกเลิก dash ถ้าไปไม่ถึงภายในเวลานี้
         public float dash_i_frame_duration = 0.6f;
         public float fade_i_frame_visual_timer = 0f; // player has i_frame but not blink
@@ -77,11 +77,11 @@ namespace old_heart
         
         public int dash_count = 0; // current dash count
         public int max_dash = 1;
-        public float dash_combo_wait = 0.3f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
+        public float dash_combo_wait = 0.7f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
         public float dash_combo_wait_timer = 0f;
 
         public bool lethal_dash_enable = false;
-        public int lethal_dash_damage = 2;
+        public int lethal_dash_damage = 1;
         public float lethal_dash_knockback = 300f;
         private HashSet<entity> dash_hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
@@ -92,7 +92,7 @@ namespace old_heart
             animation_player = new animation_player_player(content);
             animation_player_2 = new animation_player_player(content);
             ground_friction = 10f;
-            max_velocity = 300;
+            max_velocity = 260;
             default_max_velocity = max_velocity;
 
             this.run_data = run_data;

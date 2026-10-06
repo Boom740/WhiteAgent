@@ -12,7 +12,7 @@ namespace old_heart
         public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
-        public projectile_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 40)
+        public projectile_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 5)
             : base(content_set, position, time_left: 0.1f, owner: owner)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
