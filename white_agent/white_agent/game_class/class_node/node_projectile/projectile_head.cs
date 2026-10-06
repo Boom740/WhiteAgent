@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace old_heart
 {
@@ -27,9 +30,15 @@ namespace old_heart
         public float blink_interval = 0.1f;
         public float blink_min_alpha = 0.2f;
 
+        public int ricochet_max = 1;
+        public int ricochet = 0;
+        public float ricochet_range = 200;
 
         public Random random = new Random();
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null)
+
+        private HashSet<entity> hit_entity = new HashSet<entity>();
+        Vector2 bounce_direction; // for bounce
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0)
             : base(content_set,  position : position , owner : owner , time_left:0) 
         {
             this.run_data = run_data;
@@ -37,6 +46,8 @@ namespace old_heart
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + sprite_height); // position คือกึ่งกลาง X, 3/4 Y
 
             hit_box_radius = 14;
+
+            ricochet_max = head_ricochet;
         }
 
         public override void Update(GameTime gameTime)
@@ -87,14 +98,14 @@ namespace old_heart
         public void spawn_shock_wave()
         {
             if (shock_wave_enable == false) { return;}
-            shock_wave_enable = false;
 
             projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, run_data , owner: this.owner);
             global.signal.spawn_projectile(shock_wave);
         }
         public void bounce_back(Vector2 bounce_vector)
         {
-            velocity = bounce_vector * bounce_power;
+            bounce_vector = (bounce_vector != Vector2.Zero) ? Vector2.Normalize(bounce_vector) : Vector2.UnitY;
+            velocity = bounce_vector  * bounce_power;
 
             if (has_bounced == false)
             {
@@ -104,18 +115,60 @@ namespace old_heart
         }
         public override void on_hit_entity(entity target_entity)
         {
-
             if (has_bounced) return;
             if (is_resting) return;
+            if (hit_entity.Contains(target_entity)) { return; }
+            if (target_entity is player) { return; }
+            if (ricochet >= 1 && target_entity is enemy enemy && enemy.state == enemy.enemy_state.dizzy) { return; }
 
-            if (target_entity is enemy target_enemy)
+            spawn_shock_wave();
+
+            hit_entity.Add(target_entity);
+
+            Vector2 target_direction = position - target_entity.position;
+            bounce_direction = target_direction != Vector2.Zero ? target_direction : Vector2.UnitY;
+
+            if (ricochet < ricochet_max)
             {
-                spawn_shock_wave();
-
-                Vector2 target_direction = position - target_enemy.position;
-                Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
-                bounce_back(hit_direction);
+                ricochet++;
+                global.signal.spawn_projectile(new projectile_detect_entity(content, position, owner, ricochet_range , ricoche_to_enemy ));
             }
+            else
+            {
+                bounce_back(bounce_direction);
+            }
+        }
+
+        public virtual void ricoche_to_enemy(HashSet<entity> detected_entity)
+        {
+            detected_entity.ExceptWith(hit_entity);
+            if (detected_entity.Count <= 0)
+            {
+                bounce_back(bounce_direction);
+                return;
+            }
+            entity target_entity = null;
+            float min_distance = float.MaxValue;
+
+            foreach (var entity in detected_entity)
+            {
+                float distance = (position - entity.position).Length();
+                if (distance < min_distance && entity is enemy enemy && enemy.state != enemy.enemy_state.dizzy)
+                {
+                    target_entity = entity;
+                    min_distance = distance;
+                }
+
+            }
+
+            if (target_entity == null)
+            {
+                bounce_back(bounce_direction);
+                return;
+            }
+
+            Vector2 target_direction = target_entity.position - position;
+            velocity = initial_speed * Vector2.Normalize(target_direction);
         }
         
         public override void collide_wall(CollisionPair2D pair, float delta_time)
@@ -125,6 +178,7 @@ namespace old_heart
             Vector2 random_vector = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * 0.1f * time_left;
             bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector + random_vector));
             spawn_shock_wave();
+            shock_wave_enable = false;
         }
 
         public override void Draw(SpriteBatch sprite_batch)

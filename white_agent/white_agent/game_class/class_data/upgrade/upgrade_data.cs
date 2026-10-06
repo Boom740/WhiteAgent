@@ -4,7 +4,7 @@ namespace old_heart
 {
     public abstract class upgrade_base
     {
-        public enum upgrade_type { dash }
+        public enum upgrade_type { head , dash }
         public upgrade_type type;
         public upgrade_base()
         {
@@ -36,6 +36,17 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.lethal_dash_enable = true;
+        }
+    }
+    public class upgrade_ricochet_head : upgrade_base
+    {
+        public upgrade_ricochet_head()
+        {
+            this.type = upgrade_type.head;
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.head_ricochet = 1;
         }
     }
 }

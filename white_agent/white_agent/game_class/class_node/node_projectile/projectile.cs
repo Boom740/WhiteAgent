@@ -42,7 +42,20 @@ namespace old_heart
 
             shadow_texture = content.Load<Texture2D>("assets/image/other/sprite_shadow");
         }
+        public virtual void spawn(projectile_manager projectile_manager, collision_manager collision_manager, debug_manager debug_manager)
+        {
+            projectile_manager.add(this);
+            debug_manager.add(collision);
 
+            if (owner is player)
+            {
+                collision_manager.add(collision, "player_hitbox");
+            }
+            else
+            {
+                collision_manager.add(collision, "enemy_hitbox");
+            }
+        }
         public override void Update(GameTime gameTime)
         {
             if (!alive) return;
@@ -74,10 +87,9 @@ namespace old_heart
         {
         }
 
-        public void time_out()
+        public virtual void time_out()
         {
             alive = false;
-            // play efx or something
             active = false; // active = false make this get instant delete
         }
 

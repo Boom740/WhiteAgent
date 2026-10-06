@@ -21,7 +21,8 @@ namespace old_heart
 
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {
             new upgrade_double_dash(),
-            new upgrade_lethal_dash()
+            new upgrade_lethal_dash(),
+            new upgrade_ricochet_head()
         };
 
         public run_data_manager(Game game)
