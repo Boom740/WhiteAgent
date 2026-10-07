@@ -237,10 +237,10 @@ namespace old_heart
             }
         }
 
-        public override void enter_dizzy()
+        public override void enter_dizzy(bool break_shield = true)
         {
             if (state == enemy_state.dash) { return; }
-            base.enter_dizzy();
+            base.enter_dizzy(break_shield);
         }
         public override void die()
         {

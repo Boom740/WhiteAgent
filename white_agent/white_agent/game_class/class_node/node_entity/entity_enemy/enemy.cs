@@ -57,12 +57,12 @@ namespace old_heart
             return true;
         }
         // ---------------- Dizzy ----------------
-        public virtual void enter_dizzy()
+        public virtual void enter_dizzy(bool break_shield = true)
         {
 
             if (state == enemy_state.died) return;
 
-            if (shield)
+            if (shield && break_shield)
             {
                 shield = false;
                 shield_timer_current = shield_timer;

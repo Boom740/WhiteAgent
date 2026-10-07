@@ -23,9 +23,10 @@ namespace old_heart
             new upgrade_lethal_dash(),
             new upgrade_ricochet_head(),
             new upgrade_explosive_impact(),
-            new upgrade_adrenaline_rush()  
+            new upgrade_adrenaline_rush()
+            new upgrade_emergency_knockback()
             */
-            new upgrade_double_dash()
+            new upgrade_emergency_knockback()
         };
 
         public run_data_manager(Game game)

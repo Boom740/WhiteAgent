@@ -92,6 +92,8 @@ namespace old_heart
         public float adrenaline_rush_speed_time = 2f; // time of speed buff
         public float adrenaline_rush_speed_timer = 0f;
 
+        public bool emergency_knockback_enable = false;
+
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -619,6 +621,12 @@ namespace old_heart
 
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
+
+                if (emergency_knockback_enable)
+                {
+                    projectile_emergency_knockback emergency_knockback = new projectile_emergency_knockback(content, position, this);
+                    global.signal.spawn_projectile(emergency_knockback);
+                }
             }
         }
         public override void collide_entity(entity entity)

@@ -14,26 +14,6 @@ namespace old_heart
         }
     }
 
-    public class upgrade_double_dash : upgrade_base
-    {
-        public upgrade_double_dash()
-        {
-        }
-        public override void apply_upgrade(player player)
-        {
-            player.max_dash = 2;
-        }
-    }
-    public class upgrade_lethal_dash : upgrade_base
-    {
-        public upgrade_lethal_dash()
-        {
-        }
-        public override void apply_upgrade(player player)
-        {
-            player.lethal_dash_enable = true;
-        }
-    }
     public class upgrade_ricochet_head : upgrade_base
     {
         public upgrade_ricochet_head()
@@ -54,6 +34,26 @@ namespace old_heart
             player.head_explosive_impact = true;
         }
     }
+    public class upgrade_double_dash : upgrade_base
+    {
+        public upgrade_double_dash()
+        {
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.max_dash = 2;
+        }
+    }
+    public class upgrade_lethal_dash : upgrade_base
+    {
+        public upgrade_lethal_dash()
+        {
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.lethal_dash_enable = true;
+        }
+    }
     public class upgrade_adrenaline_rush : upgrade_base
     {
         public upgrade_adrenaline_rush()
@@ -62,6 +62,16 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.adrenaline_rush_enable = true;
+        }
+    }
+    public class upgrade_emergency_knockback : upgrade_base
+    {
+        public upgrade_emergency_knockback()
+        {
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.emergency_knockback_enable = true;
         }
     }
 }
