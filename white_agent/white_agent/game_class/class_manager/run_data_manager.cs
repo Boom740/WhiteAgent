@@ -18,10 +18,14 @@ namespace old_heart
         public int cleared_level = 0;
 
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {
-            /*new upgrade_double_dash(),
+            /*
+            new upgrade_double_dash(),
             new upgrade_lethal_dash(),
             new upgrade_ricochet_head(),
-            new upgrade_explosive_impact()*/
+            new upgrade_explosive_impact(),
+            new upgrade_adrenaline_rush()  
+            */
+
         };
 
         public run_data_manager(Game game)

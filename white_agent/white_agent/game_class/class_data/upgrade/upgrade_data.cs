@@ -4,8 +4,6 @@ namespace old_heart
 {
     public abstract class upgrade_base
     {
-        public enum upgrade_type { head , dash }
-        public upgrade_type type;
         public upgrade_base()
         {
         }
@@ -20,7 +18,6 @@ namespace old_heart
     {
         public upgrade_double_dash()
         {
-            this.type = upgrade_type.dash;
         }
         public override void apply_upgrade(player player)
         {
@@ -31,7 +28,6 @@ namespace old_heart
     {
         public upgrade_lethal_dash()
         {
-            this.type = upgrade_type.dash;
         }
         public override void apply_upgrade(player player)
         {
@@ -42,7 +38,6 @@ namespace old_heart
     {
         public upgrade_ricochet_head()
         {
-            this.type = upgrade_type.head;
         }
         public override void apply_upgrade(player player)
         {
@@ -53,11 +48,20 @@ namespace old_heart
     {
         public upgrade_explosive_impact()
         {
-            this.type = upgrade_type.head;
         }
         public override void apply_upgrade(player player)
         {
             player.head_explosive_impact = true;
+        }
+    }
+    public class upgrade_adrenaline_rush : upgrade_base
+    {
+        public upgrade_adrenaline_rush()
+        {
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.adrenaline_rush_enable = true;
         }
     }
 }

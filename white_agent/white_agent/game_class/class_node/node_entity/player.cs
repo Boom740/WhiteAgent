@@ -63,7 +63,7 @@ namespace old_heart
         public int head_ricochet = 0;
         public bool head_explosive_impact = false;
         // --- aim  ---
-        public float aim_speed_multiplier = 0.2f;
+        public float aim_speed_multiplier = 0.4f;
         public animation_player_player animation_player_2;
 
         // --- dash (Space) ---
@@ -77,7 +77,7 @@ namespace old_heart
         
         public int dash_count = 0; // current dash count
         public int max_dash = 1;
-        public float dash_combo_wait = 0.7f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
+        public float dash_combo_wait = 0.3f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
         public float dash_combo_wait_timer = 0f;
 
         public bool lethal_dash_enable = false;
@@ -85,15 +85,21 @@ namespace old_heart
         public float lethal_dash_knockback = 300f;
         private HashSet<entity> dash_hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
-        private float default_max_velocity;
+        // passive
+        public bool adrenaline_rush_enable = false;
+        public float adrenaline_rush_cooldown = 5f;
+        public float adrenaline_rush_cooldown_timer = 0f;
 
-        public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 5000)
+        public float adrenaline_rush_speed_multiplier = 2f;
+        public float adrenaline_rush_speed_time = 2f; // time of speed buff
+        public float adrenaline_rush_speed_timer = 0f;
+
+        public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
             animation_player_2 = new animation_player_player(content);
             ground_friction = 10f;
-            max_velocity = 260;
-            default_max_velocity = max_velocity;
+            max_velocity = 1000; // not player walk speed    real player speed is assign at     public player(Cont...    ... speed: 2600)
 
             this.run_data = run_data;
             hp = run_data.hp_left;
@@ -233,6 +239,17 @@ namespace old_heart
                 {
                     fade_i_frame_visual_timer -= delta_time;
                 }
+
+                if (adrenaline_rush_cooldown_timer > 0f)  // adrenaline_rush passive
+                {
+                    adrenaline_rush_cooldown_timer -= delta_time;
+
+                    Debug.WriteLine("ee cD " + adrenaline_rush_cooldown_timer + "\n time : "+ adrenaline_rush_speed_timer);
+                }
+                if (adrenaline_rush_speed_timer > 0f)
+                {
+                    adrenaline_rush_speed_timer -= delta_time;
+                }
             }
 
             //  local functions: state handlers (เรียกจาก switch ด้านบน) 
@@ -284,7 +301,6 @@ namespace old_heart
             }
             void update_aim_state()
             {
-
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
 
                 current_direction_vector = to_cursor;
@@ -348,7 +364,16 @@ namespace old_heart
 
                 if (input_direction != Vector2.Zero)
                 {
-                    float effective_speed = current_combat_state == combat_state.aim ? speed * aim_speed_multiplier : speed;
+                    float effective_speed = speed;
+
+                    if (current_combat_state == combat_state.aim)
+                    {
+                        effective_speed *= aim_speed_multiplier;
+                    }
+                    if (adrenaline_rush_enable && adrenaline_rush_speed_timer > 0)
+                    {
+                        effective_speed *= adrenaline_rush_speed_multiplier;
+                    }
 
                     input_direction = Vector2.Normalize(input_direction) * effective_speed;
                 }
@@ -426,6 +451,8 @@ namespace old_heart
                 if (dash_timer <= 0)  // dash end
                 {
                     end_dash();
+                    update_movement_input();
+                    return;
                 }
 
                 Vector2 dash_direction = current_direction_vector;
@@ -434,8 +461,8 @@ namespace old_heart
                     dash_direction = new  Vector2(0, 1);
                     Debug.WriteLine("error player update dash function dash_direction = vector 0,0  ");
                 }
+
                 velocity = Vector2.Normalize(dash_direction) * dash_speed; // ความเร็วคงที่พุ่งตรงเข้าหาหัว
-                acceleration = Vector2.Zero;
 
                 check_head_pickup();
             }
@@ -444,7 +471,6 @@ namespace old_heart
                 current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.dash;
                 dash_timer = dash_duration;
-                max_velocity = MathF.Max(default_max_velocity, dash_speed); // เปิดเพดานความเร็วให้สูงพอสำหรับ dash
 
                 i_frame_time += dash_i_frame_duration;
                 fade_i_frame_visual_timer += dash_i_frame_duration;
@@ -456,8 +482,9 @@ namespace old_heart
             void end_dash()
             {
                 current_combat_state = combat_state.none;
-                max_velocity = default_max_velocity; // คืนเพดานความเร็วปกติ
-                velocity = Vector2.Zero; // หยุดนิ่งทันทีตอนยกเลิก กันพุ่งเลยไปแรงๆ ก่อนกลับสู่ physics ปกติ
+                velocity = Vector2.Normalize(current_direction_vector) * speed / 10;
+
+                acceleration = Vector2.Zero;
 
                 if (dash_count >= max_dash)
                 {
@@ -625,6 +652,16 @@ namespace old_heart
             dash_hit_entity.Add(entity);
             entity.take_damage(lethal_dash_damage, damage_dealer: this);
             entity.apply_knockback(current_direction_vector, lethal_dash_knockback);
+        }
+
+        public void handle_enemy_die()
+        {
+            if (!alive || current_combat_state == combat_state.die || current_combat_state == combat_state.change_scene) { return; }
+            if (adrenaline_rush_enable == false) { return; }
+            if (adrenaline_rush_cooldown_timer > 0f ) { return; }
+
+            adrenaline_rush_cooldown_timer = adrenaline_rush_cooldown;
+            adrenaline_rush_speed_timer = adrenaline_rush_speed_time;
         }
         public override void die()
         {

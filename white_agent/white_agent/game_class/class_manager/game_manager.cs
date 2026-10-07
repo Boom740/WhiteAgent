@@ -195,6 +195,13 @@ namespace old_heart
                             player = null;
                             current_game_state = game_state.game_over;
                         }
+                        if (entity is enemy)
+                        {
+                            if (player != null)
+                            {
+                                player.handle_enemy_die();
+                            }
+                        }
 
                         entity_list.RemoveAt(list_index);
                     }
