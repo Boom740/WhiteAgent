@@ -243,8 +243,6 @@ namespace old_heart
                 if (adrenaline_rush_cooldown_timer > 0f)  // adrenaline_rush passive
                 {
                     adrenaline_rush_cooldown_timer -= delta_time;
-
-                    Debug.WriteLine("ee cD " + adrenaline_rush_cooldown_timer + "\n time : "+ adrenaline_rush_speed_timer);
                 }
                 if (adrenaline_rush_speed_timer > 0f)
                 {
