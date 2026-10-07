@@ -93,7 +93,7 @@ namespace old_heart
                 $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
                 $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
                 //$"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]" +
-                $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}  dash wait timer : {game_manager.player.dash_combo_wait_timer:F2}" +
+                $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}" +
 
 
                 $"";

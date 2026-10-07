@@ -77,8 +77,6 @@ namespace old_heart
         
         public int dash_count = 0; // current dash count
         public int max_dash = 1;
-        public float dash_combo_wait = 0.3f; // wait before get cooldown to see if dash again   (only wait if player can dash again)
-        public float dash_combo_wait_timer = 0f;
 
         public bool lethal_dash_enable = false;
         public int lethal_dash_damage = 1;
@@ -221,16 +219,6 @@ namespace old_heart
                     dash_cooldown_timer -= delta_time;
                 }
 
-                if (dash_combo_wait_timer > 0f)  // wait if player still can dash again (double dash)
-                {
-                    dash_combo_wait_timer -= delta_time;
-                }
-                else if (dash_count > 0 && current_combat_state != combat_state.dash) // combo wait is time up   and alrady in combo
-                {
-                    dash_cooldown_timer = dash_cooldown;
-                    dash_count = 0;
-                }
-
                 if (i_frame_time > 0f)  // i frame
                 {
                     i_frame_time -= delta_time;
@@ -270,7 +258,7 @@ namespace old_heart
                         return;
                     }
                 }
-                else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
+                else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash)    )
                 {
                     start_dash();
                     return;
@@ -311,7 +299,7 @@ namespace old_heart
                 {
                     throw_head();
                 }
-                else if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
+                else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash)) 
                 {
                     update_movement_input();
 
@@ -422,8 +410,6 @@ namespace old_heart
                    : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
             }
 
-            
-
             // ---------------- Head throw / dash / pickup ----------------
 
             void throw_head()
@@ -466,12 +452,17 @@ namespace old_heart
             }
             void start_dash()
             {
+                if(dash_cooldown_timer <= 0 ) // not in combo
+                {
+                    dash_count = 0;
+                }
+
                 current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.dash;
                 dash_timer = dash_duration;
 
-                i_frame_time += dash_i_frame_duration;
-                fade_i_frame_visual_timer += dash_i_frame_duration;
+                i_frame_time = dash_i_frame_duration;
+                fade_i_frame_visual_timer = dash_i_frame_duration;
 
                 dash_count++;
 
@@ -480,20 +471,10 @@ namespace old_heart
             void end_dash()
             {
                 current_combat_state = combat_state.none;
-                velocity = Vector2.Normalize(current_direction_vector) * speed / 10;
+                velocity = Vector2.Normalize(current_direction_vector) * speed / 10; // normal walk speed
 
                 acceleration = Vector2.Zero;
-
-                if (dash_count >= max_dash)
-                {
-                    dash_cooldown_timer = dash_cooldown;
-                    dash_combo_wait_timer = 0;
-                    dash_count = 0;
-                }
-                else
-                {
-                    dash_combo_wait_timer = dash_combo_wait;
-                }
+                dash_cooldown_timer = dash_cooldown;
             }
 
             void reattach_head()
@@ -652,7 +633,7 @@ namespace old_heart
             entity.apply_knockback(current_direction_vector, lethal_dash_knockback);
         }
 
-        public void handle_enemy_die()
+        public void handle_enemy_kill()
         {
             if (!alive || current_combat_state == combat_state.die || current_combat_state == combat_state.change_scene) { return; }
             if (adrenaline_rush_enable == false) { return; }

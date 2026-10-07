@@ -195,11 +195,11 @@ namespace old_heart
                             player = null;
                             current_game_state = game_state.game_over;
                         }
-                        if (entity is enemy)
+                        if (entity is enemy enemy)
                         {
-                            if (player != null)
+                            if (player != null && enemy.death_by_player == true)
                             {
-                                player.handle_enemy_die();
+                                player.handle_enemy_kill();
                             }
                         }
 

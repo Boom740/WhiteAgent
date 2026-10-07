@@ -28,6 +28,7 @@ namespace old_heart
 
         public Random random = new Random();
 
+        public bool death_by_player = false;
         public enemy(ContentManager content_set, Vector2 position, int max_hp, float speed = 600 , float hit_box_radius = 15) : base(content_set, position, max_hp: max_hp, speed: speed,hit_box_radius:hit_box_radius)
         {
             animation_player_shield = new animation_player_shield(content);
@@ -47,6 +48,11 @@ namespace old_heart
             if (alive == false)
             {
                 state = enemy_state.died;
+
+                if (damage_dealer is projectile projectile && projectile.owner is player || damage_dealer is player)
+                {
+                    death_by_player = true;
+                }
             }
             return true;
         }

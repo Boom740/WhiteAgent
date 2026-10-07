@@ -25,7 +25,7 @@ namespace old_heart
             new upgrade_explosive_impact(),
             new upgrade_adrenaline_rush()  
             */
-
+            new upgrade_double_dash()
         };
 
         public run_data_manager(Game game)
