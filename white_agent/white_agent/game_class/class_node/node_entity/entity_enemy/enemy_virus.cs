@@ -30,7 +30,6 @@ namespace old_heart
         public int attack_hit_frame = 8; // frame 9 แบบ 1-indexed = index 8 แบบ 0-indexed
         private bool hitbox_spawned_this_attack = false;
 
-        public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 100f, range: 40f, hitbox_lifetime: 0.3f, knockback_speed: 100f);
 
         public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 14 ,hit_box_radius: 15)
         {
@@ -156,7 +155,9 @@ namespace old_heart
                 {
                     hitbox_spawned_this_attack = true;
                     acceleration = Vector2.Zero;
-                    melee_data.spawn_melee_projectile(content, this, position, current_direction_vector);
+
+                    projectile projectile = new projectile_enemy_shock_wave(content, position, this);
+                    global.signal.spawn_projectile(projectile);
                 }
                
 
@@ -186,7 +187,7 @@ namespace old_heart
                 state = enemy_state.attack;
                 hitbox_spawned_this_attack = false;
 
-                Vector2 aim_direction = Vector2.Normalize(target.position - position) * melee_data.lunge_speed;
+                Vector2 aim_direction = Vector2.Normalize(target.position - position);
 
                 current_direction_vector = aim_direction;  // update direction to aim
 

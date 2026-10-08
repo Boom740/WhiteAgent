@@ -36,22 +36,27 @@ namespace old_heart
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
             game_manager.add_entity(player);
 
-            collision_shape_box wall = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 100f), new Vector2(64f, 500f)));
+            collision_shape_box wall = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 100f), new Vector2(64f, 600f)));
             game_manager.add_map_collision(wall);
             collision_shape_box wall2 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(100f, 500f), new Vector2(500f, 64f)));
             game_manager.add_map_collision(wall2);
-            collision_shape_circle wall3 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
+            collision_shape_box wall3 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 100f), new Vector2(500f, 64f)));
             game_manager.add_map_collision(wall3);
+            collision_shape_circle wall4 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
+            game_manager.add_map_collision(wall4);
 
-            enemy_1 = new enemy_leukemia(Content, position: new Vector2(1600, 300)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
+            enemy_1 = new enemy_leukemia(Content, position: new Vector2(600, 400)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
             game_manager.add_entity(enemy_1);
 
             enemy test_enemy;
 
-            test_enemy = new enemy_mole(Content, position: new Vector2(400, -300)); 
+            test_enemy = new enemy_virus(Content, position: new Vector2(400, -300));
             game_manager.add_entity(test_enemy);
 
-            enemy_2 = new enemy_bacteria(Content, position: new Vector2(400, 300)); 
+            test_enemy = new enemy_mole(Content, position: new Vector2(400, 1300)); 
+            game_manager.add_entity(test_enemy);
+
+            enemy_2 = new enemy_bacteria(Content, position: new Vector2(-400, 300)); 
             game_manager.add_entity(enemy_2);
 
         }

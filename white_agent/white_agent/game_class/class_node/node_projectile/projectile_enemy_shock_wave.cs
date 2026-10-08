@@ -28,7 +28,7 @@ namespace old_heart
                 Vector2 target_direction = target_entity.position - position;
                 Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
                 target_entity.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                target_entity.take_damage(damage); 
+                target_entity.take_damage(damage,this); 
             }
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)
