@@ -259,7 +259,7 @@ namespace old_heart
                 Vector2 aim_direction = override_direction ?? (target.position - position);
                 if (aim_direction == Vector2.Zero) aim_direction = current_direction_vector;
 
-                projectile_leukemia_bullet shot = new projectile_leukemia_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed);
+                projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed);
                 shot.owner = this;
                 global.signal.spawn_projectile(shot);
             }

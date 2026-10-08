@@ -40,9 +40,11 @@ namespace old_heart
             collision_world.EnableCollisionBetweenLayers("enemy", "wall");
             collision_world.EnableCollisionBetweenLayers("enemy_hitbox", "wall");
 
-            collision_world.EnableCollisionBetweenLayers("player_hitbox", "enemy"); // หมัด/หัวที่ผู้เล่นขว้าง ชน enemy
-            collision_world.EnableCollisionBetweenLayers("enemy_hitbox", "player"); // เผื่อไว้สำหรับท่าโจมตีของ enemy ในอนาคต
+            collision_world.EnableCollisionBetweenLayers("player_hitbox", "enemy");
+            collision_world.EnableCollisionBetweenLayers("enemy_hitbox", "player");
             collision_world.EnableCollisionBetweenLayers("player", "enemy");
+
+            collision_world.EnableCollisionBetweenLayers("player_hitbox", "enemy_hitbox");
 
         }
         public void add(ICollisionActor collision_object ,String collision_layer_name)
@@ -67,6 +69,7 @@ namespace old_heart
 
             resolve_hitbox_collision("player_hitbox", "enemy");
             resolve_hitbox_collision("enemy_hitbox", "player");
+            resolve_hitbox_collision("player_hitbox", "enemy_hitbox");
 
             resolve_entity_body_collision("player", "enemy", delta_time);
             resolve_entity_body_collision("enemy", "enemy", delta_time); 
@@ -76,6 +79,7 @@ namespace old_heart
 
             resolve_wall_collision("enemy", delta_time);
             resolve_wall_collision("enemy_hitbox", delta_time);
+
         }
 
         public void resolve_wall_collision(string layer_that_collide_with_wall ,float delta_time) // use in update only
@@ -107,13 +111,21 @@ namespace old_heart
             {
                 if (pair.First is collision_shape hitbox_shape && pair.Second is collision_shape target_shape)
                 {
-                    if (hitbox_shape.owner is projectile hitbox_projectile && target_shape.owner is entity target_entity)
+                    if (hitbox_shape.owner is projectile hitbox_projectile)
                     {
-                        hitbox_projectile.on_hit_entity(target_entity);
+                        if(target_shape.owner is entity target_entity)
+                        {
+                            hitbox_projectile.on_hit_entity(target_entity);
+                        }
+                        if (target_shape.owner is projectile target_projectile)
+                        {
+                            hitbox_projectile.on_collide_hit_box(target_projectile);
+                        }
                     }
+                    
                     else
                     {
-                        Debug.WriteLine("hitbox collision owner type mismatch: " + hitbox_shape.owner + " / " + target_shape.owner);
+                        Debug.WriteLine("hitbox collision owner is not projectile: " + hitbox_shape.owner + " / " + target_shape.owner);
                     }
                 }
             }

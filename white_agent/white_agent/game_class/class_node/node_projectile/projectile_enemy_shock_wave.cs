@@ -6,13 +6,13 @@ using System.Collections.Generic;
 
 namespace old_heart
 {
-    public class projectile_explosion : projectile
+    public class projectile_enemy_shock_wave : projectile
     {
         public int damage = 1;
-        //public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
+        public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
-        public projectile_explosion(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 45)
+        public projectile_enemy_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 50)
             : base(content_set, position, time_left: 0.1f, owner: owner)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
@@ -22,21 +22,14 @@ namespace old_heart
 
         public override void on_hit_entity(entity target_entity)
         {
-            if (target_entity is enemy target_enemy && target_enemy.alive && hit_entity.Contains(target_enemy) == false)
+            if (target_entity is player && target_entity.alive && hit_entity.Contains(target_entity) == false)
             {
-                hit_entity.Add(target_enemy);
-
-
-                target_enemy.take_damage(damage);
-
-
-                //Vector2 target_direction = target_enemy.position - position;
-                //Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
-                //target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
-                //target_enemy.enter_dizzy();
+                hit_entity.Add(target_entity);
+                Vector2 target_direction = target_entity.position - position;
+                Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
+                target_entity.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
+                target_entity.take_damage(damage); 
             }
-
-            base.on_hit_entity(target_entity);
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {

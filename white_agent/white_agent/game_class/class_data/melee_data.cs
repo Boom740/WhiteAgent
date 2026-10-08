@@ -22,7 +22,7 @@ namespace old_heart
             this.hitbox_radius = hitbox_radius;
         }
 
-        public void spawn_melee_projectile(ContentManager content, entity owner, Vector2 position , Vector2 aim_direction )
+        public void spawn_melee_projectile(ContentManager content, entity owner, Vector2 position , Vector2 aim_direction ,bool projectile_deflection_enable = false)
         {
             float travel_distance = 1;  // minimum melee distance  (if range is too low   or   hitbox is already high)
             if (range - hitbox_radius > travel_distance)
@@ -33,6 +33,7 @@ namespace old_heart
             projectile_melee melee_projectile = new projectile_melee(content, position, aim_direction, travel_distance , hitbox_lifetime, damage,hitbox_radius);
             melee_projectile.owner = owner;
             melee_projectile.knockback_speed = knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
+            melee_projectile.projectile_deflection_enable = projectile_deflection_enable;
             global.signal.spawn_projectile(melee_projectile);
 
             owner.velocity = Vector2.Normalize(aim_direction) * lunge_speed;

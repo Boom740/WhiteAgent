@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Graphics;
 namespace old_heart
 {
     // projectile ระยะไกลที่ leukemia ยิงใส่ player — โดนแล้วเหมือนโดนโจมตีทุกประการ (take_damage + knockback แบบเดียวกับ melee)
-    public class projectile_leukemia_bullet : projectile
+    public class projectile_enemy_bullet : projectile
     {
         public int damage;
         public float knockback_speed;
 
-        public projectile_leukemia_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f)
+        public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f)
             : base(content_set, position, time_left: lifetime)
         {
             this.damage = damage;
@@ -25,6 +25,8 @@ namespace old_heart
             sprite_scale = new Vector2(0.6f, 0.6f); // ย่อขนาดกว่าตัวหัวจริง เพราะยืม sprite มาใช้ชั่วคราว
 
             hit_box_radius = 10f;
+
+            deflectable = true;
         }
 
         public override void on_hit_entity(entity target_entity)
@@ -41,6 +43,8 @@ namespace old_heart
 
                 time_out(); // โดนแล้วหายทันที
             }
+
+            base.on_hit_entity (target_entity);
         }
     }
 }

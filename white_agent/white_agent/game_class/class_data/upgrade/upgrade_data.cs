@@ -54,6 +54,16 @@ namespace old_heart
             player.lethal_dash_enable = true;
         }
     }
+    public class upgrade_projectile_deflection : upgrade_base
+    {
+        public upgrade_projectile_deflection()
+        {
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.projectile_deflection_enable = true;
+        }
+    }
     public class upgrade_adrenaline_rush : upgrade_base
     {
         public upgrade_adrenaline_rush()

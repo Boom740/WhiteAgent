@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -31,6 +32,9 @@ namespace old_heart
 
         //public float ground_friction = 5f;
         public float max_velocity = 1000;
+
+        public bool deflectable = false;
+        public bool deflected_by_player = false;
         public projectile(ContentManager content_set, Vector2 position , float time_left = 1 , entity owner = null)
         {
             content = content_set;
@@ -85,6 +89,11 @@ namespace old_heart
         // เรียกจาก collision_manager ตอน hitbox ของ projectile นี้ชนกับ entity เป้าหมาย
         public virtual void on_hit_entity(entity target_entity)
         {
+            if (deflected_by_player && target_entity is enemy target_enemy)
+            {
+                target_enemy.enter_dizzy(true);
+                time_out();
+            }
         }
 
         public virtual void time_out()
@@ -97,6 +106,18 @@ namespace old_heart
         {
             velocity = Vector2.Zero;  // stop move and time_out when hit wall
             time_left = 0;
+        }
+
+        public virtual void on_collide_hit_box(projectile target_projectile)
+        {
+        }
+        public projectile clone()  // use in projectile deflection 
+        {
+            projectile cloned_projectile = (projectile)this.MemberwiseClone();
+            cloned_projectile.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
+            cloned_projectile.collision.owner = cloned_projectile;
+
+            return cloned_projectile;
         }
         public override void Draw(SpriteBatch sprite_batch)
         {

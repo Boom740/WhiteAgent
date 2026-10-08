@@ -26,7 +26,7 @@ namespace old_heart
             new upgrade_adrenaline_rush()
             new upgrade_emergency_knockback()
             */
-            new upgrade_emergency_knockback()
+            new upgrade_projectile_deflection()
         };
 
         public run_data_manager(Game game)

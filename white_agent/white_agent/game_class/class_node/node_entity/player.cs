@@ -93,7 +93,10 @@ namespace old_heart
         public float adrenaline_rush_speed_timer = 0f;
 
         public bool emergency_knockback_enable = false;
+        public float emergency_knockback_cooldown = 10f;
+        public float emergency_knockback_cooldown_timer = 0f;
 
+        public bool projectile_deflection_enable = false;
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -237,6 +240,11 @@ namespace old_heart
                 if (adrenaline_rush_speed_timer > 0f)
                 {
                     adrenaline_rush_speed_timer -= delta_time;
+                }
+
+                if (emergency_knockback_cooldown_timer > 0f)
+                {
+                    emergency_knockback_cooldown_timer -= delta_time;
                 }
             }
 
@@ -399,7 +407,7 @@ namespace old_heart
 
                 current_direction_vector = aim_direction; // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
-                hit_data.spawn_melee_projectile(content, this, position, aim_direction);
+                hit_data.spawn_melee_projectile(content, this, position, aim_direction , projectile_deflection_enable: projectile_deflection_enable);
 
                 if (combo_count >= max_combo)
                 {
@@ -622,8 +630,9 @@ namespace old_heart
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
 
-                if (emergency_knockback_enable)
+                if (emergency_knockback_enable && emergency_knockback_cooldown_timer <= 0)
                 {
+                    emergency_knockback_cooldown_timer = emergency_knockback_cooldown;
                     projectile_emergency_knockback emergency_knockback = new projectile_emergency_knockback(content, position, this);
                     global.signal.spawn_projectile(emergency_knockback);
                 }

@@ -11,6 +11,11 @@ namespace old_heart
     {
         public int damage;
         public float knockback_speed = 150f;
+
+        public bool projectile_deflection_enable = false;
+        public float projectile_deflection_speed = 1000;
+        public float projecitle_deflection_life_time = 1f;
+
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
         public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance = 50, float travel_time = 0.3f, int damage = 1 , int hit_box_radius = 20)
@@ -66,6 +71,28 @@ namespace old_heart
         public override void collide_wall(CollisionPair2D pair, float delta_time)
         {
             // not disapear when hit wall
+        }
+        public override void on_collide_hit_box(projectile target_projectile)
+        {
+            if (projectile_deflection_enable == false) {  return; }
+            if (target_projectile.deflectable == false) { return; }
+            if (owner is not player) { return; }
+            if (target_projectile.owner is not enemy) { return; }
+
+            projectile deflected_projectile = target_projectile.clone();
+            target_projectile.time_out();
+
+            deflected_projectile.owner = owner;
+            deflected_projectile.velocity = Vector2.Normalize(velocity) * projectile_deflection_speed;
+            deflected_projectile.time_left = projecitle_deflection_life_time;
+            deflected_projectile.deflected_by_player = true;
+
+
+            global.signal.spawn_projectile(deflected_projectile);
+
+
+            base.on_collide_hit_box(target_projectile);
+
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
