@@ -14,13 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin assets/font/test_font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:assets/font/test_font.spritefont;assets/font/test_font
-
 #begin assets/image/enemy/sprite_bacteria_attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -31,7 +24,21 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_bacteria_attack.png;assets/image/enemy/sprite_bacteria_attack
+
+#begin assets/image/enemy/sprite_bacteria_dizzy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_bacteria_dizzy.png;assets/image/enemy/sprite_bacteria_dizzy
 
 #begin assets/image/enemy/sprite_bacteria_idle.png
 /importer:TextureImporter
@@ -43,6 +50,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_bacteria_idle.png;assets/image/enemy/sprite_bacteria_idle
 
 #begin assets/image/enemy/sprite_bacteria_walk.png
@@ -55,9 +63,10 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_bacteria_walk.png;assets/image/enemy/sprite_bacteria_walk
 
-#begin assets/image/enemy/sprite_bacteria_dizzy.png
+#begin assets/image/enemy/sprite_leukemia_dizzy.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -67,8 +76,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:assets/image/enemy/sprite_bacteria_dizzy.png;assets/image/enemy/sprite_bacteria_dizzy
-
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_leukemia_dizzy.png;assets/image/enemy/sprite_leukemia_dizzy
 
 #begin assets/image/enemy/sprite_leukemia_idle.png
 /importer:TextureImporter
@@ -80,6 +89,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_leukemia_idle.png;assets/image/enemy/sprite_leukemia_idle
 
 #begin assets/image/enemy/sprite_leukemia_walk.png
@@ -92,20 +102,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_leukemia_walk.png;assets/image/enemy/sprite_leukemia_walk
-
-#begin assets/image/enemy/sprite_leukemia_dizzy.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:assets/image/enemy/sprite_leukemia_dizzy.png;assets/image/enemy/sprite_leukemia_dizzy
-
 
 #begin assets/image/enemy/sprite_minion_dizzy.png
 /importer:TextureImporter
@@ -117,6 +115,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_minion_dizzy.png;assets/image/enemy/sprite_minion_dizzy
 
 #begin assets/image/enemy/sprite_minion_idle.png
@@ -129,6 +128,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_minion_idle.png;assets/image/enemy/sprite_minion_idle
 
 #begin assets/image/enemy/sprite_minion_walk.png
@@ -141,6 +141,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_minion_walk.png;assets/image/enemy/sprite_minion_walk
 
 #begin assets/image/enemy/sprite_virus_attack.png
@@ -153,6 +154,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_virus_attack.png;assets/image/enemy/sprite_virus_attack
 
 #begin assets/image/enemy/sprite_virus_idle.png
@@ -165,6 +167,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_virus_idle.png;assets/image/enemy/sprite_virus_idle
 
 #begin assets/image/enemy/sprite_virus_walk.png
@@ -177,6 +180,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_virus_walk.png;assets/image/enemy/sprite_virus_walk
 
 #begin assets/image/levels/texture_level_easy_01.png
@@ -189,6 +193,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_easy_01.png;assets/image/levels/texture_level_easy_01
 
 #begin assets/image/levels/texture_level_easy_02.png
@@ -201,6 +206,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_easy_02.png;assets/image/levels/texture_level_easy_02
 
 #begin assets/image/levels/texture_level_easy_03.png
@@ -213,6 +219,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_easy_03.png;assets/image/levels/texture_level_easy_03
 
 #begin assets/image/levels/texture_level_easy_04.png
@@ -225,6 +232,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_easy_04.png;assets/image/levels/texture_level_easy_04
 
 #begin assets/image/levels/texture_level_tutorial.png
@@ -237,6 +245,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_tutorial.png;assets/image/levels/texture_level_tutorial
 
 #begin assets/image/other/sprite_shadow.png
@@ -249,6 +258,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/other/sprite_shadow.png;assets/image/other/sprite_shadow
 
 #begin assets/image/other/sprite_shield.png
@@ -261,6 +271,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/other/sprite_shield.png;assets/image/other/sprite_shield
 
 #begin assets/image/other/white_pixel.png
@@ -273,6 +284,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/other/white_pixel.png;assets/image/other/white_pixel
 
 #begin assets/image/player/sprite_player_die.png
@@ -285,6 +297,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_die.png;assets/image/player/sprite_player_die
 
 #begin assets/image/player/sprite_player_idle.png
@@ -297,6 +310,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_idle.png;assets/image/player/sprite_player_idle
 
 #begin assets/image/player/sprite_player_nohead_idle.png
@@ -309,6 +323,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_nohead_idle.png;assets/image/player/sprite_player_nohead_idle
 
 #begin assets/image/player/sprite_player_nohead_walk.png
@@ -321,6 +336,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_nohead_walk.png;assets/image/player/sprite_player_nohead_walk
 
 #begin assets/image/player/sprite_player_noheadbutarm_Idle.png
@@ -333,6 +349,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_noheadbutarm_Idle.png;assets/image/player/sprite_player_noheadbutarm_Idle
 
 #begin assets/image/player/sprite_player_noheadbutarm_punchattack.png
@@ -345,6 +362,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_noheadbutarm_punchattack.png;assets/image/player/sprite_player_noheadbutarm_punchattack
 
 #begin assets/image/player/sprite_player_noheadbutarm_takedamage.png
@@ -357,6 +375,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_noheadbutarm_takedamage.png;assets/image/player/sprite_player_noheadbutarm_takedamage
 
 #begin assets/image/player/sprite_player_noheadbutarm_walk.png
@@ -369,6 +388,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_noheadbutarm_walk.png;assets/image/player/sprite_player_noheadbutarm_walk
 
 #begin assets/image/player/sprite_player_punchattack.png
@@ -381,6 +401,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_punchattack.png;assets/image/player/sprite_player_punchattack
 
 #begin assets/image/player/sprite_player_takedamage.png
@@ -393,6 +414,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_takedamage.png;assets/image/player/sprite_player_takedamage
 
 #begin assets/image/player/sprite_player_takeoffhead.png
@@ -405,6 +427,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_takeoffhead.png;assets/image/player/sprite_player_takeoffhead
 
 #begin assets/image/player/sprite_player_walk.png
@@ -417,6 +440,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/player/sprite_player_walk.png;assets/image/player/sprite_player_walk
 
 #begin assets/image/ui/crosshair_000.png
@@ -429,6 +453,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/crosshair_000.png;assets/image/ui/crosshair_000
 
 #begin assets/image/ui/crosshair_002.png
@@ -441,6 +466,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
 
 #begin assets/image/ui/ui_crosshair.PNG
@@ -453,6 +479,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_crosshair.PNG;assets/image/ui/ui_crosshair
 
 #begin assets/image/ui/ui_cursor.PNG
@@ -465,6 +492,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_cursor.PNG;assets/image/ui/ui_cursor
 
 #begin assets/image/ui/ui_dna.PNG
@@ -477,6 +505,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_dna.PNG;assets/image/ui/ui_dna
 
 #begin assets/image/ui/ui_life.PNG
@@ -489,6 +518,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_life.PNG;assets/image/ui/ui_life
 
 #begin assets/image/weapons/sprite_weapon_head.png
@@ -501,7 +531,41 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:assets/image/weapons/sprite_weapon_head.png;assets/image/weapons/sprite_weapon_head
+
+#begin level/level_0_tutorial.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_0_tutorial.tmx
+
+#begin Placeholder/Enemies/Beast.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Enemies/Beast.png;Placeholder/Enemies/Beast
+
+#begin Placeholder/Enemies/minion.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Enemies/minion.png;Placeholder/Enemies/minion
 
 #begin Placeholder/Levels/map_01/layer01.png
 /importer:TextureImporter
@@ -513,6 +577,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:Placeholder/Levels/map_01/layer01.png;Placeholder/Levels/map_01/layer01
 
 #begin Placeholder/Levels/map_01/layer02.png
@@ -525,6 +590,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:Placeholder/Levels/map_01/layer02.png;Placeholder/Levels/map_01/layer02
 
 #begin Placeholder/Levels/map_02/layer01.png
@@ -537,6 +603,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:Placeholder/Levels/map_02/layer01.png;Placeholder/Levels/map_02/layer01
 
 #begin Placeholder/Levels/map_02/layer02.png
@@ -549,6 +616,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:Placeholder/Levels/map_02/layer02.png;Placeholder/Levels/map_02/layer02
 
 #begin Placeholder/Levels/object/goal.png
@@ -561,6 +629,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
 /build:Placeholder/Levels/object/goal.png;Placeholder/Levels/object/goal
 
 #begin Placeholder/Player/Idle_aim.png
@@ -573,7 +642,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Player/Idle_aim.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Player/Idle_aim.png;Placeholder/Player/Idle_aim
 
 #begin Placeholder/Player/Idle.png
 /importer:TextureImporter
@@ -585,7 +655,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Player/Idle.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Player/Idle.png;Placeholder/Player/Idle
 
 #begin Placeholder/Player/Roll.png
 /importer:TextureImporter
@@ -597,7 +668,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Player/Roll.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Player/Roll.png;Placeholder/Player/Roll
 
 #begin Placeholder/Player/Walk_aim.png
 /importer:TextureImporter
@@ -609,7 +681,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Player/Walk_aim.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Player/Walk_aim.png;Placeholder/Player/Walk_aim
 
 #begin Placeholder/Player/Walk.png
 /importer:TextureImporter
@@ -621,37 +694,56 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Player/Walk.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Player/Walk.png;Placeholder/Player/Walk
 
 #begin Placeholder/SFX/Impact.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Placeholder/SFX/Impact.wav
+/processorParam:Version=3.8.5.1
+/build:Placeholder/SFX/Impact.wav;Placeholder/SFX/Impact
 
 #begin Placeholder/SFX/Impact2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Placeholder/SFX/Impact2.wav
+/processorParam:Version=3.8.5.1
+/build:Placeholder/SFX/Impact2.wav;Placeholder/SFX/Impact2
 
 #begin Placeholder/SFX/Pick_up_head.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Placeholder/SFX/Pick_up_head.wav
+/processorParam:Version=3.8.5.1
+/build:Placeholder/SFX/Pick_up_head.wav;Placeholder/SFX/Pick_up_head
 
 #begin Placeholder/SFX/Slash.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Placeholder/SFX/Slash.wav
+/processorParam:Version=3.8.5.1
+/build:Placeholder/SFX/Slash.wav;Placeholder/SFX/Slash
 
 #begin Placeholder/SFX/Throw_Head.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Placeholder/SFX/Throw_Head.wav
+/processorParam:Version=3.8.5.1
+/build:Placeholder/SFX/Throw_Head.wav;Placeholder/SFX/Throw_Head
+
+#begin Placeholder/Tilesets/TilesetInterior.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Tilesets/TilesetInterior.png;Placeholder/Tilesets/TilesetInterior
 
 #begin Placeholder/Ui/crosshair-000.png
 /importer:TextureImporter
@@ -663,7 +755,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Ui/crosshair-000.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Ui/crosshair-000.png;Placeholder/Ui/crosshair-000
 
 #begin Placeholder/Ui/crosshair-002.png
 /importer:TextureImporter
@@ -675,7 +768,8 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Ui/crosshair-002.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Ui/crosshair-002.png;Placeholder/Ui/crosshair-002
 
 #begin Placeholder/Weapons/Head.png
 /importer:TextureImporter
@@ -687,5 +781,6 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Placeholder/Weapons/Head.png
+/processorParam:Version=3.8.5.1
+/build:Placeholder/Weapons/Head.png;Placeholder/Weapons/Head
 

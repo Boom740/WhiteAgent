@@ -5,10 +5,10 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "C#: game_test_mono Debug",
+        "name": "C#: white_agent Debug",
         "type": "dotnet",
         "request": "launch",
-        "projectPath": "${workspaceFolder}/game_test_mono.csproj"
+        "projectPath": "${workspaceFolder}/white_agent.csproj"
       }
     ],
   }

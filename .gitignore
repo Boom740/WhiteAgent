@@ -408,3 +408,4 @@ FodyWeavers.xsd
 .mgbld/
 
 /game_test_mono/game_test_mono/Content/assets/Editable_files
+white_agent/white_agent/Content/level/level_tiled_project.tiled-session
