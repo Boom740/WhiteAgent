@@ -16,10 +16,6 @@ namespace old_heart
 
         public test_level(Game1 game , string level_file) : base(game)
         {
-            if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
-            {
-                level_file += ".json";
-            }
             this.level_file = level_file;
             global.change_mouse_state(global.mouse_state.combat);
         }

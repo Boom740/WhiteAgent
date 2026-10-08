@@ -40,7 +40,7 @@ namespace old_heart
                 bool play_latest_level = false;
                 if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
                 {
-                    play_latest_level = game.run_data_manager.level_list[game.run_data_manager.cleared_level] + ".json" == Path.GetFileName(game_manager.level_manager.current_level_file);
+                    play_latest_level = game.run_data_manager.level_list[game.run_data_manager.cleared_level] == game_manager.level_manager.current_level_file;
                 }
                 if (play_latest_level)
                 {
@@ -50,7 +50,7 @@ namespace old_heart
 
                     if (has_next_level)
                     {
-                        string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level].ToString();
+                        string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
 
                         ScreenManager.ReplaceScreen(new scene_gameplay(game, next_level_name), fade_transition);
                         game_manager.player.current_combat_state = player.combat_state.change_scene; // cant take damage when move to next level

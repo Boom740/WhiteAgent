@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="17">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="24">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_tutorial.png" width="960" height="764"/>
  </imagelayer>
@@ -19,5 +20,8 @@
   <object id="15" x="155.417" y="497.5" width="145.833" height="175"/>
   <object id="16" x="599.583" y="575.5" width="145.833" height="76"/>
  </objectgroup>
- <objectgroup id="4" name="entity"/>
+ <objectgroup id="4" name="entity">
+  <object id="17" type="player" gid="1" x="449" y="523" width="64" height="64"/>
+  <object id="20" type="enemy_leukemia" gid="2" x="448" y="249" width="64" height="64"/>
+ </objectgroup>
 </map>

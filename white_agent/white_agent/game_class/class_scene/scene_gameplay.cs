@@ -18,10 +18,6 @@ namespace old_heart
 
         public scene_gameplay(Game1 game, string level_file) : base(game)
         {
-            if (!level_file.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
-            {
-                level_file += ".json";
-            }
             this.level_file = level_file;
 
             global.change_mouse_state(global.mouse_state.combat);
@@ -46,7 +42,7 @@ namespace old_heart
             test_text_3.visible = false;
             game_manager.add_ui(test_text_3);
 
-            live_image = new image(game.Content, new Vector2(20, 20),"assets/image/ui/ui_life");
+            live_image = new image(game.Content, new Vector2(20, 20),file_path: "assets/image/ui/ui_life");
             game_manager.add_ui(live_image);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);

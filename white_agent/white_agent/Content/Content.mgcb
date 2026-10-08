@@ -541,6 +541,12 @@
 /processorParam:Version=6.1.1.0
 /build:level/level_0_tutorial.tmx
 
+#begin level/tiled_data/entity.tsx
+/importer:TilemapTilesetImporter
+/processor:TilemapTilesetProcessor
+/processorParam:Version=6.1.1.0
+/build:level/tiled_data/entity.tsx
+
 #begin Placeholder/Enemies/Beast.png
 /importer:TextureImporter
 /processor:TextureProcessor

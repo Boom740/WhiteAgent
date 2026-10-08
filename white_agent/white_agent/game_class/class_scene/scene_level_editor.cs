@@ -25,7 +25,7 @@ namespace old_heart
         {
             base.LoadContent();
 
-            game_manager.level_manager.set_level_file("level_4_easy", game.run_data_manager);         // exact JSON file name
+            game_manager.level_manager.set_level_file("level_0_tutorial", game.run_data_manager);         // exact JSON file name
             game_manager.pause = true;
 
             test_text = new ui_text("this text get replace in update function anyway", new Vector2(10, 5));
@@ -33,7 +33,7 @@ namespace old_heart
             test_text.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text);
 
-            test_text_2 = new ui_text("[Q] save [E] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level",  new Vector2(10, 510));
+            test_text_2 = new ui_text("[E] load [WASD] move [Shift] move faster [P] toggle collision [V] return [B] test level",  new Vector2(10, 510));
             test_text_2.text_color = Color.DarkRed;
             test_text_2.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text_2);
@@ -53,10 +53,6 @@ namespace old_heart
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
                 ScreenManager.ReplaceScreen(new test_level(game,game_manager.level_manager.current_level_file), fade_transition);
-            }
-            else if (keyboard_state.WasKeyPressed(Keys.Q))
-            {
-                game_manager.level_manager.save_level();
             }
             else if (keyboard_state.WasKeyPressed(Keys.E))
             {
