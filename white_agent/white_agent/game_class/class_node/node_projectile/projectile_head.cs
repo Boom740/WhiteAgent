@@ -41,12 +41,18 @@ namespace old_heart
 
         private HashSet<entity> hit_entity = new HashSet<entity>();
         Vector2 bounce_direction; // for bounce
+
+        //Trail
+        private trail_effect trail;
+
         public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 15 , bool explosive_impact = false)
             : base(content_set,  position : position , owner : owner , time_left:0) 
         {
             this.run_data = run_data;
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (3f/4f) + sprite_height); // position คือกึ่งกลาง X, 3/4 Y
+
+            trail = new trail_effect(max_points: 10, max_width: texture.Width * sprite_scale.X);
 
             hit_box_radius = 14;
             this.shock_wave_radius = shock_wave_radius;
@@ -89,16 +95,21 @@ namespace old_heart
             height_ratio = 1f - height_ratio;
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (4f/5f) + (height_ratio * sprite_height) );
 
+            float visual_center_offset_y = (texture.Height / 2f - sprite_origin.Y) * sprite_scale.Y;
+            trail.add_point(position + new Vector2(0, visual_center_offset_y));
+
             if (velocity.Length() < stop_velocity_threshold)
             {
                 resting();
             }
+
         }
         public void resting()
         {
             velocity = Vector2.Zero;
             is_resting = true;
             sprite_origin = new Vector2(texture.Width / 2, texture.Height * (4f / 5f)); // position คือกึ่งกลาง X, 3/4 Y
+            trail.clear();
         }
         public void spawn_shock_wave()
         {
@@ -193,6 +204,8 @@ namespace old_heart
 
         }
 
+        
+
         public override void Draw(SpriteBatch sprite_batch)
         {
             float alpha = 1f;
@@ -201,6 +214,9 @@ namespace old_heart
                 bool visible_phase = ((int)(pickup_lock_timer / blink_interval)) % 2 == 0;
                 alpha = visible_phase ? 1f : blink_min_alpha;
             }
+            float layer_depth = (position.Y + 50000f) / 100000f - 0.0001f;
+            trail.draw(sprite_batch, alpha, layer_depth);
+
 
             base.Draw(sprite_batch,alpha);
 
