@@ -222,19 +222,6 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/levels/texture_level_easy_03.png;assets/image/levels/texture_level_easy_03
 
-#begin assets/image/levels/texture_level_easy_04.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:assets/image/levels/texture_level_easy_04.png;assets/image/levels/texture_level_easy_04
-
 #begin assets/image/levels/texture_level_tutorial.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -540,6 +527,27 @@
 /processorParam:LevelName=
 /processorParam:Version=6.1.1.0
 /build:level/level_0_tutorial.tmx
+
+#begin level/level_1_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_1_easy.tmx
+
+#begin level/level_2_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_2_easy.tmx
+
+#begin level/level_3_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_3_easy.tmx
 
 #begin level/tiled_data/entity.tsx
 /importer:TilemapTilesetImporter

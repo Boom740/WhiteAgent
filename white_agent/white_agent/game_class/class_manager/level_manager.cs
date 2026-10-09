@@ -91,16 +91,26 @@ namespace old_heart
                 }
                 else if (layer is TilemapObjectLayer entity_layer && entity_layer.Name == "entity")
                 {
-                    foreach (TilemapObject tile_map_object in entity_layer.Objects)
-                    {
-                        Debug.WriteLine("load entity : " +  tile_map_object.Class);
 
+                    foreach (TilemapObject tile_map_object in entity_layer.Objects)   // load player
+                    {
+                        if (tile_map_object.Class == "player")
+                        {
+                            Vector2 position = tile_map_object.Position + new Vector2(tile_map_object.Bounds.Width / 2, -tile_map_object.Bounds.Height * 0.2f);
+                            game_manager.add_entity(new player(game_manager.content, position, run_data));
+
+                            Debug.WriteLine("loaded player : " + tile_map_object.Class);
+                        }
+                    }
+
+                    foreach (TilemapObject tile_map_object in entity_layer.Objects)  // load enemy
+                    {
                         Vector2 position = tile_map_object.Position + new Vector2(tile_map_object.Bounds.Width / 2, -tile_map_object.Bounds.Height * 0.2f);
                         if (tile_map_object.Class == "player")
                         {
-                            game_manager.add_entity(new player(game_manager.content, position, run_data));
+
                         }
-                        else if(tile_map_object.Class == "enemy_leukemia")
+                        else if (tile_map_object.Class == "enemy_leukemia")
                         {
                             game_manager.add_entity(new enemy_leukemia(game_manager.content, position));
                         }
@@ -119,6 +129,11 @@ namespace old_heart
                         else
                         {
                             Debug.WriteLine("Error load entity : " + tile_map_object.Class);
+                        }
+
+                        if (tile_map_object.Class != "player")
+                        {
+                            Debug.WriteLine("loaded enemy : " + tile_map_object.Class);
                         }
                     }
                 }

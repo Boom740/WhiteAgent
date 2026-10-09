@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="64">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_easy_03.png" width="832" height="576"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="1" x="-5" y="-50" width="858" height="109.667"/>
+  <object id="5" x="-43.6667" y="-52.1668" width="104.667" height="684.334"/>
+  <object id="7" x="-2.33367" y="517.833" width="842" height="116.334"/>
+  <object id="24" x="772.333" y="-45.0003" width="106" height="693.334"/>
+  <object id="28" x="385.37" y="280" width="56" height="33.334"/>
+  <object id="34" x="133.275" y="262.055" width="54" height="53.334"/>
+  <object id="35" x="133.275" y="132.471" width="54" height="53.334"/>
+  <object id="36" x="133.275" y="389.365" width="54" height="53.334"/>
+  <object id="37" x="261.722" y="263.192" width="54" height="53.334"/>
+  <object id="38" x="261.722" y="133.608" width="54" height="53.334"/>
+  <object id="39" x="261.722" y="390.502" width="54" height="53.334"/>
+  <object id="40" x="518.048" y="263.76" width="54" height="53.334"/>
+  <object id="41" x="518.048" y="134.176" width="54" height="53.334"/>
+  <object id="42" x="518.048" y="391.07" width="54" height="53.334"/>
+  <object id="43" x="646.495" y="264.897" width="54" height="53.334"/>
+  <object id="44" x="646.495" y="135.313" width="54" height="53.334"/>
+  <object id="45" x="646.495" y="392.207" width="54" height="53.334"/>
+  <object id="46" x="391.306" y="133.608" width="54" height="53.334"/>
+  <object id="47" x="391.306" y="390.502" width="54" height="53.334"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="56" type="enemy_virus" gid="4" x="41.3335" y="172.666" width="128" height="128"/>
+  <object id="57" type="enemy_virus" gid="4" x="670.667" y="171.333" width="128" height="128"/>
+  <object id="58" type="enemy_bacteria" gid="3" x="694.667" y="498" width="80" height="80"/>
+  <object id="59" type="enemy_bacteria" gid="3" x="61.3335" y="498" width="80" height="80"/>
+  <object id="60" type="enemy_leukemia" gid="2" x="257.334" y="504.666" width="64" height="64"/>
+  <object id="61" type="enemy_leukemia" gid="2" x="388" y="502" width="64" height="64"/>
+  <object id="62" type="enemy_leukemia" gid="2" x="516.001" y="506" width="64" height="64"/>
+  <object id="63" type="player" gid="1" x="385.333" y="265.333" width="64" height="64"/>
+ </objectgroup>
+</map>

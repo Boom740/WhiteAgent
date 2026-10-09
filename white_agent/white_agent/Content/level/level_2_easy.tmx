@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="36">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_easy_02.png" width="832" height="576"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="1" x="-5" y="-50" width="858" height="109.667"/>
+  <object id="5" x="-43.6667" y="-52.1668" width="104.667" height="684.334"/>
+  <object id="6" x="326.666" y="260.833" width="178.667" height="53.334"/>
+  <object id="7" x="-2.33367" y="517.833" width="842" height="116.334"/>
+  <object id="24" x="772.333" y="-45.0003" width="106" height="693.334"/>
+  <object id="28" x="260.333" y="280" width="56" height="33.334"/>
+  <object id="29" x="390.499" y="199.749" width="54" height="178.667"/>
+  <object id="31" x="515.333" y="280" width="56" height="33.334"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="17" type="player" gid="1" x="386" y="162.667" width="64" height="64"/>
+  <object id="26" type="enemy_leukemia" gid="2" x="667" y="432" width="64" height="64"/>
+  <object id="27" type="enemy_leukemia" gid="2" x="106" y="441" width="64" height="64"/>
+  <object id="33" type="enemy_bacteria" gid="3" x="105" y="180" width="80" height="80"/>
+  <object id="34" type="enemy_bacteria" gid="3" x="650" y="188" width="80" height="80"/>
+  <object id="35" type="enemy_virus" gid="4" x="354" y="522" width="128" height="128"/>
+ </objectgroup>
+</map>
