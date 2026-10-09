@@ -7,7 +7,7 @@ using System.IO;
 
 namespace old_heart
 {
-    public class test_level : base_screen
+    public class test_level : scene_base
     {
         public ui_text test_text;
         public ui_text test_text_2;
@@ -39,11 +39,11 @@ namespace old_heart
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
+                game.change_scene(new scene_main_menu(game), fade_transition);
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
+                game.change_scene(new scene_level_editor(game), fade_transition);
             }
 
             

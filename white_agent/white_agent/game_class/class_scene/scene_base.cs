@@ -3,11 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
 using System.Diagnostics;
-using System.IO;
 
 namespace old_heart
 {
-    public abstract class base_screen : GameScreen
+    public abstract class scene_base : GameScreen
     {
         public Game1 game = null;
         public FadeTransition fade_transition;
@@ -15,7 +14,7 @@ namespace old_heart
 
         public game_manager game_manager;
         public bool player_respawned = false;
-        public base_screen(Game1 game) : base(game)
+        public scene_base(Game1 game) : base(game)
         {
             this.game = game;
             sprite_batch = game.sprite_batch;
@@ -52,7 +51,7 @@ namespace old_heart
                     {
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
 
-                        ScreenManager.ReplaceScreen(new scene_gameplay(game, next_level_name), fade_transition);
+                        game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
                         game_manager.player.current_combat_state = player.combat_state.change_scene; // cant take damage when move to next level
                     }
 
@@ -65,7 +64,7 @@ namespace old_heart
                 {
                     player_respawned = true;
                     game.run_data_manager.respawn_left--;
-                    ScreenManager.ReplaceScreen(new scene_gameplay(game, game_manager.level_manager.current_level_file), fade_transition);
+                    game.change_scene(new scene_gameplay(game, game_manager.level_manager.current_level_file), fade_transition);
 
                     Debug.WriteLine("scene base respawn logic respawn_left : " + game.run_data_manager.respawn_left);
                 }

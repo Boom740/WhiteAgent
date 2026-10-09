@@ -5,7 +5,7 @@ using MonoGame.Extended.Screens;
 
 namespace old_heart
 {
-    public class scene_main_menu : base_screen
+    public class scene_main_menu : scene_base
     {
         public ui_button start_button;
         public ui_text test_text;
@@ -51,13 +51,13 @@ namespace old_heart
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_test_anything(game), fade_transition);
+                game.change_scene(new scene_test_anything(game), fade_transition);
             }
             else if (start_button.clicked)
             {
                 if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // still has next level
                 {
-                    ScreenManager.ReplaceScreen(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
+                    game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
                 }
             }
             else if (reset_button.clicked)
@@ -66,7 +66,7 @@ namespace old_heart
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new scene_level_editor(game), fade_transition);
+                game.change_scene(new scene_level_editor(game), fade_transition);
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.F))
             {

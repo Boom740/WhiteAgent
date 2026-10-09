@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace old_heart
 {
-    public class scene_test_anything : base_screen
+    public class scene_test_anything : scene_base
     {
         public string current_map_file;
 
@@ -64,7 +64,7 @@ namespace old_heart
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
+                game.change_scene(new scene_main_menu(game), fade_transition);
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.G))
             {

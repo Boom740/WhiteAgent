@@ -2,12 +2,11 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Input;
-using MonoGame.Extended.Screens;
 using System.IO;
 
 namespace old_heart
 {
-    public class scene_level_editor : base_screen
+    public class scene_level_editor : scene_base
     {
         public node selecting_node;
 
@@ -49,17 +48,14 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyPressed(Keys.V))
             {
-                ScreenManager.ReplaceScreen(new scene_main_menu(game), fade_transition);
+                game.change_scene(new scene_main_menu(game), fade_transition);
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
-                ScreenManager.ReplaceScreen(new test_level(game,game_manager.level_manager.current_level_file), fade_transition);
+                game.change_scene(new test_level(game,game_manager.level_manager.current_level_file), fade_transition);
             }
             else if (keyboard_state.WasKeyPressed(Keys.E))
             {
                 game_manager.level_manager.load_level(game.run_data_manager);
-            }else if (keyboard_state.WasKeyPressed(Keys.D1))
-            {
-                //game_manager.add_entity(new player(game_manager.content, global.input.scaled_mouse_world_position));
             }
 
 

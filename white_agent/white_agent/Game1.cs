@@ -1,9 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended.Screens;
-using System;
-using System.Diagnostics;
+using MonoGame.Extended.Screens.Transitions;
 
 namespace old_heart
 {
@@ -13,8 +11,12 @@ namespace old_heart
         public SpriteBatch sprite_batch;
 
 
-        readonly ScreenManager screen_manager;
         public run_data_manager run_data_manager;
+
+        public ScreenManager screen_manager;
+        public scene_base next_scene;
+        public Transition next_scene_transition;
+        public float scene_transitioning_timer = 0f; // track current transition time to prevent transition in that time
 
         public Game1()
         {
@@ -60,6 +62,26 @@ namespace old_heart
         {
             global.input.update_input_state();
 
+            if (scene_transitioning_timer > 0f)
+            {
+                scene_transitioning_timer -=(float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            else if (next_scene != null)
+            {
+                if (next_scene_transition == null)
+                {
+                    screen_manager.ReplaceScreen(next_scene);
+                }
+                else
+                {
+                    screen_manager.ReplaceScreen(next_scene,next_scene_transition);
+                    scene_transitioning_timer = next_scene_transition.Duration;
+                }
+
+                next_scene = null;
+                next_scene_transition = null;
+            }
+
             base.Update(gameTime);
         }
         protected override void UnloadContent()
@@ -68,6 +90,13 @@ namespace old_heart
             base.UnloadContent();
         }
 
+        public void change_scene(scene_base scene , Transition transition = null)
+        {
+            if (next_scene != null) { return; } // already queue next scene
+
+            next_scene = scene;
+            next_scene_transition = transition;
+        }
 
         //protected override void Draw(GameTime gameTime)
         //{

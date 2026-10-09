@@ -66,7 +66,6 @@ namespace old_heart
 
             collision_world.RebuildDynamicLayers();
 
-
             resolve_hitbox_collision("player_hitbox", "enemy");
             resolve_hitbox_collision("enemy_hitbox", "player");
             resolve_hitbox_collision("player_hitbox", "enemy_hitbox");
