@@ -19,12 +19,12 @@ namespace old_heart
         public float attack_cooldown = 1.5f;
         private float attack_cooldown_timer = 0f;
 
-        public int shots_per_burst = 3;
-        public float shot_interval = 0.3f;
+        public int shots_per_burst = 2;
+        public float shot_interval = 0.5f;
         private int shots_fired_in_burst = 0;
         private float shot_timer = 0f;
 
-        public float projectile_speed = 250f;
+        public float projectile_speed = 200f;
         public int projectile_damage = 1;
         public float projectile_knockback_speed = 150f;
 

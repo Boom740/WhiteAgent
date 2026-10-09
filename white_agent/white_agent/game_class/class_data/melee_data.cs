@@ -34,6 +34,7 @@ namespace old_heart
             melee_projectile.owner = owner;
             melee_projectile.knockback_speed = knockback_speed; // set หลังสร้าง เพราะ constructor เดิมไม่รับ knockback_speed
             melee_projectile.projectile_deflection_enable = projectile_deflection_enable;
+            melee_projectile.velocity = Vector2.Normalize(melee_projectile.velocity) * (melee_projectile.velocity.Length() + lunge_speed); // make projectile follow lunged entity too
             global.signal.spawn_projectile(melee_projectile);
 
             owner.velocity = Vector2.Normalize(aim_direction) * lunge_speed;

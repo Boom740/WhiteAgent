@@ -36,9 +36,9 @@ namespace old_heart
 
         public List<melee_data> combo_hits = new List<melee_data>
          {
-          new melee_data(damage: 1, lunge_speed: 600f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
-          new melee_data(damage: 1, lunge_speed: 600f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
-          new melee_data(damage: 2, lunge_speed: 1000f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
+          new melee_data(damage: 1, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
+          new melee_data(damage: 1, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
+          new melee_data(damage: 2, lunge_speed: 700f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
          };
         // --- combat: melee combo ---
         public int combo_count = 0;
@@ -251,7 +251,7 @@ namespace old_heart
             //  local functions: state handlers (เรียกจาก switch ด้านบน) 
             void update_free_state()
             {
-                check_head_pickup();
+                check_head_pickup(); 
                 update_movement_input();
 
                 if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)

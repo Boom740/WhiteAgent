@@ -188,10 +188,9 @@ namespace old_heart
         {
             if (is_resting) return;
 
-            Vector2 random_vector = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * 0.1f * time_left;
-            bounce_back(Vector2.Normalize(pair.FirstResult.MinimumTranslationVector + random_vector));
-            spawn_shock_wave();
-            shock_wave_enable = false;
+            //Vector2 random_vector = Vector2.Rotate(Vector2.One, ((float)random.NextDouble() * (float)Math.PI * 2)) * 0.1f * time_left;
+            velocity += pair.FirstResult.MinimumTranslationVector /delta_time ;
+
         }
 
         public override void Draw(SpriteBatch sprite_batch)

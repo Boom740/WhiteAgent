@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System;
 using System.Diagnostics;
 
@@ -22,8 +23,7 @@ namespace old_heart
 
         public float attack_duration = 1f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
-        public float hitbox_spawn_time = 0.5f;
-        public float hitbox_spawn_timer = -1f;
+        public float attack_hit_box_radius = 50;
 
         public float attack_cooldown = 1.5f;
         public float attack_cooldown_timer = 0f;
@@ -156,7 +156,7 @@ namespace old_heart
                     hitbox_spawned_this_attack = true;
                     acceleration = Vector2.Zero;
 
-                    projectile projectile = new projectile_enemy_shock_wave(content, position, this);
+                    projectile projectile = new projectile_enemy_shock_wave(content, position, this , hit_box_radius : attack_hit_box_radius);
                     global.signal.spawn_projectile(projectile);
                 }
                
@@ -230,6 +230,18 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_red, position, high_layer: true);
             global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_red, position, high_layer: false);
             base.die();
+        }
+
+        public override void Draw(SpriteBatch sprite_batch)
+        {
+            base.Draw(sprite_batch);
+
+            if (state == enemy_state.attack && animation_player.current_frame_index < attack_hit_frame)
+            {
+                float charge_ratio = (float)animation_player.current_frame_index / (float)attack_hit_frame;
+
+                sprite_batch.DrawCircle(new CircleF(position, attack_hit_box_radius), 32, Color.Red * (charge_ratio * 0.3f) , 50, 0);
+            }
         }
         public class animation_player_virus : animation_player_base
         {
