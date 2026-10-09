@@ -287,9 +287,10 @@ namespace old_heart
                     current_combat_state = combat_state.none;
                 }
 
-                if (current_buffer_input == bufferable_input.dash && dash_cooldown_timer <= 0)
+                if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash))
                 {
                     update_movement_input();
+
                     start_dash();
                     return;
                 }
