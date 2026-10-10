@@ -174,7 +174,7 @@ namespace old_heart
                 sprite_scale *= draw_scale.Value;
             }
             Vector2 sprite_origin = current_animation.sprite_origin;
-            float layer_depth = ((position.Y + 50000f) / 100000f ) + current_animation.layer_depth_offset;
+            float layer_depth = Math.Clamp( ((position.Y + 50000f) / 100000f ) + current_animation.layer_depth_offset , 0 , 1);
             Color color = Color.White;
             if (current_flash_time > 0)
             {

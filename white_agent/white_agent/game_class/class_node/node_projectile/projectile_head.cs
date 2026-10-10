@@ -46,7 +46,7 @@ namespace old_heart
         private trail_effect trail;
 
         public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 15 , bool explosive_impact = false)
-            : base(content_set,  position : position , owner : owner , time_left:0) 
+            : base(content_set,  position : position , owner : owner , time_left:0, hit_box_radius: 14) 
         {
             this.run_data = run_data;
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
@@ -54,7 +54,6 @@ namespace old_heart
 
             trail = new trail_effect(max_points: 10, max_width: texture.Width * sprite_scale.X);
 
-            hit_box_radius = 14;
             this.shock_wave_radius = shock_wave_radius;
 
             ricochet_max = head_ricochet;

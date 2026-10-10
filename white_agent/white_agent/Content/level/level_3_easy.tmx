@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="64">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="67">
  <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_easy_03.png" width="832" height="576"/>
@@ -34,5 +34,8 @@
   <object id="61" type="enemy_leukemia" gid="2" x="388" y="502" width="64" height="64"/>
   <object id="62" type="enemy_leukemia" gid="2" x="516.001" y="506" width="64" height="64"/>
   <object id="63" type="player" gid="1" x="385.333" y="265.333" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="66" type="next_level_portal" gid="5" x="404.333" y="367.333" width="27" height="27"/>
  </objectgroup>
 </map>

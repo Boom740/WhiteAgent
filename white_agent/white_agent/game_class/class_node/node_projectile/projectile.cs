@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
+using System;
 using System.Diagnostics;
 
 namespace old_heart
@@ -35,11 +36,12 @@ namespace old_heart
 
         public bool deflectable = false;
         public bool deflected_by_player = false;
-        public projectile(ContentManager content_set, Vector2 position , float time_left = 1 , entity owner = null)
+        public projectile(ContentManager content_set, Vector2 position , float time_left = 1 , entity owner = null , float hit_box_radius = 15)
         {
             content = content_set;
             this.time_left = time_left;
             this.position = position;
+            this.hit_box_radius = hit_box_radius;
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
             collision.owner = this;
             this.owner = owner;
@@ -125,7 +127,7 @@ namespace old_heart
         }
         public virtual void Draw(SpriteBatch sprite_batch,float alpha)
         {
-            float layer_depth = (position.Y + 50000f) / 100000f;
+            float layer_depth = Math.Clamp( (position.Y + 50000f) / 100000f, 0, 1);
             Color color = Color.White * alpha;
             sprite_batch.Draw(texture, position, null, color, rotation, sprite_origin, sprite_scale, SpriteEffects.None, layer_depth);
 

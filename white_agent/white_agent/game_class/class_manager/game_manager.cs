@@ -34,12 +34,13 @@ namespace old_heart
         public List<entity> entity_list; // use in clear inactive
         public List<projectile> projectile_list;
         public List<world_text> world_text_list;
-        public player player;
 
         public bool pause = false;
         public enum game_state { normal , game_over , level_clear}
         public game_state current_game_state = game_state.normal;
 
+        public player player;
+        public projectile_next_level_portal next_level_portal;
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
             this.content = content;
@@ -111,20 +112,14 @@ namespace old_heart
         {
             if (projectile_manager.projectile_list.Count >= projectile_manager.limit)
             {
-                Debug.WriteLine("cant spawn projectile at limit count : " + projectile_manager.projectile_list.Count);
-                return;
+                if (projectile is not projectile_next_level_portal)
+                {
+                    Debug.WriteLine("cant spawn projectile at limit count : " + projectile_manager.projectile_list.Count);
+                    return;
+                }
             }
-            projectile_manager.add(projectile);
-            if (projectile.owner == player)
-            {
-                //Debug.WriteLine("add projectile from player");  
-                collision_manager.add(projectile.collision, "player_hitbox");
-            }
-            else
-            {
-                collision_manager.add(projectile.collision, "enemy_hitbox");
-            }
-            debug_manager.add(projectile.collision);
+
+            projectile.spawn(projectile_manager, collision_manager, debug_manager);
         }
         public void add_world_text(world_text world_text)
         {
@@ -155,8 +150,18 @@ namespace old_heart
             if (global.input.keyboard_state.WasKeyPressed(Keys.O))   // debug
             {
                 current_game_state = game_state.level_clear;
+                player.current_combat_state = player.combat_state.change_scene;
+            }else if (global.input.keyboard_state.WasKeyPressed(Keys.I))   // debug
+            {
+                foreach (entity entity in entity_manager.entity_list)
+                {
+                    if (entity is enemy)
+                    {
+                        entity.die();
+                    }
+                }
             }
-            
+
             //map_manager.update(gameTime);  map don't update lol
 
             entity_manager.update(gameTime);

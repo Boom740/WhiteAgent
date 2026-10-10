@@ -13,7 +13,7 @@ namespace old_heart
         public float knockback_speed;
 
         public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f)
-            : base(content_set, position, time_left: lifetime)
+            : base(content_set, position, time_left: lifetime, hit_box_radius: 10)
         {
             this.damage = damage;
             this.knockback_speed = knockback_speed;
@@ -23,8 +23,6 @@ namespace old_heart
             texture = content.Load<Texture2D>("assets/image/weapons/sprite_weapon_head");
             sprite_origin = new Vector2(texture.Width / 2f, texture.Height *3 / 2f);
             sprite_scale = new Vector2(0.6f, 0.6f); // ย่อขนาดกว่าตัวหัวจริง เพราะยืม sprite มาใช้ชั่วคราว
-
-            hit_box_radius = 10f;
 
             deflectable = true;
         }

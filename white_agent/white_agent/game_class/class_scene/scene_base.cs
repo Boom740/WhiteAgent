@@ -34,13 +34,29 @@ namespace old_heart
 
             if (player_respawned) {return; } 
 
-            if (game_manager.current_game_state == game_manager.game_state.level_clear)       // finished level
+            if (game_manager.current_game_state == game_manager.game_state.level_clear && game_manager.player != null)       // finished level
             {
+                bool player_entered_portal = game_manager.player.current_combat_state == player.combat_state.change_scene && game_manager.player.animation_player.is_finished == true;
+                if (player_entered_portal == false) // not enter next level yet
+                {
+                    if (game_manager.next_level_portal == null)
+                    {
+                        Debug.WriteLine("scene_base   level_clear but there is no portal loaded ");
+
+                    }else if (game_manager.next_level_portal.spawned == false)
+                    {
+                        global.signal.spawn_projectile(game_manager.next_level_portal);
+                        game_manager.next_level_portal.spawned = true;
+                    }
+                    return;
+                }
+
                 bool play_latest_level = false;
                 if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
                 {
                     play_latest_level = game.run_data_manager.level_list[game.run_data_manager.cleared_level] == game_manager.level_manager.current_level_file;
                 }
+
                 if (play_latest_level)
                 {
                     game.run_data_manager.cleared_level++;
@@ -52,7 +68,6 @@ namespace old_heart
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
 
                         game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
-                        game_manager.player.current_combat_state = player.combat_state.change_scene; // cant take damage when move to next level
                     }
 
                     Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);

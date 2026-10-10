@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Collisions;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -13,11 +14,9 @@ namespace old_heart
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
         public projectile_enemy_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 50)
-            : base(content_set, position, time_left: 0.1f, owner: owner)
+            : base(content_set, position, time_left: 0.1f, owner: owner , hit_box_radius: hit_box_radius)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
-
-            this.hit_box_radius = hit_box_radius;
         }
 
         public override void on_hit_entity(entity target_entity)

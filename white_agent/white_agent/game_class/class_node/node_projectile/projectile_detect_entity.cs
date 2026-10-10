@@ -12,11 +12,10 @@ namespace old_heart
     {
         private HashSet<entity> detected_entity = new HashSet<entity>(); // every entity detected
         public Action<HashSet<entity>> return_funciton;
-        public projectile_detect_entity(ContentManager content_set, Vector2 position , entity owner = null , float ricochet_range = 200 , Action<HashSet<entity>> return_function = null)
-            : base(content_set, position, time_left:0.02f , owner: owner)
+        public projectile_detect_entity(ContentManager content_set, Vector2 position , entity owner = null , float hit_box_radius = 200 , Action<HashSet<entity>> return_function = null)
+            : base(content_set, position, time_left:0.02f , owner: owner, hit_box_radius: hit_box_radius)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
-            hit_box_radius = ricochet_range;
             this.return_funciton = return_function;
         }
 

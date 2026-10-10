@@ -19,11 +19,10 @@ namespace old_heart
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำจาก swing เดียวกัน
 
         public projectile_melee(ContentManager content_set, Vector2 position, Vector2 aim_direction, float travel_distance = 50, float travel_time = 0.3f, int damage = 1 , int hit_box_radius = 20)
-            : base(content_set,  position , time_left: travel_time)
+            : base(content_set,  position , time_left: travel_time, hit_box_radius: hit_box_radius)
         {
             this.damage = damage;
             this.velocity = Vector2.Normalize(aim_direction) * (travel_distance / travel_time); // วิ่งให้ได้ระยะ travel_distance พอดีตอน time_left หมด
-            this.hit_box_radius = hit_box_radius;
 
             visible = false; // ล่องหน 
         }

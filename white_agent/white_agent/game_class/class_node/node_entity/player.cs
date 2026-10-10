@@ -17,7 +17,7 @@ namespace old_heart
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
         public enum combat_state { none, attack, aim , dash , die , change_scene}
-        public enum bufferable_input { none , attack , dash }
+        public enum bufferable_input { none , attack , dash , interact}
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
         public bufferable_input current_buffer_input = bufferable_input.none;
@@ -148,7 +148,7 @@ namespace old_heart
                     break;
             }
 
-            if (keyboard_state.WasKeyPressed(Keys.F))       // debug 
+            if (keyboard_state.WasKeyPressed(Keys.L))       // debug 
             {
                 take_damage(1);
                 Debug.WriteLine("hp left " + hp + " / " + max_hp);
@@ -177,6 +177,10 @@ namespace old_heart
                 else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
                 {
                     buffer_input(bufferable_input.attack);
+
+                }else if (keyboard_state.WasKeyPressed(Keys.E))
+                {
+                    buffer_input(bufferable_input.interact);
                 }
 
                 if (current_buffer_input == bufferable_input.none) { return; }
@@ -337,7 +341,7 @@ namespace old_heart
             }
             void update_change_scene_state()
             {
-                i_frame_time = 1; // set i frame to 1 every time when change scene
+                i_frame_time = 1; // set i frame to 1 every frame when change scene
             }
 
             void update_movement_input(bool look_at_mouse = true)
@@ -536,6 +540,9 @@ namespace old_heart
                 case combat_state.die:
                     //  already play animaiton in die function   dont play any other animation while dying  
                     break;
+                case combat_state.change_scene:
+                    // already play in update
+                    break;
                 case combat_state.attack:
                     //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
@@ -650,7 +657,23 @@ namespace old_heart
             entity.take_damage(lethal_dash_damage, damage_dealer: this);
             entity.apply_knockback(current_direction_vector, lethal_dash_knockback);
         }
+        public override void die()
+        {
+            if (!alive) { return; }
+            alive = false;
+            current_combat_state = combat_state.die;
+            animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
 
+            run_data.hp_left = max_hp; // reset run_data hp to max
+        }
+
+        public void enter_next_level(Vector2 portal_position)
+        {
+            current_combat_state = combat_state.change_scene;
+
+            position = portal_position;
+            animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]); // change level animation
+        }
         public void handle_enemy_kill()
         {
             if (!alive || current_combat_state == combat_state.die || current_combat_state == combat_state.change_scene) { return; }
@@ -660,16 +683,6 @@ namespace old_heart
             adrenaline_rush_cooldown_timer = adrenaline_rush_cooldown;
             adrenaline_rush_speed_timer = adrenaline_rush_speed_time;
         }
-        public override void die()
-        {
-            if (! alive) { return; }
-            alive = false;
-            current_combat_state = combat_state.die;
-            animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
-
-            run_data.hp_left = max_hp; // reset run_data hp to max
-        }
-
         public override void Draw(SpriteBatch sprite_batch)
         {
             float blink_alpha = 1f;

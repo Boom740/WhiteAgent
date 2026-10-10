@@ -137,6 +137,17 @@ namespace old_heart
                         }
                     }
                 }
+                else if (layer is TilemapObjectLayer other_layer)
+                {
+                    foreach (TilemapObject tile_map_object in other_layer.Objects)   // load other object (like next_level_portal)
+                    {
+                        Vector2 position = tile_map_object.Position + new Vector2(tile_map_object.Bounds.Width / 2, tile_map_object.Bounds.Height / 2);
+                        if (tile_map_object.Class == "next_level_portal")
+                        {
+                            game_manager.next_level_portal = new projectile_next_level_portal(content, position);
+                        }
+                    }
+                }
             }
             Debug.WriteLine("------- CBA -------- \nLoaded level : " + current_level_file);
         }
