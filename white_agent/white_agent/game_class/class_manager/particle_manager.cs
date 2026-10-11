@@ -12,13 +12,16 @@ using MonoGame.Extended.Particles.Profiles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Linq;
 
 namespace old_heart
 {
     public class particle_manager
     {
         static public Dictionary<Enum, ParticleEmitter> data = new Dictionary<Enum, ParticleEmitter>();
-        public enum particle_name { die_efx_red , die_efx_green, die_efx_purple , die_efx_white , blood_on_ground_efx_red , blood_on_ground_efx_green , blood_on_ground_efx_purple , blood_on_ground_efx_white }
+        public enum particle_name { die_efx_red , die_efx_green, die_efx_purple , die_efx_white , blood_on_ground_efx_red , blood_on_ground_efx_green , blood_on_ground_efx_purple , blood_on_ground_efx_white
+        , ground_smash_efx 
+        }
 
         public ParticleEffect low_particle_effect;
         public ParticleEffect high_particle_effect;
@@ -94,7 +97,7 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyReleased(Keys.Z))
             {
-                global.signal.spawn_particle(particle_name.blood_on_ground_efx_red, global.input.scaled_mouse_world_position, high_layer: false);
+                global.signal.spawn_particle(particle_name.ground_smash_efx, global.input.scaled_mouse_world_position, high_layer: false);
             }
 
             low_particle_effect.Update(delta_time);
@@ -121,6 +124,7 @@ namespace old_heart
             load_blood_on_ground_efx_color(Color.Purple);
             load_blood_on_ground_efx_color(Color.White);
 
+            load_ground_smash_efx();
 
             void load_die_efx_color(Color color)
             {
@@ -170,10 +174,7 @@ namespace old_heart
                     Direction = Vector2.UnitY,
                     Strength = 100f
                 });
-                emitter.Modifiers.Add(new AgeModifier
-                {
-                    Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
-                });
+                emitter.Modifiers.Add(new OpacityFastFadeModifier());
                 emitter.Modifiers.Add(new DragModifier
                 {
                     Density = 10f
@@ -223,10 +224,7 @@ namespace old_heart
                     }
                 };
 
-                emitter.Modifiers.Add(new AgeModifier
-                {
-                    Interpolators = { new OpacityInterpolator { StartValue = 1.0f, EndValue = 0.0f } }
-                });
+                emitter.Modifiers.Add(new OpacityFastFadeModifier());
                 emitter.Modifiers.Add(new AgeModifier
                 {
                     Interpolators = { new ScaleInterpolator { StartValue = new Vector2(10,10), EndValue = new Vector2(20, 20) } }
@@ -237,7 +235,37 @@ namespace old_heart
                 });
                 add_into_data(this_particle_name + color_name, emitter);
             }
+            
+            void load_ground_smash_efx()
+            {
+                ParticleEmitter emitter = new ParticleEmitter(20)
+                {
+                    Name = "ground_smash_efx",
+                    LifeSpan = 1f,
+                    TextureRegion = new Texture2DRegion(default_particle_texture),
+                    Profile = Profile.Spray(new Vector2(0,-1), MathHelper.PiOver2),
+                    Parameters = new ParticleReleaseParameters
+                    {
+                        Quantity = new ParticleInt32Parameter(10, 20),
+                        Speed = new ParticleFloatParameter(200f, 400f),
+                        Color = new ParticleColorParameter(new Vector3(15f, 0.5f, 0.3f)),
+                        Scale = new ParticleVector2Parameter(new Vector2(10f, 10f))
+                    }
+                };
+                emitter.Modifiers.Add(new DragModifier
+                {
+                    Density = 5f
+                });
+                emitter.Modifiers.Add(new LinearGravityModifier
+                {
+                    Direction = Vector2.UnitY,
+                    Strength = 400f
+                });
+                emitter.Modifiers.Add(new OpacityFastFadeModifier());
 
+
+                data.Add(particle_name.ground_smash_efx, emitter);
+            }
 
             void add_into_data(string this_particle_name , ParticleEmitter emitter)
             {
@@ -245,7 +273,7 @@ namespace old_heart
                 {
 
                     data.Add(particle_enum, emitter);
-                    Debug.WriteLine("  prase efx name : " + this_particle_name);
+                    //Debug.WriteLine("  prase efx name : " + this_particle_name);
                 }
                 else
                 {
@@ -253,5 +281,6 @@ namespace old_heart
                 }
             }
         }
+
     }
 }
