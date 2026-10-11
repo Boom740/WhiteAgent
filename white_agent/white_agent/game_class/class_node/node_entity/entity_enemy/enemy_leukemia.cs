@@ -19,7 +19,7 @@ namespace old_heart
         // --- clone ---
         public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
 
-        public float clone_timer = 5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
+        public float clone_timer = 3f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
         private float current_clone_timer;
         public int minion_limit = 2;
 
@@ -187,12 +187,8 @@ namespace old_heart
                 {
                     current_clone_timer = clone_timer;
 
-                    spawn_minion(new Vector2(-1, 0));
+                    spawn_minion(new Vector2(0, 0));
 
-                    if (minion_list.Count < minion_limit)
-                    {
-                        spawn_minion(new Vector2(1, 0));
-                    }
                 }
 
                 void spawn_minion(Vector2 offset)
