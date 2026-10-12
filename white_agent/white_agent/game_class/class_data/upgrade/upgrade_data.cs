@@ -21,7 +21,7 @@ namespace old_heart
         }
         public override void apply_upgrade(player player)
         {
-            player.head_ricochet = 1;
+            player.head_ricochet += 1;
         }
     }
     public class upgrade_explosive_impact : upgrade_base
@@ -41,7 +41,7 @@ namespace old_heart
         }
         public override void apply_upgrade(player player)
         {
-            player.max_dash = 2;
+            player.max_dash += 1;
         }
     }
     public class upgrade_lethal_dash : upgrade_base

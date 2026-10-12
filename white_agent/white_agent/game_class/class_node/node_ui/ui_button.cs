@@ -13,6 +13,8 @@ namespace old_heart
         Color base_color = Color.White;
         Color hover_color = Color.Gray;
         Color hold_color = Color.Black;
+
+        bool mouse_hover = false;
         public bool clicked = false;
 
         public ui_button(ContentManager content ,Rectangle rect)
@@ -28,7 +30,7 @@ namespace old_heart
 
             MouseStateExtended mouse_state = global.input.mouse_state;
             Point mouse_position = global.input.scaled_mouse_position;
-            bool mouse_hover = button_rect.Contains(mouse_position);
+            mouse_hover = button_rect.Contains(mouse_position);
 
             clicked = false; // reset clicked every frame
 
@@ -52,6 +54,7 @@ namespace old_heart
 
         public override void Draw(SpriteBatch sprite_batch)
         {
+            if (!visible) return;
             sprite_batch.Draw(button_texture,button_rect,button_color);
         }
 

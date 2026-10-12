@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended.Screens;
 using MonoGame.Extended.Screens.Transitions;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -17,7 +18,7 @@ namespace old_heart
         public scene_base next_scene;
         public Transition next_scene_transition;
         public float scene_transitioning_timer = 0f; // track current transition time to prevent transition in that time
-
+        public float halved_scene_transion_time = 1f; // tract time that actually change scene ( 1/2 of scene traisition time)
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -68,21 +69,25 @@ namespace old_heart
             }
             else if (next_scene != null)
             {
-                if (next_scene_transition == null)
+                if (next_scene_transition != null)
                 {
-                    screen_manager.ReplaceScreen(next_scene);
+                    screen_manager.ReplaceScreen(next_scene, next_scene_transition);
+                    scene_transitioning_timer = next_scene_transition.Duration;
+                    halved_scene_transion_time = next_scene_transition.Duration / 2f;
+
+                    Debug.WriteLine("change ee " + next_scene + " - " + screen_manager.ActiveScreen);
                 }
                 else
                 {
-                    screen_manager.ReplaceScreen(next_scene,next_scene_transition);
-                    scene_transitioning_timer = next_scene_transition.Duration;
+                    screen_manager.ReplaceScreen(next_scene);
                 }
 
-                next_scene = null;
-                next_scene_transition = null;
+                this.next_scene = null;
+                this.next_scene_transition = null;
             }
 
             base.Update(gameTime);
+
         }
         protected override void UnloadContent()
         {
@@ -93,7 +98,9 @@ namespace old_heart
         public void change_scene(scene_base scene , Transition transition = null)
         {
             if (next_scene != null) { return; } // already queue next scene
+            if (scene_transitioning_timer >= halved_scene_transion_time) { return; } // curently changing to next scene   dont queue new scene
 
+            Debug.WriteLine("queue aaaaaaaaaaaaa " + next_scene + " - " + scene);
             next_scene = scene;
             next_scene_transition = transition;
         }

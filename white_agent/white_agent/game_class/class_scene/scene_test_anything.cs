@@ -15,6 +15,8 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text2;
 
+        public ui_debug_skill ui_debug_skill ;
+
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
         public scene_test_anything(Game1 game) : base(game)
@@ -32,6 +34,9 @@ namespace old_heart
             test_text2 = new ui_text("press P to view hitbox testttttttt  Chess Battle Advanced\nE shake\nF player take 1 damage\nT spawn test projectile\nZ spawn test particle",  new Vector2(25f, 0f));
             test_text2.text_color = Color.DarkOrange;
             game_manager.add_map(test_text2);
+
+            ui_debug_skill = new ui_debug_skill(Content, game.run_data_manager);
+            game_manager.add_ui(ui_debug_skill);
 
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
             game_manager.add_entity(player);
@@ -91,14 +96,14 @@ namespace old_heart
             if (game_manager.player != null)
             {
                 test_text.text_string +=
-                 $"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
-                 $"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
+                 //$"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
+                 //$"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
                 $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
                 //$"\nplayer animation_2 : {game_manager.player.animation_player_2.current_animation.name} [{game_manager.player.animation_player_2.current_frame_index}]" +
                 $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
-                $"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
+                //$"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
                 //$"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]" +
-                $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}" +
+                //  $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}" +
 
 
                 $"";
