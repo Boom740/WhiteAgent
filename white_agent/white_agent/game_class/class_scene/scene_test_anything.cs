@@ -15,7 +15,7 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text2;
 
-        public ui_debug_skill ui_debug_skill ;
+        public ui_debug_upgrade ui_debug_skill ;
 
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
@@ -35,7 +35,7 @@ namespace old_heart
             test_text2.text_color = Color.DarkOrange;
             game_manager.add_map(test_text2);
 
-            ui_debug_skill = new ui_debug_skill(Content, game.run_data_manager);
+            ui_debug_skill = new ui_debug_upgrade(Content, game.run_data_manager);
             game_manager.add_ui(ui_debug_skill);
 
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
