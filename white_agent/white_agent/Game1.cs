@@ -74,8 +74,6 @@ namespace old_heart
                     screen_manager.ReplaceScreen(next_scene, next_scene_transition);
                     scene_transitioning_timer = next_scene_transition.Duration;
                     halved_scene_transion_time = next_scene_transition.Duration / 2f;
-
-                    Debug.WriteLine("change ee " + next_scene + " - " + screen_manager.ActiveScreen);
                 }
                 else
                 {
@@ -100,7 +98,6 @@ namespace old_heart
             if (next_scene != null) { return; } // already queue next scene
             if (scene_transitioning_timer >= halved_scene_transion_time) { return; } // curently changing to next scene   dont queue new scene
 
-            Debug.WriteLine("queue aaaaaaaaaaaaa " + next_scene + " - " + scene);
             next_scene = scene;
             next_scene_transition = transition;
         }
