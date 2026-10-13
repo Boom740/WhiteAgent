@@ -20,6 +20,7 @@ namespace old_heart
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {};
 
         public dna_data dna = new dna_data();
+        public int dna_checkpoint = 0;
         public run_data_manager(Game game)
         {
             this.game = game;
@@ -70,6 +71,15 @@ namespace old_heart
             {
                 upgrade.apply_upgrade(player);
             }
+        }
+        public void save_dna_checkpoint()
+        {
+            dna_checkpoint = dna.amount;
+        }
+
+        public void restore_dna_checkpoint()
+        {
+            dna.restore_amount(dna_checkpoint);
         }
     }
 }

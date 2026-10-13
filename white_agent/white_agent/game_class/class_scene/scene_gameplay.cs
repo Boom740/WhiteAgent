@@ -56,6 +56,8 @@ namespace old_heart
             dna_image = new image(game.Content, new Vector2(20, 70), file_path: "assets/image/ui/ui_dna");
             game_manager.add_ui(dna_image);
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
+
+            game.run_data_manager.save_dna_checkpoint();
         }
         public override void Update(GameTime gameTime)
         {

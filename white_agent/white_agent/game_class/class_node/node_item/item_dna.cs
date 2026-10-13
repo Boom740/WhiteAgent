@@ -12,7 +12,7 @@ namespace old_heart
         public item_dna(ContentManager content_set, Vector2 position, int value = 1) : base(content_set, position)
         {
             this.value = value;
-            pickup_radius = 3f;
+            hit_box_radius = 3f;
            // placeholder_color = new Color(80, 220, 160);
 
             texture = content.Load<Texture2D>("assets/image/ui/ui_dna");

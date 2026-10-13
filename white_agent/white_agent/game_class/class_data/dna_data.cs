@@ -33,7 +33,11 @@ namespace old_heart
             on_changed?.Invoke(amount);
             return true;
         }
-
+        public void restore_amount(int saved_value)
+        {
+            amount = saved_value;
+            on_changed?.Invoke(amount);
+        }
         public void reset()
         {
             amount = 0;
