@@ -157,7 +157,10 @@ namespace old_heart
             if (global.input.keyboard_state.WasKeyPressed(Keys.O))   // debug
             {
                 current_game_state = game_state.level_clear;
-                player.current_combat_state = player.combat_state.change_scene;
+                if (player != null)
+                {
+                    player.current_combat_state = player.combat_state.change_scene;
+                }
             }else if (global.input.keyboard_state.WasKeyPressed(Keys.I))   // debug
             {
                 foreach (entity entity in entity_manager.entity_list)
