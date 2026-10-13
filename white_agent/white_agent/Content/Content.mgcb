@@ -443,6 +443,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/crosshair_000.png;assets/image/ui/crosshair_000
 
+#begin assets/image/ui/crosshair_000.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/crosshair_000.png;assets/image/ui/crosshair_000
+
 #begin assets/image/ui/crosshair_002.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -455,6 +468,32 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
+
+#begin assets/image/ui/crosshair_002.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
+
+#begin assets/image/ui/ui_crosshair.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_crosshair.PNG;assets/image/ui/ui_crosshair
 
 #begin assets/image/ui/ui_crosshair.PNG
 /importer:TextureImporter
@@ -482,6 +521,32 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_cursor.PNG;assets/image/ui/ui_cursor
 
+#begin assets/image/ui/ui_cursor.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_cursor.PNG;assets/image/ui/ui_cursor
+
+#begin assets/image/ui/ui_dna.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_dna.PNG;assets/image/ui/ui_dna
+
 #begin assets/image/ui/ui_dna.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -507,6 +572,136 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_life.PNG;assets/image/ui/ui_life
+
+#begin assets/image/ui/ui_life.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_life.PNG;assets/image/ui/ui_life
+
+#begin assets/image/ui/ui_upgrade_adrenaline_rush.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_adrenaline_rush.png;assets/image/ui/ui_upgrade_adrenaline_rush
+
+#begin assets/image/ui/ui_upgrade_double_dash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_double_dash.png;assets/image/ui/ui_upgrade_double_dash
+
+#begin assets/image/ui/ui_upgrade_emergency_knockback.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_emergency_knockback.png;assets/image/ui/ui_upgrade_emergency_knockback
+
+#begin assets/image/ui/ui_upgrade_explosive_impact.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_explosive_impact.png;assets/image/ui/ui_upgrade_explosive_impact
+
+#begin assets/image/ui/ui_upgrade_lethal_dash.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_lethal_dash.png;assets/image/ui/ui_upgrade_lethal_dash
+
+#begin assets/image/ui/ui_upgrade_magnet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_magnet.png;assets/image/ui/ui_upgrade_magnet
+
+#begin assets/image/ui/ui_upgrade_projectile_deflection.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_projectile_deflection.png;assets/image/ui/ui_upgrade_projectile_deflection
+
+#begin assets/image/ui/ui_upgrade_ricochet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_ricochet.png;assets/image/ui/ui_upgrade_ricochet
+
+#begin assets/image/ui/ui_upgrade_slot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_slot.png;assets/image/ui/ui_upgrade_slot
 
 #begin assets/image/weapons/sprite_weapon_head.png
 /importer:TextureImporter

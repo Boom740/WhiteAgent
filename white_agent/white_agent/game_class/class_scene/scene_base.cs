@@ -26,6 +26,11 @@ namespace old_heart
         {
             fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 0.5f); // setup transition screen for all inheried scene to use
             game_manager = new game_manager(Content, game.Window, GraphicsDevice);
+
+            foreach (upgrade_base upgrade in game.run_data_manager.upgrade_list)
+            {
+                upgrade.cooldown_time = 0;
+            }
         }
 
         public void update_all(GameTime gameTime)

@@ -82,7 +82,6 @@ namespace old_heart
             public static event Action<entity> signal_spawn_entity;
             public static event Action<Enum,Vector2,bool> signal_spawn_particle;
             public static event Action<float> signal_screen_shake;
-            
             public static void spawn_projectile(projectile projectile)
             {
                 signal_spawn_projectile.Invoke(projectile);

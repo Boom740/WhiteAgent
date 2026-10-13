@@ -41,21 +41,26 @@ namespace old_heart
 
         List<ui_button> upgrade_button_list = new List<ui_button> { };
         List<ui_text> upgrade_button_text_list = new List<ui_text> { };
-        public ui_debug_upgrade(ContentManager content ,run_data_manager run_data)
+        public ui_debug_upgrade(ContentManager content ,run_data_manager run_data , game_manager game_manager)
         {
             this.run_data = run_data;
 
             upgrade_text = new ui_text("", upgrade_show_position + new Vector2(spacing.X,0), text_scale: new Vector2(0.25f, 0.25f));
             upgrade_text.visible = false;
+            game_manager.add_ui(upgrade_text);
 
             show_button_button = new ui_button(content, new Rectangle(show_button_position.ToPoint(), upgrade_button_size));
             show_button_text = new ui_text("choose upgrade", show_button_position + text_position_offset, text_scale: new Vector2(0.25f, 0.25f),text_color: Color.Black);
+            game_manager.add_ui(show_button_button);
+            game_manager.add_ui(show_button_text);
 
             reset_upgrade_button = new ui_button(content, new Rectangle(show_button_position.ToPoint() + new Point( spacing.X,0), upgrade_button_size));
             reset_upgrade_button.visible = false;
+            game_manager.add_ui(reset_upgrade_button);
 
             reset_upgrade_text = new ui_text("reset upgrade", show_button_position + new Vector2(spacing.X, 0) + text_position_offset, text_scale: new Vector2(0.25f, 0.25f), text_color: Color.Black);
             reset_upgrade_text.visible = false;
+            game_manager.add_ui(reset_upgrade_text);
 
             for (int i=0;i<all_upgrade_list.Count;i++) {
                 upgrade_base upgrade = all_upgrade_list[i];
@@ -70,7 +75,11 @@ namespace old_heart
 
                 upgrade_button_list.Add(new_buttton);
                 upgrade_button_text_list.Add(new_text);
+
+                game_manager.add_ui(new_buttton);
+                game_manager.add_ui(new_text);
             }
+
         }
 
         public override void Update(GameTime gameTime)
@@ -97,6 +106,7 @@ namespace old_heart
                 foreach (ui_button upgrade in upgrade_button_list)
                 {
                     upgrade.visible = showing_upgrade;
+                    upgrade.active = showing_upgrade;
                 }
                 foreach (ui_text upgrade in upgrade_button_text_list)
                 {
@@ -105,6 +115,7 @@ namespace old_heart
 
                 upgrade_text.visible = showing_upgrade;
                 reset_upgrade_button.visible = showing_upgrade;
+                reset_upgrade_button.active = showing_upgrade;
                 reset_upgrade_text.visible = showing_upgrade;
             }
 
@@ -121,31 +132,10 @@ namespace old_heart
                 run_data.upgrade_list.Clear();
             }
 
-            show_button_button.Update(gameTime);
-            reset_upgrade_button.Update(gameTime);
-            foreach (node node in upgrade_button_list)
-            {
-                node.Update(gameTime);
-            }
-
-            upgrade_text.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch sprite_batch)
         {
-            show_button_button.Draw(sprite_batch);
-            show_button_text.Draw(sprite_batch);
-            reset_upgrade_button.Draw(sprite_batch);
-            reset_upgrade_text.Draw(sprite_batch);
-            foreach (node node in upgrade_button_list)
-            {
-                node.Draw(sprite_batch);
-            }
-            foreach (node node in upgrade_button_text_list)
-            {
-                node.Draw(sprite_batch);
-            }
-            upgrade_text.Draw(sprite_batch);
         }
 
     }

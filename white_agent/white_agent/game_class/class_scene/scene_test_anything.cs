@@ -15,8 +15,8 @@ namespace old_heart
         public ui_text test_text;
         public ui_text test_text2;
 
-        public ui_debug_upgrade ui_debug_skill ;
-
+        public ui_debug_upgrade ui_debug_upgrade;
+        public ui_upgrade_bar ui_upgrade_bar;
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
         public scene_test_anything(Game1 game) : base(game)
@@ -35,8 +35,11 @@ namespace old_heart
             test_text2.text_color = Color.DarkOrange;
             game_manager.add_map(test_text2);
 
-            ui_debug_skill = new ui_debug_upgrade(Content, game.run_data_manager);
-            game_manager.add_ui(ui_debug_skill);
+            ui_debug_upgrade = new ui_debug_upgrade(Content, game.run_data_manager,game_manager);
+            game_manager.add_ui(ui_debug_upgrade);
+
+            ui_upgrade_bar = new ui_upgrade_bar(Content,game.run_data_manager,game_manager);
+            game_manager.add_ui(ui_upgrade_bar);
 
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
             game_manager.add_entity(player);

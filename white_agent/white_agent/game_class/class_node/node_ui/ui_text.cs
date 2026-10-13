@@ -12,7 +12,8 @@ namespace old_heart
         public Vector2 position;
         public string text_string;
         public Vector2 text_scale = global.theme.default_font_scale_2;
-        
+        public float alpha = 1.0f;
+
         public ui_text(string text_string_set, Vector2 position , Vector2? text_scale = null , Color? text_color = null)
         {
             this.text_string = text_string_set;
@@ -36,8 +37,7 @@ namespace old_heart
         public override void Draw(SpriteBatch sprite_batch)
         {
             if (!visible) return;
-            sprite_batch.DrawString(text_font,text_string, position, text_color,0,Vector2.Zero,text_scale,SpriteEffects.None,1);
+            sprite_batch.DrawString(text_font, text_string, position, text_color * alpha, 0, Vector2.Zero, text_scale, SpriteEffects.None, 1);
         }
-
     }
 }

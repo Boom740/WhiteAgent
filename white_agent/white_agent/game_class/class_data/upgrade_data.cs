@@ -4,6 +4,8 @@ namespace old_heart
 {
     public abstract class upgrade_base
     {
+        public string upgrade_texture = "";
+        public float cooldown_time = 0f; // for ui visual
         public upgrade_base()
         {
         }
@@ -18,6 +20,7 @@ namespace old_heart
     {
         public upgrade_ricochet_head()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_ricochet";
         }
         public override void apply_upgrade(player player)
         {
@@ -28,6 +31,7 @@ namespace old_heart
     {
         public upgrade_explosive_impact()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_explosive_impact";
         }
         public override void apply_upgrade(player player)
         {
@@ -38,6 +42,7 @@ namespace old_heart
     {
         public upgrade_double_dash()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_double_dash";
         }
         public override void apply_upgrade(player player)
         {
@@ -48,6 +53,7 @@ namespace old_heart
     {
         public upgrade_lethal_dash()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_lethal_dash";
         }
         public override void apply_upgrade(player player)
         {
@@ -58,6 +64,7 @@ namespace old_heart
     {
         public upgrade_projectile_deflection()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_projectile_deflection";
         }
         public override void apply_upgrade(player player)
         {
@@ -68,6 +75,7 @@ namespace old_heart
     {
         public upgrade_adrenaline_rush()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_adrenaline_rush";
         }
         public override void apply_upgrade(player player)
         {
@@ -78,6 +86,7 @@ namespace old_heart
     {
         public upgrade_emergency_knockback()
         {
+            upgrade_texture = "assets/image/ui/ui_upgrade_emergency_knockback";
         }
         public override void apply_upgrade(player player)
         {
