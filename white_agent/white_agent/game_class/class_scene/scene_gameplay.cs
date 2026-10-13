@@ -55,8 +55,6 @@ namespace old_heart
             game_manager.add_ui(dna_image);
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
 
-            game.run_data_manager.save_dna_checkpoint();
-
             base.LoadContent();
         }
         public override void Update(GameTime gameTime)
@@ -90,7 +88,7 @@ namespace old_heart
                 $"{game_manager.player.run_data.respawn_left}" +
                 $"";
 
-                dna_amount.text_string = $"x {game_manager.player.run_data.dna.amount}";
+                dna_amount.text_string = $"x {game_manager.player.run_data.dna_temporary}";
             }
 
 

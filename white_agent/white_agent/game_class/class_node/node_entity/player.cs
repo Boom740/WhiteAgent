@@ -674,8 +674,6 @@ namespace old_heart
             animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
 
             run_data.hp_left = max_hp; // reset run_data hp to max
-
-            run_data.restore_dna_checkpoint();
         }
 
         public void enter_next_level(Vector2 portal_position)

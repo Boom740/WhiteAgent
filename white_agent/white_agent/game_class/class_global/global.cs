@@ -10,8 +10,6 @@ using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using white_agent.game_class.class_node.node_item;
 
 namespace old_heart
 { 
@@ -83,7 +81,6 @@ namespace old_heart
             public static event Action<entity> signal_spawn_entity;
             public static event Action<Enum,Vector2,bool> signal_spawn_particle;
             public static event Action<float> signal_screen_shake;
-            public static event Action<item_drop> signal_spawn_item;
 
             public static void spawn_projectile(projectile projectile)
             {
@@ -104,10 +101,6 @@ namespace old_heart
             public static void screen_shake(float intensity)
             {
                 signal_screen_shake.Invoke(intensity * global.setting.screen_shake_intensity);
-            }
-            public static void spawn_item(item_drop item)
-            {
-                signal_spawn_item?.Invoke(item);
             }
 
         }

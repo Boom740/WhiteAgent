@@ -28,6 +28,8 @@ namespace old_heart
             {
                 upgrade.cooldown_time = 0;
             }
+
+            game.run_data_manager.dna_temporary = game.run_data_manager.dna;
         }
 
         public override void LoadContent()
@@ -73,6 +75,8 @@ namespace old_heart
                     bool has_next_level = false;
                     has_next_level = game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count;
 
+                    game.run_data_manager.dna = game.run_data_manager.dna_temporary;
+
                     if (has_next_level)
                     {
                         string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
@@ -98,17 +102,6 @@ namespace old_heart
                         game.change_scene(new scene_main_menu(game), fade_transition);
                     }
                 }
-
-                /*   && game_manager.level_manager.current_level_file != null
-            if (game.run_data_manager.respawn_left > 0)  
-            {
-                player_respawned = true;
-                game.run_data_manager.respawn_left--;
-                game.change_scene(new scene_gameplay(game, game_manager.level_manager.current_level_file), fade_transition);
-
-                Debug.WriteLine("scene base respawn logic respawn_left : " + game.run_data_manager.respawn_left);
-            }
-                */
             }
         }
         public override void Draw(GameTime gameTime)

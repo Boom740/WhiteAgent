@@ -110,7 +110,7 @@ namespace old_heart
                 float speed = 80f + (float)random.NextDouble() * 80f;
                 dna.velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed; // เด้งกระจายออกจากจุดตาย
 
-                global.signal.spawn_item(dna);
+                global.signal.spawn_projectile(dna);
             }
         }
 
