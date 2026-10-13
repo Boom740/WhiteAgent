@@ -16,8 +16,6 @@ namespace old_heart
         }
         public override void LoadContent()
         {
-            base.LoadContent();
-
             test_text = new ui_text("White Agent\nclick play to play\nEsc to quit\nV test thing scene\nB level editor\nF full screen",  new Vector2(10, 5));
             game_manager.add_ui(test_text);
 
@@ -42,6 +40,7 @@ namespace old_heart
             test_text_local.text_scale = new Vector2(0.25f, 0.25f);
             game_manager.add_ui(test_text_local);
 
+            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)

@@ -42,21 +42,9 @@ namespace old_heart
 
             load_level(run_data);
         }
-        public void clear_level()  //not true clear all  (still have collision in collision world)            use for level editor only
-        {
-            entity_list.Clear();
-            wall_collision_list.Clear();
-            map_node_list.Clear();
-            high_map_node_list.Clear();
-            game_manager.debug_manager.debug_node_list.Clear();
-
-            Debug.WriteLine("-------- Cleared level -------");
-        }
 
         public void load_level(run_data_manager run_data)
         {
-            clear_level();
-
             if (current_level_file == null)
             {
                 Debug.WriteLine("level file is null error");

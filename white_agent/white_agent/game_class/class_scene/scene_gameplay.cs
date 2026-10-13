@@ -26,8 +26,6 @@ namespace old_heart
         }
         public override void LoadContent()
         {
-            base.LoadContent();
-
             test_text = new ui_text("x 0", new Vector2(80, 20));
             //test_text.text_color = Color.Black;
             test_text.text_scale = new Vector2(0.5f, 0.5f);
@@ -37,7 +35,7 @@ namespace old_heart
             dna_amount.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(dna_amount);
 
-            ui_upgrade_bar = new ui_upgrade_bar(Content, game.run_data_manager, game_manager);
+            ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager , game.run_data_manager);
             game_manager.add_ui(ui_upgrade_bar);
 
             test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
@@ -58,6 +56,8 @@ namespace old_heart
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
 
             game.run_data_manager.save_dna_checkpoint();
+
+            base.LoadContent();
         }
         public override void Update(GameTime gameTime)
         {

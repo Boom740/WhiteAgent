@@ -28,6 +28,7 @@ namespace old_heart
 
         public override void Draw(SpriteBatch sprite_batch)
         {
+            if (visible == false) return;
             sprite_batch.Draw(texture,position,null, color, 0,new Vector2(0,0),scale,SpriteEffects.None,0);
         }
 

@@ -51,7 +51,7 @@ namespace old_heart
                 game.change_scene(new scene_main_menu(game), fade_transition);
             }else if (keyboard_state.WasKeyPressed(Keys.B))
             {
-                game.change_scene(new test_level(game,game_manager.level_manager.current_level_file), fade_transition);
+                game.change_scene(new scene_gameplay(game,game_manager.level_manager.current_level_file), fade_transition);
             }
             else if (keyboard_state.WasKeyPressed(Keys.E))
             {

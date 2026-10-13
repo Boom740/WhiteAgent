@@ -26,7 +26,7 @@ namespace old_heart
         List<ui_text> upgrade_cooldown_text_list = new List<ui_text> { };
         ui_text upgrade_text; // when hover over that upgrade slot
         float upgrade_text_alpha_change_rate = 0.05f;
-        public ui_upgrade_bar(ContentManager content, run_data_manager run_data, game_manager game_manager)
+        public ui_upgrade_bar(ContentManager content,  game_manager game_manager , run_data_manager run_data)
         {
             this.run_data = run_data;
 
@@ -64,7 +64,7 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
-            if (!visible) return; // make it not work when it is invisible
+            if (!active) return;
 
             upgrade_text.alpha = Math.Max(0, upgrade_text.alpha - upgrade_text_alpha_change_rate);
 

@@ -25,8 +25,6 @@ namespace old_heart
         }
         public override void LoadContent()
         {
-            base.LoadContent();
-
             test_text = new ui_text("this text get replace in update function anyway",  new Vector2(10, 5));
             test_text.text_color = Color.DarkRed;
             test_text.text_scale = new Vector2(0.25f, 0.25f);
@@ -35,10 +33,8 @@ namespace old_heart
             test_text2.text_color = Color.DarkOrange;
             game_manager.add_map(test_text2);
 
-            ui_debug_upgrade = new ui_debug_upgrade(Content, game.run_data_manager,game_manager);
-            game_manager.add_ui(ui_debug_upgrade);
 
-            ui_upgrade_bar = new ui_upgrade_bar(Content,game.run_data_manager,game_manager);
+            ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager, game.run_data_manager);
             game_manager.add_ui(ui_upgrade_bar);
 
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
@@ -67,6 +63,11 @@ namespace old_heart
             enemy_2 = new enemy_bacteria(Content, position: new Vector2(-400, 300)); 
             game_manager.add_entity(enemy_2);
 
+            base.LoadContent();
+
+
+            ui_debug_upgrade = new ui_debug_upgrade(Content, game.run_data_manager, game_manager);
+            game_manager.add_ui(ui_debug_upgrade);
         }
         public override void Update(GameTime gameTime)
         {
@@ -115,7 +116,7 @@ namespace old_heart
             if (enemy_2 != null)
             {
                 test_text.text_string +=
-                $"\nenemy : {enemy_1.frightened_exit_timer}" +
+                //$"\nenemy : {enemy_1.frightened_exit_timer}" +
                 $"";
             }
 
