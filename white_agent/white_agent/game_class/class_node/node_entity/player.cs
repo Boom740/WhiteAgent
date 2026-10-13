@@ -57,7 +57,7 @@ namespace old_heart
         public bool has_head = true;
         public float head_throw_speed = 1500f;
         public float pickup_radius = 40f;
-        public float throw_head_i_frame_duration = 0f;
+        public float throw_head_i_frame_duration = 0.2f;
 
         public float head_drop_speed = 1000;
 
@@ -642,7 +642,7 @@ namespace old_heart
                 head.velocity = Vector2.Normalize(head_drop_direction) * head_drop_speed ;
                 head.has_bounced = true;
                 head.shock_wave_enable = false;
-                head.pickup_lock_timer = 2; // ห้ามเก็บตลอดช่วง i-frame
+                head.pickup_lock_timer = 1; // ห้ามเก็บตลอดช่วง i-frame
 
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
