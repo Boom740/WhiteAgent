@@ -177,7 +177,7 @@ namespace old_heart
                 if (dash_timer <= 0f)
                 {
                     state = enemy_state.attack;
-                    velocity = Vector2.Zero;
+                    //velocity = Vector2.Zero;
                     animation_player.pause = false;
                     animation_player.current_frame_index = dash_animation_frame_index + 1;
                 }
