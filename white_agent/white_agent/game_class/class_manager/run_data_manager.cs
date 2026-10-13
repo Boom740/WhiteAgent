@@ -19,6 +19,7 @@ namespace old_heart
 
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {};
 
+        public dna_data dna = new dna_data();
         public run_data_manager(Game game)
         {
             this.game = game;

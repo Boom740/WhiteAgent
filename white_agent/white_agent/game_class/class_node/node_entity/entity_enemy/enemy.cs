@@ -26,6 +26,11 @@ namespace old_heart
         public float dizzy_timer_current = 0f;
         public bool can_be_dizzied = true;
 
+        // --- drop ---
+        public int drop_count_min = 1;   // จำนวนก้อน DNA ที่ดรอป สามารถสุ่มได้
+        public int drop_count_max = 2;
+        public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
+
         public Random random = new Random();
 
         public bool death_by_player = false;
@@ -86,8 +91,27 @@ namespace old_heart
         
         public override void die()
         {
+            bool was_alive = alive;
             base.die();
             global.signal.screen_shake(1.0f);
+            if (was_alive)
+            {
+                drop_items();
+            }
+        }
+        protected virtual void drop_items()
+        {
+            int count = random.Next(drop_count_min, drop_count_max + 1);
+            for (int i = 0; i < count; i++)
+            {
+                item_dna dna = new item_dna(content, position, dna_value_each);
+
+                float angle = (float)(random.NextDouble() * Math.PI * 2);
+                float speed = 80f + (float)random.NextDouble() * 80f;
+                dna.velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed; // เด้งกระจายออกจากจุดตาย
+
+                global.signal.spawn_item(dna);
+            }
         }
 
         public override void Draw(SpriteBatch sprite_batch)

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using white_agent.game_class.class_node.node_item;
 
 namespace old_heart
 {
@@ -24,12 +25,14 @@ namespace old_heart
         public world_text_manager world_text_manager;
         public collision_manager collision_manager;
         public level_manager level_manager;
+        public item_manager item_manager;
 
         public debug_manager debug_manager;
 
         public List<projectile> signal_spawn_projectile_list = new List<projectile>();
         public List<world_text> signal_spawn_world_text_list = new List<world_text>();
         public List<entity> signal_spawn_entity_list = new List<entity>();
+        public List<item_drop> signal_spawn_item_list = new List<item_drop>();
 
         public List<entity> entity_list; // use in clear inactive
         public List<projectile> projectile_list;
@@ -41,6 +44,8 @@ namespace old_heart
 
         public player player;
         public projectile_next_level_portal next_level_portal;
+
+      
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
             this.content = content;
@@ -54,6 +59,7 @@ namespace old_heart
             world_text_manager = new world_text_manager();
             collision_manager = new collision_manager();
             level_manager = new level_manager(this);
+            item_manager = new item_manager();
 
             debug_manager = new debug_manager();
 
@@ -61,6 +67,7 @@ namespace old_heart
             global.signal.signal_spawn_world_text += handle_signal_add_world_text;
             global.signal.signal_spawn_entity += handle_signal_add_entity;
             global.signal.signal_spawn_particle += add_particle;
+            global.signal.signal_spawn_item += handle_signal_add_item;
 
             global.signal.signal_screen_shake += camera_manager.shake_screen;
 
@@ -167,6 +174,7 @@ namespace old_heart
             entity_manager.update(gameTime);
             particle_manager.update(gameTime);
             projectile_manager.update(gameTime);
+            item_manager.update(gameTime, player);
             world_text_manager.update(gameTime);
             collision_manager.update(gameTime);
             camera_manager.update(gameTime, player);
@@ -178,6 +186,7 @@ namespace old_heart
             clear_inactive_node_in_entity();
             clear_inactive_node_in_projectile();
             clear_inactive_node_in_world_text();
+            clear_inactive_node_in_item();
 
             void clear_inactive_node_in_entity() 
             {
@@ -232,6 +241,22 @@ namespace old_heart
                     }
                 }
             }
+            void clear_inactive_node_in_item() 
+            {
+                List<item_drop> item_list = item_manager.item_list;
+                for (int i = item_list.Count - 1; i >= 0; i--)
+                {
+                    if (item_list[i].active != true)
+                    {
+                        int last_index = item_list.Count - 1;
+                        if (i < last_index)
+                        {
+                            item_list[i] = item_list[last_index];
+                        }
+                        item_list.RemoveAt(last_index);
+                    }
+                }
+            }
             void clear_inactive_node_in_world_text()
             {
                 for (int i = world_text_list.Count - 1; i >= 0; i--)
@@ -263,10 +288,15 @@ namespace old_heart
             {
                 add_world_text(signal_world_text);
             }
+            foreach (item_drop signal_item in signal_spawn_item_list)  
+            {
+                add_item(signal_item);
+            }
 
             signal_spawn_entity_list.Clear();
             signal_spawn_projectile_list.Clear();
             signal_spawn_world_text_list.Clear();
+            signal_spawn_item_list.Clear();
         }
         public void handle_signal_add_projectile(projectile projectile)
         {
@@ -279,6 +309,15 @@ namespace old_heart
         public void handle_signal_add_entity(entity entity)
         {
             signal_spawn_entity_list.Add(entity);
+        }
+        public void add_item(item_drop item)
+        {
+            if (item_manager.item_list.Count >= item_manager.limit) return;
+            item_manager.add(item);
+        }
+        public void handle_signal_add_item(item_drop item)
+        {
+            signal_spawn_item_list.Add(item);
         }
         public void draw(SpriteBatch sprite_batch)
         {
@@ -296,6 +335,7 @@ namespace old_heart
 
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , sortMode: SpriteSortMode.FrontToBack, transformMatrix: camera_matrix); // sorted entity and projectile layer
             entity_manager.draw(sprite_batch);
+            item_manager.draw(sprite_batch);
             projectile_manager.draw(sprite_batch);
             sprite_batch.End();
 
@@ -318,8 +358,10 @@ namespace old_heart
             global.signal.signal_spawn_world_text -= handle_signal_add_world_text;
             global.signal.signal_spawn_entity -= handle_signal_add_entity;
             global.signal.signal_spawn_particle -= add_particle;
+            global.signal.signal_spawn_item -= handle_signal_add_item;
 
             global.signal.signal_screen_shake -= camera_manager.shake_screen;
         }
     }
 }
+

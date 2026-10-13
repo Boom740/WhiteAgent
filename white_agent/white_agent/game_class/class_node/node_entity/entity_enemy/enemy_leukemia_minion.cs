@@ -90,6 +90,10 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_purple, position, high_layer: false);
             base.die();
         }
+        protected override void drop_items()
+        {
+           
+        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)

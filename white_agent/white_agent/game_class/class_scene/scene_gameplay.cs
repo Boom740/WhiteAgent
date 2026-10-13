@@ -11,6 +11,9 @@ namespace old_heart
         public ui_text test_text_2;
         public ui_text test_text_3;
         public image live_image;
+        
+        public image dna_image;
+        public ui_text dna_amount;
 
         public string level_file;
 
@@ -30,6 +33,10 @@ namespace old_heart
             test_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text);
 
+            dna_amount = new ui_text("x 0", new Vector2(80, 70));
+            dna_amount.text_scale = new Vector2(0.5f, 0.5f);
+            game_manager.add_ui(dna_amount);
+
             ui_upgrade_bar = new ui_upgrade_bar(Content, game.run_data_manager, game_manager);
             game_manager.add_ui(ui_upgrade_bar);
 
@@ -46,7 +53,8 @@ namespace old_heart
 
             live_image = new image(game.Content, new Vector2(20, 20),file_path: "assets/image/ui/ui_life");
             game_manager.add_ui(live_image);
-
+            dna_image = new image(game.Content, new Vector2(20, 70), file_path: "assets/image/ui/ui_dna");
+            game_manager.add_ui(dna_image);
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
         }
         public override void Update(GameTime gameTime)
@@ -79,6 +87,8 @@ namespace old_heart
                 test_text.text_string = $"x " +
                 $"{game_manager.player.run_data.respawn_left}" +
                 $"";
+
+                dna_amount.text_string = $"x {game_manager.player.run_data.dna.amount}";
             }
 
 
