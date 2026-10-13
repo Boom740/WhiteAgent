@@ -14,6 +14,7 @@ namespace old_heart
 
         public string level_file;
 
+        public ui_upgrade_bar ui_upgrade_bar;
         public scene_gameplay(Game1 game, string level_file) : base(game)
         {
             this.level_file = level_file;
@@ -28,6 +29,9 @@ namespace old_heart
             //test_text.text_color = Color.Black;
             test_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(test_text);
+
+            ui_upgrade_bar = new ui_upgrade_bar(Content, game.run_data_manager, game_manager);
+            game_manager.add_ui(ui_upgrade_bar);
 
             test_text_2 = new ui_text("Dash cooldown : 0", new Vector2(10, 510));
             //test_text_2.text_color = Color.Black;

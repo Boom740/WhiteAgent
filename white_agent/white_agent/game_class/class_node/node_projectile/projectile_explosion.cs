@@ -26,7 +26,7 @@ namespace old_heart
                 hit_entity.Add(target_enemy);
 
 
-                target_enemy.take_damage(damage);
+                target_enemy.take_damage(damage, this);
 
 
                 //Vector2 target_direction = target_enemy.position - position;
