@@ -99,9 +99,6 @@ namespace old_heart
             }
         }
 
-        public void on_upgrade_cooldown_sigal(upgrade_base upgrade , float cooldown)
-        {
-        }
         public override void Draw(SpriteBatch sprite_batch)
         {
         }
