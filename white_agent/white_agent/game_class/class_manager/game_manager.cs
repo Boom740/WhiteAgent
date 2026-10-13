@@ -83,6 +83,7 @@ namespace old_heart
         }
         public void add_particle(Enum particle_name , Vector2 position ,bool high_layer)
         {
+            if (player == null) { return; }   // cant spawn in realtime if there is no player 
             particle_manager.add(particle_name ,position ,high_layer);
         }
         public void add_entity(entity entity)
@@ -256,6 +257,8 @@ namespace old_heart
         }
         public void spawn_signal_list()
         {
+            if (player == null) { return; }   // cant spawn in realtime if there is no player
+
             foreach (entity signal_entity in signal_spawn_entity_list) {
                 add_entity(signal_entity);
             }
