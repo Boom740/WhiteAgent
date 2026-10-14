@@ -37,6 +37,7 @@ namespace old_heart
         public enemy(ContentManager content_set, Vector2 position, int max_hp, float speed = 600 , float hit_box_radius = 15) : base(content_set, position, max_hp: max_hp, speed: speed,hit_box_radius:hit_box_radius)
         {
             animation_player_shield = new animation_player_shield(content);
+            animation_player_shield.draw_scale = new Vector2(hit_box_radius / 15f) * 1.3f;
         }
 
         // ---------------- Damage / Death ----------------
@@ -120,7 +121,7 @@ namespace old_heart
 
             if(shield == true)
             {
-                animation_player_shield.draw(sprite_batch, position + new Vector2(0,0.01f) , alpha : 0.5f ,   new Vector2(hit_box_radius/15f)  * 1.3f ); // draw on top of enemy sprite
+                animation_player_shield.draw(sprite_batch, position + new Vector2(0,0.01f) , alpha : 0.5f ); // draw on top of enemy sprite
             }
         }
         

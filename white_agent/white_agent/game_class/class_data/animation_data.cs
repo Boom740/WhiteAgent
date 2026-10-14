@@ -28,7 +28,7 @@ namespace old_heart
         public Vector2 sprite_origin = new Vector2(16,24);
         public bool one_direction_sprite_format = false;
         public int one_diretion_sprite_format_frame_count = 0;
-        public float layer_depth_offset = 0f; 
+        public float layer_depth_offset = 0f;
         public animation(Texture2D sprite_sheet,bool loop = true, float frame_per_sec = 4, Point? sprite_size = null, bool one_direction_sprite_format = false , int one_diretion_sprite_format_frame_count = 0)
         {
             this.sprite_sheet = sprite_sheet;
@@ -60,6 +60,9 @@ namespace old_heart
 
         public bool pause = false;
         public bool is_finished = false;
+
+        public float rotation = 0;
+        public Vector2 draw_scale = Vector2.One;
         public animation_player_base()
         {
         }
@@ -156,7 +159,7 @@ namespace old_heart
         {
            current_flash_time = flash_time;
         }
-        public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f , Vector2? draw_scale = null)
+        public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f)
         {
             Texture2D texture = current_animation.sprite_sheet;
             Rectangle source_rectangle;
@@ -164,15 +167,12 @@ namespace old_heart
             {
                 source_rectangle = new Rectangle(current_animation.sprite_size.X * current_direction, current_animation.sprite_size.Y * current_frame_index, current_animation.sprite_size.X, current_animation.sprite_size.Y);
 
-            } else {
+            } else 
+            {
                 Point current_animation_index_position = new Point(current_frame_index / current_animation.frame_row_count, current_frame_index % current_animation.frame_row_count);
                 source_rectangle = new Rectangle(current_animation.sprite_size.X * current_animation_index_position.X, current_animation.sprite_size.Y * current_animation_index_position.Y, current_animation.sprite_size.X, current_animation.sprite_size.Y);
             }
-            Vector2 sprite_scale = current_animation.sprite_scale;
-            if (draw_scale.HasValue )
-            {
-                sprite_scale *= draw_scale.Value;
-            }
+            Vector2 sprite_scale = current_animation.sprite_scale * draw_scale;
             Vector2 sprite_origin = current_animation.sprite_origin;
             float layer_depth = Math.Clamp( ((position.Y + 50000f) / 100000f ) + current_animation.layer_depth_offset , 0 , 1);
             Color color = Color.White;
@@ -181,7 +181,7 @@ namespace old_heart
                 color = new Color(255,0,0,255); // flash red
             }
             color *= alpha;
-            sprite_batch.Draw(texture, position, source_rectangle, color, 0,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
+            sprite_batch.Draw(texture, position, source_rectangle, color, rotation ,sprite_origin,sprite_scale,SpriteEffects.None, layer_depth);
         }
 
     }

@@ -72,8 +72,9 @@ namespace old_heart
         }
         public void load(ContentManager content)
         {
-            Texture2D idle_texture = content.Load<Texture2D>("assets/image/player/sprite_player_die");
-            animation idle_animation = new animation(idle_texture, frame_per_sec: 16, loop: true, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 13);
+            Texture2D idle_texture = content.Load<Texture2D>("assets/image/other/sprite_warp_gate");
+            animation idle_animation = new animation(idle_texture, frame_per_sec: 12, loop: true, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 4,sprite_size:new Point(128,128));
+            idle_animation.sprite_origin = (idle_animation.sprite_size / 2 ).ToVector2();
             idle_animation.layer_depth_offset = -1f;
             idle_animation.name = "next_level_portal idle";
             animation_data.data.Add(animation_name.idle, idle_animation);

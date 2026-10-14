@@ -370,6 +370,9 @@ namespace old_heart
             void update_change_scene_state()
             {
                 i_frame_time = 1; // set i frame to 1 every frame when change scene
+                animation_player.rotation += 10 * delta_time;
+                animation_player.draw_scale -= animation_player.draw_scale * new Vector2(0.80f, 0.80f) * delta_time;
+                velocity = new Vector2(0, 3);
             }
 
             void update_movement_input(bool look_at_mouse = true)
@@ -700,7 +703,7 @@ namespace old_heart
             current_combat_state = combat_state.change_scene;
 
             position = portal_position;
-            animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]); // change level animation
+            animation_player.play(animation_player.data.data[animation_player_player.animation_name.fall]); // change level animation
         }
         public void handle_enemy_kill()
         {
@@ -762,7 +765,7 @@ namespace old_heart
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
         {
-            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch, takeoff_head, no_head_arm_idle, no_head_arm_walk , die}
+            public enum animation_name { idle, walk, no_head_idle, no_head_walk, punch, no_head_punch, takeoff_head, no_head_arm_idle, no_head_arm_walk , die , fall }
 
             public static readonly animation_data animation_data = new animation_data();
             public animation_player_player(ContentManager content) : base()
@@ -831,6 +834,12 @@ namespace old_heart
                 animation die_animation = new animation(die_texture, frame_per_sec: 16, loop: false , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count: 13);
                 die_animation.name = "player die";
                 animation_data.data.Add(animation_name.die, die_animation);
+
+                Texture2D fall_texture = content.Load<Texture2D>("assets/image/player/sprite_player_fall");
+                animation fall_animation = new animation(fall_texture, frame_per_sec: 0.5f, loop: false, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 1 );
+                fall_animation.sprite_origin = fall_animation.sprite_size.ToVector2() / 2f;
+                fall_animation.name = "player fall";
+                animation_data.data.Add(animation_name.fall, fall_animation);
             }
         }
     }
