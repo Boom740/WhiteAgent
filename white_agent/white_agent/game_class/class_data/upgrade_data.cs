@@ -93,4 +93,15 @@ namespace old_heart
             player.emergency_knockback_enable = true;
         }
     }
+    public class upgrade_magenet : upgrade_base
+    {
+        public upgrade_magenet()
+        {
+            upgrade_texture = "assets/image/ui/ui_upgrade_magnet";
+        }
+        public override void apply_upgrade(player player)
+        {
+            player.magnet_enable = true;
+        }
+    }
 }

@@ -98,6 +98,9 @@ namespace old_heart
         public float emergency_knockback_cooldown_timer = 0f;
 
         public bool projectile_deflection_enable = false;
+
+        public bool magnet_enable = false;
+        public projectile_player_magnet magnet;
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -120,6 +123,7 @@ namespace old_heart
             input_direction = Vector2.Zero;
 
             update_cooldown();
+            update_passive();
             update_input_buffer();
 
             switch (current_combat_state)
@@ -257,6 +261,21 @@ namespace old_heart
                     foreach (upgrade_base upgrade in run_data.upgrade_list.OfType<upgrade_emergency_knockback>())
                     {
                         upgrade.cooldown_time = (emergency_knockback_cooldown_timer);
+                    }
+                }
+            }
+            void update_passive()
+            {
+                if (magnet_enable)
+                {
+                    if (magnet == null)
+                    {
+                        magnet = new projectile_player_magnet(content, position, this);
+                        global.signal.spawn_projectile(magnet);
+                    }
+                    else
+                    {
+                        magnet.position = position;
                     }
                 }
             }
