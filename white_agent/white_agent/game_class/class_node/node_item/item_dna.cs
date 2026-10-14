@@ -20,6 +20,7 @@ namespace old_heart
         public override void on_hit_entity(entity target_entity)
         {
             if (target_entity is not player player) { return; }
+            if (pickup_delay > 0) { return; }
 
             player.run_data.dna_temporary += value;
             time_out();

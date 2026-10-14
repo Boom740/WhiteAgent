@@ -12,9 +12,7 @@ public abstract class item_base : projectile
 
     // --- pickup ---
    // public float pickup_radius = 3f;        // เก็บได้เมื่อห่าง player น้อยกว่า pickup_radius + hit_box_radius ของ player
-    public float magnet_radius = 30f;       // เข้าใกล้กว่านี้แล้วไอเทมเริ่มลอยเข้าหา player
-    public float magnet_acceleration = 1800f;
-    public float magnet_max_speed = 700f;
+    
     public float pickup_delay = 0.5f;        // กันเก็บทันทีตอนเพิ่งเด้งออกมา
     private float age = 0f;
 
@@ -41,6 +39,7 @@ public abstract class item_base : projectile
         float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
         age += delta_time;
+        pickup_delay -= delta_time;
 
         if (velocity != Vector2.Zero)
         {
@@ -52,6 +51,8 @@ public abstract class item_base : projectile
         }
 
         base.Update(gameTime);
+
+        acceleration = Vector2.Zero;
     }
 
     public override void collide_wall(CollisionPair2D pair, float delta_time)

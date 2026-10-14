@@ -36,7 +36,8 @@ namespace old_heart
             new upgrade_lethal_dash(),
             new upgrade_projectile_deflection(),
             new upgrade_adrenaline_rush(),
-            new upgrade_emergency_knockback()
+            new upgrade_emergency_knockback(),
+            new upgrade_magenet()
         };
 
         List<ui_button> upgrade_button_list = new List<ui_button> { };
