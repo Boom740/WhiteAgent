@@ -25,6 +25,7 @@ namespace old_heart
             player.run_data.dna_temporary += value;
             time_out();
 
+            global.sound.play_sound(global.sound.sound_name.player_collectmoney);
             base.on_hit_entity(target_entity);
         }
     }

@@ -49,6 +49,7 @@ namespace old_heart
             if (base.take_damage(damage_taken) == false) { return false; }
 
             global.signal.screen_shake(0.6f);
+            global.sound.play_sound(global.sound.sound_name.enemy_gethit);
             dizzy_timer_current += 0.3f;
             shield_timer_current += 0.3f;
             if (alive == false)
@@ -65,7 +66,7 @@ namespace old_heart
         // ---------------- Dizzy ----------------
         public virtual void enter_dizzy(bool break_shield = true)
         {
-
+            global.sound.play_sound(global.sound.sound_name.enemy_getheadbump);
             if (state == enemy_state.died) return;
 
             if (shield && break_shield)
@@ -87,6 +88,7 @@ namespace old_heart
                 velocity = Vector2.Zero;
                 acceleration = Vector2.Zero;
 
+                global.sound.play_sound(global.sound.sound_name.enemy_dizzy);
             }
         }
         
@@ -95,6 +97,7 @@ namespace old_heart
             bool was_alive = alive;
             base.die();
             global.signal.screen_shake(1.0f);
+            global.sound.play_sound(global.sound.sound_name.enemy_die);
             if (was_alive)
             {
                 drop_items();

@@ -166,7 +166,7 @@ namespace old_heart
                 global.signal.spawn_projectile(projectile_test);
             }          // debug
 
-
+            global.player_position = this.position;
 
             acceleration = input_direction;
             base.Update(gameTime);
@@ -289,6 +289,7 @@ namespace old_heart
                 if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
                 {
                     current_combat_state = combat_state.aim;
+                    global.sound.play_sound(global.sound.sound_name.player_takeoffhead);
                     animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
                     return;
                 }
@@ -365,6 +366,7 @@ namespace old_heart
                     active = false;
                     global.signal.spawn_particle(particle_manager.particle_name.die_efx_white, position, high_layer: true);
                     global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_white, position, high_layer: false);
+                    global.sound.play_sound(global.sound.sound_name.player_die);
                 }
             }
             void update_change_scene_state()
@@ -429,7 +431,7 @@ namespace old_heart
                 current_combat_state = combat_state.attack;
                 attack_timer = attack_duration;
 
-                global.sound.play_sound(global.sound.sound_name.slash);
+                global.sound.play_sound(global.sound.sound_name.player_punch);
 
                 combo_count++;
                 combo_reset_timer = combo_reset_window;
@@ -468,7 +470,7 @@ namespace old_heart
                 Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
 
-                global.sound.play_sound(global.sound.sound_name.throw_head);
+                global.sound.play_sound(global.sound.sound_name.player_throwhead);
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
 
@@ -502,7 +504,7 @@ namespace old_heart
                 {
                     dash_count = 0;
                 }
-
+                global.sound.play_sound(global.sound.sound_name.player_dash);
                 current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.dash;
                 dash_timer = dash_duration;
@@ -640,6 +642,7 @@ namespace old_heart
 
                 i_frame_time = i_frame_duration; // เริ่ม i-frame ทันทีที่หัวหลุด
                 global.signal.screen_shake(0.6f);
+                global.sound.play_sound(global.sound.sound_name.player_gethit);
                 return true;
             }
 
@@ -650,8 +653,6 @@ namespace old_heart
             run_data.hp_left = hp;
 
            
-            
-
 
             return true;
 
@@ -694,14 +695,17 @@ namespace old_heart
             alive = false;
             current_combat_state = combat_state.die;
             animation_player.play(animation_player.data.data[animation_player_player.animation_name.die]);
-
+            global.sound.play_sound(global.sound.sound_name.player_dying);
             run_data.hp_left = max_hp; // reset run_data hp to max
         }
 
         public void enter_next_level(Vector2 portal_position)
         {
+
+            if (current_combat_state == combat_state.change_scene) { return; }
             current_combat_state = combat_state.change_scene;
 
+            global.sound.play_sound(global.sound.sound_name.player_fall);
             position = portal_position;
             animation_player.play(animation_player.data.data[animation_player_player.animation_name.fall]); // change level animation
         }

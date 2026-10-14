@@ -246,33 +246,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
-/build:assets/image/other/sprite_shadow.png;assets/image/sprite_shadow
-
-#begin assets/image/other/sprite_shadow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
 /build:assets/image/other/sprite_shadow.png;assets/image/other/sprite_shadow
-
-#begin assets/image/other/sprite_shield.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:assets/image/other/sprite_shield.png;assets/image/sprite_shield
 
 #begin assets/image/other/sprite_shield.png
 /importer:TextureImporter
@@ -298,33 +272,7 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
-/build:assets/image/other/sprite_warp_gate.png;assets/image/sprite_warp_gate
-
-#begin assets/image/other/sprite_warp_gate.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
 /build:assets/image/other/sprite_warp_gate.png;assets/image/other/sprite_warp_gate
-
-#begin assets/image/other/white_pixel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/processorParam:Version=3.8.5.1
-/build:assets/image/other/white_pixel.png;assets/image/white_pixel
 
 #begin assets/image/other/white_pixel.png
 /importer:TextureImporter
@@ -715,6 +663,132 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/weapons/sprite_weapon_head.png;assets/image/weapons/sprite_weapon_head
+
+#begin assets/sound/sfx/sfx_enemy_die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_enemy_die.wav;assets/sound/sfx/sfx_enemy_die
+
+#begin assets/sound/sfx/sfx_enemy_dizzy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_enemy_dizzy.wav;assets/sound/sfx/sfx_enemy_dizzy
+
+#begin assets/sound/sfx/sfx_enemy_getheadbump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_enemy_getheadbump.wav;assets/sound/sfx/sfx_enemy_getheadbump
+
+#begin assets/sound/sfx/sfx_enemy_gethit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_enemy_gethit.wav;assets/sound/sfx/sfx_enemy_gethit
+
+#begin assets/sound/sfx/sfx_entity_walk_01.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_entity_walk_01.wav;assets/sound/sfx/sfx_entity_walk_01
+
+#begin assets/sound/sfx/sfx_entity_walk_02.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_entity_walk_02.wav;assets/sound/sfx/sfx_entity_walk_02
+
+#begin assets/sound/sfx/sfx_entity_walk_03.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_entity_walk_03.wav;assets/sound/sfx/sfx_entity_walk_03
+
+#begin assets/sound/sfx/sfx_entity_walk_04.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_entity_walk_04.wav;assets/sound/sfx/sfx_entity_walk_04
+
+#begin assets/sound/sfx/sfx_gate_open.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_gate_open.wav;assets/sound/sfx/sfx_gate_open
+
+#begin assets/sound/sfx/sfx_player_collectmoney.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_collectmoney.wav;assets/sound/sfx/sfx_player_collectmoney
+
+#begin assets/sound/sfx/sfx_player_dash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_dash.wav;assets/sound/sfx/sfx_player_dash
+
+#begin assets/sound/sfx/sfx_player_die.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_die.wav;assets/sound/sfx/sfx_player_die
+
+#begin assets/sound/sfx/sfx_player_dying.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_dying.wav;assets/sound/sfx/sfx_player_dying
+
+#begin assets/sound/sfx/sfx_player_fall.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_fall.wav;assets/sound/sfx/sfx_player_fall
+
+#begin assets/sound/sfx/sfx_player_gethit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_gethit.wav;assets/sound/sfx/sfx_player_gethit
+
+#begin assets/sound/sfx/sfx_player_punch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_punch.wav;assets/sound/sfx/sfx_player_punch
+
+#begin assets/sound/sfx/sfx_player_takeoffhead.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_takeoffhead.wav;assets/sound/sfx/sfx_player_takeoffhead
+
+#begin assets/sound/sfx/sfx_player_throwhead.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_throwhead.wav;assets/sound/sfx/sfx_player_throwhead
 
 #begin level/level_0_tutorial.tmx
 /importer:TiledTilemapImporter

@@ -31,6 +31,7 @@ namespace old_heart
             base.spawn(projectile_manager, collision_manager, debug_manager);
 
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_red, position);
+            global.sound.play_sound(global.sound.sound_name.gate_open);
         }
         public override void on_hit_entity(entity target_entity)
         {
@@ -39,7 +40,7 @@ namespace old_heart
             player player = target_entity as player;
 
             if (player.current_buffer_input == player.bufferable_input.interact)
-            {
+            {  
                 player.enter_next_level(position);
             }
         }

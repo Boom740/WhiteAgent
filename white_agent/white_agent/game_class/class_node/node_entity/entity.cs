@@ -37,6 +37,11 @@ namespace old_heart
         public int max_hp = 10;
         public int hp = 10;
         public float speed = 100;     // for acceralation
+
+        //Walk Sound
+        public float walk_sound_interval = 0.55f; // ความเร็วของจังหวะก้าวเดิน
+        public float walk_sound_timer = 0f;
+        protected Random random_sound = new Random(); // ใช้สุ่มเสียง
         public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100,float hit_box_radius = 15)
         {
             content = content_set;
@@ -80,7 +85,20 @@ namespace old_heart
 
             collision.Shape = new CollisionShape2D(new BoundingCircle2D(position, hit_box_radius));  // update collision position
 
-            
+            if (velocity.Length() > 10f)
+            {
+                walk_sound_timer -= delta_time;
+                if (walk_sound_timer <= 0f)
+                {
+                    play_walk_sound();
+                    walk_sound_timer = walk_sound_interval; //รีเซ็ตเวลาเพื่อรอก้าวถัดไป
+                }
+            }
+            else
+            {
+                walk_sound_timer = 0f;
+            }
+
             update_direction(current_direction_vector);
             update_animation(delta_time);
 
@@ -160,6 +178,22 @@ namespace old_heart
         {
             direction = Vector2.Normalize(direction);
             knockback_velocity = direction * speed;
+        }
+        protected virtual void play_walk_sound()
+        {
+            // สุ่มตัวเลข 1 ถึง 4
+            int rand = random_sound.Next(1, 5);
+            global.sound.sound_name sound_to_play = global.sound.sound_name.entity_walk_01;
+
+            switch (rand)
+            {
+                case 1: sound_to_play = global.sound.sound_name.entity_walk_01; break;
+                case 2: sound_to_play = global.sound.sound_name.entity_walk_02; break;
+                case 3: sound_to_play = global.sound.sound_name.entity_walk_03; break;
+                case 4: sound_to_play = global.sound.sound_name.entity_walk_04; break;
+            }
+
+            global.sound.play_sound_positional(sound_to_play, this.position, max_distance: 1200f);
         }
         public override void Draw(SpriteBatch sprite_batch)
         {

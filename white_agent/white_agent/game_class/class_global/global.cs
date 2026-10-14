@@ -17,6 +17,7 @@ namespace old_heart
     {
         public static Vector2 render_size = new Vector2(960,540);
 
+        public static Vector2 player_position = Vector2.Zero; //อ้างอิงตำแหน่งผู้เล่น
         public enum mouse_state { normal, combat, combat_aim }
         public static mouse_state current_mouse_state = mouse_state.normal;
         public static void change_mouse_state(mouse_state mouse_state_set)
@@ -121,7 +122,7 @@ namespace old_heart
             }
         }
         public static class sound {
-            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head };  
+            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head , enemy_die , enemy_dizzy , enemy_getheadbump , enemy_gethit , entity_walk_01 , entity_walk_02 , entity_walk_03 , entity_walk_04 , gate_open , player_collectmoney , player_dash , player_die , player_dying , player_fall , player_gethit , player_punch , player_takeoffhead , player_throwhead };  
             public enum song_name { test1 }; 
 
             public static Dictionary<sound_name, sound_data> data = new Dictionary<sound_name, sound_data>();
@@ -170,8 +171,48 @@ namespace old_heart
                     data.Add(sound_name.pick_up_head, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"),pitch_random: 0.3f);
                     data.Add(sound_name.slash, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Throw_Head"));
-                    data.Add(sound_name.throw_head, sound_data);
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_die"));
+                    data.Add(sound_name.enemy_die, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_dizzy"));
+                    data.Add(sound_name.enemy_dizzy, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_getheadbump"));
+                    data.Add(sound_name.enemy_getheadbump, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_gethit"));
+                    data.Add(sound_name.enemy_gethit, sound_data);
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_01"));
+                    data.Add(sound_name.entity_walk_01, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_02"));
+                    data.Add(sound_name.entity_walk_02, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_03"));
+                    data.Add(sound_name.entity_walk_03, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_04"));
+                    data.Add(sound_name.entity_walk_04, sound_data);
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_gate_open"));
+                    data.Add(sound_name.gate_open, sound_data);
+
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_collectmoney"));
+                    data.Add(sound_name.player_collectmoney, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_dash"));
+                    data.Add(sound_name.player_dash, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_die"));
+                    data.Add(sound_name.player_die, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_dying"));
+                    data.Add(sound_name.player_dying, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_fall"));
+                    data.Add(sound_name.player_fall, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_gethit"));
+                    data.Add(sound_name.player_gethit, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_punch"), pitch_random: 0.3f);
+                    data.Add(sound_name.player_punch, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_takeoffhead"));
+                    data.Add(sound_name.player_takeoffhead, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_throwhead"));
+                    data.Add(sound_name.player_throwhead, sound_data);
+
                 }
                 void load_song()
                 {
@@ -197,6 +238,26 @@ namespace old_heart
                     this.pitch = pitch;
                     this.pitch_random = pitch_random;
                 }
+            }
+
+            public static void play_sound_positional(sound_name sound_name, Vector2 source_position, float max_distance = 1200f)
+            {
+                sound_data sound_data = data[sound_name];
+                Vector2 listener_position = global.player_position;
+
+                float distance = Vector2.Distance(source_position, listener_position);  //คำนวณระยะห่าง 
+
+                if (distance > max_distance) return; // ถ้าไกลเกิน max_distance จะไม่เล่นเสียง
+
+                float distance_volume = 1f - (distance / max_distance); //คำนวณความดัง volume
+
+                float x_difference = source_position.X - listener_position.X; //คำนวณทิศทางซ้าย ขวา   แหล่งกำเนิดเสียงจากทางซ้ายเป็น - ทางขวาเป็น +
+                float pan = MathHelper.Clamp(x_difference / (max_distance / 2f), -1f, 1f);
+
+                float pitch = sound_data.pitch - sound_data.pitch_random + ((float)random.NextDouble() * 2 * sound_data.pitch_random);
+                float final_volume = sound_data.volume * distance_volume * global.setting.volume_sound_effect * global.setting.volume_master;
+
+                sound_data.sound_effect.Play(final_volume, pitch, pan);
             }
             public class song_data
             {
