@@ -172,31 +172,31 @@ namespace old_heart
                     sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"),pitch_random: 0.3f);
                     data.Add(sound_name.slash, sound_data);
 
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_die"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_die"), pitch_random: 0.3f);
                     data.Add(sound_name.enemy_die, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_dizzy"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_dizzy"), pitch_random: 0.3f);
                     data.Add(sound_name.enemy_dizzy, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_getheadbump"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_getheadbump"), pitch_random: 0.3f);
                     data.Add(sound_name.enemy_getheadbump, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_gethit"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_enemy_gethit"), pitch_random: 0.3f);
                     data.Add(sound_name.enemy_gethit, sound_data);
 
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_01"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_01"), pitch_random: 0.3f);
                     data.Add(sound_name.entity_walk_01, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_02"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_02"), pitch_random: 0.3f);
                     data.Add(sound_name.entity_walk_02, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_03"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_03"), pitch_random: 0.3f);
                     data.Add(sound_name.entity_walk_03, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_04"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_entity_walk_04"), pitch_random: 0.3f);
                     data.Add(sound_name.entity_walk_04, sound_data);
 
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_gate_open"));
                     data.Add(sound_name.gate_open, sound_data);
 
 
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_collectmoney"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_collectmoney"),volume: 0.1f , pitch_random: 0.3f);
                     data.Add(sound_name.player_collectmoney, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_dash"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_dash"), pitch_random: 0.3f);
                     data.Add(sound_name.player_dash, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_die"));
                     data.Add(sound_name.player_die, sound_data);
@@ -204,13 +204,13 @@ namespace old_heart
                     data.Add(sound_name.player_dying, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_fall"));
                     data.Add(sound_name.player_fall, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_gethit"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_gethit"), pitch_random: 0.3f);
                     data.Add(sound_name.player_gethit, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_punch"), pitch_random: 0.3f);
                     data.Add(sound_name.player_punch, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_takeoffhead"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_takeoffhead"), pitch_random: 0.3f);
                     data.Add(sound_name.player_takeoffhead, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_throwhead"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_throwhead"), pitch_random: 0.3f);
                     data.Add(sound_name.player_throwhead, sound_data);
 
                 }
