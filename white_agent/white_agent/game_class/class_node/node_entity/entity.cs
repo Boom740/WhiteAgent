@@ -90,7 +90,7 @@ namespace old_heart
                 walk_sound_timer -= delta_time;
                 if (walk_sound_timer <= 0f)
                 {
-                    play_walk_sound();
+                    //play_walk_sound();
                     walk_sound_timer = walk_sound_interval; //รีเซ็ตเวลาเพื่อรอก้าวถัดไป
                 }
             }
