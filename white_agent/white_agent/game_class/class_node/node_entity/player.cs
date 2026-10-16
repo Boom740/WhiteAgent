@@ -18,7 +18,7 @@ namespace old_heart
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
         public enum combat_state { none, attack, aim , dash , die , change_scene}
-        public enum bufferable_input { none , attack , dash , interact}
+        public enum bufferable_input { none , attack , dash , interact ,aim}
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
         public bufferable_input current_buffer_input = bufferable_input.none;
@@ -188,7 +188,13 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.attack);
 
-                }else if (keyboard_state.WasKeyPressed(Keys.E))
+                }
+                else if (mouse_state.WasButtonPressed(MouseButton.Right) && global.input.mouse_in_screen)
+                {
+                    buffer_input(bufferable_input.aim);
+
+                }
+                else if (keyboard_state.WasKeyPressed(Keys.E))
                 {
                     buffer_input(bufferable_input.interact);
                 }
@@ -291,7 +297,7 @@ namespace old_heart
                 check_head_pickup(); 
                 update_movement_input();
 
-                if (mouse_state.IsButtonDown(MouseButton.Right) && has_head && global.input.mouse_in_screen)
+                if (current_buffer_input == bufferable_input.aim && has_head && global.input.mouse_in_screen)
                 {
                     current_combat_state = combat_state.aim;
                     global.sound.play_sound(global.sound.sound_name.player_takeoffhead);
@@ -342,11 +348,11 @@ namespace old_heart
 
                 if ((mouse_state.IsButtonDown(MouseButton.Right) && has_head) == false)
                 {
-                    current_combat_state = combat_state.none;
+                    throw_head();
                 }
                 else if (current_buffer_input == bufferable_input.attack && global.input.mouse_in_screen)
                 {
-                    throw_head();
+                    start_attack();
                 }
                 else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash)) 
                 {
@@ -482,6 +488,7 @@ namespace old_heart
             void throw_head()
             {
                 current_buffer_input = bufferable_input.none;
+                current_combat_state = combat_state.none;
 
                 has_head = false;
 
