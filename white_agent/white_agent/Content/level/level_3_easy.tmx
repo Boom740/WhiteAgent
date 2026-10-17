@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="67">
- <editorsettings>
-  <export target="level_3_easy.tmx" format="tmx"/>
- </editorsettings>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="70">
  <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_easy_03.png" width="832" height="576"/>
@@ -28,6 +25,9 @@
   <object id="46" x="391.306" y="133.608" width="54" height="53.334"/>
   <object id="47" x="391.306" y="390.502" width="54" height="53.334"/>
  </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="354" y="414" width="128" height="128"/>
+ </objectgroup>
  <objectgroup id="4" name="entity">
   <object id="56" type="enemy_virus" gid="4" x="41.3335" y="172.666" width="128" height="128"/>
   <object id="57" type="enemy_virus" gid="4" x="670.667" y="171.333" width="128" height="128"/>
@@ -36,8 +36,5 @@
   <object id="60" type="enemy_leukemia" gid="2" x="257.334" y="504.666" width="64" height="64"/>
   <object id="62" type="enemy_leukemia" gid="2" x="516.001" y="506" width="64" height="64"/>
   <object id="63" type="player" gid="1" x="385.333" y="265.333" width="64" height="64"/>
- </objectgroup>
- <objectgroup id="5" name="other">
-  <object id="66" type="next_level_portal" gid="5" x="404.333" y="367.333" width="27" height="27"/>
  </objectgroup>
 </map>

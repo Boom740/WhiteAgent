@@ -16,7 +16,6 @@ namespace old_heart
         public ui_text test_text2;
 
         public ui_debug_upgrade ui_debug_upgrade;
-        public ui_upgrade_bar ui_upgrade_bar;
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
         public scene_test_anything(Game1 game) : base(game)
@@ -34,7 +33,7 @@ namespace old_heart
             game_manager.add_map(test_text2);
 
 
-            ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager, game.run_data_manager);
+            ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager, game.run_data_manager , ui_shop);
             game_manager.add_ui(ui_upgrade_bar);
 
             player player = new player(Content,new Vector2(200,200),game.run_data_manager);
@@ -77,7 +76,7 @@ namespace old_heart
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.G))
             {
-                //global.sound.play_sound(global.sound.sound_name.test1);
+                game.run_data_manager.dna = 1000000;
             }
             if (global.input.keyboard_state.WasKeyPressed(Keys.M))
             {

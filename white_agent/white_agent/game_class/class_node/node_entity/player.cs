@@ -17,8 +17,9 @@ namespace old_heart
 
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
-        public enum combat_state { none, attack, aim , dash , die , change_scene}
-        public enum bufferable_input { none , attack , dash , interact ,aim}
+        public enum combat_state { none, attack, aim , dash , die , change_scene , in_shop }
+        public enum bufferable_input { none , attack , dash , interact , aim }
+
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
         public bufferable_input current_buffer_input = bufferable_input.none;
@@ -106,6 +107,9 @@ namespace old_heart
         public float walk_sound_interval = 0.3f; // ความเร็วของจังหวะก้าวเดิน
         public float walk_sound_timer = 0f;
         protected Random random_sound = new Random(); // ใช้สุ่มเสียง
+
+        // ui
+        public bool in_interactable_zone = false;
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -126,6 +130,7 @@ namespace old_heart
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             MouseStateExtended mouse_state = global.input.mouse_state;
             input_direction = Vector2.Zero;
+            in_interactable_zone = false;
 
             update_cooldown();
             update_passive();
@@ -155,6 +160,10 @@ namespace old_heart
 
                 case combat_state.change_scene:
                     update_change_scene_state();
+                    break;
+
+                case combat_state.in_shop:
+                    update_in_shop();
                     break;
             }
 
@@ -342,11 +351,17 @@ namespace old_heart
             }
             void update_aim_state()
             {
-                Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
+                Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
+                Vector2 to_cursor = (global.input.scaled_mouse_world_position - sprite_center_position);
 
                 current_direction_vector = to_cursor;
 
-                if ((mouse_state.IsButtonDown(MouseButton.Right) && has_head) == false)
+                if (has_head == false)
+                {
+                    current_combat_state = combat_state.none;
+                    return;
+                }
+                else if ((mouse_state.IsButtonDown(MouseButton.Right) == false))
                 {
                     throw_head();
                 }
@@ -386,6 +401,10 @@ namespace old_heart
                 animation_player.rotation += 10 * delta_time;
                 animation_player.draw_scale -= animation_player.draw_scale * new Vector2(0.80f, 0.80f) * delta_time;
                 velocity = new Vector2(0, 3);
+            }
+            void update_in_shop()
+            {
+                update_walk_idle_state();   // can change to idle animation
             }
 
             void update_movement_input(bool look_at_mouse = true)
@@ -487,13 +506,18 @@ namespace old_heart
 
             void throw_head()
             {
+                if (!has_head) { return; }
+
                 current_buffer_input = bufferable_input.none;
                 current_combat_state = combat_state.none;
 
                 has_head = false;
 
                 projectile_head head = new projectile_head(content, position,run_data ,owner: this , head_ricochet , explosive_impact: head_explosive_impact);
-                Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
+
+                Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
+                Vector2 to_cursor = (global.input.scaled_mouse_world_position - sprite_center_position);
+
                 head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
 
                 global.sound.play_sound(global.sound.sound_name.player_throwhead);

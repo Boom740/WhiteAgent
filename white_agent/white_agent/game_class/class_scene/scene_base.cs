@@ -14,6 +14,8 @@ namespace old_heart
 
         public game_manager game_manager;
 
+        public ui_shop ui_shop;
+        public ui_upgrade_bar ui_upgrade_bar;
         public ui_game_over ui_game_over;
         public scene_base(Game1 game) : base(game)
         {
@@ -30,11 +32,15 @@ namespace old_heart
             }
 
             game.run_data_manager.dna_temporary = game.run_data_manager.dna;
+
+            ui_shop = new ui_shop(Content, game_manager, game.run_data_manager);
+            game_manager.add_ui(ui_shop);
         }
 
         public override void LoadContent()
         {
             fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 0.5f); // setup transition screen for all inheried scene to use
+
 
             ui_game_over = new ui_game_over(Content, game_manager , game.run_data_manager);
             game_manager.add_ui(ui_game_over);
@@ -46,45 +52,64 @@ namespace old_heart
 
             if (game.scene_transitioning_timer > 0) {return; }  // game class is transitioning
 
+            if (game_manager.player != null){
+                //Debug.WriteLine(game_manager.player.in_interactable_zone);
+            }
+
             if (game_manager.current_game_state == game_manager.game_state.level_clear && game_manager.player != null)       // finished level
             {
                 bool player_entered_portal = game_manager.player.current_combat_state == player.combat_state.change_scene && game_manager.player.animation_player.is_finished == true;
-                if (player_entered_portal == false) // not enter next level yet
+                if (player_entered_portal == true)
                 {
-                    if (game_manager.next_level_portal == null)
+                    bool play_latest_level = false;
+                    if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
                     {
-                        //Debug.WriteLine("scene_base   level_clear but there is no portal loaded ");
+                        play_latest_level = game.run_data_manager.level_list[game.run_data_manager.cleared_level] == game_manager.level_manager.current_level_file;
+                    }
 
-                    }else if (game_manager.next_level_portal.spawned == false)
+                    if (play_latest_level)
+                    {
+                        game.run_data_manager.cleared_level++;
+                        bool has_next_level = false;
+                        has_next_level = game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count;
+
+                        game.run_data_manager.dna = game.run_data_manager.dna_temporary;
+
+                        if (has_next_level)
+                        {
+                            string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
+
+                            game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
+                        }
+
+                        Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
+                    }
+                    return;
+                }
+                
+                if (game_manager.next_level_portal != null) // spawn next level portal
+                {
+                    if (game_manager.next_level_portal.spawned == false)  
                     {
                         global.signal.spawn_projectile(game_manager.next_level_portal);
                         game_manager.next_level_portal.spawned = true;
                     }
-                    return;
                 }
+                
 
-                bool play_latest_level = false;
-                if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
+                if (game_manager.player.current_combat_state == player.combat_state.in_shop)  // shop
                 {
-                    play_latest_level = game.run_data_manager.level_list[game.run_data_manager.cleared_level] == game_manager.level_manager.current_level_file;
-                }
-
-                if (play_latest_level)
-                {
-                    game.run_data_manager.cleared_level++;
-                    bool has_next_level = false;
-                    has_next_level = game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count;
-
-                    game.run_data_manager.dna = game.run_data_manager.dna_temporary;
-
-                    if (has_next_level)
+                    if (ui_shop.active == false)
                     {
-                        string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
-
-                        game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
+                        ui_shop.active = true;
                     }
-
-                    Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
+                    else
+                    {
+                        if (ui_shop.current_result == ui_shop.result.exit && game_manager.level_manager.current_level_file != null)
+                        {
+                            game.change_scene(new scene_gameplay(game, game_manager.level_manager.current_level_file)); // reload current scene
+                        }
+                    }
                 }
             }
             else if (game_manager.current_game_state == game_manager.game_state.game_over)  // respawn

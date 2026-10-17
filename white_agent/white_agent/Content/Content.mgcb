@@ -482,6 +482,32 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/crosshair_002.png;assets/image/ui/crosshair_002
 
+#begin assets/image/ui/ui_button_leave_selected.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_button_leave_selected.png;assets/image/ui/ui_button_leave_selected
+
+#begin assets/image/ui/ui_button_leave_unselect.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_button_leave_unselect.png;assets/image/ui/ui_button_leave_unselect
+
 #begin assets/image/ui/ui_crosshair.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -521,6 +547,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_dna.PNG;assets/image/ui/ui_dna
 
+#begin assets/image/ui/ui_guide_key.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_guide_key.png;assets/image/ui/ui_guide_key
+
 #begin assets/image/ui/ui_life.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -546,6 +585,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_upgrade_adrenaline_rush.png;assets/image/ui/ui_upgrade_adrenaline_rush
+
+#begin assets/image/ui/ui_upgrade_container.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_container.png;assets/image/ui/ui_upgrade_container
 
 #begin assets/image/ui/ui_upgrade_double_dash.png
 /importer:TextureImporter
@@ -637,6 +689,45 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_upgrade_ricochet.png;assets/image/ui/ui_upgrade_ricochet
+
+#begin assets/image/ui/ui_upgrade_selector.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_selector.png;assets/image/ui/ui_upgrade_selector
+
+#begin assets/image/ui/ui_upgrade_slot_selected.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_slot_selected.png;assets/image/ui/ui_upgrade_slot_selected
+
+#begin assets/image/ui/ui_upgrade_slot_unselect.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_upgrade_slot_unselect.png;assets/image/ui/ui_upgrade_slot_unselect
 
 #begin assets/image/ui/ui_upgrade_slot.png
 /importer:TextureImporter
@@ -790,6 +881,13 @@
 /processorParam:Version=3.8.6.0
 /build:assets/sound/sfx/sfx_player_throwhead.wav;assets/sound/sfx/sfx_player_throwhead
 
+#begin level/level_0_shop.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_0_shop.tmx
+
 #begin level/level_0_tutorial.tmx
 /importer:TiledTilemapImporter
 /processor:TilemapProcessor
@@ -817,12 +915,6 @@
 /processorParam:LevelName=
 /processorParam:Version=6.1.1.0
 /build:level/level_3_easy.tmx
-
-#begin level/tiled_data/entity.tsx
-/importer:TilemapTilesetImporter
-/processor:TilemapTilesetProcessor
-/processorParam:Version=6.1.1.0
-/build:level/tiled_data/entity.tsx
 
 #begin Placeholder/Enemies/Beast.png
 /importer:TextureImporter

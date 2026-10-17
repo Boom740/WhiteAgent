@@ -6,6 +6,7 @@ namespace old_heart
     {
         public string upgrade_texture = "";
         public float cooldown_time = 0f; // for ui visual
+        public int price = 10;
         public upgrade_base()
         {
         }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="81">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_upgrade.png" width="1087" height="718"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="69" x="75.3333" y="-18.6667" width="140" height="612"/>
+  <object id="70" x="58.6667" y="-41.3333" width="922.667" height="118.667"/>
+  <object id="71" x="793.333" y="-76" width="146.667" height="752"/>
+  <object id="72" x="-1.88738e-14" y="396" width="1070.67" height="134.667"/>
+  <object id="73" x="130.667" y="30.6667" width="278.667" height="177.333"/>
+  <object id="74" x="602" y="22" width="267" height="185"/>
+  <object id="75" x="89" y="334" width="192" height="145"/>
+  <object id="76" x="729.333" y="336" width="171.333" height="165.333"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="679.5" y="329.5" width="128" height="128"/>
+  <object id="79" type="shop_keeper" gid="6" x="480" y="192" width="64" height="64"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="78" type="player" gid="1" x="480" y="320" width="64" height="64"/>
+ </objectgroup>
+</map>

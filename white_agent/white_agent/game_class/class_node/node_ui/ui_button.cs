@@ -11,10 +11,14 @@ namespace old_heart
         public Rectangle button_rectangle = new Rectangle(0,0,200,100);
         public Color button_color = Color.White;
         public Color base_color = Color.White;
+
         public Color hover_color = Color.Gray;
+        public Texture2D hover_texture;
         public Color hold_color = Color.Black;
+        public Texture2D hold_texture;
 
         public bool mouse_hover = false;
+        public bool mouse_hold = false;
         public bool clicked = false;
 
         public ui_button(ContentManager content ,Rectangle rectangle)
@@ -36,13 +40,21 @@ namespace old_heart
 
             if (mouse_hover) // mouse inside button rectangle
             {
-                button_color = hover_color;
+                if (hover_texture == null)
+                {
+                    button_color = hover_color;
+                }
+
                 if (mouse_state.WasButtonPressed(MouseButton.Left))  // left click detected XD
                 {
                     clicked = true;
                 }else if (mouse_state.IsButtonDown(MouseButton.Left))
                 {
-                    button_color = hold_color;
+                    mouse_hold = true;
+                    if (hold_texture == null)
+                    {
+                        button_color = hold_color;
+                    }
                 }
             }
             else
@@ -55,7 +67,16 @@ namespace old_heart
         public override void Draw(SpriteBatch sprite_batch)
         {
             if (!visible) return;
-            sprite_batch.Draw(button_texture, button_rectangle, button_color);
+            Texture2D draw_texture = button_texture;
+            if (hold_texture != null && mouse_hold)
+            {
+                draw_texture = hold_texture;
+            }else if (hover_texture != null && mouse_hover)
+            {
+                draw_texture = hover_texture;
+            }
+
+            sprite_batch.Draw(draw_texture, button_rectangle, button_color);
         }
 
     }

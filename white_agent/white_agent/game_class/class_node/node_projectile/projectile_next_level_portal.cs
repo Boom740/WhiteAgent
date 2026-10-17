@@ -38,6 +38,7 @@ namespace old_heart
             if (target_entity is player == false) return;
 
             player player = target_entity as player;
+            player.in_interactable_zone = true;
 
             if (player.current_buffer_input == player.bufferable_input.interact)
             {  

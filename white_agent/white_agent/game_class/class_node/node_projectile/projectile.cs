@@ -15,6 +15,7 @@ namespace old_heart
         public ContentManager content;
         public Texture2D texture;
         public Texture2D shadow_texture;
+        public Vector2 shadow_scale;
 
         public collision_shape collision;
 
@@ -47,6 +48,7 @@ namespace old_heart
             this.owner = owner;
 
             shadow_texture = content.Load<Texture2D>("assets/image/other/sprite_shadow");
+            shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
         }
         public virtual void spawn(projectile_manager projectile_manager, collision_manager collision_manager, debug_manager debug_manager)
         {
@@ -131,7 +133,6 @@ namespace old_heart
             Color color = Color.White * alpha;
             sprite_batch.Draw(texture, position, null, color, rotation, sprite_origin, sprite_scale, SpriteEffects.None, layer_depth);
 
-            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
             Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
             sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f) * alpha, 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }

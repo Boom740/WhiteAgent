@@ -134,6 +134,10 @@ namespace old_heart
                         {
                             game_manager.next_level_portal = new projectile_next_level_portal(content, position);
                         }
+                        if (tile_map_object.Class == "shop_keeper")
+                        {
+                            game_manager.add_projectile(new projectile_shop_keeper(content, position));
+                        }
                     }
                 }
             }
@@ -142,99 +146,3 @@ namespace old_heart
     }
 }
 
-
-/*
-
-if (level_object.type == "player")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-
-                    game_manager.add_entity(new player(game_manager.content,new Vector2(position_x,position_y),run_data));
-                }
-                else if(level_object.type == "enemy_leukemia")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-
-                    game_manager.add_entity(new enemy_leukemia(game_manager.content, new Vector2(position_x, position_y)));
-                }
-                else if (level_object.type == "enemy_bacteria")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-
-                    game_manager.add_entity(new enemy_bacteria(game_manager.content, new Vector2(position_x, position_y)));
-                }
-                else if (level_object.type == "enemy_virus")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-
-                    game_manager.add_entity(new enemy_virus(game_manager.content, new Vector2(position_x, position_y)));
-                }
-                else if (level_object.type == "wall_collision_rectangle")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-                    float size_x = 0;
-                    float size_y = 0;
-
-                    float.TryParse(level_object.data["size_x"], out size_x);
-                    float.TryParse(level_object.data["size_y"], out size_y);
-
-                    game_manager.add_map_collision(new collision_shape_box((BoundingBox2D.CreateFromPositionAndSize(new Vector2(position_x, position_y), new Vector2(size_x, size_y)))));
-                }
-                else if (level_object.type == "image")
-                {
-                    float position_x = level_object.position_x;
-                    float position_y = level_object.position_y;
-                    string file_path = level_object.data["texture"];
-                    bool high = false;
-
-                    bool.TryParse(level_object.data["high"], out high);
-
-                    game_manager.add_map(new image(game_manager.content, new Vector2(position_x, position_y), file_path), high);
-                }
-                else
-                {
-                    Debug.WriteLine("ERROR cant load type : " + level_object.type);
-                }
-*/
-
-//public void save_game_data() // ฟังก์ชันใหม่สำหรับเซฟ High Score หรือข้อมูลการเล่น
-//{
-//    string file_directory = AppDomain.CurrentDomain.BaseDirectory;
-//    string save_folder = Path.Combine(file_directory, "Saves");
-
-//    if (!Directory.Exists(save_folder))
-//    {
-//        Directory.CreateDirectory(save_folder);
-//    }
-
-//    string save_file = Path.Combine(save_folder, "high_score.json");
-
-//    // ตัวอย่างการสร้างข้อมูลและเซฟเป็น JSON (คุณสามารถเปลี่ยนไปใช้ run_data แทนได้)
-//    var saveData = new { HighScore = 9999, LastPlayed = DateTime.Now };
-//    string json_string = JsonSerializer.Serialize(saveData, new JsonSerializerOptions { WriteIndented = true });
-
-//    File.WriteAllText(save_file, json_string);
-//    Debug.WriteLine("Saved game data to : " + save_file);
-//}
-
-//public void load_game_data() // ฟังก์ชันสำหรับโหลดข้อมูลกลับมา
-//{
-//    string file_directory = AppDomain.CurrentDomain.BaseDirectory;
-//    string save_file = Path.Combine(file_directory, "Saves", "high_score.json");
-
-//    if (File.Exists(save_file))
-//    {
-//        string json_string = File.ReadAllText(save_file);
-//        // นำ json_string ไปแปลงกลับเป็นข้อมูลเกมของคุณ
-//        Debug.WriteLine("Loaded game data from : " + save_file);
-//    }
-//    else
-//    {
-//        Debug.WriteLine("No save file found.");
-//    }
-//}

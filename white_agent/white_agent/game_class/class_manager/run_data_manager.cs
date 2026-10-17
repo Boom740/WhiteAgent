@@ -29,7 +29,7 @@ namespace old_heart
         }
         public void load()
         {
-            List<string> level_set_1 = new List<string>() { "level_1_easy", "level_2_easy", "level_3_easy" }; //, "level_2_easy", "level_3_easy", "level_4_easy"};
+            List<string> level_set_1 = new List<string>() { "level_1_easy", "level_0_shop","level_2_easy", "level_0_shop", "level_3_easy" }; 
             List<string> level_set_2 = new List<string>();
             List<string> level_set_3 = new List<string>();
 
