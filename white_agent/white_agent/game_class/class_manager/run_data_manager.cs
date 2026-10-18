@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace old_heart
 {
@@ -18,6 +19,19 @@ namespace old_heart
         public int cleared_level = 0;
 
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {};
+
+        public List<upgrade_base> shop_upgrade_pool_list = new List<upgrade_base> {
+            new upgrade_ricochet_head(),
+            new upgrade_explosive_impact(),
+            new upgrade_double_dash(),
+            new upgrade_lethal_dash(),
+            new upgrade_projectile_deflection(),
+            new upgrade_adrenaline_rush(),
+            new upgrade_emergency_knockback(),
+            new upgrade_magenet()
+        };
+
+        public List<upgrade_base> shop_upgrade_list = new List<upgrade_base> {}; // upgrade that sell in shop
 
         public int dna = 0;
         public int dna_temporary = 0;   // will save on dna only when clear level
@@ -50,21 +64,37 @@ namespace old_heart
                     level_list.Add(level);
                 }
             }
-            void random_level_order(List<string> level_set) 
-            {
-                int i = level_set.Count;
-                while (i > 0)
-                {
-                    i--;
-                    int random_index = random.Next(i + 1);
 
-                    string temp_level = level_set[i];       // swap
-                    level_set[i] = level_set[random_index];
-                    level_set[random_index] = temp_level;
-                }
+            random_shop_item();
+        }
+        void random_list_order<T>(List<T> list)
+        {
+            int i = list.Count;
+            while (i > 0)
+            {
+                i--;
+                int random_index = random.Next(i + 1);
+
+                T temp_level = list[i];       // swap
+                list[i] = list[random_index];
+                list[random_index] = temp_level;
             }
         }
+        public void random_shop_item()
+        {
+            shop_upgrade_list.Clear();
+            List<upgrade_base> not_owned_upgrade_list = shop_upgrade_pool_list.Except(upgrade_list).ToList();
+            random_list_order(not_owned_upgrade_list);
 
+            for (int i = 0; i < (Math.Min(3 , not_owned_upgrade_list.Count)); i++)
+            {
+                upgrade_base upgrade = not_owned_upgrade_list[i];
+                shop_upgrade_list.Add(upgrade);
+
+                Debug.WriteLine("random shop item ["+ i +"] : "+ upgrade);
+            }
+
+        }
         public void apply_upgrade(player player)
         {
             foreach (upgrade_base upgrade in upgrade_list)

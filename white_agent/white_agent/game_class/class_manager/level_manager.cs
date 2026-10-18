@@ -134,9 +134,9 @@ namespace old_heart
                         {
                             game_manager.next_level_portal = new projectile_next_level_portal(content, position);
                         }
-                        if (tile_map_object.Class == "shop_keeper")
+                        if (tile_map_object.Class == "merchant")
                         {
-                            game_manager.add_projectile(new projectile_shop_keeper(content, position));
+                            game_manager.add_projectile(new projectile_merchant(content, position));
                         }
                     }
                 }

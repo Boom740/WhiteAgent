@@ -40,6 +40,7 @@ namespace old_heart
         public player player;
         public projectile_next_level_portal next_level_portal;
 
+        bool cleared_signal_from_last_scene = false;
       
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
@@ -257,7 +258,15 @@ namespace old_heart
         }
         public void spawn_signal_list()
         {
-            if (player == null) { return; }   // cant spawn in realtime if there is no player
+            if (cleared_signal_from_last_scene == false)
+            {
+                cleared_signal_from_last_scene = true;
+
+                signal_spawn_entity_list.Clear();
+                signal_spawn_projectile_list.Clear();
+                signal_spawn_world_text_list.Clear();
+                return;
+            }
 
             foreach (entity signal_entity in signal_spawn_entity_list) {
                 add_entity(signal_entity);

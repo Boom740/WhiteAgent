@@ -8,7 +8,6 @@ namespace old_heart
         public string level_file;
 
         public ui_resource ui_resource;
-        public ui_upgrade_bar ui_upgrade_bar;
 
         public ui_text pause_text;
         public scene_gameplay(Game1 game, string level_file) : base(game)
@@ -39,15 +38,21 @@ namespace old_heart
         public override void Update(GameTime gameTime)
         {
             if (global.input.keyboard_state.WasKeyPressed(Keys.Escape)){
-                if (game_manager.pause == true)
+                if (game_manager.player != null)
                 {
-                    game_manager.pause = false;
-                    pause_text.visible = false;
-                }
-                else
-                {
-                    game_manager.pause = true;
-                    pause_text.visible = true;
+                    if (game_manager.player.current_combat_state != player.combat_state.in_shop)
+                    {
+                        if (game_manager.pause == true)
+                        {
+                            game_manager.pause = false;
+                            pause_text.visible = false;
+                        }
+                        else
+                        {
+                            game_manager.pause = true;
+                            pause_text.visible = true;
+                        }
+                    }
                 }
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.V))

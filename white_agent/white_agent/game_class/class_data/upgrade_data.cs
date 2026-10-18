@@ -7,13 +7,14 @@ namespace old_heart
         public string upgrade_texture = "";
         public float cooldown_time = 0f; // for ui visual
         public int price = 10;
+
+        public string description = "no description CBA";
         public upgrade_base()
         {
         }
 
         public virtual void apply_upgrade(player player)
         {
-            Debug.WriteLine("no apply_upgrade code in this upgrade class   idk");
         }
     }
 
@@ -22,6 +23,7 @@ namespace old_heart
         public upgrade_ricochet_head()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_ricochet";
+            price = 12;
         }
         public override void apply_upgrade(player player)
         {
@@ -33,6 +35,7 @@ namespace old_heart
         public upgrade_explosive_impact()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_explosive_impact";
+            price = 12;
         }
         public override void apply_upgrade(player player)
         {
@@ -44,6 +47,7 @@ namespace old_heart
         public upgrade_double_dash()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_double_dash";
+            price = 3;
         }
         public override void apply_upgrade(player player)
         {
@@ -55,6 +59,7 @@ namespace old_heart
         public upgrade_lethal_dash()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_lethal_dash";
+            price = 7;
         }
         public override void apply_upgrade(player player)
         {
@@ -66,6 +71,7 @@ namespace old_heart
         public upgrade_projectile_deflection()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_projectile_deflection";
+            price = 5;
         }
         public override void apply_upgrade(player player)
         {
@@ -77,6 +83,7 @@ namespace old_heart
         public upgrade_adrenaline_rush()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_adrenaline_rush";
+            price = 3;
         }
         public override void apply_upgrade(player player)
         {
@@ -88,6 +95,7 @@ namespace old_heart
         public upgrade_emergency_knockback()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_emergency_knockback";
+            price = 6;
         }
         public override void apply_upgrade(player player)
         {
@@ -99,6 +107,7 @@ namespace old_heart
         public upgrade_magenet()
         {
             upgrade_texture = "assets/image/ui/ui_upgrade_magnet";
+            price = 3;
         }
         public override void apply_upgrade(player player)
         {

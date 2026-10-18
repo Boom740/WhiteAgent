@@ -37,24 +37,30 @@ namespace old_heart
             mouse_hover = button_rectangle.Contains(mouse_position);
 
             clicked = false; // reset clicked every frame
+            mouse_hold = false;
 
             if (mouse_hover) // mouse inside button rectangle
             {
-                if (hover_texture == null)
-                {
-                    button_color = hover_color;
-                }
-
                 if (mouse_state.WasButtonPressed(MouseButton.Left))  // left click detected XD
                 {
                     clicked = true;
-                }else if (mouse_state.IsButtonDown(MouseButton.Left))
+                }
+
+                if (mouse_state.IsButtonDown(MouseButton.Left))
                 {
                     mouse_hold = true;
                     if (hold_texture == null)
                     {
                         button_color = hold_color;
                     }
+                }
+                else if(hover_texture == null)
+                {
+                    button_color = hover_color;
+                }
+                else
+                {
+                    button_color = base_color;
                 }
             }
             else

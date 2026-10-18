@@ -16,6 +16,9 @@ namespace old_heart
         {
             animation_player = new animation_player_minion(content_set);
             state = enemy_state.chase; // minion ไล่ล่าทันทีที่เกิด ไม่มี patrol เหมือน leukemia
+
+            this.drop_count_min = 0;
+            this.drop_count_max = 0;
         }
 
         public override void Update(GameTime gameTime)
@@ -89,10 +92,6 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_purple, position, high_layer: true);
             global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_purple, position, high_layer: false);
             base.die();
-        }
-        protected override void drop_items()
-        {
-           
         }
         public override void update_animation(float delta_time)
         {

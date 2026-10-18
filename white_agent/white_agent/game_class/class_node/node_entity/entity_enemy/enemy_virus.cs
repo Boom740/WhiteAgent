@@ -38,7 +38,6 @@ namespace old_heart
             can_be_dizzied = false;
             this.drop_count_min = 3;
             this.drop_count_max = 5;
-            this.dna_value_each = 1;
         }
 
         public override void Update(GameTime gameTime)

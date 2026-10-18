@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="81">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="82">
  <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_upgrade.png" width="1087" height="718"/>
@@ -16,7 +16,7 @@
  </objectgroup>
  <objectgroup id="5" name="other">
   <object id="67" type="next_level_portal" gid="5" x="679.5" y="329.5" width="128" height="128"/>
-  <object id="79" type="shop_keeper" gid="6" x="480" y="192" width="64" height="64"/>
+  <object id="81" type="merchant" gid="6" x="480" y="192" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="4" name="entity">
   <object id="78" type="player" gid="1" x="480" y="320" width="64" height="64"/>

@@ -11,6 +11,7 @@ namespace old_heart
         public Vector2 scale = new Vector2(1,1);
         public Color color = Color.White;
         public Vector2 origin = new Vector2(0,0);
+        public float alpha = 1.0f;
         public image(ContentManager content, Vector2 position,  Texture2D texture = null , string file_path = null)
         {
             this.position = position;
@@ -30,7 +31,7 @@ namespace old_heart
         public override void Draw(SpriteBatch sprite_batch)
         {
             if (visible == false) return;
-            sprite_batch.Draw(texture,position,null, color, 0, origin, scale,SpriteEffects.None,0);
+            sprite_batch.Draw(texture,position,null, color * alpha , 0, origin, scale,SpriteEffects.None,0);
         }
 
     }

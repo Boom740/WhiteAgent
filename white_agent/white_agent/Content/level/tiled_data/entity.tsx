@@ -16,7 +16,7 @@
  <tile id="4" x="0" y="0" width="128" height="128" type="next_level_portal">
   <image source="../../assets/image/other/sprite_warp_gate.png" width="128" height="512"/>
  </tile>
- <tile id="5" type="shop_keeper">
-  <image source="../../assets/image/ui/crosshair_002.png" width="64" height="64"/>
+ <tile id="5" type="merchant">
+  <image source="../../assets/image/npc/sprite_merchant_idle.png" width="64" height="64"/>
  </tile>
 </tileset>

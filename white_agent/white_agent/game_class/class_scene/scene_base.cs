@@ -14,6 +14,7 @@ namespace old_heart
 
         public game_manager game_manager;
 
+        public ui_guide ui_guide;
         public ui_shop ui_shop;
         public ui_upgrade_bar ui_upgrade_bar;
         public ui_game_over ui_game_over;
@@ -33,6 +34,9 @@ namespace old_heart
 
             game.run_data_manager.dna_temporary = game.run_data_manager.dna;
 
+            ui_guide = new ui_guide(Content, game_manager);
+            game_manager.add_ui(ui_guide);
+
             ui_shop = new ui_shop(Content, game_manager, game.run_data_manager);
             game_manager.add_ui(ui_shop);
         }
@@ -40,7 +44,6 @@ namespace old_heart
         public override void LoadContent()
         {
             fade_transition = new FadeTransition(game.GraphicsDevice, Color.Black, 0.5f); // setup transition screen for all inheried scene to use
-
 
             ui_game_over = new ui_game_over(Content, game_manager , game.run_data_manager);
             game_manager.add_ui(ui_game_over);
@@ -53,7 +56,7 @@ namespace old_heart
             if (game.scene_transitioning_timer > 0) {return; }  // game class is transitioning
 
             if (game_manager.player != null){
-                //Debug.WriteLine(game_manager.player.in_interactable_zone);
+                ui_guide.show_guide = game_manager.player.in_interactable_zone && (game_manager.player.current_combat_state != player.combat_state.die && game_manager.player.current_combat_state != player.combat_state.in_shop && game_manager.player.current_combat_state != player.combat_state.change_scene);
             }
 
             if (game_manager.current_game_state == game_manager.game_state.level_clear && game_manager.player != null)       // finished level
@@ -80,6 +83,7 @@ namespace old_heart
                             string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
 
                             game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
+                            game.run_data_manager.random_shop_item();
                         }
 
                         Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);

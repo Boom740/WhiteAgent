@@ -1,8 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using MonoGame.Extended.Screens;
 using System;
 using System.Diagnostics;
 
@@ -61,6 +59,9 @@ namespace old_heart
 
             enemy_2 = new enemy_bacteria(Content, position: new Vector2(-400, 300)); 
             game_manager.add_entity(enemy_2);
+
+            projectile merchant = new projectile_merchant(Content, position: new Vector2(400, 400));
+            game_manager.add_projectile(merchant);
 
             base.LoadContent();
 

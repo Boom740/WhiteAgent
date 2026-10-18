@@ -4,8 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
 
 namespace old_heart
 {
@@ -14,6 +12,7 @@ namespace old_heart
         ContentManager content;
 
         public run_data_manager run_data;
+        public int last_upgrade_count;
         public ui_shop ui_shop;
 
         public Vector2 upgrade_slot_position;
@@ -21,6 +20,7 @@ namespace old_heart
 
         public image upgrade_slot; // empty 4 slot image
 
+        public int upgrade_bar_limit = 4;
         public List<ui_button> upgrade_button_list = new List<ui_button> { };
         public List<image> upgrade_image_list = new List<image> { };
         public List<ui_text> upgrade_cooldown_text_list = new List<ui_text> { };
@@ -78,6 +78,10 @@ namespace old_heart
 
             upgrade_text.alpha = Math.Max(0, upgrade_text.alpha - upgrade_text_alpha_change_rate);
 
+            if (last_upgrade_count < run_data.upgrade_list.Count && last_upgrade_count < upgrade_bar_limit) // has more upgrade than loaded one    and still has slot left to load
+            {
+                load_upgrade_data();
+            }
 
             for (int i = 0; i < upgrade_button_list.Count; i++)
             {
@@ -104,7 +108,7 @@ namespace old_heart
                     }
                     else
                     {
-                        upgrade_text.text_string = "sell for " + upgrade.price / 2 + " DNA?";
+                        upgrade_text.text_string = "sell for " + upgrade.price / 2 + "  DNA?";
                     }
 
                     upgrade_text.position = new Vector2(upgrade_button.button_rectangle.Left - 5, upgrade_button.button_rectangle.Center.Y) - (upgrade_text.text_font.MeasureString(upgrade_text.text_string) * upgrade_text.text_scale * new Vector2(1,0.5f));
@@ -153,14 +157,14 @@ namespace old_heart
         }
         public void load_upgrade_data()
         {
-            int run_data_upgrade_count = run_data.upgrade_list.Count;
+            last_upgrade_count = run_data.upgrade_list.Count;
             for (int i = 0; i <  upgrade_button_list.Count; i++)
             {
                 ui_button upgrade_button = upgrade_button_list[i];
                 image upgrade_image = upgrade_image_list[i];
 
 
-                if (i > run_data_upgrade_count-1 )  // no upgrade to load
+                if (i > last_upgrade_count  - 1 )  // no upgrade to load
                 {
                     upgrade_image.visible = false;
 
