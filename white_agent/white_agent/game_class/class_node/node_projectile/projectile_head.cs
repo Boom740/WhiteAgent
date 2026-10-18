@@ -203,7 +203,10 @@ namespace old_heart
 
         }
 
-        
+        public override void on_hit_shield(enemy shielded_enemy)
+        {
+            on_hit_entity(shielded_enemy); // ใช้ logic เดิม: shock wave + เด้งกลับ (ตอนนี้เด้งออกจากผิวโล่)
+        }
 
         public override void Draw(SpriteBatch sprite_batch)
         {
@@ -220,5 +223,6 @@ namespace old_heart
             base.Draw(sprite_batch,alpha);
 
         }
+
     }
 }

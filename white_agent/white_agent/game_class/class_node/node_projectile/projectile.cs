@@ -117,6 +117,9 @@ namespace old_heart
         public virtual void on_collide_hit_box(projectile target_projectile)
         {
         }
+        public virtual void on_hit_shield(enemy shielded_enemy)
+        {
+        }
         public projectile clone()  // use in projectile deflection 
         {
             projectile cloned_projectile = (projectile)this.MemberwiseClone();

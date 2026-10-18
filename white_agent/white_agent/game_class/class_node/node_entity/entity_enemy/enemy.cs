@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Diagnostics;
+using MonoGame.Extended;
 
 namespace old_heart
 {
@@ -31,6 +32,15 @@ namespace old_heart
         public int drop_count_max = 2;
         public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
 
+        // --- shield hitbox ---
+        public collision_shape shield_collision;
+        public float shield_hitbox_scale = 1.5f;             // ขนาด
+        public Vector2 shield_hitbox_offset = Vector2.Zero;  // ตำแหน่ง
+        public float shield_push_multiplier = 1.5f;   
+        public Vector2 shield_center => position + shield_hitbox_offset;
+        public float shield_radius => hit_box_radius * shield_hitbox_scale;
+        //public bool shield_blocks_player = true;
+
         public Random random = new Random();
 
         public bool death_by_player = false;
@@ -38,6 +48,15 @@ namespace old_heart
         {
             animation_player_shield = new animation_player_shield(content);
             animation_player_shield.draw_scale = new Vector2(hit_box_radius / 15f) * 1.3f;
+
+            shield_collision = new collision_shape_circle(new BoundingCircle2D(shield_center, shield_radius));   // เพิ่ม
+            shield_collision.owner = this;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            shield_collision.Shape = new CollisionShape2D(new BoundingCircle2D(shield_center, shield_radius));
         }
 
         // ---------------- Damage / Death ----------------
@@ -90,6 +109,11 @@ namespace old_heart
 
                 global.sound.play_sound(global.sound.sound_name.enemy_dizzy);
             }
+            else
+            {
+                dizzy_timer_current = dizzy_timer;
+                shield_timer_current = shield_timer;
+            }
         }
         
         public override void die()
@@ -136,6 +160,7 @@ namespace old_heart
         public static readonly animation_data animation_data = new animation_data();
         public animation_player_shield(ContentManager content) : base()
         {
+
             if (animation_data.data.Count == 0)
             {
                 load(content);
@@ -145,6 +170,7 @@ namespace old_heart
             default_animation = animation_data.data[animation_name.normal];
             current_animation = default_animation;
         }
+
         public void load(ContentManager content)
         {
             Texture2D normal_texture = content.Load<Texture2D>("assets/image/other/sprite_shield");
@@ -155,4 +181,5 @@ namespace old_heart
 
         }
     }
+
 }

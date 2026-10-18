@@ -19,6 +19,9 @@ namespace old_heart
 
             this.drop_count_min = 0;
             this.drop_count_max = 0;
+
+            shield_hitbox_scale = 2.8f;
+            shield_hitbox_offset = new Vector2(0, -13);
         }
 
         public override void Update(GameTime gameTime)

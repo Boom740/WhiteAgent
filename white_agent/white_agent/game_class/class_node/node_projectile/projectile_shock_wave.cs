@@ -34,6 +34,10 @@ namespace old_heart
         {
             // not disapear when hit wall
         }
+        public override void on_hit_shield(enemy shielded_enemy)
+        {
+            on_hit_entity(shielded_enemy);
+        }
         public override void Draw(SpriteBatch sprite_batch)
         {
             // ล่องหน ไม่วาดอะไรเลย (ไม่เรียก base.Draw เพราะไม่มี texture โหลดไว้)

@@ -38,6 +38,9 @@ namespace old_heart
             can_be_dizzied = false;
             this.drop_count_min = 3;
             this.drop_count_max = 5;
+
+            shield_hitbox_scale = 2.9f;
+            shield_hitbox_offset = new Vector2(0, -23);
         }
 
         public override void Update(GameTime gameTime)

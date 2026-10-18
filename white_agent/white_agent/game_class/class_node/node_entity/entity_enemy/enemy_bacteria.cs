@@ -36,6 +36,9 @@ namespace old_heart
         public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 8 , hit_box_radius: 15)
         {
             animation_player = new animation_player_bacteria(content_set);
+
+            shield_hitbox_scale = 2.9f;
+            shield_hitbox_offset = new Vector2(0, -23);
         }
 
         public override void Update(GameTime gameTime)

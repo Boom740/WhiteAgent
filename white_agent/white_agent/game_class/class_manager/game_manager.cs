@@ -106,6 +106,8 @@ namespace old_heart
                 if (entity is enemy enemy)
                 {
                     enemy.target = this.player; // ให้ enemy รู้จัก player เพื่อเช็คระยะ dangerous_rad/safe_rad
+                    collision_manager.add(enemy.shield_collision, "enemy_shield");
+                    debug_manager.add(enemy.shield_collision);
                 }
             }
             debug_manager.add(entity.collision);
@@ -207,6 +209,11 @@ namespace old_heart
                         }
                         if (entity is enemy enemy)
                         {
+                            collision_manager.remove(enemy.shield_collision);
+                            if (enemy.shield_collision is node shield_node)
+                            {
+                                debug_manager.remove(shield_node);
+                            }
                             if (player != null && enemy.death_by_player == true)
                             {
                                 player.handle_enemy_kill();

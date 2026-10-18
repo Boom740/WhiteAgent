@@ -34,6 +34,12 @@ namespace old_heart
             wall_layer.IsDynamic = false;                     // not dynamic mean it will not move
             collision_world.AddLayer("wall", wall_layer);
 
+            Layer enemy_shield_layer = new Layer(new SpatialHash(new SizeF(128f, 128f)));
+            collision_world.AddLayer("enemy_shield", enemy_shield_layer);
+
+            collision_world.EnableCollisionBetweenLayers("player_hitbox", "enemy_shield");
+            collision_world.EnableCollisionBetweenLayers("player", "enemy_shield");
+
             collision_world.EnableCollisionBetweenLayers("player", "wall");
             collision_world.EnableCollisionBetweenLayers("player_hitbox", "wall");
 
@@ -78,6 +84,9 @@ namespace old_heart
 
             resolve_wall_collision("enemy", delta_time);
             resolve_wall_collision("enemy_hitbox", delta_time);
+
+            resolve_shield_collision("player_hitbox", "enemy_shield");
+            //resolve_shield_block("player", "enemy_shield", delta_time);
 
         }
 
@@ -160,6 +169,53 @@ namespace old_heart
                 }
             }
         }
+        public void resolve_shield_collision(string hitbox_layer, string shield_layer)
+        {
+            var collisionPairs = collision_world.QueryCollisionPairs(hitbox_layer, shield_layer);
+            foreach (var pair in collisionPairs)
+            {
+                if (pair.First is collision_shape hitbox_shape && hitbox_shape.owner is projectile hitbox_projectile
+                    && pair.Second is collision_shape shield_shape && shield_shape.owner is enemy shielded_enemy)
+                {
+                    if (shielded_enemy.alive == false || shielded_enemy.shield == false) { continue; } // โล่พังแล้ว = hitbox หายไป
+                    hitbox_projectile.on_hit_shield(shielded_enemy);
+                }
+            }
+        }
+        /*public void resolve_shield_block(string player_layer, string shield_layer, float delta_time)
+        {
+            float shield_eject_speed = 1000f; // ความเร็วสูงสุดที่ดันออกจากวง (px/วินาที)
+
+            var collisionPairs = collision_world.QueryCollisionPairs(player_layer, shield_layer);
+            foreach (var pair in collisionPairs)
+            {
+                if (pair.First is collision_shape player_shape && player_shape.owner is player target_player
+                    && pair.Second is collision_shape shield_shape && shield_shape.owner is enemy shielded_enemy)
+                {
+                    if (target_player.alive == false) { continue; }
+                    if (target_player.current_combat_state == player.combat_state.dash) { continue; }
+                    if (shielded_enemy.alive == false || shielded_enemy.shield == false || shielded_enemy.shield_blocks_player == false) { continue; }
+
+                    Vector2 to_player = target_player.position - shielded_enemy.shield_center;
+                    float distance = to_player.Length();
+                    float required_distance = shielded_enemy.shield_radius + target_player.hit_box_radius;
+                    if (distance >= required_distance) { continue; }
+
+                    Vector2 normal = distance > 0.001f ? to_player / distance : Vector2.UnitX; // ทิศจากโล่ไปหา player
+
+                    // ดันตำแหน่งกลับมาที่ผิววง (แบบเดียวกับกำแพง)
+                    float correction = MathF.Min(required_distance - distance, shield_eject_speed * delta_time);
+                    target_player.position += normal * correction;
+
+                    // ตัดความเร็วที่พุ่งเข้าหาโล่ทิ้ง เหลือแค่ความเร็วที่ไถลไปตามผิว
+                    float into_shield = Vector2.Dot(target_player.velocity, normal);
+                    if (into_shield < 0f)
+                    {
+                        target_player.velocity -= normal * into_shield;
+                    }
+                }
+            }
+        }*/
 
     }
 }

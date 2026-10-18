@@ -36,6 +36,9 @@ namespace old_heart
         {
             animation_player = new animation_player_leukemia(content_set);
             current_clone_timer = clone_timer;
+
+            shield_hitbox_scale = 2.9f;                      
+            shield_hitbox_offset = new Vector2(0, -23);
         }
         public override void Update(GameTime gameTime)
         {
