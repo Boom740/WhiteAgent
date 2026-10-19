@@ -82,8 +82,8 @@ namespace old_heart
                         {
                             string next_level_name = game.run_data_manager.level_list[game.run_data_manager.cleared_level];
 
-                            game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
                             game.run_data_manager.random_shop_item();
+                            game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
                         }
 
                         Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);

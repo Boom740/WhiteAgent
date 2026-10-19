@@ -82,8 +82,9 @@ namespace old_heart
         }
         public void random_shop_item()
         {
-            shop_upgrade_list.Clear();
-            List<upgrade_base> not_owned_upgrade_list = shop_upgrade_pool_list.Except(upgrade_list).ToList();
+            shop_upgrade_list.Clear(); 
+            List<string> owned_upgrade_name_list = upgrade_list.Select(upgrade => upgrade.GetType().Name).ToList();
+            List<upgrade_base> not_owned_upgrade_list = shop_upgrade_pool_list.Where(poolItem => !owned_upgrade_name_list.Contains(poolItem.GetType().Name)).ToList();
             random_list_order(not_owned_upgrade_list);
 
             for (int i = 0; i < (Math.Min(3 , not_owned_upgrade_list.Count)); i++)
@@ -91,7 +92,7 @@ namespace old_heart
                 upgrade_base upgrade = not_owned_upgrade_list[i];
                 shop_upgrade_list.Add(upgrade);
 
-                Debug.WriteLine("random shop item ["+ i +"] : "+ upgrade);
+                //Debug.WriteLine("random shop item [" + i + "] : " + upgrade);
             }
 
         }

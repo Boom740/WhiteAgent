@@ -11,6 +11,7 @@ namespace old_heart
         public Rectangle button_rectangle = new Rectangle(0,0,200,100);
         public Color button_color = Color.White;
         public Color base_color = Color.White;
+        public float alpha = 1.0f;
 
         public Color hover_color = Color.Gray;
         public Texture2D hover_texture;
@@ -82,7 +83,7 @@ namespace old_heart
                 draw_texture = hover_texture;
             }
 
-            sprite_batch.Draw(draw_texture, button_rectangle, button_color);
+            sprite_batch.Draw(draw_texture, button_rectangle, button_color*alpha);
         }
 
     }

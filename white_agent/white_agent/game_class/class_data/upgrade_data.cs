@@ -8,7 +8,7 @@ namespace old_heart
         public float cooldown_time = 0f; // for ui visual
         public int price = 10;
 
-        public string description = "no description CBA";
+        public string description = "no description CBA\nChess\nBattle\nAdvanced";
         public upgrade_base()
         {
         }
