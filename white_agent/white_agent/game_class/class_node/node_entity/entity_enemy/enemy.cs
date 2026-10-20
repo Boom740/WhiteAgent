@@ -90,6 +90,11 @@ namespace old_heart
 
                 global.sound.play_sound(global.sound.sound_name.enemy_dizzy);
             }
+            else // stun when already dizzy
+            {
+                dizzy_timer_current = dizzy_timer;
+                shield_timer_current = shield_timer;
+            }
         }
         
         public override void die()
