@@ -49,9 +49,11 @@ namespace old_heart
             if (base.take_damage(damage_taken) == false) { return false; }
 
             global.signal.screen_shake(0.6f);
-            global.sound.play_sound(global.sound.sound_name.enemy_gethit);
-            dizzy_timer_current += 0.3f;
-            shield_timer_current += 0.3f;
+            global.sound.play_sound(global.sound.sound_name.enemy_gethit); 
+
+            dizzy_timer_current = Math.Min(dizzy_timer_current + 0.3f, dizzy_timer);   // increase dizzy time when take damage
+            shield_timer_current = Math.Min(shield_timer_current + 0.3f, shield_timer);    // increase shield break time when take damage
+
             if (alive == false)
             {
                 state = enemy_state.died;

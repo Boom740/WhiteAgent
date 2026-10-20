@@ -12,8 +12,6 @@ namespace old_heart
     {
         public int damage;
         public float knockback_speed = 150f;
-        public float enemy_dizzy_time_increase = 0.3f;
-        public float enemy_barrier_break_time_increase = 0.3f;
 
         public bool projectile_deflection_enable = false;
         public float projectile_deflection_speed = 1000;
@@ -41,13 +39,7 @@ namespace old_heart
                     Vector2 hit_direction = velocity != Vector2.Zero ? Vector2.Normalize(velocity) : Vector2.UnitY;
 
                     target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักเสมอ ไม่ว่าจะมี shield กันดาเมจอยู่หรือไม่
-                    bool dealt_damage = target_enemy.take_damage(damage, damage_dealer: this); // ดาเมจยังถูก shield บล็อกตามปกติถ้ามี shield อยู่
-                    if (dealt_damage)
-                    {
-                        target_enemy.dizzy_timer_current = Math.Min(target_enemy.dizzy_timer_current + enemy_dizzy_time_increase , target_enemy.dizzy_timer);
-                        target_enemy.shield_timer_current = Math.Min(target_enemy.shield_timer_current + enemy_barrier_break_time_increase , target_enemy.shield_timer);
-                        //Debug.WriteLine("e  " + target_enemy.dizzy_timer_current + " / " + target_enemy.dizzy_timer + "  " + target_enemy.shield_timer_current + " / " + target_enemy.shield_timer);
-                    }
+                    target_enemy.take_damage(damage, damage_dealer: this); // ดาเมจยังถูก shield บล็อกตามปกติถ้ามี shield อยู่
 
                     /* bool deal_damage = target_enemy.take_damage(damage,damage_dealer: this);
                      if (deal_damage)
