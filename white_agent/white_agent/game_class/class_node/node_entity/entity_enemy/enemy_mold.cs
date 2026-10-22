@@ -5,7 +5,7 @@ using System;
 
 namespace old_heart
 {
-    public class enemy_mole : enemy
+    public class enemy_mold : enemy
     {
         public enum animation_name { idle, walk, dizzy, died }
 
@@ -37,7 +37,7 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public enemy_mole(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 4, speed: 1200, hit_box_radius: 15)
+        public enemy_mold(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 4, speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_mole(content_set);
         }
@@ -275,6 +275,22 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_purple, position, high_layer: true);
             global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_purple, position, high_layer: false);
             base.die();
+        }
+
+        public static enemy_mold super_form(ContentManager content, Vector2 position)
+        {
+            return new enemy_mold(content, position)
+            {
+                max_hp = 20,
+                hp = 20,
+
+                drop_count_min = 8,
+                drop_count_max = 12,
+                dna_value_each = 1,
+                
+                animation_player = { tint = new Color(160, 20, 180) }
+
+            };
         }
 
         public override void update_animation(float delta_time)

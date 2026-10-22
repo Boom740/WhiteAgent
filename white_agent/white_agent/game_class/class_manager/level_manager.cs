@@ -112,7 +112,7 @@ namespace old_heart
                         }
                         else if (tile_map_object.Class == "enemy_mole")
                         {
-                            game_manager.add_entity(new enemy_mole(game_manager.content, position));
+                            game_manager.add_entity(new enemy_mold(game_manager.content, position));
                         }
                         else
                         {

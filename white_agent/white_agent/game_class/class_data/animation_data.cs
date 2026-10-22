@@ -63,6 +63,8 @@ namespace old_heart
 
         public float rotation = 0;
         public Vector2 draw_scale = Vector2.One;
+
+        public Color tint = Color.White;
         public animation_player_base()
         {
         }
@@ -175,7 +177,7 @@ namespace old_heart
             Vector2 sprite_scale = current_animation.sprite_scale * draw_scale;
             Vector2 sprite_origin = current_animation.sprite_origin;
             float layer_depth = Math.Clamp( ((position.Y + 50000f) / 100000f ) + current_animation.layer_depth_offset , 0 , 1);
-            Color color = Color.White;
+            Color color = tint;
             if (current_flash_time > 0)
             {
                 color = new Color(255,0,0,255); // flash red

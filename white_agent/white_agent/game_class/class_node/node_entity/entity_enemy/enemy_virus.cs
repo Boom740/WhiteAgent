@@ -237,6 +237,22 @@ namespace old_heart
             base.die();
         }
 
+        public static enemy_virus super_form(ContentManager content, Vector2 position)
+        {
+            return new enemy_virus(content, position)
+            {
+                max_hp = 30,
+                hp = 30,
+
+                drop_count_min = 16,
+                drop_count_max = 20,
+                dna_value_each = 1,
+                
+                animation_player = { tint = new Color(160, 20, 180) }
+
+            };
+        }
+
         public override void Draw(SpriteBatch sprite_batch)
         {
             base.Draw(sprite_batch);

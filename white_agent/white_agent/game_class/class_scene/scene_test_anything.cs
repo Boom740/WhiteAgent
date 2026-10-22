@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
 using System;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 namespace old_heart
 {
@@ -54,11 +55,17 @@ namespace old_heart
             test_enemy = new enemy_virus(Content, position: new Vector2(400, -300));
             game_manager.add_entity(test_enemy);
 
-            test_enemy = new enemy_mole(Content, position: new Vector2(400, 1300)); 
+            test_enemy = new enemy_mold(Content, position: new Vector2(400, 1300)); 
             game_manager.add_entity(test_enemy);
 
             enemy_2 = new enemy_bacteria(Content, position: new Vector2(-400, 300)); 
             game_manager.add_entity(enemy_2);
+
+            game_manager.add_entity(enemy_bacteria.super_form(Content, new Vector2(200, 840)));
+
+            game_manager.add_entity(enemy_virus.super_form(Content, new Vector2(-200, 740)));
+
+            game_manager.add_entity(enemy_mold.super_form(Content, new Vector2(0, 1140)));
 
             projectile merchant = new projectile_merchant(Content, position: new Vector2(400, 400));
             game_manager.add_projectile(merchant);
