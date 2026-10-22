@@ -83,6 +83,11 @@ namespace old_heart
                 load_upgrade_data();
             }
 
+            if (run_data.upgrade_list.Count < upgrade_button_list.Count)
+            {
+                load_upgrade_data();  // loaded more than current upgrade 
+            }
+
             for (int i = 0; i < upgrade_button_list.Count; i++)
             {
                 ui_button upgrade_button = upgrade_button_list[i];
