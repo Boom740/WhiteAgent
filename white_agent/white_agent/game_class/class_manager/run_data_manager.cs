@@ -43,13 +43,13 @@ namespace old_heart
         }
         public void load()
         {
-            List<string> level_set_1 = new List<string>() { "level_1_easy", "level_0_shop","level_2_easy", "level_0_shop", "level_3_easy" }; 
+            List<string> level_set_1 = new List<string>() { "level_boss","level_1_easy", "level_0_shop","level_2_easy", "level_0_shop", "level_3_easy" }; 
             List<string> level_set_2 = new List<string>();
             List<string> level_set_3 = new List<string>();
 
             //random_level_order(level_set_1);
 
-            level_list.Add("level_0_tutorial");
+            //level_list.Add("level_0_tutorial");
             level_list_add_from_list(level_set_1);
 
             foreach (string level in level_list)

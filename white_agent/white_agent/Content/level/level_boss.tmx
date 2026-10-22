@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="83">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_boss.png" width="1213" height="937"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="72" x="923.333" y="284.667" width="171.758" height="413.333"/>
+  <object id="73" x="307.12" y="-113.667" width="545.76" height="259.333"/>
+  <object id="74" x="99.8933" y="594.501" width="949.76" height="169.333"/>
+  <object id="75" x="54.3466" y="256.167" width="159.76" height="473.333"/>
+  <object id="76" x="733.788" y="475" width="53.258" height="51.333"/>
+  <object id="77" x="664.788" y="41.3335" width="281.758" height="169.333"/>
+  <object id="78" x="189.788" y="40.6668" width="281.758" height="169.333"/>
+  <object id="79" x="107.454" y="132" width="171.758" height="269.333"/>
+  <object id="80" x="859.121" y="131.333" width="171.758" height="269.333"/>
+  <object id="81" x="349.371" y="474.334" width="53.258" height="51.333"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="506" y="448" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="71" type="player" gid="1" x="537" y="551" width="64" height="64"/>
+  <object id="82" type="enemy_boss" gid="7" x="442.667" y="293.334" width="256" height="256"/>
+ </objectgroup>
+</map>

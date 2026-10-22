@@ -17,6 +17,7 @@ namespace old_heart
         public ui_debug_upgrade ui_debug_upgrade;
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
+        public enemy_boss enemy_3;
         public scene_test_anything(Game1 game) : base(game)
         {
             global.change_mouse_state(global.mouse_state.combat);
@@ -52,7 +53,7 @@ namespace old_heart
 
             enemy test_enemy;
 
-            test_enemy = new enemy_virus(Content, position: new Vector2(400, -300));
+            test_enemy = new enemy_virus(Content, position: new Vector2(400, 1300));
             game_manager.add_entity(test_enemy);
 
             test_enemy = new enemy_mold(Content, position: new Vector2(400, 1300)); 
@@ -69,6 +70,9 @@ namespace old_heart
 
             projectile merchant = new projectile_merchant(Content, position: new Vector2(400, 400));
             game_manager.add_projectile(merchant);
+
+            enemy_3 = new enemy_boss(Content, position: new Vector2(400, -300));
+            game_manager.add_entity(enemy_3);
 
             base.LoadContent();
 
@@ -120,10 +124,10 @@ namespace old_heart
                 $"";
             }
 
-            if (enemy_2 != null)
+            if (enemy_3 != null)
             {
                 test_text.text_string +=
-                //$"\nenemy : {enemy_1.frightened_exit_timer}" +
+                $"\nenemy : {enemy_3.state}" +
                 $"";
             }
 

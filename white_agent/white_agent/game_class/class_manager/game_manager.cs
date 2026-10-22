@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -302,9 +303,10 @@ namespace old_heart
 
             sprite_batch.Begin(samplerState: SamplerState.PointClamp , transformMatrix: camera_matrix);    // low layer
 
-            //RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.Position.X, camera_manager.camera.Position.Y, camera_manager.viewport_adapter.VirtualWidth, camera_manager.viewport_adapter.VirtualHeight);
-            //sprite_batch.FillRectangle(blue_backgound_rectangle, Color.Black);  // background
-
+            /*
+            RectangleF blue_backgound_rectangle = new RectangleF(camera_manager.camera.BoundingRectangle.X, camera_manager.camera.BoundingRectangle.Y, camera_manager.viewport_adapter.VirtualWidth / camera_manager.camera.Zoom, camera_manager.viewport_adapter.VirtualHeight / camera_manager.camera.Zoom);
+            sprite_batch.FillRectangle(blue_backgound_rectangle, Color.CornflowerBlue);  // background
+            */
             map_manager.draw_low(sprite_batch);
             particle_manager.draw_low(sprite_batch);
             sprite_batch.End();

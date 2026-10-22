@@ -114,6 +114,10 @@ namespace old_heart
                         {
                             game_manager.add_entity(new enemy_mold(game_manager.content, position));
                         }
+                        else if (tile_map_object.Class == "enemy_boss")
+                        {
+                            game_manager.add_entity(new enemy_boss(game_manager.content, position));
+                        }
                         else
                         {
                             Debug.WriteLine("Error load entity : " + tile_map_object.Class);

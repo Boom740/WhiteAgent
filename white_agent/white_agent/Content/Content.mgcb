@@ -66,6 +66,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_bacteria_walk.png;assets/image/enemy/sprite_bacteria_walk
 
+#begin assets/image/enemy/sprite_boss_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_idle.png;assets/image/enemy/sprite_boss_idle
+
 #begin assets/image/enemy/sprite_leukemia_dizzy.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -183,6 +196,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_virus_walk.png;assets/image/enemy/sprite_virus_walk
 
+#begin assets/image/levels/texture_level_boss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/levels/texture_level_boss.png;assets/image/levels/texture_level_boss
+
 #begin assets/image/levels/texture_level_easy_01.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -247,6 +273,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/npc/sprite_merchant_idle.png;assets/image/npc/sprite_merchant_idle
+
+#begin assets/image/other/sprite_bosshole.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/other/sprite_bosshole.png;assets/image/other/sprite_bosshole
 
 #begin assets/image/other/sprite_shadow.png
 /importer:TextureImporter
@@ -755,6 +794,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_upgrade_slot.png;assets/image/ui/ui_upgrade_slot
 
+#begin assets/image/weapons/sprite_bullet_boss.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/weapons/sprite_bullet_boss.png;assets/image/weapons/sprite_bullet_boss
+
 #begin assets/image/weapons/sprite_weapon_head.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -928,6 +980,13 @@
 /processorParam:LevelName=
 /processorParam:Version=6.1.1.0
 /build:level/level_3_easy.tmx
+
+#begin level/level_boss.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_boss.tmx
 
 #begin Placeholder/Enemies/Beast.png
 /importer:TextureImporter

@@ -23,6 +23,9 @@ namespace old_heart
 
         public animation_player_base animation_player;
         public Texture2D shadow_texture;
+        public Color shadow_color = new Color(1, 1, 1, 0.4f);
+        public Vector2 shadow_scale;
+        public Vector2 shadow_origin;
 
         public collision_shape collision;
         public float hit_box_radius; // for collision // hit_box is circle (BoundingCircle2D)
@@ -38,7 +41,7 @@ namespace old_heart
         public int hp = 10;
         public float speed = 100;     // for acceralation
 
-        
+        public bool entity_push_enable = true;
         public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100,float hit_box_radius = 15)
         {
             content = content_set;
@@ -52,6 +55,8 @@ namespace old_heart
             collision.owner = this;
 
             shadow_texture = content.Load<Texture2D>("assets/image/other/sprite_shadow");
+            shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
+            shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
         }
         public override void Update(GameTime gameTime)
         {
@@ -173,9 +178,7 @@ namespace old_heart
         {
             animation_player.draw(sprite_batch, position, alpha);
 
-            Vector2 shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 1.5f;
-            Vector2 shadow_origin = new Vector2(shadow_texture.Width, shadow_texture.Height) / 2;   // center
-            sprite_batch.Draw(shadow_texture, position, null, Color.White * new Color(1, 1, 1, 0.4f), 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
+            sprite_batch.Draw(shadow_texture, position, null, shadow_color, 0, shadow_origin, shadow_scale, SpriteEffects.None, 0);
         }
 
         public virtual void delete_clean_up(collision_manager collision_manager , debug_manager debug_manager)

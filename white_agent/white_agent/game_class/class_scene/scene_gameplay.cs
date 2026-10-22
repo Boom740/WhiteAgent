@@ -32,6 +32,10 @@ namespace old_heart
             game_manager.add_ui(pause_text);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
+            if (level_file == "level_boss")
+            {
+                game_manager.camera_manager.camera.ZoomOut(0.25f);
+            }
 
             base.LoadContent();
         }

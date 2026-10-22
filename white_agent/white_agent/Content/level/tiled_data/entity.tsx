@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.12.2" name="entity" tilewidth="128" tileheight="128" tilecount="6" columns="0">
+<tileset version="1.10" tiledversion="1.12.2" name="boss" tilewidth="256" tileheight="256" tilecount="7" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" x="0" y="0" width="64" height="64" type="player">
   <image source="../../assets/image/player/sprite_player_idle.png" width="256" height="384"/>
@@ -18,5 +18,8 @@
  </tile>
  <tile id="5" type="merchant">
   <image source="../../assets/image/npc/sprite_merchant_idle.png" width="64" height="64"/>
+ </tile>
+ <tile id="6" type="enemy_boss">
+  <image source="../../assets/image/enemy/sprite_boss_idle.png" width="256" height="256"/>
  </tile>
 </tileset>

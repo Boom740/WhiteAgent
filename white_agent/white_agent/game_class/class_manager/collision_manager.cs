@@ -152,8 +152,14 @@ namespace old_heart
 
                     push_direction = Vector2.Normalize(push_direction) * overlapse_distance * push_multiplier;
 
-                    entity_a.velocity -= (push_direction);
-                    entity_b.velocity += (push_direction);
+                    if (entity_a.entity_push_enable)
+                    {
+                        entity_a.velocity -= (push_direction);
+                    }
+                    if (entity_b.entity_push_enable)
+                    {
+                        entity_b.velocity += (push_direction);
+                    }
 
                     entity_a.collide_entity(entity_b);
                     entity_b.collide_entity(entity_a);

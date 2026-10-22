@@ -63,8 +63,9 @@ namespace old_heart
 
         public float rotation = 0;
         public Vector2 draw_scale = Vector2.One;
-
         public Color tint = Color.White;
+
+        public bool visible = true;
         public animation_player_base()
         {
         }
@@ -163,6 +164,8 @@ namespace old_heart
         }
         public void draw(SpriteBatch sprite_batch, Vector2 position, float alpha = 1f)
         {
+            if (! visible ) { return; }
+
             Texture2D texture = current_animation.sprite_sheet;
             Rectangle source_rectangle;
             if (current_animation.one_direction_sprite_format == false)

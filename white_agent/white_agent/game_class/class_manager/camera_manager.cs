@@ -70,12 +70,13 @@ namespace old_heart
                 truama = MathHelper.Clamp(truama - trauma_decay * dt, 0f, 1f);
             }
 
-            
+            /*
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
             if (keyboard_state.WasKeyPressed(Keys.E)) //camera shake Test
             {
                 //global.signal.screen_shake(0.5f);
             }
+            */
         }
 
         public void update_global_mouse_position()

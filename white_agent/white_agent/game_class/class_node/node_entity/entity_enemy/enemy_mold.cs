@@ -164,7 +164,7 @@ namespace old_heart
                 acceleration = Vector2.Zero;
             }
 
-            void update_attack(float delta_tiem)
+            void update_attack(float delta_time)
             {
                 if (target == null) { state = enemy_state.normal; return; }
                 float distance = Vector2.Distance(position, target.position);
@@ -195,7 +195,7 @@ namespace old_heart
                     return;
                 }
 
-                    shot_timer -= delta_tiem;
+                shot_timer -= delta_time;
                 if (shot_timer <= 0f)
                 {
                     fire_projectile();
