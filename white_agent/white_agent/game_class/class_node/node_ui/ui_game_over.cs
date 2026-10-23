@@ -36,8 +36,8 @@ namespace old_heart
         public float heart_beat_amination_shrink_time = 0.3f;
 
         public Vector2 heart_beat_scale_shrink = new Vector2(1, 1);
-        public Vector2 heart_beat_scale_default = new Vector2(2 ,2);
-        public Vector2 heart_beat_scale_grow = new Vector2(3, 3);
+        public Vector2 heart_beat_scale_default = new Vector2(1.5f ,1.5f);
+        public Vector2 heart_beat_scale_grow = new Vector2(2, 2);
         public ui_game_over(ContentManager content, game_manager game_manager , run_data_manager run_data)
         {
             this.run_data = run_data;
@@ -73,7 +73,7 @@ namespace old_heart
             game_manager.add_ui(ui_life_change_text);
 
 
-            ui_life_image = new image(content, Vector2.Zero, file_path: "assets/image/ui/ui_life");
+            ui_life_image = new image(content, Vector2.Zero, file_path: "assets/image/ui/ui_loselife");
             ui_life_image.scale = heart_beat_scale_default;
             ui_life_image.position = render_size * new Vector2(0.5f, 0.62f) - (ui_life_image.texture.Bounds.Size.ToVector2() * ui_life_image.scale / 2) ;
             ui_life_image.origin = ui_life_image.texture.Bounds.Size.ToVector2() / 2;

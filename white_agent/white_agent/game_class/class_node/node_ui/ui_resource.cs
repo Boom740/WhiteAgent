@@ -29,22 +29,22 @@ namespace old_heart
         {
             this.run_data = run_data;
 
-            ui_life_text = new ui_text("x 0", new Vector2(80, 20));
+            ui_life_text = new ui_text("x 0", new Vector2(90, 25));
             ui_life_text.text_scale = new Vector2(0.5f, 0.5f);
             game_manager.add_ui(ui_life_text);
 
-            ui_dna_text = new ui_text("x 0", new Vector2(60, 70));
+            ui_dna_text = new ui_text("0", new Vector2(65, 83));
             ui_dna_text.text_scale = new Vector2(0.3f, 0.3f);
             game_manager.add_ui(ui_dna_text);
 
-            ui_dna_change_text = new ui_text("+0", new Vector2(70, 70));
+            ui_dna_change_text = new ui_text("+0", new Vector2(70, 83));
             ui_dna_change_text.text_scale = new Vector2(0.2f, 0.2f);
             game_manager.add_ui(ui_dna_change_text);
 
-            ui_life_image = new image(content, new Vector2(20, 20), file_path: "assets/image/ui/ui_life");
+            ui_life_image = new image(content, new Vector2(20, 10), file_path: "assets/image/ui/ui_life");
             game_manager.add_ui(ui_life_image);
 
-            ui_dna_image = new image(content, new Vector2(25, 70), file_path: "assets/image/ui/ui_dna");
+            ui_dna_image = new image(content, new Vector2(30, 80), file_path: "assets/image/ui/ui_dna");
             ui_dna_image.scale = new Vector2(0.6f, 0.6f);
             game_manager.add_ui(ui_dna_image);
 
@@ -57,7 +57,7 @@ namespace old_heart
             int dna = run_data.dna_temporary;
 
             ui_life_text.text_string = $"x {run_data.respawn_left}";
-            ui_dna_text.text_string = $"x {dna}";
+            ui_dna_text.text_string = $"{dna}";
 
             if (dna != last_dna_amount)
             {
