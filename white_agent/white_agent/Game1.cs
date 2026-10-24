@@ -49,7 +49,7 @@ namespace old_heart
 
             global.load(Content,GraphicsDevice);
 
-            run_data_manager = new run_data_manager(this);
+            run_data_manager = new run_data_manager();
 
             screen_manager.ShowScreen(new scene_main_menu(this)); // start in main menu naja
         }
@@ -63,6 +63,11 @@ namespace old_heart
         protected override void Update(GameTime gameTime)
         {
             global.input.update_input_state();
+
+            if (global.setting.full_screen != _graphics.IsFullScreen)
+            {
+                _graphics.ToggleFullScreen();
+            }
 
             if (scene_transitioning_timer > 0f)
             {

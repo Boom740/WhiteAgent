@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -8,7 +7,6 @@ namespace old_heart
 {
     public class run_data_manager
     {
-        public Game game;
         private Random random = new Random();
 
         public int max_hp = 1;
@@ -35,10 +33,8 @@ namespace old_heart
 
         public int dna = 0;
         public int dna_temporary = 0;   // will save on dna only when clear level
-        public run_data_manager(Game game)
+        public run_data_manager()
         {
-            this.game = game;
-
             load();
         }
         public void load()

@@ -280,6 +280,8 @@ namespace old_heart
             public static float volume_song = 0.7f;
 
             public static float screen_shake_intensity = 1f;
+
+            public static bool full_screen = false;
             public static void apply_song_volume_setting()    // use to change currently playing song      dont need when play new song cuz it already set volume when play
             {
                 MediaPlayer.Volume = volume_song * volume_master;

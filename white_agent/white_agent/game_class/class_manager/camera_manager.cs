@@ -59,7 +59,7 @@ namespace old_heart
             if(truama > 0f)
             {
                 float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                float shake = truama * truama;
+                float shake = truama;
 
                 float offset_x = max_Offset * shake * (float)(rng_shake.NextDouble() * 2 - 1);
                 float offset_y = max_Offset * shake * (float)(rng_shake.NextDouble() * 2 - 1);

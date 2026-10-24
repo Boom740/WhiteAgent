@@ -18,6 +18,7 @@ namespace old_heart
         public ui_shop ui_shop;
         public ui_upgrade_bar ui_upgrade_bar;
         public ui_game_over ui_game_over;
+        public ui_setting ui_setting;
         public scene_base(Game1 game) : base(game)
         {
             this.game = game;
@@ -47,6 +48,9 @@ namespace old_heart
 
             ui_game_over = new ui_game_over(Content, game_manager , game.run_data_manager);
             game_manager.add_ui(ui_game_over);
+
+            ui_setting = new ui_setting(Content , game_manager , game.run_data_manager);
+            game_manager.add_ui(ui_setting);
         }
 
         public void update_all(GameTime gameTime)

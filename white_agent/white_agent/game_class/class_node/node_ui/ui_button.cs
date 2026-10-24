@@ -15,7 +15,7 @@ namespace old_heart
 
         public Color hover_color = Color.Gray;
         public Texture2D hover_texture;
-        public Color hold_color = Color.Black;
+        public Color hold_color = new Color(50,50,50);
         public Texture2D hold_texture;
 
         public bool mouse_hover = false;
@@ -38,18 +38,21 @@ namespace old_heart
             mouse_hover = button_rectangle.Contains(mouse_position);
 
             clicked = false; // reset clicked every frame
-            mouse_hold = false;
 
             if (mouse_hover) // mouse inside button rectangle
             {
-                if (mouse_state.WasButtonPressed(MouseButton.Left))  // left click detected XD
+                if (mouse_state.WasButtonReleased(MouseButton.Left) && mouse_hold)  // left click detected XD
                 {
                     clicked = true;
+                    mouse_hold = false;
                 }
-
-                if (mouse_state.IsButtonDown(MouseButton.Left))
+                else if (mouse_state.WasButtonPressed(MouseButton.Left))
                 {
                     mouse_hold = true;
+                }
+
+                if (mouse_hold)
+                {
                     if (hold_texture == null)
                     {
                         button_color = hold_color;
@@ -66,6 +69,7 @@ namespace old_heart
             }
             else
             {
+                mouse_hold = false;
                 button_color = base_color;
             }
 

@@ -1,10 +1,6 @@
-﻿using Autofac.Features.GeneratedFactories;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.Extended.Input;
-using MonoGame.Extended.Timers;
-using System;
 using System.Collections.Generic;
 
 namespace old_heart

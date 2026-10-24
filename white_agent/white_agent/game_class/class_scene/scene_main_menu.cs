@@ -1,81 +1,59 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended.Screens;
 
 namespace old_heart
 {
     public class scene_main_menu : scene_base
     {
-        public ui_button start_button;
-        public ui_text test_text;
-        public ui_text test_text_2;
-        public ui_button reset_button;
+        public ui_main_menu ui_main_menu;
+
         public scene_main_menu(Game1 game) : base(game)
         {
         }
         public override void LoadContent()
         {
-            test_text = new ui_text("White Agent\nclick play to play\nEsc to quit\nV test thing scene\nB level editor\nF full screen",  new Vector2(10, 5));
-            game_manager.add_ui(test_text);
-
-            test_text_2 = new ui_text("replace in update ", new Vector2(10, 500));
-            test_text_2.text_scale = new Vector2(0.25f, 0.25f);
-            game_manager.add_ui(test_text_2);
-
-            start_button = new ui_button(Content, new Rectangle(100, 300, 200, 100));
-            game_manager.add_ui(start_button);
-
-            ui_text test_text_local;
-
-            test_text_local = new ui_text("PLAY", new Vector2(130, 330));
-            test_text_local.text_color = Color.Black;
-            game_manager.add_ui(test_text_local);
-
-            reset_button = new ui_button(Content, new Rectangle(700, 400, 150, 50));
-            game_manager.add_ui(reset_button);
-
-            test_text_local = new ui_text("reset data", new Vector2(720, 415));
-            test_text_local.text_color = Color.Black;
-            test_text_local.text_scale = new Vector2(0.25f, 0.25f);
-            game_manager.add_ui(test_text_local);
+            ui_main_menu = new ui_main_menu(Content, game_manager, game.run_data_manager);
+            game_manager.add_ui(ui_main_menu);
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (global.input.keyboard_state.WasKeyPressed(Keys.Escape)){
+
+            if (ui_setting.current_result == ui_setting.result.reset_data)
+            {
+                game.run_data_manager = new run_data_manager();
+                ui_setting.run_data = game.run_data_manager;
+                ui_main_menu.run_data = game.run_data_manager;
+                ui_setting.current_result = ui_setting.result.none;
+            }
+            if (ui_main_menu.current_result == ui_main_menu.result.setting && ui_setting.active == false)
+            {
+                ui_setting.current_result = ui_setting.result.none;
+                ui_setting.active = true;
+            }
+            else if (ui_setting.current_result == ui_setting.result.leave && ui_setting.active == true)
+            {
+                ui_main_menu.current_result = ui_main_menu.result.none;
+                ui_setting.active = false;
+            }
+            else if (ui_main_menu.current_result == ui_main_menu.result.start)
+            {
+                game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
+            }
+            else if (ui_main_menu.current_result == ui_main_menu.result.exit)
+            {
                 game.Exit();
             }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.V))
             {
                 game.change_scene(new scene_test_anything(game), fade_transition);
             }
-            else if (start_button.clicked)
-            {
-                if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // still has next level
-                {
-                    game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
-                }
-            }
-            else if (reset_button.clicked)
-            {
-                game.run_data_manager = new run_data_manager(game);
-            }
             else if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
                 game.change_scene(new scene_level_editor(game), fade_transition);
             }
-            else if (global.input.keyboard_state.WasKeyPressed(Keys.F))
-            {
-                game._graphics.ToggleFullScreen();
-            }
-
-            test_text_2.text_string = $"level cleared : {game.run_data_manager.cleared_level} / {game.run_data_manager.level_list.Count}" +
-            $"\nlife left : {game.run_data_manager.respawn_left}" +
-            $"";
-                
 
             update_all(gameTime);
         }
