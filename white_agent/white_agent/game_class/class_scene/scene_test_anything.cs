@@ -18,6 +18,9 @@ namespace old_heart
         public enemy_leukemia enemy_1;
         public enemy_bacteria enemy_2;
         public enemy_boss enemy_3;
+        public int frame_count = 0;
+        public float fps_timer = 0;
+        public int fps_last_sec = 0;
         public scene_test_anything(Game1 game) : base(game)
         {
             global.change_mouse_state(global.mouse_state.combat);
@@ -45,9 +48,14 @@ namespace old_heart
             game_manager.add_map_collision(wall2);
             collision_shape_box wall3 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 100f), new Vector2(500f, 64f)));
             game_manager.add_map_collision(wall3);
-            collision_shape_circle wall4 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
-            game_manager.add_map_collision(wall4);
+            //collision_shape_circle wall4 = new collision_shape_circle(new BoundingCircle2D(new Vector2(0, 0), 100));
+            //game_manager.add_map_collision(wall4);
+            collision_shape_box wall5 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(1000f, 100f), new Vector2(64f, 600f)));
+            game_manager.add_map_collision(wall5);
+            collision_shape_box wall6 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 500f), new Vector2(600f, 64f)));
+            game_manager.add_map_collision(wall6);
 
+            /*
             enemy_1 = new enemy_leukemia(Content, position: new Vector2(600, 400)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
             game_manager.add_entity(enemy_1);
 
@@ -73,6 +81,7 @@ namespace old_heart
 
             enemy_3 = new enemy_boss(Content, position: new Vector2(400, -300));
             game_manager.add_entity(enemy_3);
+            */
 
             base.LoadContent();
 
@@ -90,47 +99,61 @@ namespace old_heart
             {
                 game.run_data_manager.dna = 1000000;
             }
-            if (global.input.keyboard_state.WasKeyPressed(Keys.M))
+
+            if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                if (global.setting.volume_sound_effect > 0)
+                Vector2 mouse_position = global.input.scaled_mouse_world_position;
+                for(int i = 0; i < 10; i++)
                 {
-                    global.setting.volume_sound_effect = 0;
+                    global.signal.spawn_entity(new enemy_mold(Content, mouse_position));
                 }
-                else
-                {
-                    global.setting.volume_sound_effect = 0.7f;
-                }
-                Debug.WriteLine("change global volume_sound_effect : " + global.setting.volume_sound_effect);
             }
 
             test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                               V to go back to title bruh" +
-            $"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
-            $"\ngame state : {game_manager.current_game_state}" +
+            //$"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
+            //$"\ngame state : {game_manager.current_game_state}" +
             $"";
+
+            this.game_manager.player.i_frame_time = 10;
+
+            float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
+            if (fps_timer > 1)
+            {
+                fps_timer = 0;
+                fps_last_sec = frame_count;
+                frame_count = 0;
+            }
+            else
+            {
+                fps_timer += delta_time;
+                frame_count ++;
+            }
 
             if (game_manager.player != null)
             {
                 test_text.text_string +=
-                 //$"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
-                 //$"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
-                $"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
+                //$"\nplayer acc : {game_manager.player.acceleration}\nvelocity : {game_manager.player.velocity.X:F2} , {game_manager.player.velocity.Y:F2}" +
+                //$"\nw speed : {game_manager.player.velocity.Length():F2} \nposition : {game_manager.player.position.X:F2} , {game_manager.player.position.Y:F2}" +
+                //$"\nplayer animation : {game_manager.player.animation_player.current_animation.name} [{game_manager.player.animation_player.current_frame_index}]" +
                 //$"\nplayer animation_2 : {game_manager.player.animation_player_2.current_animation.name} [{game_manager.player.animation_player_2.current_frame_index}]" +
-                $"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
+                //$"\nstate : {game_manager.player.current_state} combat_state : {game_manager.player.current_combat_state} has_head : {game_manager.player.has_head}" +
                 //$"\natk [{game_manager.player.combo_count}] melee_cooldown_timer : {game_manager.player.melee_cooldown_timer:F2}  combo_reset_timer : {game_manager.player.combo_reset_timer:F2} attack_timer : {game_manager.player.attack_timer:F2}" +
                 //$"\ncurrent_buffer_input : {game_manager.player.current_buffer_input}]" +
                 //  $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}" +
-
+                $"\nentity_count : {game_manager.entity_list.Count}" +
+                $"\nprojectile_count : {game_manager.projectile_list.Count}" +
+                $"\nlast_second FPS : {fps_last_sec}" +
 
                 $"";
             }
-
+            /*
             if (enemy_3 != null)
             {
                 test_text.text_string +=
                 $"\nenemy : {enemy_3.state}" +
                 $"";
             }
-
+            */
             update_all(gameTime);
         }
     }

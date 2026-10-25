@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -37,6 +38,7 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
+
             if (global.input.keyboard_state.WasKeyPressed(Keys.Escape)){
                 if (game_manager.player != null)
                 {
@@ -55,7 +57,7 @@ namespace old_heart
                 game_manager.pause = false;
                 ui_pause.active = false;
             }
-            else if (ui_pause.current_result == ui_pause.result.return_to_main_menu)
+            else if (ui_pause.current_result == ui_pause.result.return_to_main_menu && game.scene_transitioning_timer <= 0)
             {
                 game.change_scene(new scene_main_menu(game), fade_transition);
             }

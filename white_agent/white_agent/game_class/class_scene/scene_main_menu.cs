@@ -38,7 +38,7 @@ namespace old_heart
                 ui_main_menu.current_result = ui_main_menu.result.none;
                 ui_setting.active = false;
             }
-            else if (ui_main_menu.current_result == ui_main_menu.result.start)
+            else if (ui_main_menu.current_result == ui_main_menu.result.start && game.scene_transitioning_timer <= 0)
             {
                 game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
             }
