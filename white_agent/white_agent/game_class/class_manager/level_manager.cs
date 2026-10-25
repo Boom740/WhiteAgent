@@ -21,6 +21,7 @@ namespace old_heart
         public List<node> high_map_node_list; //  world object but draw above (player enemy and all particle)
         public level_manager(game_manager game_manager)
         {
+            this.content = game_manager.content;
             this.game_manager = game_manager;
 
             entity_list = game_manager.entity_manager.entity_list;
@@ -28,7 +29,6 @@ namespace old_heart
             map_node_list = game_manager.map_manager.map_node_list;
             high_map_node_list = game_manager.map_manager.high_map_node_list;
 
-            this.content = game_manager.content;
 
         }
         public void set_level_file(string level_file,run_data_manager run_data)
@@ -54,7 +54,7 @@ namespace old_heart
                 if (layer is TilemapImageLayer image_layer)
                 {
                     Texture2D texture = image_layer.Texture;
-                    game_manager.add_map(new image(game_manager.content, new Vector2(image_layer.Position.X, image_layer.Position.X), texture: texture), high_ground: false);
+                    game_manager.add_map(new image(content, new Vector2(image_layer.Position.X, image_layer.Position.X), texture: texture), high_ground: false);
                 }
                 else if (layer is TilemapObjectLayer object_layer && object_layer.Name == "wall_collision")
                 {
@@ -80,7 +80,7 @@ namespace old_heart
                         if (tile_map_object.Class == "player")
                         {
                             Vector2 position = tile_map_object.Position + new Vector2(tile_map_object.Bounds.Width / 2, -tile_map_object.Bounds.Height * 0.2f);
-                            game_manager.add_entity(new player(game_manager.content, position, run_data));
+                            game_manager.add_entity(new player(content, position, run_data));
 
                             Debug.WriteLine("loaded player : " + tile_map_object.Class);
                         }
@@ -95,23 +95,39 @@ namespace old_heart
                         }
                         else if (tile_map_object.Class == "enemy_leukemia")
                         {
-                            game_manager.add_entity(new enemy_leukemia(game_manager.content, position));
+                            game_manager.add_entity(new enemy_leukemia(content, position));
                         }
                         else if (tile_map_object.Class == "enemy_bacteria")
                         {
-                            game_manager.add_entity(new enemy_bacteria(game_manager.content, position));
+                            game_manager.add_entity(new enemy_bacteria(content, position));
                         }
                         else if (tile_map_object.Class == "enemy_virus")
                         {
-                            game_manager.add_entity(new enemy_virus(game_manager.content, position));
+                            game_manager.add_entity(new enemy_virus(content, position));
                         }
-                        else if (tile_map_object.Class == "enemy_mole")
+                        else if (tile_map_object.Class == "enemy_mold")
                         {
-                            game_manager.add_entity(new enemy_mold(game_manager.content, position));
+                            game_manager.add_entity(new enemy_mold(content, position));
+                        }
+                        else if (tile_map_object.Class == "enemy_leukemia_super")
+                        {
+                            game_manager.add_entity(enemy_leukemia.super_form(content,position));
+                        }
+                        else if (tile_map_object.Class == "enemy_bacteria_super")
+                        {
+                            game_manager.add_entity(enemy_bacteria.super_form(content, position));
+                        }
+                        else if (tile_map_object.Class == "enemy_virus_super")
+                        {
+                            game_manager.add_entity(enemy_virus.super_form(content, position));
+                        }
+                        else if (tile_map_object.Class == "enemy_mold_super")
+                        {
+                            game_manager.add_entity(enemy_mold.super_form(content, position));
                         }
                         else if (tile_map_object.Class == "enemy_boss")
                         {
-                            game_manager.add_entity(new enemy_boss(game_manager.content, position));
+                            game_manager.add_entity(new enemy_boss(content, position));
                         }
                         else
                         {
