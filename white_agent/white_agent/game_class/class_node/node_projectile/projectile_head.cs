@@ -45,7 +45,7 @@ namespace old_heart
         //Trail
         private trail_effect trail;
 
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 15 , bool explosive_impact = false)
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 70 , bool explosive_impact = false)
             : base(content_set,  position : position , owner : owner , time_left:0, hit_box_radius: 14) 
         {
             this.run_data = run_data;
@@ -115,6 +115,7 @@ namespace old_heart
             if (shock_wave_enable == false) { return;}
 
             projectile_shock_wave shock_wave = new projectile_shock_wave(content, position, owner:owner , hit_box_radius:shock_wave_radius);
+            shock_wave.hit_entity = hit_entity;
             global.signal.spawn_projectile(shock_wave);
         }
         public void bounce_back(Vector2 bounce_vector)
@@ -130,15 +131,19 @@ namespace old_heart
         }
         public override void on_hit_entity(entity target_entity)
         {
+            if (target_entity is not enemy) { return; }
+            enemy target_enemy = target_entity as enemy;
+
             if (has_bounced) return;
             if (is_resting) return;
             if (hit_entity.Contains(target_entity)) { return; }
-            if (target_entity is player) { return; }
-            if (ricochet >= 1 && target_entity is enemy enemy && enemy.state == enemy.enemy_state.dizzy) { return; }
+            if (ricochet >= 1 && target_enemy.state == enemy.enemy_state.dizzy) { return; }
 
             hit_entity.Add(target_entity);
 
+            target_enemy.enter_dizzy(break_shield: true);
             spawn_shock_wave();
+            
 
             Vector2 target_direction = position - target_entity.position;
             bounce_direction = target_direction != Vector2.Zero ? target_direction : Vector2.UnitY;

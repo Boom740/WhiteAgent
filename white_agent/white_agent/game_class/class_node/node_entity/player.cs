@@ -514,7 +514,7 @@ namespace old_heart
 
                 has_head = false;
 
-                projectile_head head = new projectile_head(content, position,run_data ,owner: this , head_ricochet , explosive_impact: head_explosive_impact);
+                projectile_head head = new projectile_head(content, position,run_data: run_data ,owner: this , head_ricochet: head_ricochet , explosive_impact: head_explosive_impact);
 
                 Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
                 Vector2 to_cursor = (global.input.scaled_mouse_world_position - sprite_center_position);

@@ -66,7 +66,7 @@ namespace old_heart
             return true;
         }
         // ---------------- Dizzy ----------------
-        public virtual void enter_dizzy(bool break_shield = true)
+        public virtual void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
         {
             global.sound.play_sound(global.sound.sound_name.enemy_getheadbump);
             if (state == enemy_state.died) return;
@@ -85,9 +85,16 @@ namespace old_heart
 
                 state = enemy_state.dizzy;
                
-                dizzy_timer_current = dizzy_timer;
-                
-                velocity = Vector2.Zero;
+                if (dizzy_time_set == 0)
+                {
+                    dizzy_timer_current = dizzy_timer;
+                }
+                else
+                {
+                    dizzy_timer_current = Math.Min(dizzy_time_set, dizzy_timer);
+                }
+
+                    velocity = Vector2.Zero;
                 acceleration = Vector2.Zero;
 
                 global.sound.play_sound(global.sound.sound_name.enemy_dizzy);

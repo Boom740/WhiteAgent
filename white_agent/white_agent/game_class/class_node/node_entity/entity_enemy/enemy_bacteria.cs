@@ -3,8 +3,6 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection.PortableExecutable;
 
 namespace old_heart
 {
@@ -239,10 +237,10 @@ namespace old_heart
             }
         }
 
-        public override void enter_dizzy(bool break_shield = true)
+        public override void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
         {
             if (state == enemy_state.dash) { return; }
-            base.enter_dizzy(break_shield);
+            base.enter_dizzy(break_shield , dizzy_time_set);
         }
         public override void die()
         {
@@ -280,15 +278,15 @@ namespace old_heart
         {
             return new enemy_bacteria(content, position)
             {
-                max_hp = 20,
-                hp = 20,
-                //speed = 750,
-                //attack_cooldown = 1f,
+                speed = 2000,
+
+                max_hp = 12,
+                hp = 12,
 
                 drop_count_min = 8,
                 drop_count_max = 12,
                 dna_value_each = 1,
-                //melee_data = { damage = 2, knockback_speed = 700f },
+
                 animation_player = { tint = new Color(160, 20, 180) }
               
             };

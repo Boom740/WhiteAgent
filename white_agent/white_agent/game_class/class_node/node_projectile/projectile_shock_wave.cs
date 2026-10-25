@@ -9,8 +9,8 @@ namespace old_heart
     public class projectile_shock_wave : projectile
     {
         //public int damage = 0;
-        public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
-        private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
+        public float knockback_speed = 400f; // ความแรงที่ enemy จะกระเด็น
+        public HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
         public projectile_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 5)
             : base(content_set, position, time_left: 0.1f, owner: owner, hit_box_radius: hit_box_radius)
@@ -27,7 +27,7 @@ namespace old_heart
                 Vector2 hit_direction = target_direction != Vector2.Zero ? Vector2.Normalize(target_direction) : Vector2.UnitY;
                 target_enemy.apply_knockback(hit_direction, knockback_speed); // ผลักตามทิศที่หมัดพุ่งเข้าใส่
                 // target_enemy.take_damage(damage);   // no damage
-                target_enemy.enter_dizzy();
+                target_enemy.enter_dizzy(break_shield: false , dizzy_time_set:0.5f);
             }
         }
         public override void collide_wall(CollisionPair2D pair, float delta_time)

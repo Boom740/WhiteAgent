@@ -188,7 +188,7 @@ namespace old_heart
             }
         }
 
-        public override void enter_dizzy(bool break_shield = true)
+        public override void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
         {
             if (state != enemy_state.tired) { return; }  // cant dizzy if not tired
             if (! break_shield) { return; } // dont dizzy if not break shield
