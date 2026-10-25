@@ -9,7 +9,7 @@ namespace old_heart
 
         public ui_resource ui_resource;
 
-        public ui_text pause_text;
+        public ui_pause ui_pause;
         public scene_gameplay(Game1 game, string level_file) : base(game)
         {
             this.level_file = level_file;
@@ -24,12 +24,8 @@ namespace old_heart
             ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager, run_data: game.run_data_manager , ui_shop);
             game_manager.add_ui(ui_upgrade_bar);
 
-
-            pause_text = new ui_text(" [Esc]\nPause", new Vector2(550, 300));
-            pause_text.text_scale = new Vector2(1.5f, 1.5f);
-            pause_text.text_color *= 0.5f; // transparent
-            pause_text.visible = false;
-            game_manager.add_ui(pause_text);
+            ui_pause = new ui_pause(Content, game_manager, run_data: game.run_data_manager);
+            game_manager.add_ui(ui_pause);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
             if (level_file == "level_boss")
@@ -46,20 +42,20 @@ namespace old_heart
                 {
                     if (game_manager.player.current_combat_state != player.combat_state.in_shop)
                     {
-                        if (game_manager.pause == true)
-                        {
-                            game_manager.pause = false;
-                            pause_text.visible = false;
-                        }
-                        else
+                        if (game_manager.pause == false)
                         {
                             game_manager.pause = true;
-                            pause_text.visible = true;
+                            ui_pause.current_result = ui_pause.result.none;
+                            ui_pause.active = true;
                         }
                     }
                 }
+            }else if (ui_pause.current_result == ui_pause.result.un_pause)
+            {
+                game_manager.pause = false;
+                ui_pause.active = false;
             }
-            else if (global.input.keyboard_state.WasKeyPressed(Keys.V))
+            else if (ui_pause.current_result == ui_pause.result.return_to_main_menu)
             {
                 game.change_scene(new scene_main_menu(game), fade_transition);
             }

@@ -19,7 +19,7 @@ namespace old_heart
         public Point setting_toggle_button_size = new Point(100, 40);
 
         public image black_background;
-        public ui_button ui_return_buton;
+        public ui_button ui_return_button;
         public ui_text ui_return_text;
 
         public ui_button ui_reset_button;
@@ -46,15 +46,15 @@ namespace old_heart
 
             Texture2D texture_leave_button_unselect = content.Load<Texture2D>("assets/image/ui/ui_button_leave_unselect");
             Texture2D texture_leave_button_selected = content.Load<Texture2D>("assets/image/ui/ui_button_leave_selected");
-            ui_return_buton = new ui_button(content, new Rectangle(new Point(820, 475), texture_leave_button_unselect.Bounds.Size));
-            ui_return_buton.button_texture = texture_leave_button_unselect;
-            ui_return_buton.hover_texture = texture_leave_button_selected;
-            ui_return_buton.visible = false;
-            ui_return_buton.active = false;
-            game_manager.add_ui(ui_return_buton);
+            ui_return_button = new ui_button(content, new Rectangle(new Point(820, 475), texture_leave_button_unselect.Bounds.Size));
+            ui_return_button.button_texture = texture_leave_button_unselect;
+            ui_return_button.hover_texture = texture_leave_button_selected;
+            ui_return_button.visible = false;
+            ui_return_button.active = false;
+            game_manager.add_ui(ui_return_button);
 
             ui_return_text = new ui_text("Return", Vector2.Zero, text_scale: new Vector2(0.3f, 0.3f), text_color: new Color(89, 89, 89));
-            ui_return_text.position = ui_return_buton.button_rectangle.Center.ToVector2() - ui_return_text.text_font.MeasureString(ui_return_text.text_string) * ui_return_text.text_scale / 2;
+            ui_return_text.position = ui_return_button.button_rectangle.Center.ToVector2() - ui_return_text.text_font.MeasureString(ui_return_text.text_string) * ui_return_text.text_scale / 2;
             ui_return_text.visible = false;
             game_manager.add_ui(ui_return_text);
 
@@ -137,10 +137,9 @@ namespace old_heart
             if (black_background.visible == false)  // open setting menu
             {
                 set_ui_visible(true);
-
-                return;
             }
-            if (ui_return_buton.mouse_hover)
+
+            if (ui_return_button.mouse_hover)
             {
                 ui_return_text.text_color = Color.White;
             }
@@ -244,8 +243,9 @@ namespace old_heart
             {
                 current_result = result.reset_data;
             }
-            else if (ui_return_buton.clicked) // close setting
+            else if (ui_return_button.clicked) // close setting
             {
+                ui_return_button.clicked = false;
                 set_ui_visible(false);
                 current_result = result.leave;
                 return;
@@ -255,8 +255,8 @@ namespace old_heart
             void set_ui_visible(bool visible)
             {
                 black_background.visible = visible;
-                ui_return_buton.visible = visible;
-                ui_return_buton.active = visible;
+                ui_return_button.visible = visible;
+                ui_return_button.active = visible;
                 ui_return_text.visible = visible;
                 ui_reset_button.visible = visible;
                 ui_reset_text.visible = visible;
