@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 
@@ -234,9 +235,10 @@ namespace old_heart
                 {
                     upgrade_price_text.text_color = Color.Red;
                 }
-
-                
             }
+
+
+            if (current_result != result.none) { return; }
 
             if (leave_button.mouse_hover)
             {
@@ -247,12 +249,10 @@ namespace old_heart
                 leave_text.text_color = new Color(89, 89, 89);
             }
 
-
-            if (current_result != result.none) { return; }
-
             if (leave_button.clicked)
             {
                 current_result = result.exit;
+                leave_button.mouse_hover = false;
             }
         }
         public void load_shop_upgrade_data()

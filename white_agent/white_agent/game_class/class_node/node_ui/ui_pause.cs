@@ -52,6 +52,8 @@ namespace old_heart
                 return;
             }
 
+            if (current_result != result.none) { return; }
+
             if (ui_return_button.mouse_hover)
             {
                 ui_return_text.text_color = Color.White;
@@ -70,7 +72,6 @@ namespace old_heart
                 ui_pause_text.text_color = Color.White * 0.5f;
             }
 
-            if (current_result != result.none) { return; }
 
             if (ui_return_button.clicked)
             {
@@ -82,6 +83,8 @@ namespace old_heart
                 ui_pause_button.clicked = false;
                 current_result = result.un_pause;
                 set_ui_visible(false);
+                ui_return_text.text_color = Color.White * 0.5f;
+                ui_pause_text.text_color = Color.White * 0.5f;
             }
 
             void set_ui_visible(bool visible)

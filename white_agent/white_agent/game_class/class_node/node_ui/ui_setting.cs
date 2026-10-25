@@ -246,6 +246,7 @@ namespace old_heart
             else if (ui_return_button.clicked) // close setting
             {
                 ui_return_button.clicked = false;
+                ui_return_button.mouse_hover = false;
                 set_ui_visible(false);
                 current_result = result.leave;
                 return;
