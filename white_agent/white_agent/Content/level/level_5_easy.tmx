@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="80">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_easy_05.png" width="1549" height="1065"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="24" x="1264" y="220.334" width="64" height="623.334"/>
+  <object id="34" x="195.942" y="230.555" width="1073.67" height="68.334"/>
+  <object id="38" x="234.722" y="205.108" width="70.1667" height="640.668"/>
+  <object id="74" x="493.389" y="490.168" width="131.5" height="294.001"/>
+  <object id="76" x="942.722" y="262.668" width="130.5" height="294.001"/>
+  <object id="77" x="757.722" y="435.668" width="52.5" height="180.001"/>
+  <object id="78" x="1063.56" y="280.168" width="68" height="79.5007"/>
+  <object id="79" x="438.222" y="710.168" width="68" height="79.5007"/>
+  <object id="42" x="230.048" y="749.57" width="1118.67" height="81.8337"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="1105" y="468.667" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="58" type="enemy_bacteria" gid="3" x="834.001" y="563" width="80" height="80"/>
+  <object id="73" type="enemy_bacteria" gid="3" x="652.667" y="720.333" width="80" height="80"/>
+  <object id="59" type="enemy_bacteria" gid="3" x="1125.33" y="456.333" width="80" height="80"/>
+  <object id="63" type="player" gid="1" x="366.333" y="690.666" width="64" height="64"/>
+ </objectgroup>
+</map>

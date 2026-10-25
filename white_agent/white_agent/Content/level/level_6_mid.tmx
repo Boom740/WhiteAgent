@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="159">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_mid_06.png" width="1502" height="1345"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="38" x="133.223" y="562.608" width="70.1667" height="469"/>
+  <object id="113" x="526.723" y="990.67" width="376.166" height="68.0013"/>
+  <object id="145" x="1041.39" y="1014" width="82.166" height="52.0013"/>
+  <object id="158" x="467.39" y="1013" width="82.166" height="52.0013"/>
+  <object id="146" x="1101.06" y="533.334" width="121.5" height="68.0013"/>
+  <object id="144" x="291.056" y="1052" width="392.166" height="68.0013"/>
+  <object id="147" x="781.056" y="1051" width="392.166" height="68.0013"/>
+  <object id="117" x="233.553" y="987" width="95.17" height="150.001"/>
+  <object id="108" x="1227.05" y="606.001" width="84.5" height="369.334"/>
+  <object id="130" x="1099.72" y="986.67" width="150.5" height="93.668"/>
+  <object id="133" x="1035.39" y="400.84" width="150.5" height="136.668"/>
+  <object id="153" x="971.387" y="339.34" width="150.5" height="136.668"/>
+  <object id="154" x="904.387" y="275.34" width="150.5" height="136.668"/>
+  <object id="155" x="785.387" y="207.34" width="150.5" height="136.668"/>
+  <object id="132" x="1168.72" y="820.67" width="63.5003" height="105.668"/>
+  <object id="135" x="1163.39" y="922.34" width="143.5" height="83.6677"/>
+  <object id="134" x="1164.72" y="561" width="92.167" height="105.668"/>
+  <object id="126" x="105.72" y="504.668" width="161.5" height="161.001"/>
+  <object id="140" x="337.72" y="735.668" width="51.5003" height="52.001"/>
+  <object id="148" x="401.72" y="800.668" width="51.5003" height="52.001"/>
+  <object id="141" x="211.72" y="453.668" width="119.5" height="148.001"/>
+  <object id="149" x="276.72" y="390.668" width="119.5" height="148.001"/>
+  <object id="150" x="340.72" y="327.668" width="119.5" height="148.001"/>
+  <object id="151" x="403.72" y="262.668" width="119.5" height="148.001"/>
+  <object id="152" x="468.72" y="195.668" width="243.5" height="148.001"/>
+  <object id="142" x="586.553" y="730.168" width="257" height="128.501"/>
+  <object id="143" x="657.72" y="482.001" width="117.5" height="52.001"/>
+  <object id="156" x="976.72" y="802.001" width="54.5003" height="52.001"/>
+  <object id="157" x="1041.72" y="738.001" width="54.5003" height="52.001"/>
+  <object id="127" x="123.72" y="865.668" width="142.5" height="188.501"/>
+  <object id="114" x="477.39" y="215.667" width="493.167" height="68.335"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="656.003" y="692" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="58" type="enemy_bacteria" gid="3" x="676.33" y="687.666" width="80" height="80"/>
+  <object id="73" type="enemy_bacteria" gid="3" x="299.003" y="897.003" width="80" height="80"/>
+  <object id="102" type="enemy_bacteria" gid="3" x="1054" y="905.337" width="80" height="80"/>
+  <object id="63" type="player" gid="1" x="685" y="446.666" width="64" height="64"/>
+ </objectgroup>
+</map>

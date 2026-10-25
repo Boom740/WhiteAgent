@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="103">
+ <tileset firstgid="1" source="tiled_data/entity.tsx"/>
+ <imagelayer id="2" name="map_image">
+  <image source="../assets/image/levels/texture_level_mid_02.png" width="1631" height="1386"/>
+ </imagelayer>
+ <objectgroup id="3" name="wall_collision">
+  <object id="38" x="228.556" y="212.108" width="70.1667" height="1006.33"/>
+  <object id="83" x="936.556" y="548.002" width="131.5" height="129.668"/>
+  <object id="94" x="552.722" y="547.502" width="131.5" height="129.668"/>
+  <object id="95" x="751.722" y="266.335" width="119.5" height="149.668"/>
+  <object id="90" x="991.72" y="1065.33" width="69.5003" height="76.668"/>
+  <object id="96" x="561.053" y="1066.67" width="69.5003" height="76.668"/>
+  <object id="100" x="288.053" y="275.668" width="69.5003" height="76.668"/>
+  <object id="101" x="1264.05" y="273.668" width="69.5003" height="76.668"/>
+  <object id="97" x="287.72" y="1065.33" width="69.5003" height="76.668"/>
+  <object id="98" x="432.387" y="809.334" width="54.8337" height="118.001"/>
+  <object id="99" x="1136.39" y="810.168" width="54.8337" height="118.001"/>
+  <object id="85" x="620.055" y="803.334" width="382.5" height="334.335"/>
+  <object id="91" x="227.387" y="223.334" width="1165.83" height="67.668"/>
+  <object id="92" x="1264.72" y="1064.83" width="71.667" height="76.168"/>
+  <object id="89" x="1323.72" y="208.001" width="61.833" height="969.001"/>
+  <object id="42" x="232.715" y="1122.57" width="1176.34" height="81.834"/>
+ </objectgroup>
+ <objectgroup id="5" name="other">
+  <object id="67" type="next_level_portal" gid="5" x="747.667" y="666" width="128" height="128"/>
+ </objectgroup>
+ <objectgroup id="4" name="entity">
+  <object id="73" type="enemy_bacteria" gid="3" x="416.666" y="1061.67" width="80" height="80"/>
+  <object id="59" type="enemy_bacteria" gid="3" x="1029.33" y="812.332" width="80" height="80"/>
+  <object id="102" type="enemy_bacteria" gid="3" x="1126.67" y="1065.67" width="80" height="80"/>
+  <object id="63" type="player" gid="1" x="783.666" y="506.666" width="64" height="64"/>
+ </objectgroup>
+</map>
