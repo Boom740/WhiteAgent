@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -117,7 +116,7 @@ namespace old_heart
             {
                 if (projectile is not projectile_next_level_portal)
                 {
-                    Debug.WriteLine("cant spawn projectile at limit count : " + projectile_manager.projectile_list.Count);
+                    //Debug.WriteLine("cant spawn projectile at limit count : " + projectile_manager.projectile_list.Count);
                     return;
                 }
             }
@@ -128,7 +127,7 @@ namespace old_heart
         {
             if (world_text_manager.world_text_list.Count >= world_text_manager.limit)
             {
-                Debug.WriteLine("cant spawn world_text at limit count : " + world_text_manager.world_text_list.Count);
+                //Debug.WriteLine("cant spawn world_text at limit count : " + world_text_manager.world_text_list.Count);
                 return;
             }
             world_text_manager.add(world_text);

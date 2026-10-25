@@ -66,6 +66,7 @@ namespace old_heart
 
                 ui_button new_buttton = new ui_button(content, new Rectangle(new_poisition.ToPoint(), upgrade_button_size));
                 new_buttton.visible = false;
+                new_buttton.active = false;
 
                 ui_text new_text = new ui_text(upgrade.GetType().Name, new_poisition + text_position_offset,  text_scale: new Vector2(0.15f, 0.15f), text_color: Color.Black);
                 new_text.visible = false;
