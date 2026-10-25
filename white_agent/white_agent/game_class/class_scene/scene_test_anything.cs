@@ -55,7 +55,7 @@ namespace old_heart
             collision_shape_box wall6 = new collision_shape_box(BoundingBox2D.CreateFromPositionAndSize(new Vector2(500f, 500f), new Vector2(600f, 64f)));
             game_manager.add_map_collision(wall6);
 
-            /*
+            
             enemy_1 = new enemy_leukemia(Content, position: new Vector2(600, 400)); // ใช้ Content (ตัวใหญ่) ไม่ใช่ content
             game_manager.add_entity(enemy_1);
 
@@ -81,7 +81,7 @@ namespace old_heart
 
             enemy_3 = new enemy_boss(Content, position: new Vector2(400, -300));
             game_manager.add_entity(enemy_3);
-            */
+            
 
             base.LoadContent();
 
@@ -114,7 +114,7 @@ namespace old_heart
             //$"\ngame state : {game_manager.current_game_state}" +
             $"";
 
-            this.game_manager.player.i_frame_time = 10;
+            //this.game_manager.player.i_frame_time = 10;
 
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
             if (fps_timer > 1)

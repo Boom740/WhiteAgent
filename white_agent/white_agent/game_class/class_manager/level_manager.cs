@@ -2,14 +2,9 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
-using MonoGame.Extended.Collisions.Layers;
 using MonoGame.Extended.Tilemaps;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection.Metadata;
-using System.Text.Json;
 
 namespace old_heart
 {

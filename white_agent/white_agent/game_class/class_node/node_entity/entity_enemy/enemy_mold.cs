@@ -281,8 +281,10 @@ namespace old_heart
         {
             return new enemy_mold(content, position)
             {
-                max_hp = 20,
-                hp = 20,
+                shots_per_burst = 3,
+                shot_interval = 0.3f,
+                max_hp = 8,
+                hp = 8,
 
                 drop_count_min = 8,
                 drop_count_max = 12,
@@ -333,25 +335,25 @@ namespace old_heart
                 
                 Texture2D texture;
 
-                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_idle");
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_mold_idle");
                 animation idle_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(64, 64));
                 idle_animation.sprite_scale = new Vector2(1, 1);
                 idle_animation.sprite_origin = new Vector2(32, 57);
-                idle_animation.name = "mole idle";
+                idle_animation.name = "mold idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
-                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_Walk");
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_mold_walk");
                 animation walk_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(64, 64));
                 walk_animation.sprite_scale = new Vector2(1, 1);
                 walk_animation.sprite_origin = new Vector2(32, 57);
-                walk_animation.name = "mole walk";
+                walk_animation.name = "mold walk";
                 animation_data.data.Add(animation_name.walk, walk_animation);
 
-                texture = content.Load<Texture2D>("assets/image/enemy/sprite_leukemia_dizzy");
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_mold_dizzy");
                 animation dizzy_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(64, 64));
                 dizzy_animation.sprite_scale = new Vector2(1, 1);
                 dizzy_animation.sprite_origin = new Vector2(32, 57);
-                dizzy_animation.name = "mole dizzy";
+                dizzy_animation.name = "mold dizzy";
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
             }
         }

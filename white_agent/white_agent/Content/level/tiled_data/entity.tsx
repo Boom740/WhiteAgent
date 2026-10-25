@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.12.2" name="boss" tilewidth="256" tileheight="256" tilecount="7" columns="0">
+<tileset version="1.10" tiledversion="1.12.2" name="boss" tilewidth="256" tileheight="256" tilecount="8" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0" x="0" y="0" width="64" height="64" type="player">
   <image source="../../assets/image/player/sprite_player_idle.png" width="256" height="384"/>
@@ -21,5 +21,8 @@
  </tile>
  <tile id="6" type="enemy_boss">
   <image source="../../assets/image/enemy/sprite_boss_idle.png" width="256" height="256"/>
+ </tile>
+ <tile id="7" x="0" y="0" width="64" height="64" type="enemy_leukemia_super">
+  <image source="../../assets/image/enemy/sprite_leukemia_dizzy.png" width="256" height="384"/>
  </tile>
 </tileset>

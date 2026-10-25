@@ -157,6 +157,45 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_minion_walk.png;assets/image/enemy/sprite_minion_walk
 
+#begin assets/image/enemy/sprite_mold_dizzy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_mold_dizzy.png;assets/image/enemy/sprite_mold_dizzy
+
+#begin assets/image/enemy/sprite_mold_idle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_mold_idle.png;assets/image/enemy/sprite_mold_idle
+
+#begin assets/image/enemy/sprite_mold_walk.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_mold_walk.png;assets/image/enemy/sprite_mold_walk
+
 #begin assets/image/enemy/sprite_virus_attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -980,6 +1019,20 @@
 /processorParam:Version=6.1.1.0
 /build:level/level_1_easy.tmx
 
+#begin level/level_1_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_1_hard.tmx
+
+#begin level/level_1_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_1_mid.tmx
+
 #begin level/level_2_easy.tmx
 /importer:TiledTilemapImporter
 /processor:TilemapProcessor
@@ -987,12 +1040,103 @@
 /processorParam:Version=6.1.1.0
 /build:level/level_2_easy.tmx
 
+#begin level/level_2_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_2_hard.tmx
+
+#begin level/level_2_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_2_mid.tmx
+
 #begin level/level_3_easy.tmx
 /importer:TiledTilemapImporter
 /processor:TilemapProcessor
 /processorParam:LevelName=
 /processorParam:Version=6.1.1.0
 /build:level/level_3_easy.tmx
+
+#begin level/level_3_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_3_hard.tmx
+
+#begin level/level_3_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_3_mid.tmx
+
+#begin level/level_4_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_4_easy.tmx
+
+#begin level/level_4_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_4_hard.tmx
+
+#begin level/level_4_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_4_mid.tmx
+
+#begin level/level_5_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_5_easy.tmx
+
+#begin level/level_5_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_5_hard.tmx
+
+#begin level/level_5_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_5_mid.tmx
+
+#begin level/level_6_easy.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_6_easy.tmx
+
+#begin level/level_6_hard.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_6_hard.tmx
+
+#begin level/level_6_mid.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_6_mid.tmx
 
 #begin level/level_boss.tmx
 /importer:TiledTilemapImporter
