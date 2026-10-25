@@ -205,6 +205,23 @@ namespace old_heart
             global.signal.spawn_particle(particle_manager.particle_name.blood_on_ground_efx_purple, position, high_layer: false);
             base.die();
         }
+        public static enemy_leukemia super_form(ContentManager content, Vector2 position)
+        {
+            return new enemy_leukemia(content, position)
+            {
+                minion_limit = 4,
+
+                max_hp = 8,
+                hp = 8,
+
+                drop_count_min = 8,
+                drop_count_max = 12,
+                dna_value_each = 1,
+
+                animation_player = { tint = new Color(160, 20, 180) }
+
+            };
+        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)
@@ -222,8 +239,6 @@ namespace old_heart
 
             base.update_animation(delta_time);
         }
-
-
 
         public class animation_player_leukemia : animation_player_base
         {

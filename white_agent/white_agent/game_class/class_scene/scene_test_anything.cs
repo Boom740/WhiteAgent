@@ -75,6 +75,7 @@ namespace old_heart
             game_manager.add_entity(enemy_virus.super_form(Content, new Vector2(-200, 740)));
 
             game_manager.add_entity(enemy_mold.super_form(Content, new Vector2(0, 1140)));
+            game_manager.add_entity(enemy_leukemia.super_form(Content, new Vector2(0, 1140)));
 
             projectile merchant = new projectile_merchant(Content, position: new Vector2(400, 400));
             game_manager.add_projectile(merchant);
