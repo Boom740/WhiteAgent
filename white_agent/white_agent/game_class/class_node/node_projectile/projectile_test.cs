@@ -8,11 +8,11 @@ namespace old_heart
 {
     public class projectile_test : projectile
     {
-        public projectile_test(ContentManager content_set, float time_left,Vector2 position) : base(content_set, position , time_left)
+        public projectile_test(ContentManager content_set, float time_left,Vector2 position,Vector2 velocity) : base(content_set, position , time_left)
         {
-            texture = content.Load<Texture2D>("Placeholder/Weapons/Head");
+            texture = content.Load<Texture2D>("assets/image/weapons/sprite_bullet_boss");
             sprite_origin = new Vector2((texture.Width / 2), (texture.Height)); // position is center X and bottom Y
-            sprite_scale = new Vector2(2, 2);
+            this.velocity = velocity;
         }
         public override void Update(GameTime gameTime)
         {

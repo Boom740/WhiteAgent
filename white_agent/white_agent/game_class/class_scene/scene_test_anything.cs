@@ -1,9 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
-using System;
-using System.Diagnostics;
-using System.Reflection.Metadata;
 
 namespace old_heart
 {
@@ -20,7 +17,9 @@ namespace old_heart
         public enemy_boss enemy_3;
         public int frame_count = 0;
         public float fps_timer = 0;
-        public int fps_last_sec = 0;
+        public int fps_last_record = 0;
+        public float spawn_projectile_timer = 0;
+        public int projectile_spawn_count = 0;
         public scene_test_anything(Game1 game) : base(game)
         {
             global.change_mouse_state(global.mouse_state.combat);
@@ -33,7 +32,7 @@ namespace old_heart
             game_manager.add_ui(test_text);
             test_text2 = new ui_text("press P to view hitbox testttttttt  Chess Battle Advanced\nE shake\nF player take 1 damage\nT spawn test projectile\nZ spawn test particle",  new Vector2(25f, 0f));
             test_text2.text_color = Color.DarkOrange;
-            game_manager.add_map(test_text2);
+            //game_manager.add_map(test_text2);
 
 
             ui_upgrade_bar = new ui_upgrade_bar(Content, game_manager, game.run_data_manager , ui_shop);
@@ -104,24 +103,44 @@ namespace old_heart
             if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
                 Vector2 mouse_position = global.input.scaled_mouse_world_position;
-                for(int i = 0; i < 10; i++)
+                for (int i = 0; i < 100; i++)
                 {
-                    global.signal.spawn_entity(new enemy_mold(Content, mouse_position));
+                    //global.signal.spawn_entity(new enemy_bacteria(Content, mouse_position));
                 }
             }
+            else if (global.input.keyboard_state.WasKeyPressed(Keys.N))
+            {
+                //projectile_spawn_count += 1000;
+            }
 
-            test_text.text_string = $"scene_test_anything fps [{(1/ gameTime.ElapsedGameTime.TotalSeconds):F2}]                                               V to go back to title bruh" +
-            //$"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
-            //$"\ngame state : {game_manager.current_game_state}" +
-            $"";
 
-            //this.game_manager.player.i_frame_time = 10;
+                test_text.text_string = $"scene_test_anything current_frame_fps[{(1 / gameTime.ElapsedGameTime.TotalSeconds):F2}]                                                     V to go back to title bruh" +
+                //    fps[{ (1 / gameTime.ElapsedGameTime.TotalSeconds):F2}]
+                //$"\nmouse_pos : {global.input.scaled_mouse_position}\nworld_mouse_pos : {global.input.scaled_mouse_world_position}" +
+                //$"\ngame state : {game_manager.current_game_state}" +
+                $"";
+
+            this.game_manager.player.i_frame_time = 10;
 
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
-            if (fps_timer > 1)
+            /*
+            if (spawn_projectile_timer <= 0)
+            {
+                for (int i = 0; i < projectile_spawn_count; i++)
+                {
+                    global.signal.spawn_projectile(new projectile_test(Content, 1, new Vector2 (i/10f,0) , new Vector2(0,-100)));
+                }
+                spawn_projectile_timer = 1;
+            }
+            else
+            {
+                spawn_projectile_timer -= delta_time;
+            }
+            */
+            if (fps_timer > 10)
             {
                 fps_timer = 0;
-                fps_last_sec = frame_count;
+                fps_last_record = frame_count/10;
                 frame_count = 0;
             }
             else
@@ -143,7 +162,7 @@ namespace old_heart
                 //  $"\ndash [{game_manager.player.dash_count}] cooldown timer : {game_manager.player.dash_cooldown_timer:F2}" +
                 $"\nentity_count : {game_manager.entity_list.Count}" +
                 $"\nprojectile_count : {game_manager.projectile_list.Count}" +
-                $"\nlast_second FPS : {fps_last_sec}" +
+                $"\navarage FPS (10 second): {fps_last_record}" +
 
                 $"";
             }
