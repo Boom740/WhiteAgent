@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="old_heart.collision_shape" Collapsed="true">
+    <Position X="7.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQGAAAAAAAAggAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_collision\collision_shape.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="old_heart.collision_shape_box" Collapsed="true">
+    <Position X="6.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_collision\collision_shape_box.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.collision_shape_circle" Collapsed="true">
+    <Position X="8.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_collision\collision_shape_circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy" Collapsed="true">
+    <Position X="29.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABACAAAACAAIgABJAAAAAAAIAAAAAKEIAQBAgCAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation_player_shield" Collapsed="true">
+    <Position X="34.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_bacteria" Collapsed="true">
+    <Position X="30.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECCAAAG1AQACAAAAAgiAAAAEAAQAAEAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_bacteria.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_boss" Collapsed="true">
+    <Position X="30.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIQQAAAAECCAAAABACAGAATAAgAAAAAIAAABAAiAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_boss.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_leukemia" Collapsed="true">
+    <Position X="28.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAgAEgACACAAAAEACAAAAEAAABICAAEAE=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_leukemia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_leukemia_minion" Collapsed="true">
+    <Position X="28.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAASAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_leukemia_minion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_mold" Collapsed="true">
+    <Position X="28.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAIAECAAAAEkACACEASAAgCAABAMAAABIAIAAAE=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_mold.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.enemy_virus" Collapsed="true">
+    <Position X="30.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgECCAAgEmACACAAAAAgCAAAAEAAAAAEAAAAg=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity_enemy\enemy_virus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.entity" Collapsed="true">
+    <Position X="30.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ECQCgAAAACIgBgKAACACsIwABBABAQQAAARDAACAAAA=</HashCode>
+      <FileName>game_class\class_node\node_entity\entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.player" Collapsed="true">
+    <Position X="32" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQBgDYA4DCAAiQDK7CKCWIpCEADKCiAqQxAAUOACCw=</HashCode>
+      <FileName>game_class\class_node\node_entity\player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.item_base" Collapsed="true">
+    <Position X="21.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAQAACAAQgAAAAAAAAQAAQAAAAABAIQAAAAAAAI=</HashCode>
+      <FileName>game_class\class_node\node_item\item_base.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.item_dna" Collapsed="true">
+    <Position X="21.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_item\item_dna.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.image" Collapsed="true">
+    <Position X="13.5" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.207" Y="1.375" />
+        <Point X="15.207" Y="3.596" />
+        <Point X="14.25" Y="3.596" />
+        <Point X="14.25" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>CAQAAAAAAAAAAgAAAACAIAACAAAAAgCAAAAQAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_other\node_image.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.world_text" Collapsed="true">
+    <Position X="13.5" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.242" Y="1.375" />
+        <Point X="15.242" Y="2.296" />
+        <Point X="14.25" Y="2.296" />
+        <Point X="14.25" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>DgQAABAAABAgAgAAAACAIAACAACBAAAAgBACAAgAAAA=</HashCode>
+      <FileName>game_class\class_node\node_other\node_world_text.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile" Collapsed="true">
+    <Position X="21.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQCgBAAAARAhgCAAgCAIAwBBBAAAgQAAAQREQAGAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_detect_entity" Collapsed="true">
+    <Position X="22.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQBAAAAAAAgAAAgAAAAQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_detect_entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_emergency_knockback" Collapsed="true">
+    <Position X="22.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgCAAAAAAAQAAAAAAACAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_emergency_knockback.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_enemy_bullet" Collapsed="true">
+    <Position X="22.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAACAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_enemy_bullet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_enemy_shock_wave" Collapsed="true">
+    <Position X="20.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggCAAAAAAAQAAAAAAACAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_enemy_shock_wave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_explosion" Collapsed="true">
+    <Position X="20.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggCAAAAAAAQAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_explosion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_head" Collapsed="true">
+    <Position X="20.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQIACUAEAAQCgCCAEACIEQAAEABCgABAIQAIAAEAKA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_head.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_melee" Collapsed="true">
+    <Position X="20.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAggCAAAAAAAQAAAAAAACAAAgAAQAEAgA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_melee.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_merchant" Collapsed="true">
+    <Position X="22.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAAAgAAAAAAAAQAAAAAAQAAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_merchant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation_player_merchant" Collapsed="true">
+    <Position X="36.75" Y="6.5" Width="1.5" />
+    <InheritanceLine Type="old_heart.animation_player_base" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="37.5" Y="10.5" />
+        <Point X="37.5" Y="7.191" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_merchant.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_next_level_portal" Collapsed="true">
+    <Position X="22.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQAAAAAAAAAAgAAAAAAAAQBAAAAAQAAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_next_level_portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation_player_next_level_portal" Collapsed="true">
+    <Position X="39.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_next_level_portal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_player_magnet" Collapsed="true">
+    <Position X="20.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAQAAAAgAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_player_magnet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_shock_wave" Collapsed="true">
+    <Position X="22.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgCAAAAAAAQAAAAAAACAAAAAAAAEAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_shock_wave.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_test" Collapsed="true">
+    <Position X="20.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_projectile\projectile_test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_button" Collapsed="true">
+    <Position X="35" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQBAACIEAAAAoAAAEAAAQAAAAAAAAAAAAAwAAgAAIA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_debug_upgrade" Collapsed="true">
+    <Position X="35" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EARAAiAAAIAAAgAAAAAAIAAEAAAEAAAIAgAAABgQAkA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_debug_upgrade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_game_over" Collapsed="true">
+    <Position X="37" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAVACCAgAAAKEgAAAAAAAAAAQAEQAAARAARAJBAEAIA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_game_over.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_guide" Collapsed="true">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.184" Y="1.375" />
+        <Point X="15.184" Y="4.596" />
+        <Point X="16.25" Y="4.596" />
+        <Point X="16.25" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQDASAAAAAAAgABAAAAAAAAAAAAAAAAAAEQAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_guide.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_main_menu" Collapsed="true">
+    <Position X="15.5" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.195" Y="1.375" />
+        <Point X="15.195" Y="3.596" />
+        <Point X="16.25" Y="3.596" />
+        <Point X="16.25" Y="3.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAICAAAAAAAgAAAAAAAAAAAUAAAAAhAABAAQAAICA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_main_menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_pause" Collapsed="true">
+    <Position X="15.5" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.198" Y="1.375" />
+        <Point X="15.198" Y="2.296" />
+        <Point X="16.25" Y="2.296" />
+        <Point X="16.25" Y="2.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AASAACAAAAAAIgAAAAAAAAAAAAAAAAAAABBAAAIAAAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_pause.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_resource" Collapsed="true">
+    <Position X="27" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQEADAABAAAAwAACAAAAAAAACQAAAABAIAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_resource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_setting" Collapsed="true">
+    <Position X="35" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAGiAAAIAAIhABAAAIAAEQAICEAAAIAABAAACAEAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_setting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_shop" Collapsed="true">
+    <Position X="37" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQCCCAAAJJSCgAQAIAAAAAAAAAAAAAAAABAQAoAAAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_shop.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_text" Collapsed="true">
+    <Position X="37" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CgQAAAAAAAAAAgAAAACAIAACAAAAAAAAgAASAAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_text.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_upgrade_bar" Collapsed="true">
+    <Position X="13.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="node" ManuallyRouted="true">
+      <Path>
+        <Point X="25.25" Y="1.062" />
+        <Point X="25.25" Y="1.375" />
+        <Point X="15.199" Y="1.375" />
+        <Point X="15.199" Y="4.596" />
+        <Point X="14.25" Y="4.596" />
+        <Point X="14.25" Y="4.75" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>CAyCACAAAJAAAgAAAAEAAACAAACAAAAAAAACgAgAgEA=</HashCode>
+      <FileName>game_class\class_node\node_ui\ui_upgrade_bar.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="node" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAKAAAAAA=</HashCode>
+      <FileName>game_class\class_node\node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.camera_manager" Collapsed="true">
+    <Position X="9.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAgAAAAABAEAEAACAAAAAIAAgACCAAAAUAQA=</HashCode>
+      <FileName>game_class\class_manager\camera_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.collision_manager" Collapsed="true">
+    <Position X="11.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAhAAAAAAAgAAEAAAAAAIAAAAAAAAAAAABAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\collision_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.debug_manager" Collapsed="true">
+    <Position X="13.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAQAAAAAAEAAIAAAAAAAAAAAAAAAAAAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\debug_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.entity_manager" Collapsed="true">
+    <Position X="15" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAEAAQAAAAAAAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\entity_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.game_manager" Collapsed="true">
+    <Position X="9.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAKBAAAAACEMAJARAIAgwAAgIAAAQEBAISASIEkIBA=</HashCode>
+      <FileName>game_class\class_manager\game_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.level_manager" Collapsed="true">
+    <Position X="11.5" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQgAAQEAAAAAAIAAAAAIgAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_manager\level_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.map_manager" Collapsed="true">
+    <Position X="13.25" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAQAAEAAAAIAAAAAAAAAAAAAAAAAAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\map_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.particle_manager" Collapsed="true">
+    <Position X="15" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABACAAAAAIAAAEIAAAAAAAAAAgAAAAAAAAAQAQAGAAA=</HashCode>
+      <FileName>game_class\class_manager\particle_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.projectile_manager" Collapsed="true">
+    <Position X="9.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAIAAAAAAAEAAAAAAAAAAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\projectile_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.run_data_manager" Collapsed="true">
+    <Position X="11.5" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABAIUAAAAAAAAACAAAAAAwEAgAAAQAAAQgAAA=</HashCode>
+      <FileName>game_class\class_manager\run_data_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.ui_manager" Collapsed="true">
+    <Position X="13.25" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAECAJAAAAAAAAAAAAAAAAAAAAGgAA=</HashCode>
+      <FileName>game_class\class_manager\ui_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.world_text_manager" Collapsed="true">
+    <Position X="15" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAIAAAAAAAEAAAAAAAAAAAAGAAA=</HashCode>
+      <FileName>game_class\class_manager\world_text_manager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.scene_base" Collapsed="true">
+    <Position X="19" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAEgAABgCAAEAAAgCAAAAIAAABIAAAAAQ=</HashCode>
+      <FileName>game_class\class_scene\scene_base.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.scene_gameplay" Collapsed="true">
+    <Position X="17.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU=</HashCode>
+      <FileName>game_class\class_scene\scene_gameplay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.scene_level_editor" Collapsed="true">
+    <Position X="20.25" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIQAgAAAAAIAAgAAAAAABAAAAAAAAAAACAAAAQAAACQ=</HashCode>
+      <FileName>game_class\class_scene\scene_level_editor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.scene_main_menu" Collapsed="true">
+    <Position X="17.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>game_class\class_scene\scene_main_menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.scene_test_anything" Collapsed="true">
+    <Position X="20.25" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAQAAIAFIQAAAAAAIAAAAAAQAEAAAAAAAAAAgAAAQCQ=</HashCode>
+      <FileName>game_class\class_scene\scene_test_anything.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation_data" Collapsed="true">
+    <Position X="38.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\animation_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation" Collapsed="true">
+    <Position X="36.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAABAAAACAABQCgAAAAAAAAEAAAAAQAQAAACAAA=</HashCode>
+      <FileName>game_class\class_data\animation_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.animation_player_base" Collapsed="true">
+    <Position X="36.75" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AoBAAAAAAAAAAIAAAAKCAAAADACAAAAgCBgSCAAEIAA=</HashCode>
+      <FileName>game_class\class_data\animation_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.melee_data" Collapsed="true">
+    <Position X="34.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAgAAAAAAAAAIAAAAAAADACAAAAAAAAAg=</HashCode>
+      <FileName>game_class\class_data\melee_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_base" Collapsed="true">
+    <Position X="27.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAQIAAACAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_ricochet_head" Collapsed="true">
+    <Position X="26.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_explosive_impact" Collapsed="true">
+    <Position X="28.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_double_dash" Collapsed="true">
+    <Position X="28.75" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_lethal_dash" Collapsed="true">
+    <Position X="26.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_projectile_deflection" Collapsed="true">
+    <Position X="26.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_adrenaline_rush" Collapsed="true">
+    <Position X="28.75" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_emergency_knockback" Collapsed="true">
+    <Position X="28.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.upgrade_magenet" Collapsed="true">
+    <Position X="26.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>game_class\class_data\upgrade_data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="old_heart.global" Collapsed="true">
+    <Position X="12.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAIAAAAAAAAAAAAEAIAAACAAAAQQAAAAAAAA=</HashCode>
+      <FileName>game_class\class_global\global.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
