@@ -6,7 +6,7 @@ namespace old_heart
 {
     public class entity_manager
     {
-        public int limit = 50000;   // entity_limit
+        public int limit = 100;   // entity_limit
         public List<entity> entity_list = new List<entity> { }; //  all entity in this scene
         public entity_manager()
         {

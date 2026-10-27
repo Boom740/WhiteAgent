@@ -7,7 +7,7 @@ namespace old_heart
 {
     public class projectile_manager
     {
-        public int limit = 30000;
+        public int limit = 1000;
         public List<projectile> projectile_list = new List<projectile> { }; //  all projectile in this scene
         public projectile_manager()
         {
