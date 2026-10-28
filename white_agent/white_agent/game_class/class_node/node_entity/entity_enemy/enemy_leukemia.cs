@@ -32,7 +32,7 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 50 , speed: 1200, hit_box_radius: 15)
+        public enemy_leukemia(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 40 , speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_leukemia(content_set);
             current_clone_timer = clone_timer;
@@ -212,11 +212,11 @@ namespace old_heart
             {
                 minion_limit = 4,
 
-                max_hp = 8,
-                hp = 8,
+                max_hp = 90,
+                hp = 90,
 
-                drop_count_min = 8,
-                drop_count_max = 12,
+                drop_count_min = 6,
+                drop_count_max = 8,
                 dna_value_each = 1,
 
                 animation_player = { tint = new Color(160, 20, 180) }

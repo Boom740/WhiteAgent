@@ -241,11 +241,11 @@ namespace old_heart
         {
             return new enemy_virus(content, position)
             {
-                max_hp = 30,
-                hp = 30,
+                max_hp = 240,
+                hp = 240,
 
-                drop_count_min = 16,
-                drop_count_max = 20,
+                drop_count_min = 9,
+                drop_count_max = 11,
                 dna_value_each = 1,
                 
                 animation_player = { tint = new Color(160, 20, 180) }

@@ -280,11 +280,11 @@ namespace old_heart
             {
                 speed = 2000,
 
-                max_hp = 12,
-                hp = 12,
+                max_hp = 150,
+                hp = 150,
 
-                drop_count_min = 8,
-                drop_count_max = 12,
+                drop_count_min = 6,
+                drop_count_max = 8,
                 dna_value_each = 1,
 
                 animation_player = { tint = new Color(160, 20, 180) }
