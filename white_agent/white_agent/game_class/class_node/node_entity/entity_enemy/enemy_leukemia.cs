@@ -210,7 +210,8 @@ namespace old_heart
         {
             return new enemy_leukemia(content, position)
             {
-                minion_limit = 4,
+                clone_timer = 2f,
+                minion_limit = 3,
 
                 max_hp = 90,
                 hp = 90,
@@ -219,7 +220,7 @@ namespace old_heart
                 drop_count_max = 8,
                 dna_value_each = 1,
 
-                animation_player = { tint = new Color(160, 20, 180) }
+                animation_player = { tint = new Color(200, 20, 180) }
 
             };
         }

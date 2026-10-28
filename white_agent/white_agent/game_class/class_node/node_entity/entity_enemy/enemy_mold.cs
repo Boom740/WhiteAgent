@@ -12,14 +12,14 @@ namespace old_heart
         // radius
         public float sight_radius = 420f;   // ระยะการมองเห็น
         public float attack_radius = 320f;  // ระยะยิง
-        public float dangerous_rad = 160f;   // ระยะหนี
+        public float dangerous_rad = 200f;   // ระยะหนี
         public float safe_rad = 240f;       // ระยะหยุดหนี
 
         //ranged attack
-        public float attack_cooldown = 1.5f;
+        public float attack_cooldown = 1.6f;
         private float attack_cooldown_timer = 0f;
 
-        public int shots_per_burst = 2;
+        public int shots_per_burst = 1;
         public float shot_interval = 1f;
         private int shots_fired_in_burst = 0;
         private float shot_timer = 0f;
@@ -281,8 +281,9 @@ namespace old_heart
         {
             return new enemy_mold(content, position)
             {
+                attack_cooldown = 2.5f,
                 shots_per_burst = 3,
-                shot_interval = 0.75f,
+                shot_interval = 0.3f,
                 max_hp = 100,
                 hp = 100,
 
@@ -290,7 +291,7 @@ namespace old_heart
                 drop_count_max = 8,
                 dna_value_each = 1,
                 
-                animation_player = { tint = new Color(160, 20, 180) }
+                animation_player = { tint = new Color(200, 20, 180) }
 
             };
         }

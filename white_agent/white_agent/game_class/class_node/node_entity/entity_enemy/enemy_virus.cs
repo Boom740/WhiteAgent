@@ -15,16 +15,16 @@ namespace old_heart
 
         // --- radii ---
         public float dangerous_radius = 200f;
-        public float attack_radius = 40f;
+        public float attack_radius = 60f;
 
         // --- patrol (square) ---
         private float patrol_time_wait = 1f;
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public float attack_duration = 1f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 2f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
-        public float attack_hit_box_radius = 50;
+        public float attack_hit_box_radius = 75;
 
         public float attack_cooldown = 1.5f;
         public float attack_cooldown_timer = 0f;
@@ -32,7 +32,7 @@ namespace old_heart
         private bool hitbox_spawned_this_attack = false;
 
 
-        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 180 ,hit_box_radius: 15)
+        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 150 ,hit_box_radius: 15)
         {
             animation_player = new animation_player_virus(content_set);
             can_be_dizzied = false;
@@ -241,14 +241,17 @@ namespace old_heart
         {
             return new enemy_virus(content, position)
             {
-                max_hp = 240,
-                hp = 240,
+                max_hp = 150,
+                hp = 150,
+                speed = 1500,
+                attack_cooldown = 0.8f,
+                attack_duration = 1f,
 
                 drop_count_min = 9,
                 drop_count_max = 11,
                 dna_value_each = 1,
                 
-                animation_player = { tint = new Color(160, 20, 180) }
+                animation_player = { tint = new Color(200, 20, 180) }
 
             };
         }

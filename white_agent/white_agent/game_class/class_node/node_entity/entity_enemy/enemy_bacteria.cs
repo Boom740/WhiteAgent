@@ -32,7 +32,7 @@ namespace old_heart
         public melee_data melee_data = new melee_data(damage: 1, lunge_speed: 1500f, range: 150f, hitbox_lifetime: 0.5f, knockback_speed: 500f);
 
 
-        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 100 , hit_box_radius: 15)
+        public enemy_bacteria(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 90 , hit_box_radius: 15)
         {
             animation_player = new animation_player_bacteria(content_set);
         }
@@ -278,16 +278,18 @@ namespace old_heart
         {
             return new enemy_bacteria(content, position)
             {
+                attack_cooldown = 1f,
+                attack_duration = 0.8f,
                 speed = 2000,
 
-                max_hp = 150,
-                hp = 150,
+                max_hp = 110,
+                hp = 110,
 
                 drop_count_min = 6,
                 drop_count_max = 8,
                 dna_value_each = 1,
 
-                animation_player = { tint = new Color(160, 20, 180) }
+                animation_player = { tint = new Color(200, 20, 180) }
               
             };
         }
