@@ -32,7 +32,7 @@ namespace old_heart
         private bool hitbox_spawned_this_attack = false;
 
 
-        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 14 ,hit_box_radius: 15)
+        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 180 ,hit_box_radius: 15)
         {
             animation_player = new animation_player_virus(content_set);
             can_be_dizzied = false;

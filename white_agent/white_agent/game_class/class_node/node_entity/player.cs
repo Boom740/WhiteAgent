@@ -38,9 +38,9 @@ namespace old_heart
 
         public List<melee_data> combo_hits = new List<melee_data>
          {
-          new melee_data(damage: 1, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
-          new melee_data(damage: 1, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
-          new melee_data(damage: 2, lunge_speed: 700f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
+          new melee_data(damage: 24, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
+          new melee_data(damage: 24, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
+          new melee_data(damage: 32, lunge_speed: 700f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
          };
         // --- combat: melee combo ---
         public int combo_count = 0;

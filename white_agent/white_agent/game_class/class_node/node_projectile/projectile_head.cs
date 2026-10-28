@@ -45,7 +45,7 @@ namespace old_heart
         //Trail
         private trail_effect trail;
 
-        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 70 , bool explosive_impact = false)
+        public projectile_head(ContentManager content_set, Vector2 position , run_data_manager run_data , entity owner = null , int head_ricochet = 0 , int shock_wave_radius = 110 , bool explosive_impact = false)
             : base(content_set,  position : position , owner : owner , time_left:0, hit_box_radius: 14) 
         {
             this.run_data = run_data;
