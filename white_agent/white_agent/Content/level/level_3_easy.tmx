@@ -31,7 +31,7 @@
  <objectgroup id="4" name="entity">
   <object id="58" type="enemy_bacteria" gid="3" x="325.334" y="731.333" width="80" height="80"/>
   <object id="73" type="enemy_bacteria" gid="3" x="322.667" y="430" width="80" height="80"/>
-  <object id="59" type="enemy_bacteria" gid="3" x="658.667" y="814" width="80" height="80"/>
+  <object id="59" type="enemy_bacteria" gid="3" x="596.722" y="571.852" width="80" height="80"/>
   <object id="63" type="player" gid="1" x="994.666" y="485.333" width="64" height="64"/>
  </objectgroup>
 </map>

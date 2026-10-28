@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="85">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="86">
  <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_easy_06.png" width="1361" height="1376"/>
@@ -26,7 +26,7 @@
  <objectgroup id="4" name="entity">
   <object id="58" type="enemy_bacteria" gid="3" x="947.666" y="809.816" width="80" height="80"/>
   <object id="73" type="enemy_bacteria" gid="3" x="639.677" y="713.838" width="80" height="80"/>
-  <object id="59" type="enemy_bacteria" gid="3" x="724.254" y="1036.03" width="80" height="80"/>
   <object id="63" type="player" gid="1" x="455.641" y="401.631" width="64" height="64"/>
+  <object id="85" type="enemy_mold" gid="11" x="719.815" y="1022.51" width="64" height="64"/>
  </objectgroup>
 </map>
