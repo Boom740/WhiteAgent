@@ -12,13 +12,13 @@ namespace old_heart
         public int contact_damage = 1;
 
         // --- fuse (จุดระเบิด) ---
-        public float fuse_trigger_radius = 45f;   
-        public float fuse_time = 3f;              
-        public int fuse_blink_count = 3;          
+        public float fuse_trigger_radius = 30f;   
+        public float fuse_time = 0.6f;              
+        public int fuse_blink_count = 5;          
         private float fuse_timer = 0f;
 
         // --- explosion ---
-        public float explosion_radius = 50f;      
+        public float explosion_radius = 60f;      
 
         public enemy_leukemia_minion(ContentManager content_set, Vector2 position)
             : base(content_set, position, max_hp: 1, speed: 900, hit_box_radius: 8)
