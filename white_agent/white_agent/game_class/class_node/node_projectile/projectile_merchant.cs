@@ -74,13 +74,13 @@ namespace old_heart
         public void load(ContentManager content)
         {
             Texture2D idle_texture = content.Load<Texture2D>("assets/image/npc/sprite_merchant_idle");
-            animation idle_animation = new animation(idle_texture, frame_per_sec: 8, loop: true, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 6, sprite_size: new Point(64,64));
+            animation idle_animation = new animation(idle_texture, frame_per_sec: 10, loop: true, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 6, sprite_size: new Point(64,64));
             idle_animation.sprite_origin = (idle_animation.sprite_size).ToVector2() * new Vector2(0.5f,0.9f);
             idle_animation.name = "merchant idle";
             animation_data.data.Add(animation_name.idle, idle_animation);
 
             Texture2D wave_texture = content.Load<Texture2D>("assets/image/npc/sprite_merchant_wave");
-            animation wave_animation = new animation(wave_texture, frame_per_sec: 8, loop: false, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 17, sprite_size: new Point(64, 64));
+            animation wave_animation = new animation(wave_texture, frame_per_sec: 10, loop: false, one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 17, sprite_size: new Point(64, 64));
             wave_animation.sprite_origin = (wave_animation.sprite_size).ToVector2() * new Vector2(0.5f, 0.9f);
             wave_animation.name = "merchant wave";
             animation_data.data.Add(animation_name.wave, wave_animation);

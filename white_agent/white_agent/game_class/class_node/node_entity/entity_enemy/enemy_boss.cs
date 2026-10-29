@@ -397,55 +397,55 @@ namespace old_heart
                 Texture2D texture;
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_idle");
-                animation idle_animation = new animation(texture, frame_per_sec: 8 ,sprite_size: new Point(256,256) , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count:15);
+                animation idle_animation = new animation(texture, frame_per_sec: 12 ,sprite_size: new Point(256,256) , one_direction_sprite_format: true , one_diretion_sprite_format_frame_count:15);
                 idle_animation.sprite_origin = new Vector2(128,201.5f);
                 idle_animation.name = "boss idle";
                 animation_data.data.Add(animation_name.idle, idle_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_angryidle");
-                animation angry_idle_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 15);
+                animation angry_idle_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 15);
                 angry_idle_animation.sprite_origin = new Vector2(128, 201.5f);
                 angry_idle_animation.name = "boss angry_idle";
                 animation_data.data.Add(animation_name.angry_idle, angry_idle_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_shoot");
-                animation shoot_animation = new animation(texture, frame_per_sec: 8 ,sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 4, loop: false);
+                animation shoot_animation = new animation(texture, frame_per_sec: 10 ,sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 4, loop: false);
                 shoot_animation.sprite_origin = new Vector2(128,201.5f);
                 shoot_animation.name = "boss attack";
                 animation_data.data.Add(animation_name.attack, shoot_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_tired");
-                animation tired_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 8);
+                animation tired_animation = new animation(texture, frame_per_sec: 10, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 8);
                 tired_animation.sprite_origin = new Vector2(128,201.5f);
                 tired_animation.name = "boss tired"; 
                 animation_data.data.Add(animation_name.tired, tired_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_dizzy");
-                animation dizzy_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 8);
+                animation dizzy_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 8);
                 dizzy_animation.sprite_origin = new Vector2(128,201.5f);
                 dizzy_animation.name = "boss dizzy";
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_angry");
-                animation angry_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 12 , loop:false);
+                animation angry_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 12 , loop:false);
                 angry_animation.sprite_origin = new Vector2(128,201.5f);
                 angry_animation.name = "boss angry";
                 animation_data.data.Add(animation_name.angry, angry_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_intro");
-                animation intro_animation = new animation(texture, frame_per_sec: 6, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 15, loop: false);
+                animation intro_animation = new animation(texture, frame_per_sec: 10, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 15, loop: false);
                 intro_animation.sprite_origin = new Vector2(128,201.5f);
                 intro_animation.name = "boss intro";
                 animation_data.data.Add(animation_name.intro, intro_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_die");
-                animation die_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 43, loop: false);
+                animation die_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 43, loop: false);
                 die_animation.sprite_origin = new Vector2(128, 201.5f);
                 die_animation.name = "boss die";
                 animation_data.data.Add(animation_name.died, die_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_roar");
-                animation roar_animation = new animation(texture, frame_per_sec: 8, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 30, loop: false);
+                animation roar_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 30, loop: false);
                 roar_animation.sprite_origin = new Vector2(128, 201.5f);
                 roar_animation.name = "boss roar";
                 animation_data.data.Add(animation_name.roar, roar_animation);
