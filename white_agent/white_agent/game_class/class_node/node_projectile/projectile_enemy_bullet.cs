@@ -12,17 +12,17 @@ namespace old_heart
         public int damage;
         public float knockback_speed;
 
-        public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f)
-            : base(content_set, position, time_left: lifetime, hit_box_radius: 6)
+        public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f,
+     string texture_path = "assets/image/weapons/sprite_bullet_boss", float scale = 0.6f)
+     : base(content_set, position, time_left: lifetime, hit_box_radius: 6)
         {
             this.damage = damage;
             this.knockback_speed = knockback_speed;
             velocity = (aim_direction != Vector2.Zero ? Vector2.Normalize(aim_direction) : Vector2.UnitY) * projectile_speed;
 
-            // TODO: ใช้ placeholder ไปก่อน เปลี่ยน path เมื่อมี sprite projectile จริงของ leukemia
-            texture = content.Load<Texture2D>("assets/image/weapons/sprite_bullet_boss");
-            sprite_origin = new Vector2(texture.Width / 2f, texture.Height *3 / 2f);
-            sprite_scale = new Vector2(0.6f, 0.6f); // ย่อขนาดกว่าตัวหัวจริง เพราะยืม sprite มาใช้ชั่วคราว
+            texture = content.Load<Texture2D>(texture_path);
+            sprite_origin = new Vector2(texture.Width / 2f, texture.Height * 3 / 2f);
+            sprite_scale = new Vector2(scale);
 
             deflectable = true;
         }
