@@ -11,6 +11,15 @@ namespace old_heart
 
         public int contact_damage = 1;
 
+        // --- fuse (จุดระเบิด) ---
+        public float fuse_trigger_radius = 45f;   
+        public float fuse_time = 3f;              
+        public int fuse_blink_count = 3;          
+        private float fuse_timer = 0f;
+
+        // --- explosion ---
+        public float explosion_radius = 70f;      
+
         public enemy_leukemia_minion(ContentManager content_set, Vector2 position)
             : base(content_set, position, max_hp: 1, speed: 900, hit_box_radius: 8)
         {
@@ -26,7 +35,7 @@ namespace old_heart
             if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            // shield regen ทำงานอิสระจาก state 
+            // shield regen ทำงานอิสระจาก state
             if (shield == false && state != enemy_state.died)
             {
                 shield_timer_current -= delta_time;
@@ -40,6 +49,11 @@ namespace old_heart
             {
                 case enemy_state.chase:
                     chase_target();
+                    check_fuse_trigger();
+                    break;
+
+                case enemy_state.attack:          
+                    update_fuse(delta_time);
                     break;
 
                 case enemy_state.dizzy:
@@ -63,30 +77,78 @@ namespace old_heart
                 }
             }
 
+            void check_fuse_trigger()
+            {
+                if (target == null || target.alive == false) return;
+                if (Vector2.Distance(position, target.position) <= fuse_trigger_radius)
+                {
+                    state = enemy_state.attack;
+                    fuse_timer = 0f;
+                }
+            }
+
+            void update_fuse(float dt)
+            {
+                velocity = Vector2.Zero;          
+                acceleration = Vector2.Zero;
+
+                fuse_timer += dt;
+
+                // 3 วินาที / 3 ครั้ง = รอบละ 1 วินาที ครึ่งแรกของรอบปกติ ครึ่งหลังแดง
+                float blink_cycle = fuse_time / fuse_blink_count;
+                bool red_phase = (fuse_timer % blink_cycle) >= blink_cycle * 0.5f;
+                if (red_phase)
+                {
+                    animation_player.flash();
+                }
+                else
+                {
+                    animation_player.current_flash_time = 0f;
+                }
+
+                if (fuse_timer >= fuse_time)
+                {
+                    explode();
+                }
+            }
+
+            void explode()
+            {
+                if (target != null && target.alive)
+                {
+                    float reach = explosion_radius + target.hit_box_radius;
+                    if (Vector2.Distance(position, target.position) <= reach)
+                    {
+                        target.take_damage(contact_damage, damage_dealer: this);
+                    }
+                }
+                die();
+            }
+
             void update_dizzy(float dt)
             {
                 acceleration = Vector2.Zero;
-                dizzy_timer_current -= dt; 
+                dizzy_timer_current -= dt;
                 if (dizzy_timer_current <= 0f)
                 {
-                    state = enemy_state.chase; // มึนหมดเวลา กลับมาไล่ต่อ (ถ้ายังไม่โดนจัดการก่อน)
+                    state = enemy_state.chase;
                 }
             }
         }
 
         // ชนกับ entity อื่น 
-        public override void collide_entity(entity entity)
-        {
-            if (alive == false) return;
-            if (state != enemy_state.chase) return; // ตอนติด dizzyไม่ระเบิดใส่ผู้เล่นตอนโดนชน
+        /*  public override void collide_entity(entity entity)
+          {
+              if (alive == false) return;
+              if (state != enemy_state.chase) return; // ตอนติด dizzyไม่ระเบิดใส่ผู้เล่นตอนโดนชน
 
-            if (entity is player)
-            {
-                bool deal_damage = entity.take_damage(contact_damage, damage_dealer: this);
-                if (deal_damage == false) { return; }
-                die();
-            }
-        }
+              if (entity is player)
+              {
+                  bool deal_damage = entity.take_damage(contact_damage, damage_dealer: this);
+                  if (deal_damage == false) { return; }
+                  die();
+              }
+          }*/
         public override void die()
         {
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_purple, position, high_layer: true);
