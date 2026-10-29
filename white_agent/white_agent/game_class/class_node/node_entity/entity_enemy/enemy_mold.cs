@@ -37,6 +37,10 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
+        //bullet sprite
+        public string bullet_texture_path = "assets/image/weapons/sprite_bullet_mold";
+        public float bullet_scale = 1f;
+
         public enemy_mold(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 70, speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_mole(content_set);
@@ -209,7 +213,8 @@ namespace old_heart
                     Vector2 aim_direction = override_direction ?? (target.position - position);
                     if (aim_direction == Vector2.Zero) aim_direction = current_direction_vector;
 
-                    projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed);
+                    projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed, texture_path: bullet_texture_path, scale: bullet_scale);
+
                     shot.owner = this;
                     global.signal.spawn_projectile(shot);
                 }
