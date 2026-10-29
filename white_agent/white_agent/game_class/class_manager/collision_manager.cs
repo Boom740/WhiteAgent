@@ -90,6 +90,7 @@ namespace old_heart
                 {
                     if (collision_shape.owner is entity entity)
                     {
+                        if (entity.wall_collision_enable == false) { continue;}
                         entity.position += pair.FirstResult.MinimumTranslationVector;
                         entity.collide_wall(pair, delta_time);
                     }

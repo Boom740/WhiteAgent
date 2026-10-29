@@ -39,6 +39,7 @@ namespace old_heart
         {
             animation_player = new animation_player_boss(content_set);
 
+            wall_collision_enable = false;
             entity_push_enable = false;
             //animation_player_shield.visible = false;
 

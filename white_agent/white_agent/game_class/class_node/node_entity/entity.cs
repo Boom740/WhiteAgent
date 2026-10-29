@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using MonoGame.Extended.Collisions;
 using System;
-using System.Diagnostics;
 
 namespace old_heart
 {
@@ -42,6 +41,7 @@ namespace old_heart
         public float speed = 100;     // for acceralation
 
         public bool entity_push_enable = true;
+        public bool wall_collision_enable = true;
         public entity(ContentManager content_set, Vector2 position, int max_hp = 4, float speed = 100,float hit_box_radius = 15)
         {
             content = content_set;
