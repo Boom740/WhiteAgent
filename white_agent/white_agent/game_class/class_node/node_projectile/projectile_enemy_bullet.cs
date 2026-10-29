@@ -13,7 +13,7 @@ namespace old_heart
         public float knockback_speed;
 
         public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f,
-     string texture_path = "assets/image/weapons/sprite_bullet_boss", float scale = 0.6f)
+     string texture_path = "assets/image/weapons/sprite_bullet_boss", float scale = 0.8f)
      : base(content_set, position, time_left: lifetime, hit_box_radius: 6)
         {
             this.damage = damage;

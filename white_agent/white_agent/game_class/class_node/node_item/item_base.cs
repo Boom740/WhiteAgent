@@ -28,7 +28,7 @@ public abstract class item_base : projectile
 
     Random random = new Random();
 
-    protected item_base(ContentManager content_set, Vector2 position , float hit_box_radius = 7)
+    protected item_base(ContentManager content_set, Vector2 position , float hit_box_radius = 15)
         : base(content_set, position, time_left: 30f, owner: null, hit_box_radius: hit_box_radius)
     {
         bob_offset = random.Next(-10,10)/10f;
