@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace old_heart
 {
@@ -28,6 +29,8 @@ namespace old_heart
         public int projectile_damage = 1;
         public float projectile_knockback_speed = 150f;
 
+        public List<projectile_enemy_bullet> fired_bullets = new List<projectile_enemy_bullet>();
+
         //frightened 
         public float frightened_exit_timer = 0f;
         private const float frightened_exit_delay = 0.0f;
@@ -50,6 +53,7 @@ namespace old_heart
         {
             if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            fired_bullets.RemoveAll(bullet => bullet.alive == false);
 
             if (attack_cooldown_timer > 0f)
             {
@@ -86,6 +90,7 @@ namespace old_heart
                     break;
 
                 case enemy_state.dizzy:
+                    destroy_fired_bullets();
                     update_dizzy(delta_time);
                     break;
 
@@ -216,6 +221,7 @@ namespace old_heart
                     projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed, projectile_damage, projectile_knockback_speed, texture_path: bullet_texture_path, scale: bullet_scale);
 
                     shot.owner = this;
+                    fired_bullets.Add(shot);
                     global.signal.spawn_projectile(shot);
                 }
             }
@@ -275,6 +281,14 @@ namespace old_heart
             }
         }
 
+        private void destroy_fired_bullets()
+        {
+            foreach (projectile_enemy_bullet bullet in fired_bullets)
+            {
+                bullet.time_out();
+            }
+            fired_bullets.Clear();
+        }
         public override void die()
         {
             global.signal.spawn_particle(particle_manager.particle_name.die_efx_purple, position, high_layer: true);
