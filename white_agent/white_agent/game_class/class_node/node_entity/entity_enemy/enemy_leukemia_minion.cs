@@ -18,7 +18,7 @@ namespace old_heart
         private float fuse_timer = 0f;
 
         // --- explosion ---
-        public float explosion_radius = 70f;      
+        public float explosion_radius = 50f;      
 
         public enemy_leukemia_minion(ContentManager content_set, Vector2 position)
             : base(content_set, position, max_hp: 1, speed: 900, hit_box_radius: 8)
@@ -114,14 +114,10 @@ namespace old_heart
 
             void explode()
             {
-                if (target != null && target.alive)
-                {
-                    float reach = explosion_radius + target.hit_box_radius;
-                    if (Vector2.Distance(position, target.position) <= reach)
-                    {
-                        target.take_damage(contact_damage, damage_dealer: this);
-                    }
-                }
+                projectile shock_wave = new projectile_enemy_shock_wave(content, position, this, hit_box_radius: explosion_radius);
+                global.signal.spawn_projectile(shock_wave);
+
+                global.signal.spawn_particle(particle_manager.particle_name.ground_smash_efx, position, high_layer: true);
                 die();
             }
 
