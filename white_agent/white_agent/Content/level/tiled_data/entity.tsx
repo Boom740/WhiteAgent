@@ -16,11 +16,11 @@
  <tile id="4" x="0" y="0" width="128" height="128" type="next_level_portal">
   <image source="../../assets/image/other/sprite_warp_gate.png" width="128" height="512"/>
  </tile>
- <tile id="5" type="merchant">
-  <image source="../../assets/image/npc/sprite_merchant_idle.png" width="64" height="64"/>
+ <tile id="5" x="0" y="0" width="64" height="64" type="merchant">
+  <image source="../../assets/image/npc/sprite_merchant_idle.png" width="64" height="384"/>
  </tile>
- <tile id="6" type="enemy_boss">
-  <image source="../../assets/image/enemy/sprite_boss_idle.png" width="256" height="256"/>
+ <tile id="6" x="0" y="0" width="256" height="256" type="enemy_boss">
+  <image source="../../assets/image/enemy/sprite_boss_idle.png" width="768" height="1280"/>
  </tile>
  <tile id="7" x="0" y="0" width="64" height="64" type="enemy_leukemia_super">
   <image source="../../assets/image/enemy/sprite_leukemia_dizzy.png" width="256" height="384"/>
