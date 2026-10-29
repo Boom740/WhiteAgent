@@ -66,6 +66,58 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_bacteria_walk.png;assets/image/enemy/sprite_bacteria_walk
 
+#begin assets/image/enemy/sprite_boss_angry.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_angry.png;assets/image/enemy/sprite_boss_angry
+
+#begin assets/image/enemy/sprite_boss_angryidle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_angryidle.png;assets/image/enemy/sprite_boss_angryidle
+
+#begin assets/image/enemy/sprite_boss_die.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_die.png;assets/image/enemy/sprite_boss_die
+
+#begin assets/image/enemy/sprite_boss_dizzy.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_dizzy.png;assets/image/enemy/sprite_boss_dizzy
+
 #begin assets/image/enemy/sprite_boss_idle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -78,6 +130,58 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/enemy/sprite_boss_idle.png;assets/image/enemy/sprite_boss_idle
+
+#begin assets/image/enemy/sprite_boss_intro.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_intro.png;assets/image/enemy/sprite_boss_intro
+
+#begin assets/image/enemy/sprite_boss_roar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_roar.png;assets/image/enemy/sprite_boss_roar
+
+#begin assets/image/enemy/sprite_boss_shoot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_shoot.png;assets/image/enemy/sprite_boss_shoot
+
+#begin assets/image/enemy/sprite_boss_tired.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/enemy/sprite_boss_tired.png;assets/image/enemy/sprite_boss_tired
 
 #begin assets/image/enemy/sprite_leukemia_dizzy.png
 /importer:TextureImporter
@@ -313,6 +417,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/npc/sprite_merchant_idle.png;assets/image/npc/sprite_merchant_idle
 
+#begin assets/image/npc/sprite_merchant_wave.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/npc/sprite_merchant_wave.png;assets/image/npc/sprite_merchant_wave
+
 #begin assets/image/other/sprite_bosshole.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -364,6 +481,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/other/sprite_warp_gate.png;assets/image/other/sprite_warp_gate
+
+#begin assets/image/other/texture_gameover.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/other/texture_gameover.png;assets/image/other/texture_gameover
 
 #begin assets/image/other/white_pixel.png
 /importer:TextureImporter
@@ -1150,6 +1280,13 @@
 /processorParam:LevelName=
 /processorParam:Version=6.1.1.0
 /build:level/level_6_mid.tmx
+
+#begin level/level_boss_cutscene.tmx
+/importer:TiledTilemapImporter
+/processor:TilemapProcessor
+/processorParam:LevelName=
+/processorParam:Version=6.1.1.0
+/build:level/level_boss_cutscene.tmx
 
 #begin level/level_boss.tmx
 /importer:TiledTilemapImporter

@@ -13,7 +13,7 @@ namespace old_heart
         public Color text_color = Color.White;
         public string text_string;
         public Vector2 text_size;
-        public Vector2 text_scale = global.theme.default_font_scale_2;
+        public Vector2 text_scale = global.theme.default_font_scale_2 /2;
         public float rotation = 0;
         public Vector2 origin = new Vector2(0, 0);
 

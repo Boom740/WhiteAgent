@@ -18,6 +18,7 @@ namespace old_heart
 
         public image black_background;
         public ui_text ui_game_over_text;
+        public image ui_game_over_image;
 
         public ui_text ui_respawn_text;
         public ui_text ui_life_text;
@@ -55,6 +56,12 @@ namespace old_heart
             ui_game_over_text.position = render_size * new Vector2(0.5f, 0.2f) - ui_game_over_text.text_font.MeasureString(ui_game_over_text.text_string) * ui_game_over_text.text_scale / 2;
             ui_game_over_text.visible = false;
             game_manager.add_ui(ui_game_over_text);
+
+            Texture2D game_over_texture = content.Load<Texture2D>("assets/image/other/texture_gameover");
+            ui_game_over_image = new image(content, render_size * new Vector2(0.5f, 0.67f), game_over_texture);
+            ui_game_over_image.origin = game_over_texture.Bounds.Center.ToVector2();
+            ui_game_over_image.visible = false;
+            game_manager.add_ui(ui_game_over_image);
 
             ui_respawn_text = new ui_text("Remaining Life", Vector2.Zero, text_scale: new Vector2(0.5f, 0.5f) , text_color: Color.White);
             ui_respawn_text.position = render_size * new Vector2(0.5f, 0.4f) - ui_game_over_text.text_font.MeasureString(ui_respawn_text.text_string) * ui_respawn_text.text_scale / 2;
@@ -122,6 +129,7 @@ namespace old_heart
                 else
                 {
                     ui_game_over_text.visible = true;
+                    ui_game_over_image.visible = true;
                 }
 
             }

@@ -66,7 +66,7 @@ namespace old_heart
             if (game_manager.current_game_state == game_manager.game_state.level_clear && game_manager.player != null)       // finished level
             {
                 bool player_entered_portal = game_manager.player.current_combat_state == player.combat_state.change_scene && game_manager.player.animation_player.is_finished == true;
-                if (player_entered_portal == true)
+                if (player_entered_portal == true || game_manager.player.change_scene_fall_animation == false)
                 {
                     bool play_latest_level = false;
                     if (game.run_data_manager.cleared_level < game.run_data_manager.level_list.Count)  // check if clear_level not exceed level_list index
@@ -90,7 +90,7 @@ namespace old_heart
                             game.change_scene(new scene_gameplay(game, next_level_name), fade_transition);
                         }
 
-                        Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
+                        //Debug.WriteLine("clear latest level has_next_level? : " + has_next_level);
                     }
                     return;
                 }

@@ -53,8 +53,9 @@ namespace old_heart
                 Debug.WriteLine("Loading layer : " + layer.Name.ToString());
                 if (layer is TilemapImageLayer image_layer)
                 {
+                    Vector2 position = layer.Offset;
                     Texture2D texture = image_layer.Texture;
-                    game_manager.add_map(new image(content, new Vector2(image_layer.Position.X, image_layer.Position.X), texture: texture), high_ground: false);
+                    game_manager.add_map(new image(content, position, texture: texture), high_ground: false);
                 }
                 else if (layer is TilemapObjectLayer object_layer && object_layer.Name == "wall_collision")
                 {
@@ -128,6 +129,10 @@ namespace old_heart
                         else if (tile_map_object.Class == "enemy_boss")
                         {
                             game_manager.add_entity(new enemy_boss(content, position));
+                        }
+                        else if (tile_map_object.Class == "enemy_leukemia_cutscene")
+                        {
+                            game_manager.add_entity(new enemy_leukemia_cutscene(content, position));
                         }
                         else
                         {

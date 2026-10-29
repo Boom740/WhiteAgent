@@ -8,7 +8,7 @@ namespace old_heart
 {
     public abstract class enemy : entity
     {
-        public enum enemy_state { normal , frightened , dizzy, died , chase , attack , dash , tired , summoning}
+        public enum enemy_state { normal , frightened , dizzy, died , chase , attack , dash , tired , summoning , intro , roar}
         public enemy_state state = enemy_state.normal;
 
         // --- target (player) ---
@@ -117,7 +117,7 @@ namespace old_heart
                 drop_items();
             }
         }
-        protected virtual void drop_items()
+        protected virtual void drop_items(float drop_speed = 80f)
         {
             int count = random.Next(drop_count_min, drop_count_max + 1);
             for (int i = 0; i < count; i++)
@@ -125,7 +125,7 @@ namespace old_heart
                 item_dna dna = new item_dna(content, position, dna_value_each);
 
                 float angle = (float)(random.NextDouble() * Math.PI * 2);
-                float speed = 80f + (float)random.NextDouble() * 80f;
+                float speed = drop_speed  + (float)random.NextDouble() * drop_speed;
                 dna.velocity = new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle)) * speed; // เด้งกระจายออกจากจุดตาย
 
                 global.signal.spawn_projectile(dna);

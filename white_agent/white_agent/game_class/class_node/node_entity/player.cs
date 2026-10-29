@@ -110,6 +110,9 @@ namespace old_heart
 
         // ui
         public bool in_interactable_zone = false;
+
+        //other 
+        public bool change_scene_fall_animation = true; // rotate and smaller when change scene
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -399,6 +402,8 @@ namespace old_heart
             void update_change_scene_state()
             {
                 i_frame_time = 1; // set i frame to 1 every frame when change scene
+
+                if (change_scene_fall_animation == false) { return; }
                 animation_player.rotation += 10 * delta_time;
                 animation_player.draw_scale -= animation_player.draw_scale * new Vector2(0.80f, 0.80f) * delta_time;
                 velocity = new Vector2(0, 3);
