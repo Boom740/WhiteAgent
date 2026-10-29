@@ -208,7 +208,16 @@ namespace old_heart
 
         }
 
-        
+        public override void on_collide_hit_box(projectile target_projectile)
+        {
+            if (is_resting) { return; }  //หัวที่หยุดไม่ทำลายกระสุน
+
+            if (target_projectile is projectile_enemy_bullet bullet && bullet.alive)
+            {
+                bullet.time_out();
+            }
+        }
+
 
         public override void Draw(SpriteBatch sprite_batch)
         {

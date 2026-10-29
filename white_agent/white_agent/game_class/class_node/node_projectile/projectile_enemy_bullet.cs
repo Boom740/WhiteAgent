@@ -29,6 +29,7 @@ namespace old_heart
 
         public override void on_hit_entity(entity target_entity)
         {
+            if (alive == false) { return; }
             if (target_entity is player target_player && target_player.alive)
             {
                 bool deal_damage = target_player.take_damage(damage, damage_dealer: this); // ทำงานเหมือนโดนโจมตีทุกอย่าง (หัวหลุด, i-frame ฯลฯ)
