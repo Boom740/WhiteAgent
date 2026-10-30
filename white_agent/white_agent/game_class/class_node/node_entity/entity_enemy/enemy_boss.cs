@@ -17,7 +17,7 @@ namespace old_heart
         public float summon_timer = 0f;
 
         //ranged attack
-        public float attack_cooldown = 5f;
+        public float attack_cooldown = 2.5f;
         private float attack_cooldown_timer = 0f;
 
         public int shots_burst_count = 0;  // number of shot shoot at same time
@@ -182,7 +182,7 @@ namespace old_heart
                     Vector2 aim_direction = override_direction ?? (target.position - position);
                     if (aim_direction == Vector2.Zero) aim_direction = current_direction_vector;
 
-                    projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed : 150f, damage:1, knockback_speed:30f , lifetime:3f);
+                    projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed : 200f, damage:1, knockback_speed:30f , lifetime:3f);
                     shot.owner = this;
                     global.signal.spawn_projectile(shot);
                 }
@@ -201,18 +201,24 @@ namespace old_heart
 
                 if (stage == 1)
                 {
+                    spawn_enemy(enemy_bacteria.super_form(content, position));
+                    spawn_enemy(new enemy_bacteria(content, position));
                     spawn_enemy(new enemy_bacteria(content, position));
                 }
                 else if (stage == 2)
                 {
-                    spawn_enemy(new enemy_bacteria(content, position));
-                    spawn_enemy(new enemy_bacteria(content, position));
+                    spawn_enemy(new enemy_mold(content, position));
+                    spawn_enemy(enemy_virus.super_form(content, position));
+                    spawn_enemy(enemy_virus.super_form(content, position));
+                    spawn_enemy(new enemy_mold(content, position));
                 }
                 else if (stage == 3)
                 {
-                    spawn_enemy(new enemy_bacteria(content, position)); 
-                    spawn_enemy(new enemy_bacteria(content, position));
-                    spawn_enemy(new enemy_bacteria(content, position));
+                    spawn_enemy(enemy_leukemia.super_form(content, position));
+                    spawn_enemy(enemy_mold.super_form(content, position));
+                    spawn_enemy(new enemy_leukemia(content, position));
+                    spawn_enemy(enemy_mold.super_form(content, position));
+                    spawn_enemy(enemy_leukemia.super_form(content, position));
                 }
 
                 enter_normal();
