@@ -212,7 +212,7 @@ namespace old_heart
         {
             return new enemy_leukemia(content, position)
             {
-                clone_timer = 2f,
+                clone_timer = 3f,
                 minion_limit = 3,
 
                 max_hp = 90,
