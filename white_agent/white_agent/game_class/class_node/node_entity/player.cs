@@ -81,7 +81,7 @@ namespace old_heart
         public int max_dash = 1;
 
         public bool lethal_dash_enable = false;
-        public int lethal_dash_damage = 1;
+        public int lethal_dash_damage = 20;
         public float lethal_dash_knockback = 300f;
         private HashSet<entity> dash_hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
@@ -90,13 +90,13 @@ namespace old_heart
         public float adrenaline_rush_cooldown = 5f;
         public float adrenaline_rush_cooldown_timer = 0f;
 
-        public float adrenaline_rush_speed_multiplier = 2f;
+        public float adrenaline_rush_speed_multiplier = 1.6f;
         public float adrenaline_rush_speed_time = 2f; // time of speed buff
         public float adrenaline_rush_speed_timer = 0f;
         public trail_effect adrenaline_rush_trail;
 
         public bool emergency_knockback_enable = false;
-        public float emergency_knockback_cooldown = 10f;
+        public float emergency_knockback_cooldown = 8f;
         public float emergency_knockback_cooldown_timer = 0f;
 
         public bool projectile_deflection_enable = false;

@@ -27,7 +27,7 @@ namespace old_heart
 
         // --- drop ---
         public int drop_count_min = 1;   // จำนวนก้อน DNA ที่ดรอป สามารถสุ่มได้
-        public int drop_count_max = 3;
+        public int drop_count_max = 2;
         public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
 
         public Random random = new Random();

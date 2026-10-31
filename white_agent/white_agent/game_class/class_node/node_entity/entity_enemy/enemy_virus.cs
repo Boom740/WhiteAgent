@@ -36,8 +36,8 @@ namespace old_heart
         {
             animation_player = new animation_player_virus(content_set);
             can_be_dizzied = false;
-            this.drop_count_min = 3;
-            this.drop_count_max = 5;
+            this.drop_count_min = 2;
+            this.drop_count_max = 3;
         }
 
         public override void Update(GameTime gameTime)
@@ -247,8 +247,8 @@ namespace old_heart
                 attack_cooldown = 0.8f,
                 attack_duration = 1f,
 
-                drop_count_min = 5,
-                drop_count_max = 7,
+                drop_count_min = 4,
+                drop_count_max = 5,
                 dna_value_each = 1,
                 
                 animation_player = { tint = new Color(200, 20, 180) }

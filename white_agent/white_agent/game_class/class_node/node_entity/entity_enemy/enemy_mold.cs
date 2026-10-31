@@ -306,8 +306,8 @@ namespace old_heart
                 max_hp = 100,
                 hp = 100,
 
-                drop_count_min = 5,
-                drop_count_max = 7,
+                drop_count_min = 4,
+                drop_count_max = 5,
                 dna_value_each = 1,
                 
                 animation_player = { tint = new Color(200, 20, 180) }

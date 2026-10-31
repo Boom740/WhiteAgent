@@ -31,7 +31,7 @@ namespace old_heart
 
         public int ricochet_max = 1;
         public int ricochet = 0;
-        public float ricochet_range = 200;
+        public float ricochet_range = 250;
 
         public bool explosive_impact = false;
 

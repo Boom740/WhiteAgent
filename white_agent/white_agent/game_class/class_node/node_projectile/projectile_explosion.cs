@@ -9,7 +9,7 @@ namespace old_heart
 {
     public class projectile_explosion : projectile
     {
-        public int damage = 1;
+        public int damage = 40;
         //public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 

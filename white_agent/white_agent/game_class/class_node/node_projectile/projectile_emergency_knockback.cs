@@ -8,10 +8,10 @@ namespace old_heart
 {
     public class projectile_emergency_knockback : projectile
     {
-        public float knockback_speed = 250f; // ความแรงที่ enemy จะกระเด็น
+        public float knockback_speed = 300f; // ความแรงที่ enemy จะกระเด็น
         private HashSet<entity> hit_entity = new HashSet<entity>(); // กันโดนดาเมจซ้ำ
 
-        public projectile_emergency_knockback(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 200)
+        public projectile_emergency_knockback(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 250)
             : base(content_set, position, time_left: 0.1f, owner: owner, hit_box_radius: hit_box_radius)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย

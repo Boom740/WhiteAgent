@@ -7,9 +7,9 @@ namespace old_heart
 {
     public class projectile_player_magnet : projectile
     {
-        public float magnet_acceleration = 1800f;
+        public float magnet_acceleration = 2000f;
 
-        public projectile_player_magnet(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 100)
+        public projectile_player_magnet(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 150)
             : base(content_set, position, time_left: 10 , owner: owner, hit_box_radius: hit_box_radius)
         {
             visible = false; // ล่องหน ไม่ต้องมี texture เลย
