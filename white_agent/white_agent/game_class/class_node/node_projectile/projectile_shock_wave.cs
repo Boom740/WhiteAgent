@@ -15,7 +15,7 @@ namespace old_heart
         public projectile_shock_wave(ContentManager content_set, Vector2 position,  entity owner = null, float hit_box_radius = 5)
             : base(content_set, position, time_left: 0.1f, owner: owner, hit_box_radius: hit_box_radius)
         {
-            visible = false; // ล่องหน ไม่ต้องมี texture เลย
+           //visible = false; // ล่องหน ไม่ต้องมี texture เลย
         }
 
         public override void on_hit_entity(entity target_entity)
@@ -36,7 +36,7 @@ namespace old_heart
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
-            // ล่องหน ไม่วาดอะไรเลย (ไม่เรียก base.Draw เพราะไม่มี texture โหลดไว้)
+            draw_circle_wave_effect(sprite_batch, new Color(130, 210, 255));
         }
     }
 }

@@ -33,6 +33,9 @@ namespace old_heart
         public bool alive = true;
         public float time_left = 0;
 
+        protected float initial_time_left;     // time_left ตอนสร้าง ใช้คำนวณความคืบหน้าของเอฟเฟกต์
+        private Texture2D circle_wave_texture; 
+
         //public float ground_friction = 5f;
         public float max_velocity = 1000;
 
@@ -42,6 +45,7 @@ namespace old_heart
         {
             content = content_set;
             this.time_left = time_left;
+            initial_time_left = time_left;
             this.position = position;
             this.hit_box_radius = hit_box_radius;
             this.collision = new collision_shape_circle(new BoundingCircle2D(position, hit_box_radius));
@@ -148,6 +152,25 @@ namespace old_heart
             {
                 debug_manager.remove(node);
             }
+        }
+        protected void draw_circle_wave_effect(SpriteBatch sprite_batch, Color color, float max_alpha = 0.5f)  
+        {
+            if (initial_time_left <= 0f) { return; }
+
+            if (circle_wave_texture == null)
+            {
+                circle_wave_texture = content.Load<Texture2D>("assets/image/other/sprite_attack_warn");
+            }
+
+            float progress = MathHelper.Clamp(1f - time_left / initial_time_left, 0f, 1f);
+            float ease = 1f - (1f - progress) * (1f - progress);              // เริ่มขยายเร็วแล้วค่อยๆ ช้าลง
+            float radius = hit_box_radius * MathHelper.Lerp(0.4f, 1f, ease);  // จบที่ขนาดเท่า hitbox พอดี
+            float alpha = (1f - progress) * max_alpha;
+
+            Vector2 scale = new Vector2(radius * 2f / circle_wave_texture.Width, radius * 2f / circle_wave_texture.Height);
+            Vector2 origin = new Vector2(circle_wave_texture.Width, circle_wave_texture.Height) / 2f;
+
+            sprite_batch.Draw(circle_wave_texture, position, null, color * alpha, 0f, origin, scale, SpriteEffects.None, 0.0001f);
         }
     }
 }
