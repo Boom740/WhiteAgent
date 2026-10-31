@@ -729,6 +729,32 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_button_leave_unselect.png;assets/image/ui/ui_button_leave_unselect
 
+#begin assets/image/ui/ui_checkbox_checked.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_checkbox_checked.png;assets/image/ui/ui_checkbox_checked
+
+#begin assets/image/ui/ui_checkbox_uncheck.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_checkbox_uncheck.png;assets/image/ui/ui_checkbox_uncheck
+
 #begin assets/image/ui/ui_crosshair.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -755,6 +781,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_cursor.PNG;assets/image/ui/ui_cursor
 
+#begin assets/image/ui/ui_decrease.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_decrease.png;assets/image/ui/ui_decrease
+
 #begin assets/image/ui/ui_dna.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -768,6 +807,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_dna.PNG;assets/image/ui/ui_dna
 
+#begin assets/image/ui/ui_gametitle.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_gametitle.png;assets/image/ui/ui_gametitle
+
 #begin assets/image/ui/ui_guide_key.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -780,6 +832,19 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:assets/image/ui/ui_guide_key.png;assets/image/ui/ui_guide_key
+
+#begin assets/image/ui/ui_increase.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.5.1
+/build:assets/image/ui/ui_increase.png;assets/image/ui/ui_increase
 
 #begin assets/image/ui/ui_life.PNG
 /importer:TextureImporter
