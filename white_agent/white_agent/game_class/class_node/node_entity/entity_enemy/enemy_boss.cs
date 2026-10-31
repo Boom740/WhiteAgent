@@ -253,7 +253,7 @@ namespace old_heart
                 }
 
                 die_animation_timer += delta_time;
-                if (die_animation_timer > 3)
+                if (die_animation_timer > 2)
                 {
                     die_screen_shake_interval = 0.3f;
                 }
