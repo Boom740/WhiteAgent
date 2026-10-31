@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+
 namespace old_heart
 {
     public class ui_setting : node
@@ -12,67 +12,71 @@ namespace old_heart
         public enum result { none, leave , reset_data};
         public result current_result = result.none;
 
-        public Vector2 setting_top_left_position = new Vector2(230,80);
+        public Vector2 setting_top_left_position = new Vector2(230,120);
         public Vector2 setting_spacing = new Vector2(400, 50);
         public float setting_button_spacing_distance = 60;
         public Point setting_button_size = new Point(40,40);
         public Point setting_toggle_button_size = new Point(100, 40);
 
+        public ui_text ui_setting_text;
         public image black_background;
         public ui_button ui_return_button;
         public ui_text ui_return_text;
-
-        public ui_button ui_reset_button;
-        public ui_text ui_reset_text;
+        public Point return_button_size = new Point(100,50);
 
         public List<ui_text> ui_setting_text_list = new List<ui_text> { };
         public List<ui_text> ui_setting_value_text_list = new List<ui_text> { };
         public List<ui_button> ui_setting_decrease_button_list = new List<ui_button> { };
         public List<ui_button> ui_setting_increase_button_list = new List<ui_button> { };
-        public List<ui_text> ui_setting_button_text_list = new List<ui_text> { }; // for - and +
+        public List<image> ui_setting_button_image_list = new List<image> { }; // for - and +
         public List<ui_button> ui_setting_toggle_button_list = new List<ui_button> { };
-        public List<ui_text> ui_setting_toggle_button_text_list = new List<ui_text> { }; // for true and false
+        public List<image> ui_setting_toggle_button_image_list = new List<image> { }; // for true and false
+
+        public Texture2D setting_check_texture_true;
+        public Texture2D setting_check_texture_false;
         public ui_setting(ContentManager content  , game_manager game_manager, run_data_manager run_data)
         {
             this.run_data = run_data;
             active = false;
+            Vector2 render_size = global.render_size;
+
+            setting_check_texture_true = content.Load<Texture2D>("assets/image/ui/ui_checkbox_checked");
+            setting_check_texture_false = content.Load<Texture2D>("assets/image/ui/ui_checkbox_uncheck");
+
+            Texture2D setting_increase_texture = content.Load<Texture2D>("assets/image/ui/ui_increase");
+            Texture2D setting_decrease_texture = content.Load<Texture2D>("assets/image/ui/ui_decrease");
 
             Texture2D white_pixel = content.Load<Texture2D>("assets/image/other/white_pixel");
             black_background = new image(content, Vector2.Zero, texture: white_pixel);
-            black_background.scale = global.render_size;
+            black_background.scale = render_size;
             black_background.color = Color.Black;
             black_background.visible = false;
             game_manager.add_ui(black_background);
 
-            Texture2D texture_leave_button_unselect = content.Load<Texture2D>("assets/image/ui/ui_button_leave_unselect");
-            Texture2D texture_leave_button_selected = content.Load<Texture2D>("assets/image/ui/ui_button_leave_selected");
-            ui_return_button = new ui_button(content, new Rectangle(new Point(820, 475), texture_leave_button_unselect.Bounds.Size));
-            ui_return_button.button_texture = texture_leave_button_unselect;
-            ui_return_button.hover_texture = texture_leave_button_selected;
+            ui_setting_text = new ui_text("SETTING", Vector2.Zero, text_scale: new Vector2(0.5f, 0.5f), text_color:Color.White);
+            ui_setting_text.origin = ui_setting_text.text_font.MeasureString(ui_setting_text.text_string) / 2;
+            ui_setting_text.position = render_size * new Vector2(0.5f, 0.1f);
+            ui_setting_text.visible = false;
+            game_manager.add_ui(ui_setting_text);
+
+            ui_return_button = new ui_button(content, new Rectangle(new Point(50, 475), return_button_size));
             ui_return_button.visible = false;
             ui_return_button.active = false;
             game_manager.add_ui(ui_return_button);
 
-            ui_return_text = new ui_text("Return", Vector2.Zero, text_scale: new Vector2(0.3f, 0.3f), text_color: new Color(89, 89, 89));
+            ui_return_text = new ui_text("Back", Vector2.Zero, text_scale: new Vector2(0.5f, 0.5f), text_color: new Color(89, 89, 89));
             ui_return_text.position = ui_return_button.button_rectangle.Center.ToVector2() - ui_return_text.text_font.MeasureString(ui_return_text.text_string) * ui_return_text.text_scale / 2;
             ui_return_text.visible = false;
             game_manager.add_ui(ui_return_text);
 
 
-            ui_reset_button = new ui_button(content, new Rectangle(20, 470, 150, 50));
-            ui_reset_button.visible = false;
-            game_manager.add_ui(ui_reset_button);
-
-            ui_reset_text = new ui_text("reset data", ui_reset_button.button_rectangle.Center.ToVector2(), new Vector2(0.25f, 0.25f), Color.Black);
-            ui_reset_text.origin = ui_reset_text.text_font.MeasureString(ui_reset_text.text_string) / 2;
-            ui_reset_text.visible = false;
-            game_manager.add_ui(ui_reset_text);
 
             make_ui_setting("Master volume", setting_top_left_position);
             make_ui_setting("Sound effect volume", setting_top_left_position + new Vector2(0,setting_spacing.Y));
             make_ui_setting("Music volume", setting_top_left_position + new Vector2(0, setting_spacing.Y * 2));
             make_ui_setting("Screen shake intensity", setting_top_left_position + new Vector2(0, setting_spacing.Y * 4));
             make_ui_setting("Full screen", setting_top_left_position + new Vector2(0, setting_spacing.Y * 6) , toggle_button:true);
+
 
             void make_ui_setting(string text ,Vector2 position , bool toggle_button = false)
             {
@@ -89,17 +93,19 @@ namespace old_heart
                     ui_setting_increase_button_list.Add(new_ui_setting_increase_button);
                     game_manager.add_ui(new_ui_setting_increase_button);
 
-                    ui_text new_ui_setting_button_text = new ui_text("-", new_ui_setting_decrease_button.button_rectangle.Center.ToVector2() , new Vector2(0.5f, 0.5f), Color.Black);
-                    new_ui_setting_button_text.origin = new_ui_setting_button_text.text_font.MeasureString("-") / 2;
-                    new_ui_setting_button_text.visible = false;
-                    ui_setting_button_text_list.Add(new_ui_setting_button_text);
-                    game_manager.add_ui(new_ui_setting_button_text);
+                    image new_ui_setting_button_image; // make both - , +
+                    new_ui_setting_button_image = new image(content, new_ui_setting_decrease_button.button_rectangle.Center.ToVector2(), texture: setting_decrease_texture);
+                    new_ui_setting_button_image.origin = setting_decrease_texture.Bounds.Center.ToVector2();
+                    new_ui_setting_button_image.visible = false;
+                    ui_setting_button_image_list.Add(new_ui_setting_button_image);
+                    game_manager.add_ui(new_ui_setting_button_image);
 
-                    new_ui_setting_button_text = new ui_text("+", new_ui_setting_increase_button.button_rectangle.Center.ToVector2(), new Vector2(0.5f, 0.5f), Color.Black);
-                    new_ui_setting_button_text.origin = new_ui_setting_button_text.text_font.MeasureString("-") / 2;
-                    new_ui_setting_button_text.visible = false;
-                    ui_setting_button_text_list.Add(new_ui_setting_button_text);
-                    game_manager.add_ui(new_ui_setting_button_text);
+                    new_ui_setting_button_image = new image(content, new_ui_setting_increase_button.button_rectangle.Center.ToVector2(), texture: setting_increase_texture);
+                    new_ui_setting_button_image.origin = setting_increase_texture.Bounds.Center.ToVector2();
+                    new_ui_setting_button_image.visible = false;
+                    ui_setting_button_image_list.Add(new_ui_setting_button_image);
+                    game_manager.add_ui(new_ui_setting_button_image);
+
                 }
                 else
                 {
@@ -108,10 +114,11 @@ namespace old_heart
                     ui_setting_toggle_button_list.Add(new_ui_setting_toggle_button);
                     game_manager.add_ui(new_ui_setting_toggle_button);
 
-                    ui_text new_ui_setting_button_text = new ui_text(" ", new_ui_setting_toggle_button.button_rectangle.Center.ToVector2(), new Vector2(0.25f, 0.25f), Color.Black);
-                    new_ui_setting_button_text.visible = false;
-                    ui_setting_toggle_button_text_list.Add(new_ui_setting_button_text);
-                    game_manager.add_ui(new_ui_setting_button_text);
+                    image new_ui_setting_button_image = new image(content, new_ui_setting_toggle_button.button_rectangle.Center.ToVector2(), texture: setting_check_texture_false);
+                    new_ui_setting_button_image.origin = setting_increase_texture.Bounds.Center.ToVector2();
+                    new_ui_setting_button_image.visible = false;
+                    ui_setting_toggle_button_image_list.Add(new_ui_setting_button_image);
+                    game_manager.add_ui(new_ui_setting_button_image);
                 }
 
                 ui_text new_ui_setting_text = new ui_text(text, position, new Vector2(0.25f, 0.25f), Color.White);
@@ -229,9 +236,15 @@ namespace old_heart
                             global.setting.full_screen = true;
                         }
                     }
-                    ui_text ui_setting_toggle_button_text = ui_setting_toggle_button_text_list[toggle_index];
-                    ui_setting_toggle_button_text.text_string = global.setting.full_screen.ToString();
-                    ui_setting_toggle_button_text.origin = ui_setting_toggle_button_text.text_font.MeasureString(ui_setting_toggle_button_text.text_string) / 2;
+                    image ui_setting_toggle_button_image = ui_setting_toggle_button_image_list[toggle_index];
+                    if (global.setting.full_screen == true)
+                    {
+                        ui_setting_toggle_button_image.texture = setting_check_texture_true;
+                    }
+                    else
+                    {
+                        ui_setting_toggle_button_image.texture = setting_check_texture_false;
+                    }
                 }
 
 
@@ -239,11 +252,7 @@ namespace old_heart
 
             if (current_result != result.none) { return; }
 
-            if (ui_reset_button.clicked)
-            {
-                current_result = result.reset_data;
-            }
-            else if (ui_return_button.clicked) // close setting
+            if (ui_return_button.clicked) // close setting
             {
                 ui_return_button.clicked = false;
                 ui_return_button.mouse_hover = false;
@@ -256,11 +265,9 @@ namespace old_heart
             void set_ui_visible(bool visible)
             {
                 black_background.visible = visible;
-                ui_return_button.visible = visible;
+                ui_setting_text.visible = visible;
                 ui_return_button.active = visible;
                 ui_return_text.visible = visible;
-                ui_reset_button.visible = visible;
-                ui_reset_text.visible = visible;
                 foreach (ui_text ui_text in ui_setting_text_list)
                 {
                     ui_text.visible = visible;
@@ -269,25 +276,13 @@ namespace old_heart
                 {
                     ui_text.visible = visible;
                 }
-                foreach (ui_button ui_Button in ui_setting_decrease_button_list)
+                foreach (image image in ui_setting_toggle_button_image_list)
                 {
-                    ui_Button.visible = visible;
+                    image.visible = visible;
                 }
-                foreach (ui_button ui_Button in ui_setting_increase_button_list)
+                foreach (image image in ui_setting_button_image_list)
                 {
-                    ui_Button.visible = visible;
-                }
-                foreach (ui_button ui_Button in ui_setting_toggle_button_list)
-                {
-                    ui_Button.visible = visible;
-                }
-                foreach (ui_text ui_text in ui_setting_toggle_button_text_list)
-                {
-                    ui_text.visible = visible;
-                }
-                foreach (ui_text ui_text in ui_setting_button_text_list)
-                {
-                    ui_text.visible = visible;
+                    image.visible = visible;
                 }
             }
         }
