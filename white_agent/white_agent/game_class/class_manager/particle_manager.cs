@@ -12,7 +12,6 @@ using MonoGame.Extended.Particles.Profiles;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml.Linq;
 
 namespace old_heart
 {
@@ -20,7 +19,7 @@ namespace old_heart
     {
         static public Dictionary<Enum, ParticleEmitter> data = new Dictionary<Enum, ParticleEmitter>();
         public enum particle_name { die_efx_red , die_efx_green, die_efx_purple , die_efx_white , blood_on_ground_efx_red , blood_on_ground_efx_green , blood_on_ground_efx_purple , blood_on_ground_efx_white
-        , ground_smash_efx 
+        , ground_smash_efx , enemy_summon_efx
         }
 
         public ParticleEffect low_particle_effect;
@@ -95,9 +94,10 @@ namespace old_heart
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
 
             KeyboardStateExtended keyboard_state = global.input.keyboard_state;
+
             if (keyboard_state.WasKeyReleased(Keys.Z))
             {
-                global.signal.spawn_particle(particle_name.ground_smash_efx, global.input.scaled_mouse_world_position, high_layer: false);
+                global.signal.spawn_particle(particle_name.enemy_summon_efx, global.input.scaled_mouse_world_position, high_layer: true);
             }
 
             low_particle_effect.Update(delta_time);
@@ -125,6 +125,7 @@ namespace old_heart
             load_blood_on_ground_efx_color(Color.White);
 
             load_ground_smash_efx();
+            load_enemy_summon_efx();
 
             void load_die_efx_color(Color color)
             {
@@ -265,6 +266,38 @@ namespace old_heart
 
 
                 data.Add(particle_name.ground_smash_efx, emitter);
+            }
+
+            void load_enemy_summon_efx()
+            {
+                ParticleEmitter emitter = new ParticleEmitter(20)
+                {
+                    Name = "enemy_summon_efx",
+                    LifeSpan = 0.7f,
+                    TextureRegion = new Texture2DRegion(default_particle_texture),
+                    Profile = Profile.Line(new Vector2(1, 0), 50, LineRadiation.PerpendicularUp),
+                    Parameters = new ParticleReleaseParameters
+                    {
+                        Quantity = new ParticleInt32Parameter(10, 20),
+                        Speed = new ParticleFloatParameter(100f, 400f),
+                        Color = new ParticleColorParameter(new Vector3(67f, 0f, 0.9f)),
+                        Scale = new ParticleVector2Parameter(new Vector2(15f, 15f)),
+                        Opacity = new ParticleFloatParameter(0.5f)
+                    }
+                };
+                emitter.Modifiers.Add(new DragModifier
+                {
+                    Density = 15f
+                });
+                emitter.Modifiers.Add(new LinearGravityModifier
+                {
+                    Direction = Vector2.UnitY,
+                    Strength = 100f
+                });
+                emitter.Modifiers.Add(new OpacityFastFadeModifier());
+
+
+                data.Add(particle_name.enemy_summon_efx, emitter);
             }
 
             void add_into_data(string this_particle_name , ParticleEmitter emitter)

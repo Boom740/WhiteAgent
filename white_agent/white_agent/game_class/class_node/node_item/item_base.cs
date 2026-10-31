@@ -32,6 +32,7 @@ public abstract class item_base : projectile
         : base(content_set, position, time_left: 30f, owner: null, hit_box_radius: hit_box_radius)
     {
         bob_offset = random.Next(-10,10)/10f;
+        shadow_scale = new Vector2((hit_box_radius * 2) / shadow_texture.Width, (hit_box_radius * 2) / shadow_texture.Height) * 0.8f;
     }
 
     public override void Update(GameTime gameTime)

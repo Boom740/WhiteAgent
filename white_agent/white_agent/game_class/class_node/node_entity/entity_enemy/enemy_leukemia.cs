@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using static old_heart.particle_manager;
 
 namespace old_heart
 {
@@ -196,6 +197,7 @@ namespace old_heart
                     enemy_leukemia_minion new_minion = new enemy_leukemia_minion(content, position + offset);
                     new_minion.animation_player.tint = animation_player.tint;
                     global.signal.spawn_entity(new_minion);
+                    global.signal.spawn_particle(particle_name.enemy_summon_efx, position + offset, high_layer: true);
                     minion_list.Add(new_minion);
                 }
             }

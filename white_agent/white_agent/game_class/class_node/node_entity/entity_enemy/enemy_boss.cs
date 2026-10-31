@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
+using static old_heart.particle_manager;
 
 namespace old_heart
 {
@@ -324,6 +325,7 @@ namespace old_heart
             new_enemy.drop_count_max = 0;
             new_enemy.position += summoned_enemy_spawn_offset;
             global.signal.spawn_entity(new_enemy);
+            global.signal.spawn_particle(particle_name.enemy_summon_efx, new_enemy.position , high_layer: true);
             summoned_enemy_list.Add(new_enemy);
         }
         public override void die()
