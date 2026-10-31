@@ -22,7 +22,7 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public float attack_duration = 2f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 3f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
         public float attack_hit_box_radius = 75;
 
@@ -247,8 +247,8 @@ namespace old_heart
                 attack_cooldown = 0.8f,
                 attack_duration = 1f,
 
-                drop_count_min = 9,
-                drop_count_max = 11,
+                drop_count_min = 5,
+                drop_count_max = 7,
                 dna_value_each = 1,
                 
                 animation_player = { tint = new Color(200, 20, 180) }
@@ -308,7 +308,7 @@ namespace old_heart
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
 
                 Texture2D punch_texture = content.Load<Texture2D>("assets/image/enemy/sprite_virus_attack");
-                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 12, sprite_size: new Point(128, 128));
+                animation punch_animation = new animation(punch_texture, loop: false, frame_per_sec: 10, sprite_size: new Point(128, 128));
                 punch_animation.name = "bacteria attack";
                 animation_data.data.Add(animation_name.attack, punch_animation);
             }

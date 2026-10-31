@@ -17,7 +17,7 @@ namespace old_heart
         public float safe_rad = 240f;       // ระยะหยุดหนี
 
         //ranged attack
-        public float attack_cooldown = 1.6f;
+        public float attack_cooldown = 2f;
         private float attack_cooldown_timer = 0f;
 
         public int shots_per_burst = 1;

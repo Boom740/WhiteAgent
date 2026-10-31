@@ -13,7 +13,7 @@ namespace old_heart
 
         // --- fuse (จุดระเบิด) ---
         public float fuse_trigger_radius = 30f;   
-        public float fuse_time = 0.6f;              
+        public float fuse_time = 0.8f;              
         public int fuse_blink_count = 5;          
         private float fuse_timer = 0f;
 

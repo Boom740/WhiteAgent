@@ -19,7 +19,7 @@ namespace old_heart
         // --- clone ---
         public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
 
-        public float clone_timer = 3f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
+        public float clone_timer = 3.5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
         private float current_clone_timer;
         public int minion_limit = 2;
 
@@ -216,8 +216,8 @@ namespace old_heart
                 max_hp = 90,
                 hp = 90,
 
-                drop_count_min = 6,
-                drop_count_max = 8,
+                drop_count_min = 5,
+                drop_count_max = 7,
                 dna_value_each = 1,
 
                 animation_player = { tint = new Color(200, 20, 180) }
