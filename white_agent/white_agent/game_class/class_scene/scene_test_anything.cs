@@ -120,7 +120,7 @@ namespace old_heart
                 //$"\ngame state : {game_manager.current_game_state}" +
                 $"";
 
-            this.game_manager.player.i_frame_time = 10;
+            //this.game_manager.player.i_frame_time = 10;
 
             float delta_time = (float)gameTime.ElapsedGameTime.TotalMilliseconds / 1000;
             /*

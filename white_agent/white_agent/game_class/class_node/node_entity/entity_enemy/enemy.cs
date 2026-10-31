@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
-using System.Diagnostics;
 
 namespace old_heart
 {
@@ -162,7 +161,7 @@ namespace old_heart
         public void load(ContentManager content)
         {
             Texture2D normal_texture = content.Load<Texture2D>("assets/image/other/sprite_shield");
-            animation normal_animation = new animation(normal_texture, frame_per_sec: 8);
+            animation normal_animation = new animation(normal_texture, frame_per_sec: 8,sprite_size:normal_texture.Bounds.Size);
             normal_animation.name = "enemy shield normal";
             normal_animation.sprite_origin = new Vector2(normal_animation.sprite_size.X / 2f, (normal_animation.sprite_size.Y * 4f) / 5f);
             animation_data.data.Add(animation_name.normal, normal_animation);

@@ -93,6 +93,7 @@ namespace old_heart
         public float adrenaline_rush_speed_multiplier = 2f;
         public float adrenaline_rush_speed_time = 2f; // time of speed buff
         public float adrenaline_rush_speed_timer = 0f;
+        public trail_effect adrenaline_rush_trail;
 
         public bool emergency_knockback_enable = false;
         public float emergency_knockback_cooldown = 10f;
@@ -123,6 +124,8 @@ namespace old_heart
             this.run_data = run_data;
             hp = run_data.hp_left;
             max_hp = run_data.max_hp;
+
+            adrenaline_rush_trail = new trail_effect(max_points: 10, max_width: 20);
 
             run_data.apply_upgrade(this);
         }
@@ -301,6 +304,11 @@ namespace old_heart
                     {
                         magnet.position = position;
                     }
+                }
+                if (adrenaline_rush_speed_timer > 0)
+                {
+                    float visual_center_offset_y = (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin).Y;
+                    adrenaline_rush_trail.add_point(position + new Vector2(0, visual_center_offset_y));
                 }
             }
 
@@ -530,7 +538,7 @@ namespace old_heart
                 global.signal.spawn_projectile(head);
                 head_projectile = head;
 
-                i_frame_time = throw_head_i_frame_duration;
+                i_frame_time = Math.Max(i_frame_time ,throw_head_i_frame_duration);
             }
             
             void update_dash()
@@ -565,8 +573,8 @@ namespace old_heart
                 current_combat_state = combat_state.dash;
                 dash_timer = dash_duration;
 
-                i_frame_time = dash_i_frame_duration;
-                fade_i_frame_visual_timer = dash_i_frame_duration;
+                i_frame_time = Math.Max(i_frame_time, dash_i_frame_duration);
+                fade_i_frame_visual_timer = Math.Max(fade_i_frame_visual_timer , dash_i_frame_duration);
 
                 dash_count++;
 
@@ -696,7 +704,7 @@ namespace old_heart
 
                 drop_head(head_drop_direction);
 
-                i_frame_time = i_frame_duration; // เริ่ม i-frame ทันทีที่หัวหลุด
+                i_frame_time = Math.Max(i_frame_time, i_frame_duration); // เริ่ม i-frame ทันทีที่หัวหลุด
                 global.signal.screen_shake(0.6f);
                 global.sound.play_sound(global.sound.sound_name.player_gethit);
                 return true;
@@ -704,7 +712,7 @@ namespace old_heart
 
             if (base.take_damage(damage_taken) == false) { return false; }
 
-            i_frame_time = i_frame_duration; // เริ่ม i-frame ตอนโดนดาเมจจริง
+            i_frame_time = Math.Max(i_frame_time, i_frame_duration); // เริ่ม i-frame ตอนโดนดาเมจจริง
             global.signal.screen_shake(0.6f);
             run_data.hp_left = hp;
 
@@ -773,6 +781,9 @@ namespace old_heart
 
             adrenaline_rush_cooldown_timer = adrenaline_rush_cooldown;
             adrenaline_rush_speed_timer = adrenaline_rush_speed_time;
+            adrenaline_rush_trail.clear();
+            i_frame_time = Math.Max(i_frame_time, adrenaline_rush_speed_time);
+            fade_i_frame_visual_timer = Math.Max (fade_i_frame_visual_timer , adrenaline_rush_speed_time);
         }
         protected virtual void play_walk_sound()
         {
@@ -837,6 +848,12 @@ namespace old_heart
                 Rectangle dash_cooldown_rectangle = new Rectangle(rectagle_top_left,new Point((int)(dash_cooldown_rectangle_size.X * rectangle_ratio), dash_cooldown_rectangle_size.Y));
 
                 sprite_batch.FillRectangle(dash_cooldown_rectangle, Color.White, 1);
+            }
+
+            if (adrenaline_rush_speed_timer > 0)  // adrenaline_rush_trail 
+            {
+                float layer_depth = (position.Y + 50000f) / 100000f - 0.0001f;
+                adrenaline_rush_trail.draw(sprite_batch,1,layer_depth: layer_depth);
             }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only
