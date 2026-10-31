@@ -43,16 +43,16 @@ namespace old_heart
             List<string> level_set_2 = new List<string>() { "level_1_mid", "level_2_mid", "level_3_mid", "level_4_mid", "level_5_mid", "level_6_mid" }; ;
             List<string> level_set_3 = new List<string>() { "level_1_hard", "level_2_hard", "level_3_hard", "level_4_hard", "level_5_hard", "level_6_hard" }; ;
 
-            //random_level_order(level_set_1);
-            //random_level_order(level_set_2);
-            //random_level_order(level_set_3);
+            random_list_order(level_set_1);
+            random_list_order(level_set_2);
+            random_list_order(level_set_3);
 
-            //level_list.Add("level_0_tutorial");
-            //level_list_add_from_list(level_set_1);
-            //level_list.Add("level_0_shop");
-            //level_list_add_from_list(level_set_2);
+            level_list.Add("level_0_tutorial");
+            level_list_add_from_list(level_set_1.GetRange(0, 3));
             level_list.Add("level_0_shop");
-            level_list_add_from_list(level_set_3);
+            level_list_add_from_list(level_set_2.GetRange(0, 3));
+            level_list.Add("level_0_shop");
+            level_list_add_from_list(level_set_3.GetRange(0, 3));
             level_list.Add("level_0_shop");
             level_list.Add("level_boss_cutscene");
             level_list.Add("level_boss");
