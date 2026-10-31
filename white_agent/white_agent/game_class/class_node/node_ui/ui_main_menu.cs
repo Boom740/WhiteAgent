@@ -37,7 +37,7 @@ namespace old_heart
             Vector2 render_size = global.render_size;
             Point button_center_offset = new Point(0, button_size.Y / 2);
 
-            ui_game_logo = new image(content, new Vector2(40, 40), file_path: "assets/image/ui/ui_gametitle");
+            ui_game_logo = new image(content, new Vector2(40, 30), file_path: "assets/image/ui/ui_gametitle");
             game_manager.add_ui(ui_game_logo);
 
             ui_version_text = new ui_text("version : 0.1", render_size - new Vector2(10,10));
