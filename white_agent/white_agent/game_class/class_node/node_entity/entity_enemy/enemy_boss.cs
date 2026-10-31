@@ -208,16 +208,15 @@ namespace old_heart
                 }
                 else if (stage == 2)
                 {
-                    spawn_enemy(new enemy_bacteria(content, position));
-                    spawn_enemy(enemy_leukemia.super_form(content, position));
-                    spawn_enemy(enemy_virus.super_form(content, position));
-
-                }
-                else if (stage == 3)
-                {
                     spawn_enemy(enemy_bacteria.super_form(content, position));
                     spawn_enemy(enemy_mold.super_form(content, position));
                     spawn_enemy(enemy_bacteria.super_form(content, position));
+                }
+                else if (stage == 3)
+                {
+                    spawn_enemy(enemy_leukemia.super_form(content, position));
+                    spawn_enemy(enemy_virus.super_form(content, position));
+                    spawn_enemy(enemy_virus.super_form(content, position));
                 }
 
                 enter_normal();
