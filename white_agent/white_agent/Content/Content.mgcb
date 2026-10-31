@@ -430,6 +430,19 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/npc/sprite_merchant_wave.png;assets/image/npc/sprite_merchant_wave
 
+#begin assets/image/other/sprite_attack_warn.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/processorParam:Version=3.8.6.0
+/build:assets/image/other/sprite_attack_warn.png
+
 #begin assets/image/other/sprite_bosshole.png
 /importer:TextureImporter
 /processor:TextureProcessor

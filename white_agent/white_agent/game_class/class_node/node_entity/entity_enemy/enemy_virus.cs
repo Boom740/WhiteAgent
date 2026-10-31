@@ -263,8 +263,7 @@ namespace old_heart
             if (state == enemy_state.attack && animation_player.current_frame_index < attack_hit_frame)
             {
                 float charge_ratio = (float)animation_player.current_frame_index / (float)attack_hit_frame;
-
-                sprite_batch.DrawCircle(new CircleF(position, attack_hit_box_radius), 32, Color.Red * (charge_ratio * 0.3f) , 50, 0);
+                draw_attack_warning(sprite_batch, attack_hit_box_radius, charge_ratio);
             }
         }
         public class animation_player_virus : animation_player_base

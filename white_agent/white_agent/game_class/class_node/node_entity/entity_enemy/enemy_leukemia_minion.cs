@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended;
 using System.Diagnostics;
 
 namespace old_heart
@@ -132,6 +133,8 @@ namespace old_heart
             }
         }
 
+
+
         // ชนกับ entity อื่น 
         /*  public override void collide_entity(entity entity)
           {
@@ -169,6 +172,16 @@ namespace old_heart
             base.update_animation(delta_time);
         }
 
+        public override void Draw(SpriteBatch sprite_batch)
+        {
+            base.Draw(sprite_batch);
+
+            if (state == enemy_state.attack)
+            {
+                float charge_ratio = MathHelper.Clamp(fuse_timer / fuse_time, 0f, 1f);
+                draw_attack_warning(sprite_batch, explosion_radius, charge_ratio);
+            }
+        }
         public class animation_player_minion : animation_player_base
         {
             public static readonly animation_data animation_data = new animation_data();
@@ -214,4 +227,4 @@ namespace old_heart
             }
         }
     }
-}
+} 

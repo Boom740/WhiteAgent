@@ -12,6 +12,7 @@ namespace old_heart
         public int damage;
         public float knockback_speed;
 
+        private trail_effect trail;
         public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f,
      string texture_path = "assets/image/weapons/sprite_bullet_boss", float scale = 0.8f)
      : base(content_set, position, time_left: lifetime, hit_box_radius: 6)
@@ -25,6 +26,20 @@ namespace old_heart
             sprite_scale = new Vector2(scale);
 
             deflectable = true;
+
+            trail = new trail_effect(max_points: 8, max_width: texture.Width * sprite_scale.X, min_point_distance: 2f, color: Color.Gray);
+        }
+        public override void Update(GameTime gameTime)
+        {
+            // ให้คลาสแม่จัดการเรื่องเคลื่อนที่
+            base.Update(gameTime);
+
+            if (alive)
+            {
+                float offset_x = 0f;
+                float offset_y = -14f;
+                trail.add_point(position + new Vector2(offset_x, offset_y));
+            }
         }
 
         public override void on_hit_entity(entity target_entity)
@@ -44,6 +59,26 @@ namespace old_heart
             }
 
             base.on_hit_entity (target_entity);
+        }
+        public override void time_out()
+        {
+            trail.clear();
+            base.time_out();
+        }
+
+        public override void collide_wall(MonoGame.Extended.Collisions.CollisionPair2D pair, float delta_time)
+        {
+        
+            trail.clear();
+            base.collide_wall(pair, delta_time);
+        }
+
+        public override void Draw(SpriteBatch sprite_batch, float alpha)
+        {
+            float layer_depth = Math.Clamp((position.Y + 50000f) / 100000f, 0, 1) - 0.0001f;
+            trail.draw(sprite_batch, alpha, layer_depth);
+
+            base.Draw(sprite_batch, alpha);
         }
     }
 }
