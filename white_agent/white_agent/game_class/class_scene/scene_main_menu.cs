@@ -23,10 +23,7 @@ namespace old_heart
 
             if (ui_setting.current_result == ui_setting.result.reset_data)
             {
-                game.run_data_manager = new run_data_manager();
-                ui_setting.run_data = game.run_data_manager;
-                ui_main_menu.run_data = game.run_data_manager;
-                ui_setting.current_result = ui_setting.result.none;
+                reset_data();
             }
             if (ui_main_menu.current_result == ui_main_menu.result.setting && ui_setting.active == false)
             {
@@ -38,7 +35,12 @@ namespace old_heart
                 ui_main_menu.current_result = ui_main_menu.result.none;
                 ui_setting.active = false;
             }
-            else if (ui_main_menu.current_result == ui_main_menu.result.start && game.scene_transitioning_timer <= 0)
+            else if (ui_main_menu.current_result == ui_main_menu.result.new_game && game.scene_transitioning_timer <= 0)
+            {
+                reset_data();
+                game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
+            }
+            else if (ui_main_menu.current_result == ui_main_menu.result.resume_game && game.scene_transitioning_timer <= 0)
             {
                 game.change_scene(new scene_gameplay(game, game.run_data_manager.level_list[game.run_data_manager.cleared_level]), fade_transition);
             }
@@ -56,6 +58,14 @@ namespace old_heart
             }
 
             update_all(gameTime);
+
+            void reset_data()
+            {
+                game.run_data_manager = new run_data_manager();
+                ui_setting.run_data = game.run_data_manager;
+                ui_main_menu.run_data = game.run_data_manager;
+                ui_setting.current_result = ui_setting.result.none;
+            }
         }
         public override void Draw(GameTime gameTime)
         {
