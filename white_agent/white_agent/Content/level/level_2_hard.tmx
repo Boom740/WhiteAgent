@@ -31,10 +31,9 @@
  </objectgroup>
  <objectgroup id="4" name="entity">
   <object id="63" type="player" gid="1" x="1109" y="454.666" width="64" height="64"/>
-  <object id="189" type="enemy_leukemia_super" gid="8" x="320.148" y="1024.72" width="64" height="64"/>
-  <object id="190" type="enemy_mold_super" gid="12" x="313.44" y="848.647" width="64" height="64"/>
-  <object id="191" type="enemy_bacteria" gid="3" x="875.584" y="1081.35" width="80" height="80"/>
-  <object id="192" type="enemy_virus_super" gid="10" x="898.537" y="820.279" width="128" height="128"/>
-  <object id="193" type="enemy_bacteria" gid="3" x="399.346" y="608.467" width="80" height="80"/>
+  <object id="189" type="enemy_leukemia_super" gid="8" x="287.148" y="874.72" width="64" height="64"/>
+  <object id="191" type="enemy_bacteria" gid="3" x="638.584" y="1083.35" width="80" height="80"/>
+  <object id="192" type="enemy_virus_super" gid="10" x="920.537" y="871.279" width="128" height="128"/>
+  <object id="193" type="enemy_bacteria" gid="3" x="611.346" y="614.467" width="80" height="80"/>
  </objectgroup>
 </map>

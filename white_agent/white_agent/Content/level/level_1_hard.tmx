@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="185">
+<map version="1.10" tiledversion="1.12.2" orientation="orthogonal" renderorder="right-down" width="30" height="23" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="187">
  <tileset firstgid="1" source="tiled_data/entity.tsx"/>
  <imagelayer id="2" name="map_image">
   <image source="../assets/image/levels/texture_level_hard_01.png" width="1523" height="1415"/>
@@ -34,10 +34,10 @@
  </objectgroup>
  <objectgroup id="4" name="entity">
   <object id="63" type="player" gid="1" x="1052.66" y="1052.23" width="64" height="64"/>
-  <object id="177" type="enemy_leukemia_super" gid="8" x="283.595" y="532.944" width="64" height="64"/>
+  <object id="177" type="enemy_leukemia_super" gid="8" x="408.595" y="441.944" width="64" height="64"/>
   <object id="180" type="enemy_bacteria" gid="3" x="272.255" y="970.086" width="80" height="80"/>
-  <object id="182" type="enemy_leukemia" gid="2" x="432.208" y="404.368" width="64" height="64"/>
+  <object id="186" type="enemy_bacteria" gid="3" x="1087.26" y="640.086" width="80" height="80"/>
   <object id="183" type="enemy_bacteria_super" gid="9" x="402.501" y="1112.02" width="80" height="80"/>
-  <object id="184" type="enemy_virus" gid="4" x="665.709" y="788.699" width="128" height="128"/>
+  <object id="185" type="enemy_virus_super" gid="10" x="953" y="482" width="128" height="128"/>
  </objectgroup>
 </map>

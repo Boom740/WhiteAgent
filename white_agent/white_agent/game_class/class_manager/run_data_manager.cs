@@ -47,12 +47,12 @@ namespace old_heart
             //random_level_order(level_set_2);
             //random_level_order(level_set_3);
 
-            level_list.Add("level_0_tutorial");
+            //level_list.Add("level_0_tutorial");
             //level_list_add_from_list(level_set_1);
-            level_list.Add("level_0_shop");
+            //level_list.Add("level_0_shop");
             //level_list_add_from_list(level_set_2);
             level_list.Add("level_0_shop");
-            //level_list_add_from_list(level_set_3);
+            level_list_add_from_list(level_set_3);
             level_list.Add("level_0_shop");
             level_list.Add("level_boss_cutscene");
             level_list.Add("level_boss");

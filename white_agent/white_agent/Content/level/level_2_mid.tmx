@@ -27,10 +27,9 @@
  </objectgroup>
  <objectgroup id="4" name="entity">
   <object id="59" type="enemy_bacteria" gid="3" x="1212.52" y="913.739" width="80" height="80"/>
-  <object id="106" type="enemy_bacteria" gid="3" x="1034.24" y="912.103" width="80" height="80"/>
+  <object id="106" type="enemy_bacteria" gid="3" x="355.24" y="620.103" width="80" height="80"/>
   <object id="63" type="player" gid="1" x="783.666" y="506.666" width="64" height="64"/>
-  <object id="103" type="enemy_virus" gid="4" x="364.525" y="682.253" width="128" height="128"/>
-  <object id="104" type="enemy_virus" gid="4" x="1138.16" y="678.982" width="128" height="128"/>
+  <object id="104" type="enemy_virus" gid="4" x="1114.16" y="620.982" width="128" height="128"/>
   <object id="105" type="enemy_mold" gid="11" x="332.737" y="908.677" width="64" height="64"/>
  </objectgroup>
 </map>
