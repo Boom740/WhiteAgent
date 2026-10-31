@@ -154,6 +154,7 @@ namespace old_heart
                 current_game_state = game_state.level_clear;
                 if (player != null)
                 {
+                    player.change_scene_fall_animation = false;
                     player.current_combat_state = player.combat_state.change_scene;
                 }
             }else if (global.input.keyboard_state.WasKeyPressed(Keys.I))   // debug

@@ -81,6 +81,7 @@ namespace old_heart
         }
         public override void Update(GameTime gameTime)
         {
+            if (!active ) { return;  }
             if (run_data == null) { return; }
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -108,7 +109,7 @@ namespace old_heart
 
             if (current_result != result.none) { return; }
 
-            if (run_data.cleared_level != 0)
+            if (run_data.cleared_level != 0 && run_data.cleared_level < run_data.level_list.Count)
             {
                 ui_resume_text.visible = true;
                 ui_resume_button.active = true;

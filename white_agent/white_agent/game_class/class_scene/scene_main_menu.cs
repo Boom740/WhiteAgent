@@ -25,7 +25,7 @@ namespace old_heart
             {
                 reset_data();
             }
-            if (ui_main_menu.current_result == ui_main_menu.result.setting && ui_setting.active == false)
+            else if (ui_main_menu.current_result == ui_main_menu.result.setting && ui_setting.active == false)
             {
                 ui_setting.current_result = ui_setting.result.none;
                 ui_setting.active = true;
