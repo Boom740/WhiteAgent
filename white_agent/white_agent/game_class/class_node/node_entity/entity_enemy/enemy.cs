@@ -30,6 +30,9 @@ namespace old_heart
         public int drop_count_max = 2;
         public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
 
+        // --- attack warning ---
+        private Texture2D attack_warn_texture;
+
         public Random random = new Random();
 
         public bool death_by_player = false;
@@ -140,7 +143,21 @@ namespace old_heart
                 animation_player_shield.draw(sprite_batch, position + new Vector2(0,0.01f) , alpha : 0.5f ); // draw on top of enemy sprite
             }
         }
-        
+
+        protected void draw_attack_warning(SpriteBatch sprite_batch, float radius, float charge_ratio, float max_alpha = 0.3f)
+        {
+            if (attack_warn_texture == null)
+            {
+                attack_warn_texture = content.Load<Texture2D>("assets/image/other/sprite_attack_warn");   // โหลดตอนใช้ครั้งแรก
+            }
+
+            float diameter = radius * 2f;
+            Vector2 scale = new Vector2(diameter / attack_warn_texture.Width, diameter / attack_warn_texture.Height);   // ย่อ/ขยายให้กว้างเท่า hitbox
+            Vector2 origin = new Vector2(attack_warn_texture.Width, attack_warn_texture.Height) / 2f;                  // จุดกลางภาพ
+            Color color = Color.Red * (MathHelper.Clamp(charge_ratio, 0f, 1f) * max_alpha);
+
+            sprite_batch.Draw(attack_warn_texture, position, null, color, 0f, origin, scale, SpriteEffects.None, 0.0001f);
+        }
     }
     public class animation_player_shield : animation_player_base       // custom animation for this class only
     {

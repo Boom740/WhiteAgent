@@ -24,6 +24,8 @@ namespace old_heart
         private float current_clone_timer;
         public int minion_limit = 2;
 
+        public bool wait_for_minions_clear = false;
+
         // --- frightened ---
         public float frightened_exit_timer = 0f;
         private const float frightened_exit_delay = 0.5f;
@@ -177,11 +179,18 @@ namespace old_heart
 
             void update_clone_timer(float delta_time)
             {
-                if (minion_list.Count >= minion_limit)
+
+                if (wait_for_minions_clear)
                 {
-                    current_clone_timer = clone_timer;  // timer dont move
-                    return;
+                    if (minion_list.Count == 0)
+                    {
+                        // ถ้าลูกน้องถูกกำจัดหมดแล้ว ปลดล็อคให้เริ่มนับเวลาเกิดชุดใหม่
+                        wait_for_minions_clear = false;
+                        current_clone_timer = clone_timer;
+                    }
+                    return; // ถ้ายังตายไม่หมด ให้ออกจากฟังก์ชันนี้ไปเลย (เวลาจะไม่ถูกนับ)
                 }
+
 
                 current_clone_timer -= delta_time;
                 if (current_clone_timer <= 0f)
@@ -189,7 +198,10 @@ namespace old_heart
                     current_clone_timer = clone_timer;
 
                     spawn_minion(new Vector2(0, 0));
-
+                    if (minion_list.Count >= minion_limit)
+                    {
+                        wait_for_minions_clear = true;
+                    }
                 }
 
                 void spawn_minion(Vector2 offset)
