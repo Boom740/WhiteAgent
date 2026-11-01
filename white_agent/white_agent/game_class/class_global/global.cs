@@ -224,19 +224,19 @@ namespace old_heart
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_touch"), volume: 0.5f , pitch_random: 0.2f);
                     data.Add(sound_name.ui_button_touch, sound_data);
 
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_mold_shoot"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_mold_shoot"), pitch_random: 0.3f);
                     data.Add(sound_name.mold_shoot, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_attack"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_attack"), pitch_random: 0.3f);
                     data.Add(sound_name.bacteria_attack, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_charge"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_charge"), pitch_random: 0.3f);
                     data.Add(sound_name.bacteria_charge, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_leukemia_spawn"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_leukemia_spawn"), pitch_random: 0.3f);
                     data.Add(sound_name.leukemia_spawn_minion, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_virus_smash"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_virus_smash"), pitch_random: 0.3f);
                     data.Add(sound_name.virus_smash, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_explosive_impact"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_explosive_impact"), pitch_random: 0.3f);
                     data.Add(sound_name.spike_head, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_minion_charge"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_minion_charge"), pitch_random: 0.3f);
                     data.Add(sound_name.minion_charge, sound_data);
                     
 
