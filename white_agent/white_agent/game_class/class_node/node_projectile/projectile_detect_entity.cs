@@ -21,6 +21,7 @@ namespace old_heart
 
         public override void on_hit_entity(entity target_entity)
         {
+            if (target_entity is enemy_boss) { return; }
             if (target_entity is enemy target_enemy && target_enemy.alive && detected_entity.Contains(target_enemy) == false)
             {
                 detected_entity.Add(target_enemy);
