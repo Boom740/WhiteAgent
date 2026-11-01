@@ -166,11 +166,11 @@ namespace old_heart
                 void load_sound()
                 {
                     sound_data sound_data;
-                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact"), pitch_random: 0.3f);
                     data.Add(sound_name.impact_1, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact2"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Impact2"), pitch_random: 0.3f);
                     data.Add(sound_name.impact_2, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Pick_up_head"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Pick_up_head"), pitch_random: 0.3f);
                     data.Add(sound_name.pick_up_head, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("Placeholder/SFX/Slash"),pitch_random: 0.3f);
                     data.Add(sound_name.slash, sound_data);
