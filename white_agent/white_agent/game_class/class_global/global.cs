@@ -216,7 +216,7 @@ namespace old_heart
                     data.Add(sound_name.player_throwhead, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_emergency_knockback"));
                     data.Add(sound_name.player_emergency_knockback, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_attackarmor"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_attackarmor"), volume: 0.6f, pitch_random: 0.3f);
                     data.Add(sound_name.attack_shield, sound_data);
 
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_click"), volume: 0.4f , pitch_random: 0.2f);
