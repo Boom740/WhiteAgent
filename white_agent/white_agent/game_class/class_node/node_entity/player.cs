@@ -272,7 +272,7 @@ namespace old_heart
                 if (adrenaline_rush_cooldown_timer > 0f)  // adrenaline_rush passive
                 {
                     adrenaline_rush_cooldown_timer -= delta_time;
-                    foreach(upgrade_base upgrade in run_data.upgrade_list.OfType<upgrade_adrenaline_rush>())
+                    foreach(upgrade_base upgrade in run_data.upgrade_list.OfType<upgrade_Adrenaline_rush>())
                     {
                         upgrade.cooldown_time = adrenaline_rush_cooldown_timer;
                     }
@@ -285,7 +285,7 @@ namespace old_heart
                 if (emergency_knockback_cooldown_timer > 0f)
                 {
                     emergency_knockback_cooldown_timer -= delta_time;
-                    foreach (upgrade_base upgrade in run_data.upgrade_list.OfType<upgrade_emergency_knockback>())
+                    foreach (upgrade_base upgrade in run_data.upgrade_list.OfType<upgrade_Emergency_knockback>())
                     {
                         upgrade.cooldown_time = (emergency_knockback_cooldown_timer);
                     }

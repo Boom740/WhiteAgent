@@ -19,14 +19,14 @@ namespace old_heart
         public List<upgrade_base> upgrade_list = new List<upgrade_base> {};
 
         public List<upgrade_base> shop_upgrade_pool_list = new List<upgrade_base> {
-            new upgrade_ricochet_head(),
-            new upgrade_explosive_impact(),
-            new upgrade_double_dash(),
-            new upgrade_lethal_dash(),
-            new upgrade_projectile_deflection(),
-            new upgrade_adrenaline_rush(),
-            new upgrade_emergency_knockback(),
-            new upgrade_magenet()
+            new upgrade_Ricochet(),
+            new upgrade_Spike_head(),
+            new upgrade_Double_dash(),
+            new upgrade_Lethal_dash(),
+            new upgrade_Projectile_deflection(),
+            new upgrade_Adrenaline_rush(),
+            new upgrade_Emergency_knockback(),
+            new upgrade_Magnet()
         };
 
         public List<upgrade_base> shop_upgrade_list = new List<upgrade_base> {}; // upgrade that sell in shop
