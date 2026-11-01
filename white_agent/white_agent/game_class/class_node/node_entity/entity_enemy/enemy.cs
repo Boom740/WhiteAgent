@@ -71,7 +71,7 @@ namespace old_heart
             return true;
         }
         // ---------------- Dizzy ----------------
-        public virtual void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
+        public virtual void enter_dizzy(bool break_shield = true, float dizzy_time_set = 0, bool bypass_i_frame = false)
         {
             global.sound.play_sound(global.sound.sound_name.enemy_getheadbump);
             

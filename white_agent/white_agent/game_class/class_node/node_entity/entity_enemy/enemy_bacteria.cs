@@ -239,9 +239,9 @@ namespace old_heart
             }
         }
 
-        public override void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
+        public override void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0, bool bypass_i_frame = false)
         {
-            if (state == enemy_state.dash) { return; }
+            if (state == enemy_state.dash && bypass_i_frame == false) { return; }
             base.enter_dizzy(break_shield , dizzy_time_set);
         }
         public override void die()
