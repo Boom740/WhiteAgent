@@ -80,7 +80,7 @@ namespace old_heart
             game_manager.add_projectile(merchant);
 
             enemy_3 = new enemy_boss(Content, position: new Vector2(400, -300));
-            game_manager.add_entity(enemy_3);
+            //game_manager.add_entity(enemy_3);
             
 
             base.LoadContent();

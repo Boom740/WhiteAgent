@@ -171,6 +171,8 @@ namespace old_heart
                     upgrade_button.active = true;
                     if (upgrade_button.active == false) { continue; }
 
+                    if (i >= run_data.shop_upgrade_list.Count) { break; }
+
                     upgrade_base upgrade = run_data.shop_upgrade_list[i];
 
                     image upgrade_image = upgrade_image_list[i];
@@ -196,6 +198,7 @@ namespace old_heart
                 ui_button upgrade_button = upgrade_button_list[i];
                 if (upgrade_button.active == false) { continue; }
 
+                if (i >= run_data.shop_upgrade_list.Count) { break; }
                 upgrade_base upgrade = run_data.shop_upgrade_list[upgrade_index];
                 upgrade_index++;
 
