@@ -105,7 +105,7 @@ namespace old_heart
 
             if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
-                global.sound.play_sound(global.sound.sound_name.boss_roar);
+                global.sound.play_sound(global.sound.sound_name.boss_shoot);
                 Vector2 mouse_position = global.input.scaled_mouse_world_position;
                 for (int i = 0; i < 100; i++)
                 {

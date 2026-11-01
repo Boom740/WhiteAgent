@@ -247,7 +247,7 @@ namespace old_heart
                     data.Add(sound_name.boss_dying, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_roar"));
                     data.Add(sound_name.boss_roar, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_shoot"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_shoot"), pitch_random: 0.1f);
                     data.Add(sound_name.boss_shoot, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_shake"), pitch_random: 0.2f , volume: 0.6f);
                     data.Add(sound_name.shake, sound_data);
