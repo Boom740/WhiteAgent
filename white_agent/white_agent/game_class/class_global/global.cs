@@ -122,8 +122,11 @@ namespace old_heart
             }
         }
         public static class sound {
-            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head , enemy_die , enemy_dizzy , enemy_getheadbump , enemy_gethit , entity_walk_01 , entity_walk_02 , entity_walk_03 , entity_walk_04 , gate_open , player_collectmoney , player_dash , player_die , player_dying , player_fall , player_gethit , player_punch , player_takeoffhead , player_throwhead , ui_button_click , ui_button_touch , mold_shoot , bacteria_attack , bacteria_charge , leukemia_spawn_minion , virus_smash , spike_head , player_emergency_knockback , attack_shield , minion_charge};  
-            public enum song_name { test1 }; 
+            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head , enemy_die , enemy_dizzy , enemy_getheadbump , enemy_gethit , entity_walk_01 , entity_walk_02 , entity_walk_03 , entity_walk_04 , gate_open , player_collectmoney , player_dash , player_die , player_dying , player_fall , player_gethit , player_punch , player_takeoffhead , player_throwhead , ui_button_click , ui_button_touch , mold_shoot , bacteria_attack , bacteria_charge , leukemia_spawn_minion , virus_smash , spike_head , player_emergency_knockback , attack_shield , minion_charge ,
+                boss_angry, boss_dying, boss_roar, boss_shoot, shake
+            };
+            public enum song_name { boss_fight,level,upgrade_room };
+            public static song_name current_song;
 
             public static Dictionary<sound_name, sound_data> data = new Dictionary<sound_name, sound_data>();
             public static Dictionary<song_name, song_data> data_song = new Dictionary<song_name, song_data>();
@@ -136,13 +139,13 @@ namespace old_heart
                 
                 //Debug.WriteLine("global play sound : "+ sound_data.name + " volume : " + volume + " pitch : " + pitch);
             }
-            public static void play_song(song_name song_name)  // maybe later  add sound fade out before play if there is already song playing
+            public static void play_song(song_name song_name , bool replace_same_song = false)  // replace_same_song is when that song alrady playing   start at begining ?
             {
+                if (song_name == current_song && replace_same_song == false) { return; }
                 song_data song_data = data_song[song_name];
                 MediaPlayer.Volume = song_data.volume * global.setting.volume_song * global.setting.volume_master;
                 MediaPlayer.Play(song_data.song);
-
-                Debug.WriteLine("global play song : " + song_data.name + " volume : " + MediaPlayer.Volume);
+                current_song = song_name;
             }
             public static void pause_song()
             {
@@ -237,12 +240,27 @@ namespace old_heart
                     data.Add(sound_name.minion_charge, sound_data);
                     
 
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_angry"));
+                    data.Add(sound_name.boss_angry, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_dying"));
+                    data.Add(sound_name.boss_dying, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_roar"));
+                    data.Add(sound_name.boss_roar, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_boss_shoot"));
+                    data.Add(sound_name.boss_shoot, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_shake"), pitch_random: 0.2f , volume: 0.6f);
+                    data.Add(sound_name.shake, sound_data);
                 }
                 void load_song()
                 {
                     song_data song_data;
-                    //song_data = new song_data(content.Load<Song>("Placeholder/"));
-                    //data_song.Add(song_name.test1, song_data);
+                    song_data = new song_data(content.Load<Song>("assets/sound/bgm/bgm_bossfight"));
+                    data_song.Add(song_name.boss_fight, song_data);
+                    song_data = new song_data(content.Load<Song>("assets/sound/bgm/bgm_level"));
+                    data_song.Add(song_name.level, song_data);
+                    song_data = new song_data(content.Load<Song>("assets/sound/bgm/bgm_upgraderoom"));
+                    data_song.Add(song_name.upgrade_room, song_data);
                 }
             }
 

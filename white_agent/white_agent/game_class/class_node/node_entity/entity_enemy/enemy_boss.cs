@@ -161,6 +161,7 @@ namespace old_heart
                         fire_projectile(bullet_direction);
                     }
                     shots_fired_in_burst++;
+                    global.sound.play_sound(global.sound.sound_name.boss_shoot);
 
 
 
@@ -247,6 +248,7 @@ namespace old_heart
                 else
                 {
                     global.signal.screen_shake(1.0f);
+                    global.sound.play_sound(global.sound.sound_name.shake);
                     die_screen_shake_timer = die_screen_shake_interval;
                 }
 
@@ -275,6 +277,7 @@ namespace old_heart
             {
                 state = enemy_state.roar;
                 animation_player.play(animation_player.data.data[animation_name.roar]);
+                global.sound.play_sound(global.sound.sound_name.boss_roar);
                 roar_screen_shake_timer = 0;
             }
             void enter_attack()
@@ -290,6 +293,7 @@ namespace old_heart
 
                 animation_player.play(animation_player.data.data[animation_name.angry]);
                 angry = true;
+                global.sound.play_sound(global.sound.sound_name.boss_angry);
             }
         }
 
@@ -331,6 +335,7 @@ namespace old_heart
             if (!alive) { return; }
             state = enemy_state.died;
             animation_player.play(animation_player.data.data[animation_name.died]);
+            global.sound.play_sound(global.sound.sound_name.boss_dying);
             alive = false;
             shield = false;
         }

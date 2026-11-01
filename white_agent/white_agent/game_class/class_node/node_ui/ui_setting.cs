@@ -147,6 +147,8 @@ namespace old_heart
             if (black_background.visible == false)  // open setting menu
             {
                 set_ui_visible(true);
+
+                global.sound.play_song(global.sound.song_name.upgrade_room , replace_same_song: true);
             }
 
             if (ui_return_button.mouse_hover)
@@ -261,6 +263,8 @@ namespace old_heart
                 ui_return_button.mouse_hover = false;
                 set_ui_visible(false);
                 current_result = result.leave;
+
+                global.sound.pause_song();
                 return;
             }
 

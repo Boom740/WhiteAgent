@@ -29,9 +29,23 @@ namespace old_heart
             game_manager.add_ui(ui_pause);
 
             game_manager.level_manager.set_level_file(level_file, game.run_data_manager);
+
             if (level_file == "level_boss")
             {
                 game_manager.camera_manager.camera.ZoomOut(0.25f);
+                global.sound.play_song(global.sound.song_name.boss_fight);
+            }
+            else if (level_file == "level_0_shop")
+            {
+                global.sound.play_song(global.sound.song_name.upgrade_room);
+            }
+            else if (level_file == "level_boss_cutscene")
+            {
+                global.sound.pause_song();
+            }
+            else
+            {
+                global.sound.play_song(global.sound.song_name.level);
             }
 
             base.LoadContent();

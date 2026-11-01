@@ -30,6 +30,8 @@ namespace old_heart
             {
                 ui_main_menu.active = true;
             }
+
+            global.sound.pause_song();
         }
 
         public override void Update(GameTime gameTime)

@@ -88,6 +88,9 @@ namespace old_heart
 
             ui_debug_upgrade = new ui_debug_upgrade(Content, game.run_data_manager, game_manager);
             game_manager.add_ui(ui_debug_upgrade);
+
+
+            global.sound.pause_song();
         }
         public override void Update(GameTime gameTime)
         {
@@ -102,6 +105,7 @@ namespace old_heart
 
             if (global.input.keyboard_state.WasKeyPressed(Keys.B))
             {
+                global.sound.play_sound(global.sound.sound_name.boss_roar);
                 Vector2 mouse_position = global.input.scaled_mouse_world_position;
                 for (int i = 0; i < 100; i++)
                 {

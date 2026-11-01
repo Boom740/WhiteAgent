@@ -136,6 +136,7 @@ namespace old_heart
                 else
                 {
                     global.signal.screen_shake(1.0f);
+                    global.sound.play_sound(global.sound.sound_name.shake);
                     die_screen_shake_timer = die_screen_shake_interval;
                 }
 
