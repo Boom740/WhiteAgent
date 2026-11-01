@@ -185,6 +185,7 @@ namespace old_heart
 
                     projectile_enemy_bullet shot = new projectile_enemy_bullet(content, position, aim_direction, projectile_speed : 150f, damage:1, knockback_speed:30f , lifetime:3f);
                     shot.owner = this;
+                    shot.trail_offset = new Vector2(0, -16f);
                     global.signal.spawn_projectile(shot);
                 }
             }

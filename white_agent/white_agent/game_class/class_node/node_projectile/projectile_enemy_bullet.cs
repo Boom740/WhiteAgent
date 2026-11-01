@@ -12,6 +12,7 @@ namespace old_heart
         public int damage;
         public float knockback_speed;
 
+        public Vector2 trail_offset = new Vector2(0, -14f);
         private trail_effect trail;
         public projectile_enemy_bullet(ContentManager content_set, Vector2 position, Vector2 aim_direction, float projectile_speed, int damage, float knockback_speed, float lifetime = 2f,
      string texture_path = "assets/image/weapons/sprite_bullet_boss", float scale = 0.8f)
@@ -36,9 +37,7 @@ namespace old_heart
 
             if (alive)
             {
-                float offset_x = 0f;
-                float offset_y = -14f;
-                trail.add_point(position + new Vector2(offset_x, offset_y));
+                trail.add_point(position + trail_offset);
             }
         }
 
