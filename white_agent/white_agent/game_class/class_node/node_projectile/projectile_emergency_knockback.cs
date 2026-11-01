@@ -34,6 +34,7 @@ namespace old_heart
         }
         public override void spawn(projectile_manager projectile_manager, collision_manager collision_manager, debug_manager debug_manager)
         {
+            global.sound.play_sound(global.sound.sound_name.player_emergency_knockback);
             base.spawn(projectile_manager, collision_manager, debug_manager);
             global.signal.screen_shake(0.5f);
         }

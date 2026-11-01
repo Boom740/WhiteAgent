@@ -210,6 +210,7 @@ namespace old_heart
                     new_minion.animation_player.tint = animation_player.tint;
                     global.signal.spawn_entity(new_minion);
                     global.signal.spawn_particle(particle_name.enemy_summon_efx, position + offset, high_layer: true);
+                    global.sound.play_sound(global.sound.sound_name.leukemia_spawn_minion);
                     minion_list.Add(new_minion);
                 }
             }

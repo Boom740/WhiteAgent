@@ -223,6 +223,7 @@ namespace old_heart
                     shot.owner = this;
                     fired_bullets.Add(shot);
                     global.signal.spawn_projectile(shot);
+                    global.sound.play_sound(global.sound.sound_name.mold_shoot);
                 }
             }
 

@@ -139,6 +139,7 @@ namespace old_heart
 
             hit_entity.Add(target_entity);
 
+            //bool should_play_bump_sound = !explosive_impact;
             target_enemy.enter_dizzy(break_shield: true);
             spawn_shock_wave();
             

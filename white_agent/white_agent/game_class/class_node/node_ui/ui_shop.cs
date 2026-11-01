@@ -168,6 +168,7 @@ namespace old_heart
                 for (int i=0 ;i < upgrade_button_list.Count; i++)
                 {
                     ui_button upgrade_button = upgrade_button_list[i];
+                    upgrade_button.active = true;
                     if (upgrade_button.active == false) { continue; }
 
                     upgrade_base upgrade = run_data.shop_upgrade_list[i];
@@ -253,6 +254,9 @@ namespace old_heart
             {
                 current_result = result.exit;
                 leave_button.mouse_hover = false;
+
+                foreach (ui_button button in upgrade_button_list) { button.active = false; }
+                leave_button.active = false;
             }
         }
         public void load_shop_upgrade_data()
@@ -270,7 +274,7 @@ namespace old_heart
                 ui_text upgrade_description = upgrade_description_list[i];
                 ui_text upgrade_price_text = upgrade_price_text_list[i];
 
-                upgrade_button.active = true;
+                upgrade_button.active = false;
                 upgrade_image.texture = content.Load<Texture2D>(upgrade.upgrade_texture);
                 upgrade_name.text_string = upgrade.GetType().Name.Remove(0, 8).Replace('_', ' ');
                 upgrade_name.origin = upgrade_name.text_font.MeasureString(upgrade_name.text_string) /2;

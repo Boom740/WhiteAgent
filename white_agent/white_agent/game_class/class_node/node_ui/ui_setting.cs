@@ -84,12 +84,14 @@ namespace old_heart
                 {
                     ui_button new_ui_setting_decrease_button = new ui_button(content, new Rectangle((position + new Vector2(setting_spacing.X - setting_button_spacing_distance,0)).ToPoint() - setting_button_size/2 , setting_button_size));
                     new_ui_setting_decrease_button.visible = false;
+                    new_ui_setting_decrease_button.active = false;
                     ui_setting_decrease_button_list.Add(new_ui_setting_decrease_button);
                     game_manager.add_ui(new_ui_setting_decrease_button);
 
 
                     ui_button new_ui_setting_increase_button = new ui_button(content, new Rectangle((position + new Vector2(setting_spacing.X + setting_button_spacing_distance, 0)).ToPoint() - setting_button_size / 2, setting_button_size));
                     new_ui_setting_increase_button.visible = false;
+                    new_ui_setting_increase_button.active = false;
                     ui_setting_increase_button_list.Add(new_ui_setting_increase_button);
                     game_manager.add_ui(new_ui_setting_increase_button);
 
@@ -111,6 +113,7 @@ namespace old_heart
                 {
                     ui_button new_ui_setting_toggle_button = new ui_button(content, new Rectangle((position + new Vector2(setting_spacing.X, 0)).ToPoint() - setting_toggle_button_size / 2, setting_toggle_button_size));
                     new_ui_setting_toggle_button.visible = false;
+                    new_ui_setting_toggle_button.active = false;
                     ui_setting_toggle_button_list.Add(new_ui_setting_toggle_button);
                     game_manager.add_ui(new_ui_setting_toggle_button);
 
@@ -280,9 +283,22 @@ namespace old_heart
                 {
                     image.visible = visible;
                 }
+
                 foreach (image image in ui_setting_button_image_list)
                 {
                     image.visible = visible;
+                }
+                foreach (ui_button button in ui_setting_decrease_button_list)
+                {
+                    button.active = visible;
+                }
+                foreach (ui_button button in ui_setting_increase_button_list)
+                {
+                    button.active = visible;
+                }
+                foreach (ui_button button in ui_setting_toggle_button_list)
+                {
+                    button.active = visible;
                 }
             }
         }

@@ -45,8 +45,11 @@ namespace old_heart
         // ---------------- Damage / Death ----------------
         public override bool take_damage(int damage_taken, node damage_dealer = null)
         {
-            if (alive == false) { return false; }
-            if (shield) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า
+            if (alive == false) { return false; } // มี shield อยู่ โจมตีธรรมดาไม่เข้า
+            if (shield) {
+                global.sound.play_sound(global.sound.sound_name.attack_shield);
+                return false;
+            } 
 
             if (base.take_damage(damage_taken) == false) { return false; }
 
@@ -71,6 +74,7 @@ namespace old_heart
         public virtual void enter_dizzy(bool break_shield = true , float dizzy_time_set = 0)
         {
             global.sound.play_sound(global.sound.sound_name.enemy_getheadbump);
+            
             if (state == enemy_state.died) return;
 
             if (shield && break_shield)

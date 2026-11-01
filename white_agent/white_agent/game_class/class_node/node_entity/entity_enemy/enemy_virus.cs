@@ -161,7 +161,8 @@ namespace old_heart
 
                     projectile projectile = new projectile_enemy_shock_wave(content, position, this , hit_box_radius : attack_hit_box_radius);
                     global.signal.spawn_projectile(projectile);
-
+                    global.signal.screen_shake(0.5f);
+                    global.sound.play_sound(global.sound.sound_name.virus_smash);
                     global.signal.spawn_particle(particle_name.ground_smash_efx, position , high_layer: true);
                 }
                

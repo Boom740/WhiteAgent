@@ -84,6 +84,7 @@ namespace old_heart
                 if (Vector2.Distance(position, target.position) <= fuse_trigger_radius)
                 {
                     state = enemy_state.attack;
+                    global.sound.play_sound(global.sound.sound_name.minion_charge);
                     fuse_timer = 0f;
                 }
             }

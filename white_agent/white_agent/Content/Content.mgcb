@@ -1093,6 +1093,62 @@
 /processorParam:Version=3.8.5.1
 /build:assets/image/weapons/sprite_weapon_head.png;assets/image/weapons/sprite_weapon_head
 
+#begin assets/sound/sfx/sfx_bacteria_attack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_bacteria_attack.wav
+
+#begin assets/sound/sfx/sfx_bacteria_charge.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_bacteria_charge.wav
+
+#begin assets/sound/sfx/sfx_boss_angry.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_boss_angry.wav;assets/sound/sfx_boss_angry
+
+#begin assets/sound/sfx/sfx_boss_dying.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_boss_dying.wav;assets/sound/sfx_boss_dying
+
+#begin assets/sound/sfx/sfx_boss_roar.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_boss_roar.wav;assets/sound/sfx_boss_roar
+
+#begin assets/sound/sfx/sfx_boss_shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_boss_shoot.wav;assets/sound/sfx_boss_shoot
+
+#begin assets/sound/sfx/sfx_button_click.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_button_click.wav
+
+#begin assets/sound/sfx/sfx_button_touch.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_button_touch.wav
+
 #begin assets/sound/sfx/sfx_enemy_die.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -1149,12 +1205,68 @@
 /processorParam:Version=3.8.6.0
 /build:assets/sound/sfx/sfx_entity_walk_04.wav;assets/sound/sfx/sfx_entity_walk_04
 
+#begin assets/sound/sfx/sfx_explosive_impact.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_explosive_impact.wav;assets/sound/sfx_explosive_impact
+
+#begin assets/sound/sfx/sfx_explosive_impact.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_explosive_impact.wav
+
 #begin assets/sound/sfx/sfx_gate_open.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /processorParam:Version=3.8.6.0
 /build:assets/sound/sfx/sfx_gate_open.wav;assets/sound/sfx/sfx_gate_open
+
+#begin assets/sound/sfx/sfx_leukemia_spawn.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_leukemia_spawn.wav;assets/sound/sfx_leukemia_spawn
+
+#begin assets/sound/sfx/sfx_leukemia_spawn.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_leukemia_spawn.wav
+
+#begin assets/sound/sfx/sfx_minion_charge.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_minion_charge.wav;assets/sound/sfx_minion_charge
+
+#begin assets/sound/sfx/sfx_minion_charge.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_minion_charge.wav
+
+#begin assets/sound/sfx/sfx_mold_shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_mold_shoot.wav
+
+#begin assets/sound/sfx/sfx_player_attackarmor.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_attackarmor.wav
 
 #begin assets/sound/sfx/sfx_player_collectmoney.wav
 /importer:WavImporter
@@ -1183,6 +1295,13 @@
 /processorParam:Quality=Best
 /processorParam:Version=3.8.6.0
 /build:assets/sound/sfx/sfx_player_dying.wav;assets/sound/sfx/sfx_player_dying
+
+#begin assets/sound/sfx/sfx_player_emergency_knockback.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_player_emergency_knockback.wav
 
 #begin assets/sound/sfx/sfx_player_fall.wav
 /importer:WavImporter
@@ -1218,6 +1337,27 @@
 /processorParam:Quality=Best
 /processorParam:Version=3.8.6.0
 /build:assets/sound/sfx/sfx_player_throwhead.wav;assets/sound/sfx/sfx_player_throwhead
+
+#begin assets/sound/sfx/sfx_shake.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_shake.wav;assets/sound/sfx_shake
+
+#begin assets/sound/sfx/sfx_virus_smash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_virus_smash.wav;assets/sound/sfx_virus_smash
+
+#begin assets/sound/sfx/sfx_virus_smash.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.0
+/build:assets/sound/sfx/sfx_virus_smash.wav
 
 #begin level/level_0_shop.tmx
 /importer:TiledTilemapImporter

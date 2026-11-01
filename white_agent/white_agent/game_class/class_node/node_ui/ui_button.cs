@@ -19,6 +19,7 @@ namespace old_heart
         public Texture2D hold_texture;
 
         public bool mouse_hover = false;
+        private bool previous_mouse_hover = false;
         public bool mouse_hold = false;
         public bool clicked = false;
 
@@ -29,9 +30,16 @@ namespace old_heart
             button_texture = content.Load<Texture2D>("assets/image/other/white_pixel");
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime) //แหลว
         {
-            if (!active) return; // make it not work when it is not active
+            if (!active)   // make it not work when it is not active
+            {
+                mouse_hover = false;
+                previous_mouse_hover = false;
+                mouse_hold = false;
+                button_color = base_color;
+                return;
+            }
 
             MouseStateExtended mouse_state = global.input.mouse_state;
             Point mouse_position = global.input.scaled_mouse_position;
@@ -39,16 +47,22 @@ namespace old_heart
 
             clicked = false; // reset clicked every frame
 
+            if (mouse_hover && !previous_mouse_hover)
+            {
+                global.sound.play_sound(global.sound.sound_name.ui_button_touch);
+            }
             if (mouse_hover) // mouse inside button rectangle
             {
                 if (mouse_state.WasButtonReleased(MouseButton.Left) && mouse_hold)  // left click detected XD
                 {
                     clicked = true;
                     mouse_hold = false;
+                    
                 }
                 else if (mouse_state.WasButtonPressed(MouseButton.Left))
                 {
                     mouse_hold = true;
+                    global.sound.play_sound(global.sound.sound_name.ui_button_click);
                 }
 
                 if (mouse_hold)
@@ -57,6 +71,7 @@ namespace old_heart
                     {
                         button_color = hold_color;
                     }
+                   
                 }
                 else if(hover_texture == null)
                 {
@@ -72,7 +87,7 @@ namespace old_heart
                 mouse_hold = false;
                 button_color = base_color;
             }
-
+            previous_mouse_hover = mouse_hover;
         }
 
         public override void Draw(SpriteBatch sprite_batch)

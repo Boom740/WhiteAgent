@@ -138,6 +138,7 @@ namespace old_heart
                 {
                     if (attack_cooldown_timer <= 0)
                     {
+                        global.sound.play_sound(global.sound.sound_name.bacteria_charge);
                         start_attack();
                     }
                     acceleration = Vector2.Zero;
@@ -190,6 +191,7 @@ namespace old_heart
                 animation_player.current_frame_index = dash_animation_frame_index;
                 dash_timer = melee_data.hitbox_lifetime;
                 hit_entity.Clear();
+                global.sound.play_sound(global.sound.sound_name.bacteria_attack);
 
                 acceleration = Vector2.Zero;
             }

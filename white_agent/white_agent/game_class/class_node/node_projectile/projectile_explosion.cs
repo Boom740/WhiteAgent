@@ -25,7 +25,7 @@ namespace old_heart
             {
                 hit_entity.Add(target_enemy);
 
-
+                global.sound.play_sound(global.sound.sound_name.spike_head);
                 target_enemy.take_damage(damage, this);
 
 

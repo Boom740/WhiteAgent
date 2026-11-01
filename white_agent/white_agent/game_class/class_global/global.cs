@@ -122,7 +122,7 @@ namespace old_heart
             }
         }
         public static class sound {
-            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head , enemy_die , enemy_dizzy , enemy_getheadbump , enemy_gethit , entity_walk_01 , entity_walk_02 , entity_walk_03 , entity_walk_04 , gate_open , player_collectmoney , player_dash , player_die , player_dying , player_fall , player_gethit , player_punch , player_takeoffhead , player_throwhead };  
+            public enum sound_name { impact_1 , impact_2 , pick_up_head , slash , throw_head , enemy_die , enemy_dizzy , enemy_getheadbump , enemy_gethit , entity_walk_01 , entity_walk_02 , entity_walk_03 , entity_walk_04 , gate_open , player_collectmoney , player_dash , player_die , player_dying , player_fall , player_gethit , player_punch , player_takeoffhead , player_throwhead , ui_button_click , ui_button_touch , mold_shoot , bacteria_attack , bacteria_charge , leukemia_spawn_minion , virus_smash , spike_head , player_emergency_knockback , attack_shield , minion_charge};  
             public enum song_name { test1 }; 
 
             public static Dictionary<sound_name, sound_data> data = new Dictionary<sound_name, sound_data>();
@@ -193,7 +193,6 @@ namespace old_heart
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_gate_open"));
                     data.Add(sound_name.gate_open, sound_data);
 
-
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_collectmoney"),volume: 0.1f , pitch_random: 0.3f);
                     data.Add(sound_name.player_collectmoney, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_dash"), pitch_random: 0.3f);
@@ -212,6 +211,31 @@ namespace old_heart
                     data.Add(sound_name.player_takeoffhead, sound_data);
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_throwhead"), pitch_random: 0.3f);
                     data.Add(sound_name.player_throwhead, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_emergency_knockback"));
+                    data.Add(sound_name.player_emergency_knockback, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_attackarmor"));
+                    data.Add(sound_name.attack_shield, sound_data);
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_click"));
+                    data.Add(sound_name.ui_button_click, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_touch"));
+                    data.Add(sound_name.ui_button_touch, sound_data);
+
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_mold_shoot"));
+                    data.Add(sound_name.mold_shoot, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_attack"));
+                    data.Add(sound_name.bacteria_attack, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_bacteria_charge"));
+                    data.Add(sound_name.bacteria_charge, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_leukemia_spawn"));
+                    data.Add(sound_name.leukemia_spawn_minion, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_virus_smash"));
+                    data.Add(sound_name.virus_smash, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_explosive_impact"));
+                    data.Add(sound_name.spike_head, sound_data);
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_minion_charge"));
+                    data.Add(sound_name.minion_charge, sound_data);
+                    
 
                 }
                 void load_song()
