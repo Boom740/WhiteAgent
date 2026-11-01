@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace old_heart
 {
@@ -23,6 +24,9 @@ namespace old_heart
 
         public ui_text shop_text;
         public image shop_background_image;
+
+        public ui_text notification_text;  // when not enough slot
+        public float notification_text_time = 2;
 
         public ui_text sell_text;
 
@@ -63,6 +67,7 @@ namespace old_heart
             leave_text.visible = false;
             game_manager.add_ui(leave_text);
 
+
             Texture2D texture_shop_background = content.Load<Texture2D>("assets/image/ui/ui_upgrade_container");
             shop_background_image = new image(content, render_size / 2, texture: texture_shop_background);
             shop_background_image.origin = texture_shop_background.Bounds.Center.ToVector2();
@@ -78,6 +83,7 @@ namespace old_heart
             sell_text = new ui_text("Click to sell", render_size * new Vector2(0.91f, 0.26f) , text_scale: new Vector2(0.15f, 0.15f), text_color: Color.DarkGray);
             sell_text.visible = false;
             game_manager.add_ui(sell_text);
+
 
             Texture2D upgrade_button_unselect_texture = content.Load<Texture2D>("assets/image/ui/ui_upgrade_slot_unselect");
             Texture2D upgrade_button_selected_texture = content.Load<Texture2D>("assets/image/ui/ui_upgrade_slot_selected");
@@ -145,6 +151,12 @@ namespace old_heart
                 game_manager.add_ui(sold_out_text);
             }
 
+            notification_text = new ui_text("Upgrade slot is full", Vector2.Zero, text_scale: new Vector2(0.5f, 0.5f), text_color: Color.White);
+            notification_text.position = render_size * new Vector2(0.5f, 0.93f);
+            notification_text.origin = notification_text.text_font.MeasureString(notification_text.text_string) / 2;
+            notification_text.visible = false;
+            game_manager.add_ui(notification_text);
+
             load_shop_upgrade_data();
         }
         public override void Update(GameTime gameTime)
@@ -168,7 +180,6 @@ namespace old_heart
                 for (int i=0 ;i < upgrade_button_list.Count; i++)
                 {
                     ui_button upgrade_button = upgrade_button_list[i];
-                    upgrade_button.active = true;
                     if (upgrade_button.active == false) { continue; }
 
                     if (i >= run_data.shop_upgrade_list.Count) { break; }
@@ -192,13 +203,21 @@ namespace old_heart
                 return;
             }
 
+            if (notification_text.alpha > 0)
+            {
+                notification_text.alpha -= delta_time / notification_text_time;  // number is second it show
+            }
+            else if (notification_text.visible == true)
+            {
+                notification_text.visible = false;
+            }
+
             int upgrade_index = 0; // skip the sold button index
             for (int i = 0; i < upgrade_button_list.Count; i++)   // shop logic
             {
                 ui_button upgrade_button = upgrade_button_list[i];
                 if (upgrade_button.active == false) { continue; }
-
-                if (i >= run_data.shop_upgrade_list.Count) { break; }
+                
                 upgrade_base upgrade = run_data.shop_upgrade_list[upgrade_index];
                 upgrade_index++;
 
@@ -232,6 +251,11 @@ namespace old_heart
                         sold_out_image.visible = true;
                         sold_out_text.visible = true;
 
+                        break;
+                    }else if (upgrade_button.clicked)
+                    {
+                        notification_text.visible = true;
+                        notification_text.alpha = 1;
                         break;
                     }
                 }
@@ -277,7 +301,7 @@ namespace old_heart
                 ui_text upgrade_description = upgrade_description_list[i];
                 ui_text upgrade_price_text = upgrade_price_text_list[i];
 
-                upgrade_button.active = false;
+                upgrade_button.active = true;
                 upgrade_image.texture = content.Load<Texture2D>(upgrade.upgrade_texture);
                 upgrade_name.text_string = upgrade.GetType().Name.Remove(0, 8).Replace('_', ' ');
                 upgrade_name.origin = upgrade_name.text_font.MeasureString(upgrade_name.text_string) /2;
