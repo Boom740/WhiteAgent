@@ -54,9 +54,9 @@ namespace old_heart
                 ui_button upgrade_button = new ui_button(content, new Rectangle(upgrade_position.ToPoint(), upgrade_texture.Bounds.Size));
                 upgrade_button.visible = false;
                 upgrade_button.active = false;
+                upgrade_button.click_sound_enable = false;
                 upgrade_button_list.Add(upgrade_button);
                 game_manager.add_ui(upgrade_button);
-
 
                 ui_text upgrade_cooldown_text = new ui_text("0", Vector2.Zero, text_scale: new Vector2(0.25f, 0.25f));
                 upgrade_cooldown_text.visible = false;
@@ -88,6 +88,7 @@ namespace old_heart
                 load_upgrade_data();  // loaded more than current upgrade
             }
 
+
             for (int i = 0; i < upgrade_button_list.Count; i++)
             {
                 ui_button upgrade_button = upgrade_button_list[i];
@@ -97,7 +98,10 @@ namespace old_heart
                 ui_text upgrade_cooldown_text = upgrade_cooldown_text_list[i];
                 upgrade_base upgrade = run_data.upgrade_list[i];
 
-                
+                if (upgrade_button.click_sound_enable == false && ui_shop.active == true) 
+                {
+                    upgrade_button.click_sound_enable = true;
+                }
 
                 if (upgrade_button.mouse_hover)
                 {

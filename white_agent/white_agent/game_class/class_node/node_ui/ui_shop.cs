@@ -157,7 +157,6 @@ namespace old_heart
             notification_text.visible = false;
             game_manager.add_ui(notification_text);
 
-            load_shop_upgrade_data();
         }
         public override void Update(GameTime gameTime)
         {
@@ -176,6 +175,8 @@ namespace old_heart
                 shop_background_image.visible = true;
                 shop_text.visible = true;
                 sell_text.visible = true;
+
+                load_shop_upgrade_data();
 
                 for (int i=0 ;i < upgrade_button_list.Count; i++)
                 {
@@ -199,7 +200,6 @@ namespace old_heart
                     upgrade_price_image.visible = true;
                     upgrade_price_text.visible = true;
                 }
-
                 return;
             }
 

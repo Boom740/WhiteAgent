@@ -23,6 +23,8 @@ namespace old_heart
         public bool mouse_hold = false;
         public bool clicked = false;
 
+        public bool hover_sound_enable = true;
+        public bool click_sound_enable = true;
         public ui_button(ContentManager content ,Rectangle rectangle)
         {
             button_rectangle = rectangle;
@@ -49,7 +51,10 @@ namespace old_heart
 
             if (mouse_hover && !previous_mouse_hover)
             {
-                global.sound.play_sound(global.sound.sound_name.ui_button_touch);
+                if (hover_sound_enable)
+                {
+                    global.sound.play_sound(global.sound.sound_name.ui_button_touch);
+                }
             }
             if (mouse_hover) // mouse inside button rectangle
             {
@@ -57,7 +62,10 @@ namespace old_heart
                 {
                     clicked = true;
                     mouse_hold = false;
-                    global.sound.play_sound(global.sound.sound_name.ui_button_click);
+                    if (click_sound_enable)
+                    {
+                        global.sound.play_sound(global.sound.sound_name.ui_button_click);
+                    }
 
                 }
                 else if (mouse_state.WasButtonPressed(MouseButton.Left))
