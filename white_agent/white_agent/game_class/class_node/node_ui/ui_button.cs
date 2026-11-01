@@ -57,12 +57,12 @@ namespace old_heart
                 {
                     clicked = true;
                     mouse_hold = false;
-                    
+                    global.sound.play_sound(global.sound.sound_name.ui_button_click);
+
                 }
                 else if (mouse_state.WasButtonPressed(MouseButton.Left))
                 {
                     mouse_hold = true;
-                    global.sound.play_sound(global.sound.sound_name.ui_button_click);
                 }
 
                 if (mouse_hold)

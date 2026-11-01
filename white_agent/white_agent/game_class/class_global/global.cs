@@ -219,9 +219,9 @@ namespace old_heart
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_player_attackarmor"));
                     data.Add(sound_name.attack_shield, sound_data);
 
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_click"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_click"), volume: 0.4f , pitch_random: 0.2f);
                     data.Add(sound_name.ui_button_click, sound_data);
-                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_touch"));
+                    sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_button_touch"), volume: 0.5f , pitch_random: 0.2f);
                     data.Add(sound_name.ui_button_touch, sound_data);
 
                     sound_data = new sound_data(content.Load<SoundEffect>("assets/sound/sfx/sfx_mold_shoot"));
