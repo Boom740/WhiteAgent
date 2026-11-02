@@ -139,8 +139,18 @@ namespace old_heart
                 current_result = result.exit;
             }
 
+        }
 
-
+        public void set_button_sound(bool enable_button_sound)
+        {
+            ui_new_game_button.hover_sound_enable = enable_button_sound;
+            ui_new_game_button.click_sound_enable = enable_button_sound;
+            ui_resume_button.hover_sound_enable = enable_button_sound;
+            ui_resume_button.click_sound_enable = enable_button_sound;
+            ui_setting_button.hover_sound_enable = enable_button_sound;
+            ui_setting_button.click_sound_enable = enable_button_sound;
+            ui_exit_button.hover_sound_enable = enable_button_sound;
+            ui_exit_button.click_sound_enable = enable_button_sound;
         }
         public override void Draw(SpriteBatch sprite_batch)
         {

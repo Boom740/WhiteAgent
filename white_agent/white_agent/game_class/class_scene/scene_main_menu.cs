@@ -25,6 +25,7 @@ namespace old_heart
             {
                 ui_cut_scene.active = true;
                 ui_main_menu.active = false;
+                ui_main_menu.set_button_sound(false);
             }
             else
             {
@@ -52,6 +53,7 @@ namespace old_heart
                 else
                 {
                     ui_main_menu.active = true;
+                    ui_main_menu.set_button_sound(true);
                 }
             }
 
@@ -63,17 +65,22 @@ namespace old_heart
             {
                 ui_setting.current_result = ui_setting.result.none;
                 ui_setting.active = true;
+
+                ui_main_menu.set_button_sound(false);
             }
             else if (ui_setting.current_result == ui_setting.result.leave && ui_setting.active == true)
             {
                 ui_main_menu.current_result = ui_main_menu.result.none;
                 ui_setting.active = false;
+
+                ui_main_menu.set_button_sound(true);
             }
             else if (ui_main_menu.current_result == ui_main_menu.result.new_game && game.scene_transitioning_timer <= 0)
             {
                 reset_data();
                 ui_cut_scene.active = true;
                 ui_main_menu.active = false;
+                ui_main_menu.set_button_sound(false);
             }
             else if (ui_main_menu.current_result == ui_main_menu.result.resume_game && game.scene_transitioning_timer <= 0)
             {
