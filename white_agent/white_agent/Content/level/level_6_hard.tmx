@@ -41,7 +41,7 @@
   <object id="236" type="enemy_virus_super" gid="10" x="1082.97" y="574.939" width="128" height="128"/>
   <object id="237" type="enemy_virus_super" gid="10" x="328.895" y="583.749" width="128" height="128"/>
   <object id="238" type="enemy_mold_super" gid="12" x="717.61" y="1120.16" width="64" height="64"/>
-  <object id="242" gid="9" x="1115" y="1079" width="80" height="80"/>
-  <object id="243" gid="3" x="308" y="1078" width="80" height="80"/>
+  <object id="242" type="enemy_bacteria_super" gid="9" x="1115" y="1079" width="80" height="80"/>
+  <object id="243" type="enemy_bacteria" gid="3" x="308" y="1078" width="80" height="80"/>
  </objectgroup>
 </map>
