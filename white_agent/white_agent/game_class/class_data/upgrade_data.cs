@@ -15,6 +15,7 @@ namespace old_heart
 
         public virtual void apply_upgrade(player player)
         {
+            cooldown_time = 0f; // for ui visual
         }
     }
 
@@ -29,6 +30,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.head_ricochet += 1;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Spike_head : upgrade_base
@@ -42,6 +45,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.head_explosive_impact = true;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Double_dash : upgrade_base
@@ -55,6 +60,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.max_dash += 1;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Lethal_dash : upgrade_base
@@ -68,6 +75,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.lethal_dash_enable = true;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Projectile_deflection : upgrade_base
@@ -81,6 +90,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.projectile_deflection_enable = true;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Adrenaline_rush : upgrade_base
@@ -94,6 +105,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.adrenaline_rush_enable = true;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Emergency_knockback : upgrade_base
@@ -107,6 +120,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.emergency_knockback_enable = true;
+
+            base.apply_upgrade(player);
         }
     }
     public class upgrade_Magnet : upgrade_base
@@ -120,6 +135,8 @@ namespace old_heart
         public override void apply_upgrade(player player)
         {
             player.magnet_enable = true;
+
+            base.apply_upgrade(player);
         }
     }
 }

@@ -28,10 +28,6 @@ namespace old_heart
 
             game_manager = new game_manager(Content, game.Window, GraphicsDevice); 
 
-            foreach (upgrade_base upgrade in game.run_data_manager.upgrade_list)
-            {
-                upgrade.cooldown_time = 0;
-            }
 
             game.run_data_manager.dna_temporary = game.run_data_manager.dna;
 
