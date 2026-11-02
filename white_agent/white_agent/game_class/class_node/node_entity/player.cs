@@ -173,11 +173,12 @@ namespace old_heart
                     break;
             }
 
+            /*
             if (keyboard_state.WasKeyPressed(Keys.L))       // debug 
             {
                 take_damage(1);
                 Debug.WriteLine("hp left " + hp + " / " + max_hp);
-            }          // debug
+            }          // debug */
             /*
             if (keyboard_state.WasKeyPressed(Keys.T))
             {

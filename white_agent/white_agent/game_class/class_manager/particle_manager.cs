@@ -97,7 +97,7 @@ namespace old_heart
 
             if (keyboard_state.WasKeyReleased(Keys.Z))
             {
-                global.signal.spawn_particle(particle_name.enemy_summon_efx, global.input.scaled_mouse_world_position, high_layer: true);
+                //global.signal.spawn_particle(particle_name.enemy_summon_efx, global.input.scaled_mouse_world_position, high_layer: true);
             }
 
             low_particle_effect.Update(delta_time);
