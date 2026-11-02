@@ -28,6 +28,18 @@
 		<PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.*" />
 	</ItemGroup>
 	<ItemGroup>
+		<None Update="Content\assets\font\DigitalDisco-Thin.fnt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\assets\font\DigitalDisco-Thin.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\assets\font\DigitalDisco.fnt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\assets\font\DigitalDisco.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Content\assets\font\lukee_bold.fnt">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
@@ -38,6 +50,12 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\assets\font\lukee_bold_outlined.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\assets\font\Lukee_how.fnt">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="Content\assets\font\Lukee_how.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Content\assets\font\lukee_light.fnt">

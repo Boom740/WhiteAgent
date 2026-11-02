@@ -118,7 +118,7 @@ namespace old_heart
             {
                 default_font_1 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_bold_outlined.fnt"), "font_1");
                 default_font_2 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_light.fnt"),"font_2");
-                default_font_3 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/lukee_small_outlined.fnt"), "font_3");
+                default_font_3 = BitmapFont.FromStream(graphics_device, TitleContainer.OpenStream("Content/assets/font/DigitalDisco.fnt"), "font_3");
             }
         }
         public static class sound {
