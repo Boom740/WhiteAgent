@@ -33,15 +33,15 @@
 
 ## Nice to Have
 
-| # | User Story                                                                                                      | Acceptance Criteria                                                                                                                                      | Estimate (SP) | Sprint | Status |
-| - | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ------ | ------ |
-| 1 | As a designer, I want enemy spawn rate stored in a data file, so that I can tune difficulty without recompiling | ปรับค่า spawn rate ในไฟล์ data แล้วรันเกมใหม่ ค่าที่เปลี่ยนมีผลทันทีโดยไม่ต้อง build ใหม่ | 1 week        | -      |        |
-| 2 | As a designer, I want enemy spawn in random position                                                            | ทุกครั้งที่เล่น ศัตรูจะเกิดไม่ซ้ำที่เดิม                                                                          | 1 week        | -      |        |
-| 3 | As a designer, I want game to have setting in game                                                             | ในเกมจะมีระบบ Setting                                                                                                                       | 1 week        | -      |        |
-| 4 | As a designer, I want to make game cut scene                                                                    | ก่อนเข้าหน้าเมนูจะมี cut scene เล่นให้ดูก่อน                                                                            | 1 week        | -      |        |
-| 5 | As a player, I want a inventory to keep item                                                                    | จะมีกระเป๋าหรือกล่องให้ผู้เล่นเก็บไอเทม                                                                           | 1 week        | -      |        |
-| 6 | As a player, I want to see ability effect                                                                       | จะมีเอฟเฟคเล่นตอนโจมตีหรือใช้สกิล                                                                                       | 2 days        | 3      |        |
-| 7 | As a player, I want to know game lore                                                                           | เกมมีเนื้อเรื่องเล่า                                                                                                                 | 1 day         | 4      |        |
+| # | User Story                                                                                                      | Acceptance Criteria                                                             | Estimate (SP) | Sprint | Status |
+| - | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------- | ------ | ------ |
+| 1 | As a designer, I want enemy spawn rate stored in a data file, so that I can tune difficulty without recompiling | ปรับค่า spawn rate ในไฟล์ data แล้วรันเกมใหม่        | 1 week        | -      | block  |
+| 2 | As a designer, I want enemy spawn in random position                                                            | ทุกครั้งที่เล่น ศัตรูจะเกิดไม่ซ้ำที่เดิม | 1 week        | -      | block  |
+| 3 | As a designer, I want game to have setting in game                                                             | ในเกมจะมีระบบ Setting                                              | 1 week        | -      | block  |
+| 4 | As a designer, I want to make game cut scene                                                                    | ก่อนเข้าหน้าเมนูจะมี cut scene เล่นให้ดูก่อน   | 1 week        | -      | block  |
+| 5 | As a player, I want a inventory to keep item                                                                    | จะมีกระเป๋าหรือกล่องให้ผู้เล่นเก็บไอเทม  | 1 week        | -      | block  |
+| 6 | As a player, I want to see ability effect                                                                       | จะมีเอฟเฟคเล่นตอนโจมตีหรือใช้สกิล              | 2 days        | 3      | ✅     |
+| 7 | As a player, I want to know game lore                                                                           | เกมมีเนื้อเรื่องเล่า                                        | 1 day         | 4      | ✅     |
 
 ## MoSCoW Legend
 
