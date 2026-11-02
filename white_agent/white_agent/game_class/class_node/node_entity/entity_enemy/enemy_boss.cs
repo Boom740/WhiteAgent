@@ -336,6 +336,7 @@ namespace old_heart
             state = enemy_state.died;
             animation_player.play(animation_player.data.data[animation_name.died]);
             global.sound.play_sound(global.sound.sound_name.boss_dying);
+            global.sound.pause_song();
             alive = false;
             shield = false;
         }
