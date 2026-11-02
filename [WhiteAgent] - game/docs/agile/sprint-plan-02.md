@@ -6,7 +6,7 @@
 
 # Sprint [2] Plan
 
-**Sprint Goal:** [เป้าหมายหลักของ Sprint นี้ในหนึ่งประโยค]
+**Sprint Goal:** [ขยายสโคปและระบบผู้ใช้]
 **ระยะเวลา:** [2026/09/14] — [2026/09/26]
 **Team:** [ธีรภัทร ศิริณัฐกุลสมบัติ, วงศ์วรรธน์ พงค์จินะ, กนต์ระพี เดชะ, ณัฏฐกิตติ์ นามอภิรมย์]
 
@@ -51,7 +51,7 @@
 
 ### Story 4 — [As a player, I will gather money]
 
-- [X] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
+- [ ] [Ui Token] [domain::Artist] [owner:: กนต์ระพี เดชะ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
 - [ ] [collectible system] [domain::programmer] [owner:: วงศ์วรรธน์ พงค์จินะ]  [estimate:: 2]  [status:: ❌ Blocked] ******เอาไปทำ Sprint ถัดไป***
 
 ---

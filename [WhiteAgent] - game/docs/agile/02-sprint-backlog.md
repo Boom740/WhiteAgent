@@ -14,8 +14,8 @@
 | -------- | ---------- | -------------- |
 | Sprint 1 | 2026-08-31 | 2026-09-12     |
 | Sprint 2 | 2026-09-14 | 2026-09-26     |
-| Sprint 3 | 2026-09-26 | 2026-10-5      |
-| Sprint x |            |                |
+| Sprint 3 | 2026-10-05 | 2026-10-18     |
+| Sprint 4 | 2026-10-19 | 2026-11-02     |
 
 ```mermaid
 gantt
@@ -23,9 +23,9 @@ gantt
     dateFormat  YYYY-MM-DD
     section Sprints
     Sprint 1 :s1, 2026-08-31, 13d
-    Sprint 2 :s2, after s1, 13d
-    Sprint 3 :s3, after s2, 10d
-    Sprint 4 :s4, after s3, 12d
+    Sprint 2 :s2, 2026-09-14, 13d
+    Sprint 3 :s3, 2026-10-05, 14d
+    Sprint 4 :s4, 2026-10-19, 16d
 ```
 
 > ปรับวันที่ให้ตรงกับวันที่ทีมเริ่มลงมือทำจริง (ถ้าไม่ใช่วันแลปนี้)
@@ -45,25 +45,40 @@ gantt
 | - | ------------------------------------ | ----------- | ------------- |
 | 1 | As a player, I want to save game     | Must Have   | 6hr           |
 | 2 | As a player, I want to go next level | Must Have   | 3hr           |
-| 3 | As a player, I will gather money    | Should Have | 1 days        |
+| 3 | As a player, I will gather money    | Should Have | 1 day         |
 | 4 | As a player, I will fight more enemy | Must Have   | 5 days        |
 
-## Sprint 3 (In Progress)
+## Sprint 3 (Done)
 
-| # | User Story                                   | MoSCoW      | Estimate (SP) |
-| - | -------------------------------------------- | ----------- | ------------- |
-| 1 | As a player, I want to upgrade ability       | Should Have | 5 days        |
-| 2 | As a player, I will get gameover             | Must Have   | 1hr           |
-| 3 | As a player, I will gather money            | Should Have | 1 days        |
-| 4 | As a designer, I want player to hear SFX/BGM | Should Have | 2 days        |
-| 5 | As a enemy, It will drop item when die       | Should Have | 6hr           |
-| 6 | As a designer, I want to make Main menu      | Should Have | 7hr           |
-| 7 | As a player, I will fight the boss           | Should Have | 3 days        |
-| 8 | As a player, I will fight more enemy         | Should Have | 12hr          |
+| #  | User Story                                   | MoSCoW       | Estimate (SP) |
+| -- | -------------------------------------------- | ------------ | ------------- |
+| 1  | As a player, I want to upgrade ability       | Should Have  | 5 days        |
+| 2  | As a player, I will get gameover             | Must Have    | 1hr           |
+| 3  | As a player, I will gather money            | Should Have  | 1 day         |
+| 4  | As a designer, I want player to hear SFX/BGM | Should Have  | 2 days        |
+| 5  | As a enemy, It will drop item when die       | Should Have  | 6hr           |
+| 6  | As a designer, I want to make Main menu      | Should Have  | 7hr           |
+| 7  | As a player, I will fight the boss           | Should Have  | 3 days        |
+| 8  | As a player, I will fight more enemy         | Should Have  | 12hr          |
+| 9  | As a player, I need some rest after fight    | Should Have  | 1 day         |
+| 10 | As a player, I want to see ability effect    | Nice to Have | 12hr          |
+| 11 | As a player, I want to play a level randomly | Should Have  | 1 day         |
 
-> **Sprint 2-4 คือ draft ระดับ release plan** — เป้าหมายคือฝึกกะจำนวน SP ต่อ Sprint ให้ใกล้เคียง capacity ของทีม ไม่ใช่ล็อก scope ตายตัว ปรับได้ทุกครั้งที่ทำ Sprint Planning ของ Sprint ถัดไป
->
-> เมื่อ Sprint ไหนเริ่มทำงานจริง ให้คัดลอก template `sprint-plan-template.md` (ไฟล์แนบใน LMS) ไปสร้าง `docs/agile/sprint-plan-[NN].md` แล้วดึง Story ของ Sprint นั้นจากตารางด้านบนมาใส่คนรับผิดชอบ แตก Task และปรับ Estimate ให้ละเอียดขึ้น
+
+## Sprint 4 (Done)
+
+| # | User Story                                   | MoSCoW       | Estimate (SP) |
+| - | -------------------------------------------- | ------------ | ------------- |
+| 1 | As a designer, I want player to hear SFX/BGM | Should Have  | 5 days        |
+| 2 | As a designer, I want to make Main menu      | Should Have  | 1hr           |
+| 3 | As a player, I will fight the boss           | Should Have  | 1 day         |
+| 4 | As a player, I will fight more enemy         | Must Have    | 2 days        |
+| 5 | As a player, I want to know game lore        | Nice to Have | 1 day         |
+| 6 | As a player, I want to play a level randomly | Should Have  | 1 day         |
+
+**Sprint 2-4 คือ draft ระดับ release plan** — เป้าหมายคือฝึกกะจำนวน SP ต่อ Sprint ให้ใกล้เคียง capacity ของทีม ไม่ใช่ล็อก scope ตายตัว ปรับได้ทุกครั้งที่ทำ Sprint Planning ของ Sprint ถัดไป
+
+เมื่อ Sprint ไหนเริ่มทำงานจริง ให้คัดลอก template `sprint-plan-template.md` (ไฟล์แนบใน LMS) ไปสร้าง `docs/agile/sprint-plan-[NN].md` แล้วดึง Story ของ Sprint นั้นจากตารางด้านบนมาใส่คนรับผิดชอบ แตก Task และปรับ Estimate ให้ละเอียดขึ้น
 
 ## Links
 
