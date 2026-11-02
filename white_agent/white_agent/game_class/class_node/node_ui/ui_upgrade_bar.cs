@@ -65,7 +65,7 @@ namespace old_heart
             }
 
             upgrade_text = new ui_text("", Vector2.Zero , text_scale: new Vector2(0.25f, 0.25f));
-            upgrade_text.text_font = global.theme.default_font_3;
+            upgrade_text.text_font = global.theme.default_font_1;
             upgrade_text.visible = false;
             upgrade_text.alpha = 0f;
             game_manager.add_ui(upgrade_text);

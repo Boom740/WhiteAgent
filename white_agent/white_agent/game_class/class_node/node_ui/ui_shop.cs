@@ -118,6 +118,7 @@ namespace old_heart
                 game_manager.add_ui(upgrade_name);
 
                 ui_text upgrade_description = new ui_text("upgrade description", upgrade_position.ToVector2(), text_scale: new Vector2(0.15f, 0.15f), text_color: Color.White);
+                upgrade_description.text_font = global.theme.default_font_3;
                 upgrade_description.visible = false;
                 upgrade_description_list.Add(upgrade_description);
                 game_manager.add_ui(upgrade_description);
