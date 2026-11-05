@@ -55,7 +55,7 @@ namespace old_heart
             ui_ending_text_1.visible = false;
             game_manager.add_ui(ui_ending_text_1);
 
-            ui_ending_text_2 = new ui_text("Thanks for playing", Vector2.Zero, text_scale: new Vector2(1f, 1f));
+            ui_ending_text_2 = new ui_text("Thanks for playing", Vector2.Zero, text_scale: new Vector2(1f, 1f), text_color: Color.Yellow);
             ui_ending_text_2.position = render_size * new Vector2(0.5f, 0.67f) - ui_ending_text_2.text_font.MeasureString(ui_ending_text_2.text_string) * ui_ending_text_2.text_scale / 2;
             ui_ending_text_2.visible = false;
             game_manager.add_ui(ui_ending_text_2);
