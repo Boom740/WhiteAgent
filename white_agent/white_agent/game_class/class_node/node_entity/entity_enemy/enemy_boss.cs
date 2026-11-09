@@ -8,7 +8,7 @@ namespace old_heart
 {
     public class enemy_boss : enemy
     {
-        public enum animation_name { idle , attack , tired , dizzy, died , intro , roar , angry , angry_idle }
+        public enum animation_name { idle , attack , tired , dizzy, died , intro , roar , angry , angry_idle , dizzy_immune }
 
         // --- summon ---
         public List<enemy> summoned_enemy_list = new List<enemy> { };
@@ -42,7 +42,7 @@ namespace old_heart
 
             wall_collision_enable = false;
             entity_push_enable = false;
-            //animation_player_shield.visible = false;
+            animation_player_shield.visible = false;
 
             shadow_color = Color.Transparent;
 
@@ -319,6 +319,13 @@ namespace old_heart
             shield = true;
             angry = false;
 
+            if (state == enemy_state.dizzy)   
+            {
+                animation_player.play(animation_player.data.data[animation_name.dizzy_immune]);
+                animation_player.current_frame_index = 0;
+                animation_player.current_time = 0f;
+            }
+
             return took_damage; 
         }
         void spawn_enemy(enemy new_enemy)
@@ -369,7 +376,10 @@ namespace old_heart
             }
             else if(state == enemy_state.dizzy)
             {
-                animation_player.play(animation_player.data.data[animation_name.dizzy]);
+                animation_player.play(shield
+                    ? animation_player.data.data[animation_name.dizzy_immune]
+                    : animation_player.data.data[animation_name.dizzy]);
+                //animation_player.play(animation_player.data.data[animation_name.dizzy]);
             }
             else
             {
@@ -438,6 +448,12 @@ namespace old_heart
                 dizzy_animation.sprite_origin = new Vector2(128,201.5f);
                 dizzy_animation.name = "boss dizzy";
                 animation_data.data.Add(animation_name.dizzy, dizzy_animation);
+
+                texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_dizzy_immune");
+                animation dizzy_immune_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 8);
+                dizzy_immune_animation.sprite_origin = new Vector2(128, 201.5f);
+                dizzy_immune_animation.name = "boss dizzy immune";
+                animation_data.data.Add(animation_name.dizzy_immune, dizzy_immune_animation);
 
                 texture = content.Load<Texture2D>("assets/image/enemy/sprite_boss_angry");
                 animation angry_animation = new animation(texture, frame_per_sec: 12, sprite_size: new Point(256, 256), one_direction_sprite_format: true, one_diretion_sprite_format_frame_count: 12 , loop:false);
