@@ -29,6 +29,10 @@ namespace old_heart
 
         public static int eee = 0;     // for debug only
         private static Random random = new Random();   // use in global only
+
+        public static gamepad_input gamepad = new gamepad_input();
+        public static bool using_gamepad = false;
+
         public static class input
         {
             public static KeyboardStateExtended keyboard_state;

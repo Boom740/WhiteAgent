@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using old_heart;
 
 namespace old_heart
 {
@@ -114,6 +115,25 @@ namespace old_heart
 
         //other 
         public bool change_scene_fall_animation = true; // rotate and smaller when change scene
+
+        public gamepad_input gamepad => global.gamepad;
+        public enum aim_input_source { mouse, gamepad }
+        public aim_input_source aim_source = aim_input_source.mouse;
+        private bool buffer_from_gamepad = false; // input ที่ buffer ไว้มาจากจอยไหม (ใช้เลือกทิศโจมตี)
+
+        public aim_indicator aim_indicator;
+
+        // property ช่วย: จุดศูนย์กลางวงโคจร ใช้สูตรเดียวกับที่ aim/throw ใช้หาทิศอยู่แล้ว
+        Vector2 visual_center_position =>
+            position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin);
+
+        // เงื่อนไขโชว์: เข้า aim ด้วยสติ๊กและยังเล็งอยู่จริง
+        bool should_show_aim_indicator =>
+            current_combat_state == combat_state.aim
+            && aim_source == aim_input_source.gamepad
+            && has_head
+            && gamepad.aim_active;
+
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
             animation_player = new animation_player_player(content);
@@ -128,6 +148,8 @@ namespace old_heart
             adrenaline_rush_trail = new trail_effect(max_points: 10, max_width: 20);
 
             run_data.apply_upgrade(this);
+
+            aim_indicator = new aim_indicator(content);
         }
         public override void Update(GameTime gameTime)
         {
@@ -188,6 +210,8 @@ namespace old_heart
                 global.signal.spawn_projectile(projectile_test);
             }          // debug
             */
+
+            aim_indicator.update(delta_time, should_show_aim_indicator, visual_center_position, gamepad.last_valid_aim_direction);
             global.player_position = this.position;
 
             acceleration = input_direction;
@@ -197,7 +221,19 @@ namespace old_heart
 
             void update_input_buffer()
             {
-                if (keyboard_state.WasKeyPressed(Keys.Space))
+                if (gamepad.was_pressed(Buttons.LeftShoulder))      // LB = dash
+                {
+                    buffer_input(bufferable_input.dash, true);
+                }
+                else if (gamepad.was_pressed(Buttons.X))            // X = melee
+                {
+                    buffer_input(bufferable_input.attack, true);
+                }
+                else if (keyboard_state.WasKeyPressed(Keys.Space))  // ← ของเดิม
+                {
+                    buffer_input(bufferable_input.dash);
+                }
+                else if (keyboard_state.WasKeyPressed(Keys.Space))
                 {
                     buffer_input(bufferable_input.dash);
                 }
@@ -215,6 +251,10 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.interact);
                 }
+                else if (gamepad.was_pressed(Buttons.A))
+                {
+                    buffer_input(bufferable_input.interact, true);
+                }
 
                 if (current_buffer_input == bufferable_input.none) { return; }
                 if (current_input_beffer_time < input_buffer_time_limit)
@@ -226,10 +266,11 @@ namespace old_heart
                     current_buffer_input = bufferable_input.none;
                 }
 
-                void buffer_input(bufferable_input buffer_input)
+                void buffer_input(bufferable_input buffer_input, bool from_gamepad = false)
                 {
                     current_buffer_input = buffer_input;
                     current_input_beffer_time = 0;
+                    buffer_from_gamepad = from_gamepad;
                 }
             }
 
@@ -321,9 +362,7 @@ namespace old_heart
 
                 if (current_buffer_input == bufferable_input.aim && has_head && global.input.mouse_in_screen)
                 {
-                    current_combat_state = combat_state.aim;
-                    global.sound.play_sound(global.sound.sound_name.player_takeoffhead);
-                    animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
+                    enter_aim(aim_input_source.mouse);
                     return;
                 }
                 else if (current_buffer_input == bufferable_input.attack)     // attack
@@ -338,6 +377,20 @@ namespace old_heart
                 {
                     start_dash();
                     return;
+                }
+
+                if (has_head && gamepad.aim_active)
+                {
+                    enter_aim(aim_input_source.gamepad);
+                    return;
+                }
+
+                void enter_aim(aim_input_source source)
+                {
+                    aim_source = source;
+                    current_combat_state = combat_state.aim;
+                    global.sound.play_sound(global.sound.sound_name.player_takeoffhead);
+                    animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
                 }
 
                 update_walk_idle_state();
@@ -364,34 +417,51 @@ namespace old_heart
             }
             void update_aim_state()
             {
-                Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
-                Vector2 to_cursor = (global.input.scaled_mouse_world_position - sprite_center_position);
+                bool from_pad = aim_source == aim_input_source.gamepad;
 
-                current_direction_vector = to_cursor;
-
-                if (has_head == false)
+                if (from_pad)
                 {
+                    current_direction_vector = gamepad.last_valid_aim_direction;
+                }
+                else
+                {
+                    Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
+                    current_direction_vector = global.input.scaled_mouse_world_position - sprite_center_position;
+                }
+
+                bool aim_released = from_pad ? !gamepad.aim_active : !mouse_state.IsButtonDown(MouseButton.Right);
+
+                if (has_head == false || (from_pad && !gamepad.is_connected))
+                {
+                    cancel_aim();
                     current_combat_state = combat_state.none;
                     return;
                 }
-                else if ((mouse_state.IsButtonDown(MouseButton.Right) == false))
+                else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash))
+                {
+                    // LB: ยกเลิกเล็งโดยไม่ขว้าง แล้ว dash (เช็กก่อน release เพื่อให้ชนะเสมอ)
+                    cancel_aim();
+                    update_movement_input();
+                    start_dash();
+                    return;
+                }
+                else if (aim_released)
                 {
                     throw_head();
                 }
-                else if (current_buffer_input == bufferable_input.attack && global.input.mouse_in_screen)
+                else if (current_buffer_input == bufferable_input.attack && (from_pad || global.input.mouse_in_screen))
                 {
+                    cancel_aim();
                     start_attack();
-                }
-                else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash)) 
-                {
-                    update_movement_input();
-
-                    start_dash();
-                    return;
                 }
 
                 update_movement_input(false);
                 update_walk_idle_state();
+
+                void cancel_aim()
+                {
+                    if (from_pad) gamepad.cancel_aim_until_release();
+                }
             }
             void update_dash_state()
             {
@@ -424,6 +494,8 @@ namespace old_heart
 
             void update_movement_input(bool look_at_mouse = true)
             {
+                input_direction += gamepad.left_stick;
+
                 if (keyboard_state.IsKeyDown(Keys.D))
                 {
                     input_direction += new Vector2(1, 0);
@@ -454,7 +526,8 @@ namespace old_heart
                         effective_speed *= adrenaline_rush_speed_multiplier;
                     }
 
-                    input_direction = Vector2.Normalize(input_direction) * effective_speed;
+                    if (input_direction.LengthSquared() > 1f) input_direction.Normalize(); // คีย์บอร์ดได้ผลเหมือนเดิม, analog เอียงเบาได้ค่าน้อยกว่า 1
+                    input_direction *= effective_speed;
                 }
 
                 if (look_at_mouse  &&  input_direction != Vector2.Zero)
@@ -499,8 +572,19 @@ namespace old_heart
                 int hit_index = MathHelper.Clamp(combo_count - 1, 0, combo_hits.Count - 1); // กันเผื่อ max_combo กับ combo_hits.Count ไม่ตรงกัน
                 melee_data hit_data = combo_hits[hit_index];
 
-                Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
-                Vector2 aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
+                Vector2 aim_direction;
+
+                if (buffer_from_gamepad)
+                {
+                    // เล็งด้วยสติ๊กขวาอยู่ใช้ทิศ cache ไม่งั้นใช้ทิศที่ตัวละครหันอยู่
+                    Vector2 d = gamepad.aim_active ? gamepad.last_valid_aim_direction : current_direction_vector;
+                    aim_direction = d != Vector2.Zero ? Vector2.Normalize(d) : Vector2.UnitY;
+                }
+                else
+                {
+                    Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
+                    aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
+                }
 
                 current_direction_vector = aim_direction; // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
 
@@ -530,10 +614,17 @@ namespace old_heart
 
                 projectile_head head = new projectile_head(content, position,run_data: run_data ,owner: this , head_ricochet: head_ricochet , explosive_impact: head_explosive_impact);
 
-                Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
-                Vector2 to_cursor = (global.input.scaled_mouse_world_position - sprite_center_position);
-
-                head.velocity = Vector2.Normalize(to_cursor) * head_throw_speed;
+                Vector2 throw_direction;
+                if (aim_source == aim_input_source.gamepad)
+                {
+                    throw_direction = gamepad.last_valid_aim_direction;   // ทิศจาก cache ไม่ใช่ค่าสติ๊กเฟรมนี้
+                }
+                else
+                {
+                    Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
+                    throw_direction = Vector2.Normalize(global.input.scaled_mouse_world_position - sprite_center_position);
+                }
+                head.velocity = throw_direction * head_throw_speed;
 
                 global.sound.play_sound(global.sound.sound_name.player_throwhead);
                 global.signal.spawn_projectile(head);
@@ -855,6 +946,11 @@ namespace old_heart
             {
                 float layer_depth = (position.Y + 50000f) / 100000f - 0.0001f;
                 adrenaline_rush_trail.draw(sprite_batch,1,layer_depth: layer_depth);
+            }
+
+            if (should_show_aim_indicator)   // เช็กซ้ำตอนวาด
+            {
+                aim_indicator.draw(sprite_batch);
             }
         }
         public class animation_player_player : animation_player_base       // custom animation for this class only

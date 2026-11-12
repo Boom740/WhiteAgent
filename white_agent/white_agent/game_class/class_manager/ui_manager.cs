@@ -60,7 +60,10 @@ namespace old_heart
             }
 
             // draw mouse cursor
-            sprite_batch.Draw(mouse_cursor, global.input.scaled_mouse_position.ToVector2() , null, Color.White, 0, mouse_cursor.Bounds.Size.ToVector2() / 2, Vector2.One, SpriteEffects.None, 1);
+            if (global.using_gamepad == false)
+            {
+                sprite_batch.Draw(mouse_cursor, global.input.scaled_mouse_position.ToVector2(), null, Color.White, 0, mouse_cursor.Bounds.Size.ToVector2() / 2, Vector2.One, SpriteEffects.None, 1);
+            }
         }
     }
 }

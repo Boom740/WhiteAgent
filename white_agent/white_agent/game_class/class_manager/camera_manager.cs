@@ -47,7 +47,8 @@ namespace old_heart
                     camera.LookAt(player.position);
                 }
 
-                Vector2 target_position = (player.position*(1-follow_mouse_ratio) + global.input.scaled_mouse_world_position * (follow_mouse_ratio));
+                Vector2 look_target = global.using_gamepad ? player.position : global.input.scaled_mouse_world_position;
+                Vector2 target_position = (player.position * (1 - follow_mouse_ratio) + look_target * follow_mouse_ratio);
                 Vector2 current_center = camera.Position + camera.Origin;
 
                 target_position = Vector2.Lerp(current_center, target_position, tween_smooting);

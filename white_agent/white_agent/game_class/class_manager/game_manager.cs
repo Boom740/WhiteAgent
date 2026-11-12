@@ -41,7 +41,9 @@ namespace old_heart
         public projectile_next_level_portal next_level_portal;
 
         bool cleared_signal_from_last_scene = false;
-      
+
+        Point last_mouse_position;
+
         public game_manager(ContentManager content,GameWindow window,GraphicsDevice graphics_device)
         {
             this.content = content;
@@ -139,6 +141,8 @@ namespace old_heart
             ui_manager.update(gameTime);
             debug_manager.update(gameTime);
 
+            update_input_device();
+
             if (pause)
             {
                 camera_manager.update_global_mouse_position();
@@ -179,6 +183,23 @@ namespace old_heart
 
             clear_inactive_node();
         }
+
+        void update_input_device()
+        {
+            global.gamepad.update();
+
+            Point mouse_position = global.input.scaled_mouse_position;
+            MouseState mouse = Mouse.GetState();
+            bool mouse_or_keyboard_active =
+                mouse_position != last_mouse_position
+                || mouse.LeftButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed
+                || Keyboard.GetState().GetPressedKeyCount() > 0;
+            last_mouse_position = mouse_position;
+
+            if (global.gamepad.has_activity) { global.using_gamepad = true; }
+            else if (mouse_or_keyboard_active) { global.using_gamepad = false; }
+        }
+
         public void clear_inactive_node()      // use evil swap back technique >:D
         {
             clear_inactive_node_in_entity();
