@@ -22,7 +22,7 @@ namespace old_heart
         private float patrol_time_walk = 0.5f;
         private float current_patrol_time = 0f;
 
-        public float attack_duration = 3f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
+        public float attack_duration = 4f; // ~10 frame ที่ 60fps เป็น placeholder ไปก่อน
         public float attack_timer = 0f;
         public float attack_hit_box_radius = 75;
 

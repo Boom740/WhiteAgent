@@ -20,7 +20,7 @@ namespace old_heart
         // --- clone ---
         public List<enemy_leukemia_minion> minion_list = new List<enemy_leukemia_minion> { };
 
-        public float clone_timer = 3.5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
+        public float clone_timer = 5f; // TODO: ปรับค่าตามความยากง่ายที่ต้องการ
         private float current_clone_timer;
         public int minion_limit = 2;
 

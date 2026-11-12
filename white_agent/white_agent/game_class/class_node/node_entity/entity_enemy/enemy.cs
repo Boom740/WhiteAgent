@@ -26,8 +26,8 @@ namespace old_heart
         public bool can_be_dizzied = true;
 
         // --- drop ---
-        public int drop_count_min = 1;   // จำนวนก้อน DNA ที่ดรอป สามารถสุ่มได้
-        public int drop_count_max = 2;
+        public int drop_count_min = 4;   // จำนวนก้อน DNA ที่ดรอป สามารถสุ่มได้
+        public int drop_count_max = 5;
         public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
 
         // --- attack warning ---

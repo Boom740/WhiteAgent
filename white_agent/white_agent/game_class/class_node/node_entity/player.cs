@@ -58,7 +58,7 @@ namespace old_heart
         public bool has_head = true;
         public float head_throw_speed = 1500f;
         public float pickup_radius = 40f;
-        public float throw_head_i_frame_duration = 0.2f;
+        public float throw_head_i_frame_duration = 0.8f;
 
         public float head_drop_speed = 1000;
 

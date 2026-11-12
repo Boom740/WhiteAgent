@@ -23,7 +23,7 @@ namespace old_heart
         public float attack_duration = 1.3f;
         public float attack_timer = 0f;
 
-        public float attack_cooldown = 1.5f;
+        public float attack_cooldown = 3f;
         public float attack_cooldown_timer = 0f;
 
         public float dash_timer = 0f;

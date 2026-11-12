@@ -52,8 +52,8 @@ namespace old_heart
             level_list.Add("level_0_shop");
             level_list_add_from_list(level_set_2.GetRange(0, 3));
             level_list.Add("level_0_shop");
-            level_list_add_from_list(level_set_3.GetRange(0, 3));
-            level_list.Add("level_0_shop");
+            //level_list_add_from_list(level_set_3.GetRange(0, 3));
+            //level_list.Add("level_0_shop");
             level_list.Add("level_boss_cutscene");
             level_list.Add("level_boss");
 

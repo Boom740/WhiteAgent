@@ -204,21 +204,22 @@ namespace old_heart
 
                 if (stage == 1)
                 {
-                    spawn_enemy(enemy_bacteria.super_form(content, position));
+                    //spawn_enemy(enemy_bacteria.super_form(content, position));
+                    spawn_enemy(new enemy_bacteria(content, position));
                     spawn_enemy(new enemy_bacteria(content, position));
                     spawn_enemy(new enemy_bacteria(content, position));
                 }
                 else if (stage == 2)
                 {
-                    spawn_enemy(enemy_bacteria.super_form(content, position));
-                    spawn_enemy(enemy_mold.super_form(content, position));
-                    spawn_enemy(enemy_bacteria.super_form(content, position));
+                    spawn_enemy(new enemy_bacteria(content, position));
+                    spawn_enemy(new enemy_mold(content, position));
+                    spawn_enemy(new enemy_bacteria(content, position));
                 }
                 else if (stage == 3)
                 {
-                    spawn_enemy(enemy_leukemia.super_form(content, position));
-                    spawn_enemy(enemy_virus.super_form(content, position));
-                    spawn_enemy(enemy_virus.super_form(content, position));
+                    spawn_enemy(new enemy_leukemia(content, position));
+                    spawn_enemy(new enemy_virus(content, position));
+                    spawn_enemy(new enemy_virus(content, position));
                 }
 
                 enter_normal();
