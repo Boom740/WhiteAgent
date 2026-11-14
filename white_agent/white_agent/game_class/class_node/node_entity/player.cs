@@ -225,7 +225,7 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.dash, true);
                 }
-                else if (gamepad.was_pressed(Buttons.X))            // X = melee
+                else if (gamepad.was_pressed(Buttons.A))            // X = melee
                 {
                     buffer_input(bufferable_input.attack, true);
                 }
@@ -251,7 +251,7 @@ namespace old_heart
                 {
                     buffer_input(bufferable_input.interact);
                 }
-                else if (gamepad.was_pressed(Buttons.A))
+                else if (gamepad.was_pressed(Buttons.B))
                 {
                     buffer_input(bufferable_input.interact, true);
                 }

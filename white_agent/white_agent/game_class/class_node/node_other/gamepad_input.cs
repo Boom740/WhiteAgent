@@ -30,6 +30,10 @@ namespace old_heart
         public float right_stick_magnitude;
         public bool has_activity;   // มีการขยับสติ๊ก/กดปุ่มเฟรมนี้
 
+        public float menu_stick_threshold = 0.6f;
+        public Point menu_move;            // ทิศที่ "เพิ่งกด" เฟรมนี้ (-1/0/+1) จาก D-pad หรือสติ๊กซ้าย
+        Point previous_menu_held;
+
         public gamepad_input()
         {
             current_state = GamePad.GetState(PlayerIndex.One, GamePadDeadZone.None);
@@ -50,15 +54,20 @@ namespace old_heart
                 aim_active = false;
                 aim_suppressed = false;
                 has_activity = false;
+
+                menu_move = Point.Zero;
+                previous_menu_held = Point.Zero;
                 return;
             }
 
             update_left_stick();
             update_right_stick();
+            update_menu_move();
 
             has_activity = left_stick != Vector2.Zero
                         || right_stick_magnitude >= aim_exit_deadzone
-                        || current_state.Buttons != previous_state.Buttons;
+                        || current_state.Buttons != previous_state.Buttons
+                        || current_state.DPad != previous_state.DPad;
         }
 
         public bool is_down(Buttons button) => is_connected && current_state.IsButtonDown(button);
@@ -138,6 +147,28 @@ namespace old_heart
             {
                 reverse_frames = 0;
             }
+        }
+
+        void update_menu_move()
+        {
+            Point held = Point.Zero;
+
+            if (is_down(Buttons.DPadLeft)) held.X = -1;
+            else if (is_down(Buttons.DPadRight)) held.X = 1;
+            if (is_down(Buttons.DPadUp)) held.Y = -1;
+            else if (is_down(Buttons.DPadDown)) held.Y = 1;
+
+            if (held == Point.Zero)   // ไม่ได้กด D-pad → ใช้สติ๊กซ้าย (เอาแกนที่เอียงมากกว่า)
+            {
+                if (MathF.Abs(left_stick.X) >= MathF.Abs(left_stick.Y))
+                {
+                    if (MathF.Abs(left_stick.X) >= menu_stick_threshold) held.X = Math.Sign(left_stick.X);
+                }
+                else if (MathF.Abs(left_stick.Y) >= menu_stick_threshold) held.Y = Math.Sign(left_stick.Y);
+            }
+
+            menu_move = held != previous_menu_held ? held : Point.Zero;   // เปลี่ยนทิศ/เพิ่งกดเท่านั้น
+            previous_menu_held = held;
         }
     }
 }

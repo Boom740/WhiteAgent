@@ -29,15 +29,24 @@ namespace old_heart
 
         public int last_selected_upgrade = -1;
         public bool sell_confirm = false;
-        public ui_upgrade_bar(ContentManager content,  game_manager game_manager , run_data_manager run_data , ui_shop ui_shop)
+
+        // --- controller ---
+        public int pad_confirm_index = -1;   // ui_shop ตั้งค่านี้เมื่อกด B บนช่องขาย (บาร์ consume ใน Update)
+        public int sellable_count => Math.Min(run_data.upgrade_list.Count, upgrade_button_list.Count);
+
+        // --- selector: ตัวชี้ช่องที่ถูกเลือก (เมาส์ hover หรือเลือกด้วยจอย) ---
+        public Texture2D selector_texture;
+        int selected_index = -1;   // ช่องที่ถูกเลือกในเฟรมนี้ (-1 = ไม่มี) ตั้งใน Update อ่านใน Draw
+        public ui_upgrade_bar(ContentManager content, game_manager game_manager, run_data_manager run_data, ui_shop ui_shop)
         {
             this.content = content;
             this.run_data = run_data;
             this.ui_shop = ui_shop;
+            this.ui_shop.upgrade_bar = this;   // ให้ ui_shop รู้จักบาร์นี้ (ใช้เลือกช่องขายด้วยจอย)
 
             Texture2D upgrade_slot_texture = content.Load<Texture2D>("assets/image/ui/ui_upgrade_slot");
             upgrade_slot_position = global.render_size * new Vector2(1, 0.3f) - new Vector2(upgrade_slot_texture.Bounds.Width, 0);
-            spacing = new Point(0, (int)((float)upgrade_slot_texture.Bounds.Height  / (float)4 ) + 2 );
+            spacing = new Point(0, (int)((float)upgrade_slot_texture.Bounds.Height / (float)4) + 2);
             upgrade_slot = new image(content, upgrade_slot_position, texture: upgrade_slot_texture);
             game_manager.add_ui(upgrade_slot);
 
@@ -64,20 +73,25 @@ namespace old_heart
                 game_manager.add_ui(upgrade_cooldown_text);
             }
 
-            upgrade_text = new ui_text("", Vector2.Zero , text_scale: new Vector2(0.25f, 0.25f));
+            upgrade_text = new ui_text("", Vector2.Zero, text_scale: new Vector2(0.25f, 0.25f));
             upgrade_text.text_font = global.theme.default_font_1;
             upgrade_text.visible = false;
             upgrade_text.alpha = 0f;
             game_manager.add_ui(upgrade_text);
+
+            selector_texture = content.Load<Texture2D>("assets/image/ui/ui_upgrade_selector");
 
 
             load_upgrade_data();
         }
         public override void Update(GameTime gameTime)
         {
+            selected_index = -1;   // รีเซ็ตทุกเฟรม ลูปด้านล่างจะตั้งใหม่ถ้ามีช่องที่ถูกเลือก
             if (!active) return;
 
             upgrade_text.alpha = Math.Max(0, upgrade_text.alpha - upgrade_text_alpha_change_rate);
+
+            if (!ui_shop.active) { pad_confirm_index = -1; }
 
             if (last_upgrade_count < run_data.upgrade_list.Count && last_upgrade_count < upgrade_bar_limit) // has more upgrade than loaded one    and still has slot left to load
             {
@@ -95,17 +109,25 @@ namespace old_heart
                 ui_button upgrade_button = upgrade_button_list[i];
                 if (upgrade_button.active == false) { continue; }
 
+                // controller: ถ้าใช้จอย ใช้ช่องที่เลือกด้วยจอยแทน hover ของเมาส์ (เมาส์ถูกซ่อนอยู่)
+                bool hovered = global.using_gamepad
+                    ? (ui_shop.active && ui_shop.selected_sell_index == i)
+                    : upgrade_button.mouse_hover;
+                bool pad_confirmed = (pad_confirm_index == i);
+                if (pad_confirmed) { pad_confirm_index = -1; }
+
                 image upgrade_image = upgrade_image_list[i];
                 ui_text upgrade_cooldown_text = upgrade_cooldown_text_list[i];
                 upgrade_base upgrade = run_data.upgrade_list[i];
 
-                if (upgrade_button.click_sound_enable == false && ui_shop.active == true) 
+                if (upgrade_button.click_sound_enable == false && ui_shop.active == true)
                 {
                     upgrade_button.click_sound_enable = true;
                 }
 
-                if (upgrade_button.mouse_hover)
+                if (hovered)
                 {
+                    selected_index = i;
                     if (last_selected_upgrade != i)
                     {
                         last_selected_upgrade = i;
@@ -121,12 +143,12 @@ namespace old_heart
                         upgrade_text.text_string = "sell for " + upgrade.price / 2 + "  DNA?";
                     }
 
-                    upgrade_text.position = new Vector2(upgrade_button.button_rectangle.Left - 5, upgrade_button.button_rectangle.Center.Y) - (upgrade_text.text_font.MeasureString(upgrade_text.text_string) * upgrade_text.text_scale * new Vector2(1,0.5f));
+                    upgrade_text.position = new Vector2(upgrade_button.button_rectangle.Left - 5, upgrade_button.button_rectangle.Center.Y) - (upgrade_text.text_font.MeasureString(upgrade_text.text_string) * upgrade_text.text_scale * new Vector2(1, 0.5f));
                     upgrade_text.alpha = Math.Min(upgrade_text.alpha + upgrade_text_alpha_change_rate * 2, 1);
                     upgrade_text.visible = true;
 
                 }
-                else 
+                else
                 {
                     if (last_selected_upgrade == i)// not hover over last selected upgrade
                     {
@@ -134,7 +156,7 @@ namespace old_heart
                     }
                 }
 
-                if (upgrade_button.clicked && ui_shop.active)
+                if ((upgrade_button.clicked || pad_confirmed) && ui_shop.active)
                 {
                     if (sell_confirm == false)
                     {
@@ -152,7 +174,7 @@ namespace old_heart
 
                 if (upgrade.cooldown_time > 0)
                 {
-                    upgrade_image.color = new Color(new Vector3( 0.2f));
+                    upgrade_image.color = new Color(new Vector3(0.2f));
                     upgrade_cooldown_text.text_string = upgrade.cooldown_time.ToString("F1");
                     upgrade_cooldown_text.position = upgrade_button.button_rectangle.Center.ToVector2() - (upgrade_cooldown_text.text_font.MeasureString(upgrade_cooldown_text.text_string) * upgrade_text.text_scale / 2);
                     upgrade_cooldown_text.visible = true;
@@ -168,13 +190,13 @@ namespace old_heart
         public void load_upgrade_data()
         {
             last_upgrade_count = run_data.upgrade_list.Count;
-            for (int i = 0; i <  upgrade_button_list.Count; i++)
+            for (int i = 0; i < upgrade_button_list.Count; i++)
             {
                 ui_button upgrade_button = upgrade_button_list[i];
                 image upgrade_image = upgrade_image_list[i];
 
 
-                if (i > last_upgrade_count  - 1 )  // no upgrade to load
+                if (i > last_upgrade_count - 1)  // no upgrade to load
                 {
                     upgrade_image.visible = false;
 
@@ -192,6 +214,17 @@ namespace old_heart
         }
         public override void Draw(SpriteBatch sprite_batch)
         {
+            if (selected_index < 0 || selected_index >= upgrade_button_list.Count) { return; }
+
+            ui_button button = upgrade_button_list[selected_index];
+            if (!button.active) { return; }
+
+            // วาดทับกลางช่อง: สามเหลี่ยมบนอยู่เหนือ hex สามเหลี่ยมล่างอยู่ใต้ hex
+            // origin ใช้เลขเต็ม (หารจำนวนเต็ม) กัน pixel art เบลอจากครึ่งพิกเซล
+            Vector2 center = button.button_rectangle.Center.ToVector2();
+            Vector2 origin = new Vector2(selector_texture.Width / 2, selector_texture.Height / 2);
+
+            sprite_batch.Draw(selector_texture, center, null, Color.White, 0f, origin, Vector2.One, SpriteEffects.None, 0f);
         }
     }
 }
