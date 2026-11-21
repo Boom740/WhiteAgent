@@ -306,10 +306,6 @@ namespace old_heart
             base.enter_dizzy(break_shield : true);
         }
 
-        public override void apply_knockback(Vector2 direction, float speed)
-        {
-            // no knock back 
-        }
         public override bool take_damage(int damage_taken, node damage_dealer = null)
         {
             bool took_damage = base.take_damage(1 , damage_dealer);

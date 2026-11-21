@@ -32,7 +32,7 @@ namespace old_heart
         private bool hitbox_spawned_this_attack = false;
 
 
-        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 1 ,hit_box_radius: 15)
+        public enemy_virus(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 2 ,hit_box_radius: 15)
         {
             animation_player = new animation_player_virus(content_set);
             can_be_dizzied = false;
@@ -46,6 +46,7 @@ namespace old_heart
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             update_cooldown();
+            update_knockback((float)gameTime.ElapsedGameTime.TotalSeconds);
 
             if (shield == false && state != enemy_state.died)
             {
@@ -206,10 +207,6 @@ namespace old_heart
 
         }
         
-        public override void apply_knockback(Vector2 direction, float speed)
-        {
-            // ทำให้ virus ไม่โดน knockback 
-        }
         public override void update_animation(float delta_time)
         {
             if (state == enemy_state.dizzy)

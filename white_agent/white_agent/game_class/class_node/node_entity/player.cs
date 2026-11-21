@@ -64,7 +64,7 @@ namespace old_heart
         public float head_drop_speed = 1000;
 
         public int head_ricochet = 0;
-        public bool head_explosive_impact = false;
+        public bool head_explosive_impact = true;
         // --- aim  ---
         public float aim_speed_multiplier = 0.4f;
         public animation_player_player animation_player_2;

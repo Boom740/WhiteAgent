@@ -155,10 +155,7 @@ namespace old_heart
         {
             return false;  // cant take_damage
         }
-        public override void apply_knockback(Vector2 direction, float speed)
-        {
-            // cant knock back
-        }
+
         public override void die()
         {
             if (!alive ) { return; }

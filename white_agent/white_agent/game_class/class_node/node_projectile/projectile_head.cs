@@ -17,7 +17,7 @@ namespace old_heart
         public float drag = 4f;                    // ยิ่งมากยิ่งหยุดเร็ว
         private const float stop_velocity_threshold = 15f;
 
-        public float bounce_power = 50f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
+        public float bounce_power = 400f;   // 0-1 ยิ่งมากยิ่งกระเด้งกลับแรง
         public bool has_bounced = false; // กันโดนกระแทกซ้ำหลายเฟรมจาก enemy ตัวเดิม
         public float sprite_height = 15;
         public float initial_speed = 300;
@@ -140,12 +140,18 @@ namespace old_heart
             hit_entity.Add(target_entity);
 
             //bool should_play_bump_sound = !explosive_impact;
+            Vector2 hit_dir = velocity;  // ต้องเก็บก่อน เพราะ bounce_back ด้านล่างเปลี่ยนค่า velocity
             target_enemy.enter_dizzy(break_shield: true);
-            spawn_shock_wave();
-            
+            target_enemy.apply_knockback(hit_dir, 250f);
 
-            Vector2 target_direction = position - target_entity.position;
-            bounce_direction = target_direction != Vector2.Zero ? target_direction : Vector2.UnitY;
+            spawn_shock_wave();
+
+
+            Vector2 normal = position - target_entity.position;
+            normal = normal != Vector2.Zero ? Vector2.Normalize(normal) : Vector2.UnitY;
+            bounce_direction = hit_dir != Vector2.Zero
+                ? hit_dir - 2f * Vector2.Dot(hit_dir, normal) * normal   // สูตรสะท้อน
+                : normal;
 
             if (explosive_impact == true)
             {

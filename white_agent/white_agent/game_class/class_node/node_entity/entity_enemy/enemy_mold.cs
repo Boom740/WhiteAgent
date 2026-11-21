@@ -44,7 +44,7 @@ namespace old_heart
         public string bullet_texture_path = "assets/image/weapons/sprite_bullet_mold";
         public float bullet_scale = 1f;
 
-        public enemy_mold(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 1, speed: 1200, hit_box_radius: 15)
+        public enemy_mold(ContentManager content_set, Vector2 position) : base(content_set, position, max_hp: 2, speed: 1200, hit_box_radius: 15)
         {
             animation_player = new animation_player_mole(content_set);
         }
@@ -53,6 +53,8 @@ namespace old_heart
         {
             if (alive == false) return;
             float delta_time = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            update_knockback((float)gameTime.ElapsedGameTime.TotalSeconds);
             fired_bullets.RemoveAll(bullet => bullet.alive == false);
 
             if (attack_cooldown_timer > 0f)

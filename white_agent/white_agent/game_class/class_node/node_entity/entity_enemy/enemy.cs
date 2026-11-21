@@ -30,6 +30,9 @@ namespace old_heart
         public int drop_count_max = 5;
         public int dna_value_each = 1;   // จำนวน DNA ที่ได้ตอนเก็บแต่ละก้อน
 
+        public Vector2 knockback_velocity = Vector2.Zero;
+        public float knockback_drag = 6f;
+
         // --- attack warning ---
         private Texture2D attack_warn_texture;
 
@@ -111,7 +114,21 @@ namespace old_heart
                 shield_timer_current = shield_timer;
             }
         }
-        
+
+        public void apply_knockback(Vector2 direction, float force)
+        {
+            if (direction == Vector2.Zero) return;
+            knockback_velocity = Vector2.Normalize(direction) * force;
+        }
+
+        protected void update_knockback(float delta_time)
+        {
+            if (knockback_velocity == Vector2.Zero) return;
+            position += knockback_velocity * delta_time;
+            knockback_velocity -= knockback_velocity * knockback_drag * delta_time;
+            if (knockback_velocity.LengthSquared() < 100f) knockback_velocity = Vector2.Zero;
+        }
+
         public override void die()
         {
             bool was_alive = alive;
