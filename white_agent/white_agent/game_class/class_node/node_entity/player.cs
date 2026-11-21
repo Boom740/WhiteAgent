@@ -110,9 +110,11 @@ namespace old_heart
         // เงื่อนไขโชว์: เข้า aim ด้วยสติ๊กและยังเล็งอยู่จริง
         bool should_show_aim_indicator =>
             current_combat_state == combat_state.aim
-            && aim_source == aim_input_source.gamepad
             && has_head
-            && gamepad.aim_active;
+            && (aim_source == aim_input_source.mouse || gamepad.aim_active);
+
+        Vector2 mouse_aim_direction = Vector2.UnitY;   // ทิศเล็งล่าสุดของเมาส์ (เหมือน last_valid_aim_direction ของจอย)
+        public float mouse_aim_deadzone = 8f;           // px ต่ำกว่านี้ไม่อัปเดตทิศ
 
         public player(ContentManager content, Vector2 position , run_data_manager run_data) : base(content, position , speed: 2600)
         {
@@ -187,7 +189,18 @@ namespace old_heart
             }          // debug
             */
 
-            aim_indicator.update(delta_time, should_show_aim_indicator, visual_center_position, gamepad.last_valid_aim_direction);
+            global.input.mouse_lock = current_combat_state switch
+            {
+                combat_state.in_shop or combat_state.die or combat_state.change_scene => global.input.mouse_lock_mode.free,
+                combat_state.aim when aim_source == aim_input_source.mouse => global.input.mouse_lock_mode.clamp,
+                _ => global.input.mouse_lock_mode.center
+            };
+
+            Vector2 aim_indicator_direction = aim_source == aim_input_source.gamepad
+                ? gamepad.last_valid_aim_direction
+                : mouse_aim_direction;
+
+            aim_indicator.update(delta_time, should_show_aim_indicator, visual_center_position, aim_indicator_direction);
             global.player_position = this.position;
 
             acceleration = input_direction;
@@ -321,6 +334,11 @@ namespace old_heart
                 void enter_aim(aim_input_source source)
                 {
                     aim_source = source;
+                    if (source == aim_input_source.mouse)
+                    {
+                        mouse_aim_direction = current_direction_vector != Vector2.Zero ? Vector2.Normalize(current_direction_vector) : Vector2.UnitY;
+                    }
+
                     current_combat_state = combat_state.aim;
                     global.sound.play_sound(global.sound.sound_name.player_takeoffhead);
                     animation_player_2.play(animation_player_2.data.data[animation_player_player.animation_name.takeoff_head]);
@@ -338,8 +356,12 @@ namespace old_heart
                 }
                 else
                 {
-                    Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
-                    current_direction_vector = global.input.scaled_mouse_world_position - sprite_center_position;
+                    Vector2 offset = global.input.scaled_mouse_position.ToVector2() - global.render_size / 2f;
+                    if (offset.Length() > mouse_aim_deadzone)
+                    {
+                        mouse_aim_direction = Vector2.Normalize(offset);
+                    }
+                    current_direction_vector = mouse_aim_direction;
                 }
 
                 bool aim_released = from_pad ? !gamepad.aim_active : !mouse_state.IsButtonDown(MouseButton.Left);
@@ -483,8 +505,7 @@ namespace old_heart
                 }
                 else
                 {
-                    Vector2 sprite_center_position = (position + (animation_player.default_animation.sprite_size.ToVector2() / 2 - animation_player.default_animation.sprite_origin));
-                    throw_direction = Vector2.Normalize(global.input.scaled_mouse_world_position - sprite_center_position);
+                    throw_direction = mouse_aim_direction;
                 }
                 head.velocity = throw_direction * head_throw_speed;
 

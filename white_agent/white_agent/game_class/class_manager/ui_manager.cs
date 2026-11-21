@@ -45,12 +45,9 @@ namespace old_heart
             {
                 mouse_cursor = cursor_combat;
             }
-            else if (mouse_state == global.mouse_state.combat_aim)
-            {
-                //Debug.WriteLine("mouse combat_aim");
-            }
 
-            
+            if (ui_pause.is_open) { mouse_cursor = cursor_normal; }   // ตอน pause ใช้ลูกศรปกติ
+
             foreach (node node in ui_node_list)
             {
                 if (node.visible)
@@ -60,7 +57,8 @@ namespace old_heart
             }
 
             // draw mouse cursor
-            if (global.using_gamepad == false)
+            bool hide_cursor = mouse_state == global.mouse_state.combat && ui_pause.is_open == false;
+            if (global.using_gamepad == false && hide_cursor == false)
             {
                 sprite_batch.Draw(mouse_cursor, global.input.scaled_mouse_position.ToVector2(), null, Color.White, 0, mouse_cursor.Bounds.Size.ToVector2() / 2, Vector2.One, SpriteEffects.None, 1);
             }

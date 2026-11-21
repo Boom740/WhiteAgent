@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using static old_heart.global;
 
 namespace old_heart
 {
@@ -15,9 +17,14 @@ namespace old_heart
 
         public ui_button ui_return_button;
         public ui_text ui_return_text;
+
+        public static ui_pause instance;
+        public static bool is_open => instance != null && instance.active && instance.ui_pause_text.visible;
+
         public ui_pause(ContentManager content  , game_manager game_manager, run_data_manager run_data)
         {
             this.run_data = run_data;
+            instance = this;
             active = false;
 
             ui_pause_button = new ui_button(content, new Rectangle(new Point(540, 290), new Point(360, 230)));

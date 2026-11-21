@@ -63,6 +63,7 @@ namespace old_heart
         protected override void Update(GameTime gameTime)
         {
             global.input.update_input_state();
+            global.input.window_active = IsActive;
 
             if (global.setting.full_screen != _graphics.IsFullScreen)
             {

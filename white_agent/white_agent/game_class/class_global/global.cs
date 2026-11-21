@@ -10,6 +10,7 @@ using MonoGame.Extended.ViewportAdapters;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Input;
 
 namespace old_heart
 { 
@@ -41,6 +42,11 @@ namespace old_heart
             public static Point scaled_mouse_position = Point.Zero;
             public static Vector2 scaled_mouse_world_position = Vector2.Zero;
             public static bool mouse_in_screen = false;       // check if mouse is in screen
+            public static Vector2 mouse_world_position_free = Vector2.Zero;   // อัปเดตทุกเฟรม แม้เมาส์อยู่นอก viewport (ใช้กับการเล็ง)
+            public enum mouse_lock_mode { free, clamp, center }
+            public static mouse_lock_mode mouse_lock = mouse_lock_mode.free;   // player ตั้งทุกเฟรม
+            public static bool window_active = true;   // ตั้งจากคลาสหลักของเกม ไม่ให้ดึงเมาส์ตอนสลับไปหน้าต่างอื่น
+
             public static void update_input_state()
             {
                 KeyboardExtended.Update(); // update keyboard input 
@@ -50,9 +56,31 @@ namespace old_heart
                 mouse_state = MouseExtended.GetState();
             }
 
-            public static void update_scaled_mouse(BoxingViewportAdapter viewport , OrthographicCamera camera) // call from camera manager
+            public static void update_scaled_mouse(BoxingViewportAdapter viewport, OrthographicCamera camera)
             {
-                scaled_mouse_position = viewport.PointToScreen(mouse_state.Position);
+                Point mouse_position = mouse_state.Position;
+
+                bool lock_allowed = window_active
+                    && using_gamepad == false
+                    && current_mouse_state == global.mouse_state.combat   // อยู่ในด่าน
+                    && ui_pause.is_open == false;                         // pause = ปล่อยอิสระ
+
+                if (lock_allowed && mouse_lock != mouse_lock_mode.free)
+                {
+                    Rectangle bounds = viewport.Viewport.Bounds;
+                    Point target = mouse_lock == mouse_lock_mode.center
+                        ? bounds.Center
+                        : new Point(Math.Clamp(mouse_position.X, bounds.Left, bounds.Right - 1),
+                                    Math.Clamp(mouse_position.Y, bounds.Top, bounds.Bottom - 1));
+
+                    if (target != mouse_position)
+                    {
+                        Mouse.SetPosition(target.X, target.Y);
+                        mouse_position = target;
+                    }
+                }
+
+                scaled_mouse_position = viewport.PointToScreen(mouse_position);
 
                 bool mouse_in_screen_x = scaled_mouse_position.X >= 0 && scaled_mouse_position.X <= render_size.X;
                 bool mouse_in_screen_y = scaled_mouse_position.Y >= 0 && scaled_mouse_position.Y <= render_size.Y;
@@ -60,21 +88,12 @@ namespace old_heart
                 if (mouse_in_screen_x && mouse_in_screen_y)
                 {
                     mouse_in_screen = true;
-                    scaled_mouse_world_position = camera.ScreenToWorld(mouse_state.Position.ToVector2());
+                    scaled_mouse_world_position = camera.ScreenToWorld(mouse_position.ToVector2());
                 }
                 else
                 {
                     mouse_in_screen = false;
-                    //if (mouse_in_screen_x)
-                    //{
-                    //    scaled_mouse_world_position.X = camera.ScreenToWorld(mouse_state.Position.ToVector2()).X;
-                    //}
-                    //else if(mouse_in_screen_y)
-                    //{
-                    //    scaled_mouse_world_position.Y = camera.ScreenToWorld(mouse_state.Position.ToVector2()).Y;
-                    //}
                 }
-
             }
         }
         public static class signal
