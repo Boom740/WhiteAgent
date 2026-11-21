@@ -15,6 +15,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="game_class\class_node\node_entity\entity_enemy\gamepad_input.cs" />
+	  <Compile Remove="game_class\class_node\node_projectile\projectile_explosion.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="Icon.ico">

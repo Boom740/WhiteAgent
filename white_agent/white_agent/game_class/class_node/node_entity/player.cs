@@ -18,8 +18,8 @@ namespace old_heart
 
         public Vector2 input_direction = Vector2.Zero;
         public enum state { idle, walk }
-        public enum combat_state { none, attack, aim , dash , die , change_scene , in_shop }
-        public enum bufferable_input { none , attack , dash , interact , aim }
+        public enum combat_state { none, aim, dash, die, change_scene, in_shop }
+        public enum bufferable_input { none, dash, interact, aim }
 
         public state current_state = state.idle;
         public combat_state current_combat_state = combat_state.none;
@@ -29,30 +29,11 @@ namespace old_heart
         public float current_input_beffer_time = 0f;
 
         public float i_frame_time = 0f;  // currnetly use when change scene only
-        // --- combat: melee ---
-        public float attack_duration = 0.3f ;  // time that not able to move
-        public float attack_timer = 0f;
+
         // --- I-frame---
         public float i_frame_duration = 2f; // ระยะเวลา i-frame ทั้งหมด ใช้ทั้งคุม i_frame_time และ pickup_lock_timer ของหัว ให้ sync กัน
         public float blink_interval = 0.1f;
         public float blink_min_alpha = 0.2f;
-
-        public List<melee_data> combo_hits = new List<melee_data>
-         {
-          new melee_data(damage: 1, lunge_speed: 800f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f , hitbox_radius: 35), // hit 1
-          //new melee_data(damage: 24, lunge_speed: 400f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 300f, hitbox_radius: 35), // hit 2
-          //new melee_data(damage: 32, lunge_speed: 700f, range: 70f, hitbox_lifetime: 0.07f, knockback_speed: 1000f, hitbox_radius: 35), // hit 3 (finisher)
-         };
-        // --- combat: melee combo ---
-        public int combo_count = 0;
-        public int max_combo = 1;
-        public float combo_reset_window = 1f;   // เว้นช่วงกดเกินเท่านี้ = คอมโบหลุด
-        public float combo_reset_timer = 0f;
-        public float combo_cooldown_duration = 1f; // คูลดาวน์หลังคอมโบครบ
-        public float melee_cooldown_timer = 0f;
-
-        public float attack_input_delay = 0.4f; // ดีเลย์ขั้นต่ำระหว่างแต่ละ hit กันคลิกรัวเกินจังหวะ
-        private float next_attack_timer = 0f;
 
         // --- combat: head throw ---
         private projectile_head head_projectile;
@@ -119,7 +100,6 @@ namespace old_heart
         public gamepad_input gamepad => global.gamepad;
         public enum aim_input_source { mouse, gamepad }
         public aim_input_source aim_source = aim_input_source.mouse;
-        private bool buffer_from_gamepad = false; // input ที่ buffer ไว้มาจากจอยไหม (ใช้เลือกทิศโจมตี)
 
         public aim_indicator aim_indicator;
 
@@ -166,10 +146,6 @@ namespace old_heart
 
             switch (current_combat_state)
             {
-                case combat_state.attack:
-                    update_attack_state();
-                    break;
-
                 case combat_state.aim:
                     update_aim_state();
                     break;
@@ -221,28 +197,15 @@ namespace old_heart
 
             void update_input_buffer()
             {
-                if (gamepad.was_pressed(Buttons.LeftShoulder))      // LB = dash
+                if (gamepad.was_pressed(Buttons.A))      // A = dash
                 {
                     buffer_input(bufferable_input.dash, true);
-                }
-                else if (gamepad.was_pressed(Buttons.A))            // X = melee
-                {
-                    buffer_input(bufferable_input.attack, true);
                 }
                 else if (keyboard_state.WasKeyPressed(Keys.Space))  // ← ของเดิม
                 {
                     buffer_input(bufferable_input.dash);
                 }
-                else if (keyboard_state.WasKeyPressed(Keys.Space))
-                {
-                    buffer_input(bufferable_input.dash);
-                }
                 else if (mouse_state.WasButtonPressed(MouseButton.Left) && global.input.mouse_in_screen)
-                {
-                    buffer_input(bufferable_input.attack);
-
-                }
-                else if (mouse_state.WasButtonPressed(MouseButton.Right) && global.input.mouse_in_screen)
                 {
                     buffer_input(bufferable_input.aim);
 
@@ -270,33 +233,11 @@ namespace old_heart
                 {
                     current_buffer_input = buffer_input;
                     current_input_beffer_time = 0;
-                    buffer_from_gamepad = from_gamepad;
                 }
             }
 
             void update_cooldown()
             {
-                // --- combo cooldown countdown ---
-                if (melee_cooldown_timer > 0f)
-                {
-                    melee_cooldown_timer -= delta_time;
-                }
-                // --- combo reset countdown (เฉพาะตอนไม่ได้ cooldown อยู่) ---
-                else if (combo_count > 0)
-                {
-                    combo_reset_timer -= delta_time;
-                    if (combo_reset_timer <= 0f)
-                    {
-                        combo_count = 0; // เว้นช่วงนานเกินไป คอมโบหลุดกลับไปนับ 1 ใหม่
-                    }
-                }
-
-                // --- attack input delay countdown ---
-                if (next_attack_timer > 0f)
-                {
-                    next_attack_timer -= delta_time;
-                }
-
                 if (dash_cooldown_timer > 0f)
                 {
                     dash_cooldown_timer -= delta_time;
@@ -365,14 +306,6 @@ namespace old_heart
                     enter_aim(aim_input_source.mouse);
                     return;
                 }
-                else if (current_buffer_input == bufferable_input.attack)     // attack
-                {
-                    if (melee_cooldown_timer <= 0 && next_attack_timer <= 0f)
-                    {
-                        start_attack();
-                        return;
-                    }
-                }
                 else if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash)    )
                 {
                     start_dash();
@@ -395,26 +328,6 @@ namespace old_heart
 
                 update_walk_idle_state();
             }
-            void update_attack_state()
-            {
-                attack_timer -= delta_time;
-                if (attack_timer <= 0f ||  (animation_player.is_finished == true && (
-                    animation_player.current_animation == animation_player_player.animation_data.data[animation_player_player.animation_name.punch] ||
-                    animation_player.current_animation == animation_player_player.animation_data.data[animation_player_player.animation_name.no_head_punch]
-                    ) ) )
-                {
-                    current_combat_state = combat_state.none;
-                }
-
-                if (current_buffer_input == bufferable_input.dash && (dash_cooldown_timer <= 0 || dash_count < max_dash))
-                {
-                    update_movement_input();
-
-                    start_dash();
-                    return;
-                }
-                
-            }
             void update_aim_state()
             {
                 bool from_pad = aim_source == aim_input_source.gamepad;
@@ -429,7 +342,7 @@ namespace old_heart
                     current_direction_vector = global.input.scaled_mouse_world_position - sprite_center_position;
                 }
 
-                bool aim_released = from_pad ? !gamepad.aim_active : !mouse_state.IsButtonDown(MouseButton.Right);
+                bool aim_released = from_pad ? !gamepad.aim_active : !mouse_state.IsButtonDown(MouseButton.Left);
 
                 if (has_head == false || (from_pad && !gamepad.is_connected))
                 {
@@ -448,11 +361,6 @@ namespace old_heart
                 else if (aim_released)
                 {
                     throw_head();
-                }
-                else if (current_buffer_input == bufferable_input.attack && (from_pad || global.input.mouse_in_screen))
-                {
-                    cancel_aim();
-                    start_attack();
                 }
 
                 update_movement_input(false);
@@ -553,52 +461,6 @@ namespace old_heart
             void update_walk_idle_state()
             {
                 current_state = velocity.Length() > 10f ? state.walk : state.idle;
-            }
-
-            // ---------------- Melee ----------------
-
-            void start_attack()
-            {
-                current_buffer_input = bufferable_input.none;
-                current_combat_state = combat_state.attack;
-                attack_timer = attack_duration;
-
-                global.sound.play_sound(global.sound.sound_name.player_punch);
-
-                combo_count++;
-                combo_reset_timer = combo_reset_window;
-                next_attack_timer = attack_input_delay; // เริ่มนับดีเลย์ทันทีที่ออกหมัด
-
-                int hit_index = MathHelper.Clamp(combo_count - 1, 0, combo_hits.Count - 1); // กันเผื่อ max_combo กับ combo_hits.Count ไม่ตรงกัน
-                melee_data hit_data = combo_hits[hit_index];
-
-                Vector2 aim_direction;
-
-                if (buffer_from_gamepad)
-                {
-                    // เล็งด้วยสติ๊กขวาอยู่ใช้ทิศ cache ไม่งั้นใช้ทิศที่ตัวละครหันอยู่
-                    Vector2 d = gamepad.aim_active ? gamepad.last_valid_aim_direction : current_direction_vector;
-                    aim_direction = d != Vector2.Zero ? Vector2.Normalize(d) : Vector2.UnitY;
-                }
-                else
-                {
-                    Vector2 to_cursor = global.input.scaled_mouse_world_position - position;
-                    aim_direction = to_cursor != Vector2.Zero ? Vector2.Normalize(to_cursor) : Vector2.UnitY;
-                }
-
-                current_direction_vector = aim_direction; // ยังใช้ตัวนี้แค่สำหรับเลือก animation/sprite ทิศทาง ไม่เกี่ยวกับ hit detection แล้ว
-
-                hit_data.spawn_melee_projectile(content, this, position, aim_direction , projectile_deflection_enable: projectile_deflection_enable);
-
-                if (combo_count >= max_combo)
-                {
-                    melee_cooldown_timer = combo_cooldown_duration;
-                    combo_count = 0; // เริ่มคอมโบใหม่ตั้งแต่ตอนนี้ ระหว่างนี้ cooldown จะบล็อกการโจมตีอยู่แล้ว
-                }
-
-                animation_player.play(has_head
-                   ? animation_player.data.data[animation_player_player.animation_name.punch]
-                   : animation_player.data.data[animation_player_player.animation_name.no_head_punch]);
             }
 
             // ---------------- Head throw / dash / pickup ----------------
@@ -708,7 +570,7 @@ namespace old_heart
                 }
 
                 Vector2 to_head = head_projectile.position - position;
-                if (to_head.Length() <= pickup_radius  && head_projectile.is_resting)   // head in pickup_radius
+                if (to_head.Length() <= pickup_radius && (head_projectile.is_resting || head_projectile.has_bounced))   // head in pickup_radius
                 {
                     bool pickup_via_dash = current_combat_state == combat_state.dash;
 
@@ -731,9 +593,6 @@ namespace old_heart
                     break;
                 case combat_state.change_scene:
                     // already play in update
-                    break;
-                case combat_state.attack:
-                    //  already play animaiton in punch function   dont play any other animation while attacking
                     break;
                 case combat_state.dash:
                     //  already play animaiton

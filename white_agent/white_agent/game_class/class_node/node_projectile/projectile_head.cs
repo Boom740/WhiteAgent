@@ -25,6 +25,8 @@ namespace old_heart
         public float shock_wave_radius = 15;  // set when initilize
         public bool shock_wave_enable = true;
 
+        public int damage = 1;
+
         public float pickup_lock_timer = 0f; // ห้ามเก็บหัว
         public float blink_interval = 0.1f;
         public float blink_min_alpha = 0.2f;
@@ -139,24 +141,26 @@ namespace old_heart
 
             hit_entity.Add(target_entity);
 
-            //bool should_play_bump_sound = !explosive_impact;
-            Vector2 hit_dir = velocity;  // ต้องเก็บก่อน เพราะ bounce_back ด้านล่างเปลี่ยนค่า velocity
+            Vector2 hit_dir = velocity;               // ต้องเก็บก่อน เพราะ bounce_back เปลี่ยนค่า velocity
+            bool had_shield = target_enemy.shield;    // ต้องเช็คก่อน enter_dizzy เพราะมันทำให้เกราะแตก
+
             target_enemy.enter_dizzy(break_shield: true);
             target_enemy.apply_knockback(hit_dir, 250f);
 
-            spawn_shock_wave();
+            if (had_shield == false)                  // มีเกราะ = แตกอย่างเดียว / ไม่มีเกราะ = โดนดาเมจ
+            {
+                global.sound.play_sound(global.sound.sound_name.spike_head);
+                target_enemy.take_damage(damage, this);   // this = หัว ซึ่ง owner เป็น player จึงนับ death_by_player ได้
+            }
 
+            spawn_shock_wave();
 
             Vector2 normal = position - target_entity.position;
             normal = normal != Vector2.Zero ? Vector2.Normalize(normal) : Vector2.UnitY;
             bounce_direction = hit_dir != Vector2.Zero
-                ? hit_dir - 2f * Vector2.Dot(hit_dir, normal) * normal   // สูตรสะท้อน
+                ? hit_dir - 2f * Vector2.Dot(hit_dir, normal) * normal
                 : normal;
 
-            if (explosive_impact == true)
-            {
-                global.signal.spawn_projectile(new projectile_explosion(content, position, owner));
-            }
 
 
             if (ricochet < ricochet_max)
